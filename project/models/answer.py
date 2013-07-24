@@ -38,7 +38,7 @@ from . import Base
 class ValidationError(Exception):
     pass
 
-class Question(Base):
+class Answer(Base):
     """Database table User.
 
     Attributes:
@@ -48,25 +48,21 @@ class Question(Base):
         active: Indicates, whether user-account is active
         games: relationship to table Game
     """
-    __tablename__ = 'question'
+    __tablename__ = 'answer'
     id = Column(Integer, primary_key=True) 
-    number = Column(String(50))
     text = Column(String(500))
-    points = Column(Integer)
-    qtype = Column(Enum)
-    test_id = Column(Integer, ForeignKey('test.id'), index=True)
-    test = relationship('Test', backref=backref("tests", cascade="all, delete-orphan"))
+    correct = Column(Boolean)
+    question_id = Column(Integer, ForeignKey('question.id'), index=True)
+    question = relationship('Question', backref=backref("questions", cascade="all, delete-orphan"))
 
-    def __init__(self, number, text, points, qtype, test):
+    def __init__(self, text, correct, question):
         """Initialization of class.
         """
-        self.number = number
         self.text = text
-        self.points = points
-        self.qtype = qtype
-        self.test = test
+        self.correct = correct
+        self.question = question
 
     def __repr__(self):
         """Returns representative object of class User.
         """
-        return "Question<{number}>".format(number=self.number)
+        return "Answer<{text}>".format(text=self.text)

@@ -81,8 +81,8 @@ class User(Base):
     email = Column(String(50), unique=True)
     _password = Column(String(100), nullable=False)
     #fullname = Column(String(100))
-    meno = Column(String(100))
-    priezvisko = Column(String(100))
+    #meno = Column(String(100))
+    #priezvisko = Column(String(100))
     recovery_code = Column(String(100))
     
 
