@@ -17,6 +17,7 @@ requires = [
     'pyramid_mailer',
     'py3k-bcrypt',
     'mock',
+    'py_postgresql',
     ]
 
 setup(name='project',
