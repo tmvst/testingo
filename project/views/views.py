@@ -273,3 +273,8 @@ def recovery_final_submit(request):
     user.password = password
     return HTTPFound(location=request.route_url('home'))
 
+@view_config(route_name='dashboard', request_method='GET', renderer='project:templates/dashboard.mako')
+def dashboard(request):
+    """Shows dashboard.
+    """
+    return {'errors':[]}
