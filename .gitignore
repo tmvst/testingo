@@ -37,3 +37,5 @@ nosetests.xml
 *.db
 *.sqlite
 env
+.idea
+Testingo/
