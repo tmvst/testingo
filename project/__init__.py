@@ -1,4 +1,5 @@
 from pyramid.config import Configurator
+from sqlalchemy import create_engine
 
 from pyramid.events import (
     ContextFound,
@@ -67,6 +68,7 @@ def main(global_config, **settings):
     authn_policy = AuthTktAuthenticationPolicy(secret=settings['auth_secret_key']) 
     authz_policy = ACLAuthorizationPolicy()
     engine = engine_from_config(settings, 'sqlalchemy.')
+    #engine = create_engine('postgresql+pypostgresql://localhost/testingo_dev')
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine
 
