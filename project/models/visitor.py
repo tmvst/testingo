@@ -43,9 +43,6 @@ class Visitor(Base):
     Attributes:
         id: Identificator of object
         email: User email, used as a login, so it's must be unique
-        password: User Password
-        active: Indicates, whether user-account is active
-        games: relationship to table Game
     """
     __tablename__ = 'vizitor'
     id = Column(Integer, primary_key=True) 
