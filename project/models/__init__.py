@@ -8,7 +8,7 @@ from sqlalchemy.orm import (
 
 
 from zope.sqlalchemy import ZopeTransactionExtension
-import testingo.models
+import project.models
 
 Base = declarative_base()
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
@@ -16,7 +16,7 @@ DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 #from .user import User
 
 def load_modules():
-    for loader, module_name, pkg in pkgutil.walk_packages(testingo.models.__path__, testingo.models.__name__ + '.'):
+    for loader, module_name, pkg in pkgutil.walk_packages(project.models.__path__, project.models.__name__ + '.'):
         __import__(module_name)
 
 def set_up_tables(engine):
