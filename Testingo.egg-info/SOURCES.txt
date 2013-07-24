@@ -16,17 +16,6 @@ testingo/__init__.py
 testingo/authenticator.py
 testingo/helpers.py
 testingo/utils.py
-testingo/env/lib/python3.3/no-global-site-packages.txt
-testingo/env/lib/python3.3/orig-prefix.txt
-testingo/env/lib/python3.3/site-packages/distribute-0.6.34-py3.3.egg/EGG-INFO/SOURCES.txt
-testingo/env/lib/python3.3/site-packages/distribute-0.6.34-py3.3.egg/EGG-INFO/dependency_links.txt
-testingo/env/lib/python3.3/site-packages/distribute-0.6.34-py3.3.egg/EGG-INFO/entry_points.txt
-testingo/env/lib/python3.3/site-packages/distribute-0.6.34-py3.3.egg/EGG-INFO/top_level.txt
-testingo/env/lib/python3.3/site-packages/pip-1.3.1-py3.3.egg/EGG-INFO/SOURCES.txt
-testingo/env/lib/python3.3/site-packages/pip-1.3.1-py3.3.egg/EGG-INFO/dependency_links.txt
-testingo/env/lib/python3.3/site-packages/pip-1.3.1-py3.3.egg/EGG-INFO/entry_points.txt
-testingo/env/lib/python3.3/site-packages/pip-1.3.1-py3.3.egg/EGG-INFO/requires.txt
-testingo/env/lib/python3.3/site-packages/pip-1.3.1-py3.3.egg/EGG-INFO/top_level.txt
 testingo/models/__init__.py
 testingo/models/user.py
 testingo/scripts/__init__.py
