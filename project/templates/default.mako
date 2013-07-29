@@ -41,7 +41,7 @@
             <div class="login">
             % if request.userid is None:
                 <div id="log in">
-                    <form class="form-inline">
+                    <form class="form-inline" action="${request.route_path('login')}" method="POST">
                         <input type="email" name="email" class="input-small" placeholder="Email" required>
                         <input type="password" name="password" class="input-small" placeholder="Heslo" required>
                         <button type="submit" class="btn">Sign in</button>
@@ -53,7 +53,8 @@
                 </div>
             % else:
                 <form action="${request.route_path('logout')}" method="POST">
-                    <button type="submit" class="signout-button">Odhlásiť ${request.user.email}</button>
+                ${request.user.email}
+                    <button type="submit" class="btn">Odhlásiť</button>
                 </form>
             % endif
             </div>
