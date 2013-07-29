@@ -16,8 +16,20 @@
 		<div class="control-group">
 			<div class="controls">
 				<textarea name="description" id="description" placeholder="Opis" ></textarea>
-				<button type="submit" class="btn">Vytvoriť</button>
-				<a class="btn pull-right">Pridať otázku</a>
+			</div>
+
+			<div class="controls">
+				<textarea name="text" id="text" placeholder="Znenie otázky"></textarea>
+				<label class="radio">
+  					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+  					<input type="text" name="a1" id="a1" placeholder="Odpoveď 1" required/>
+				</label>
+				<label class="radio">
+  					<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+  					<input type="text" name="a2" id="a2" placeholder="Odpoveď 2" required/>
+				</label>
+			<a class="btn">Pridať odpoveď</a>
+			<button type="submit" class="btn btn-primary">Vytvoriť test</button>
 			</div>
 		</div>
 	</form>
