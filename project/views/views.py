@@ -287,4 +287,7 @@ def dashboard(request):
 def newtest(request):
     """Shows newtest.
     """
+    if request.userid == None:
+        return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
+    
     return {'errors':[]}
