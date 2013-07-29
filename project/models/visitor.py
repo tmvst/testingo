@@ -2,6 +2,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
+    ForeignKey
     )
 
 from sqlalchemy.orm import (
@@ -26,6 +27,7 @@ class Visitor(Base):
     __tablename__ = 'vizitor'
     id = Column(Integer, primary_key=True) 
     email = Column(String(50), unique=True)
+    user_id = Column(Integer, ForeignKey('uzer.id'), index=True)
     user = relationship('User', backref=backref("visitors", cascade="all, delete-orphan"))
     @validates('email')
     def validate_email(self, key, address):
@@ -33,10 +35,11 @@ class Visitor(Base):
             raise InvalidEmailError('You must input correct email.')
         return address
 
-    def __init__(self, email):
+    def __init__(self, email,user):
         """Initialization of class.
         """
         self.email = email
+        self.user = user
 
     def __repr__(self):
         """Returns representative object of class User.
