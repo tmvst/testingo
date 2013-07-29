@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="${request.static_path('project:static/stylesheets/custom.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
     <link href="${request.static_path('project:static/stylesheets/bootstrap.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="${request.static_path('project:static/stylesheets/bootstrap-glyphicons.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
 
     <link href="${request.static_path('project:static/js/bootstrap.js')}" type="text/javascript" />
 </head>
 
 <body>
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fixed-top navbar-inverse">
         <div class="navbar-inner">
             <div class="container">
 
@@ -22,10 +23,10 @@
                 </a>
 
                 <!-- Be sure to leave the brand out there if you want it shown -->
-                <a class="brand" href="/">Testingo</a>
+                <a class="navbar-brand" href="/">Testingo</a>
 
                 <!-- Everything you want hidden at 940px or less, place within here -->
-                <ul class="nav pull-right">
+                <ul class="nav navbar-nav pull-right">
                     % if request.userid:
                         <li><a href="/dashboard">Dashboard</a></li>
                         <li><a href="/newtest">Nový test</a></li>
@@ -41,19 +42,19 @@
             % if request.userid is None:
                 <div id="log in">
                     <form class="form-inline" action="${request.route_path('login')}" method="POST">
-                        <input type="email" name="email" class="input-small" placeholder="Email" required>
-                        <input type="password" name="password" class="input-small" placeholder="Heslo" required>
-                        <button type="submit" class="btn">Sign in</button>
-                        <label>
+                        <input type="email" name="email" class="form-control" style="width: 180px;" placeholder="Email" required>
+                        <input type="password" name="password" class="form-control" style="width: 180px;" placeholder="Heslo" required>
+                        <button type="submit" class="btn btn-default">Prihlásiť</button>
+                        <span class="help-block">
                             <a href="${request.route_path('register')}">Zaregistrovať sa</a> |
                             <a href="${request.route_path('beg_for_recovery')}" >Zabudol som heslo</a>
-                        </label>
+                        </span>
                     </form>
                 </div>
             % else:
                 <form action="${request.route_path('logout')}" method="POST">
-                ${request.user.email}
-                    <button type="submit" class="btn">Odhlásiť</button>
+                    Prihlásený ${request.user.email}
+                    <button type="submit" class="btn btn-default">Odhlásiť</button>
                 </form>
             % endif
             </div>
