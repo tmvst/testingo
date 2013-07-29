@@ -2,7 +2,7 @@
 <%block name="title">Úvodná stránka</%block>
 <%block name="page_content">
 <div class="page-header">
-	<h1>Toto je úvodná stránka</h1>
+	<h1>Vitaj</h1>
 </div>
 
 <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac

@@ -28,8 +28,10 @@
 
                 <!-- Everything you want hidden at 940px or less, place within here -->
                 <ul class="nav pull-right">
-                    <li><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="/newtest">Nový test</a></li>
+                    % if request.userid:
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/newtest">Nový test</a></li>
+                    % endif
                 </ul>
             </div>
         </div>
