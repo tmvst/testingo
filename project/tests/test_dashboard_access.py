@@ -21,14 +21,3 @@ class MyTest(unittest.TestCase):
         #print(response,type(response))
         self.assertRaises(HTTPForbidden,dashboard,request)
 
-    # def test_view_dashboard_allowed(self):
-    #     from pyramid.httpexceptions import HTTPForbidden
-    #     request = testing.DummyRequest()
-    #     request.context = testing.DummyResource()
-    #     request.userid = None
-    #     self.request = request
-    #     response = dashboard(self.request)
-    #
-    #     print(response,type(response))
-    #     self.assertRaises(HTTPForbidden, response, request)
-

@@ -315,7 +315,7 @@ def newtest_submission(request):
 
 
 def create_test(request, db_session, name, description):         # pridať password !!!
-    """Registers a new user and returns his ID (single number).
+    """ Creates new test and returns its id.
 
     """
 
