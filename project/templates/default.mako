@@ -9,7 +9,6 @@
     <link href="${request.static_path('project:static/stylesheets/bootstrap.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
 
     <link href="${request.static_path('project:static/js/bootstrap.js')}" type="text/javascript" />
-
 </head>
 
 <body>
