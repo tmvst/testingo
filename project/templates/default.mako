@@ -53,7 +53,7 @@
                 </div>
             % else:
                 <form action="${request.route_path('logout')}" method="POST">
-                    Prihlásený ${request.user.email}
+                    <span>Prihlásený ${request.user.email}</span>
                     <button type="submit" class="btn btn-default">Odhlásiť</button>
                 </form>
             % endif
