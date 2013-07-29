@@ -23,7 +23,7 @@
                 </a>
 
                 <!-- Be sure to leave the brand out there if you want it shown -->
-                <a class="navbar-brand" href="/">Testingo</a>
+                <a class="navbar-brand" href="/">Testingo <span class="glyphicon glyphicon-ok"></span></a>
 
                 <!-- Everything you want hidden at 940px or less, place within here -->
                 <ul class="nav navbar-nav pull-right">
