@@ -26,7 +26,7 @@ class Visitor(Base):
     __tablename__ = 'vizitor'
     id = Column(Integer, primary_key=True) 
     email = Column(String(50), unique=True)
-    user = relationship('User', backref=backref("visitor", cascade="all, delete-orphan"))
+    user = relationship('User', backref=backref("visitors", cascade="all, delete-orphan"))
     @validates('email')
     def validate_email(self, key, address):
         if not valid_email(address):
