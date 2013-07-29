@@ -8,7 +8,9 @@ from sqlalchemy import (
 from sqlalchemy.orm import (
     validates,
     relationship,
-    backref
+    backref,
+    scoped_session,
+    sessionmaker,
     )
 
 from ..utils import valid_email
@@ -29,6 +31,7 @@ class Visitor(Base):
     email = Column(String(50), unique=True)
     user_id = Column(Integer, ForeignKey('uzer.id'), index=True)
     user = relationship('User', backref=backref("visitors", cascade="all, delete-orphan"))
+
     @validates('email')
     def validate_email(self, key, address):
         if not valid_email(address):
