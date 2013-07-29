@@ -4,16 +4,17 @@
 
 <div class="page-header">
 	<h1>Dashboard</h1>
+
 </div>
 
 <div class="container">
+	<p class="lead">
+		Use this document as a way to quick start any new project.
+		
+		All you get is this message and a barebones HTML document.
+	</p>
 	<div class="row">
 		<div class="col-lg-5">
-			<p>
-				Use this document as a way to quick start any new project.
-				<br>
-				All you get is this message and a barebones HTML document.
-			</p>
 			<div class="btn-group">
 				<a href="#" class="btn btn-primary">Admin</a>
 				<a href="#" class="btn btn-default">Respondent<br></a>
