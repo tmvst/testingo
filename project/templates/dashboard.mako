@@ -16,20 +16,6 @@
 			<a href="#" class="btn btn-primary">Admin</a>
 			<a href="#" class="btn">Respondent<br></a>
 		</div>
-		<div class="btn-group">
-		</div>
-		<div class="btn-group">
-		</div>
-	</div>
-	<table class="table">
-		<tbody>
-			<tr>
-			</tr>
-		</tbody>
-	</table>
-	<div class="container">
-	</div>
-	<div>
 	</div>
 	<h3 class="pull-left">
 		Vaše testy
@@ -39,9 +25,7 @@
 			Aktivita
 		</h3>
 		<p class="text-left">
-			<a href="#">Jano</a>
-			vyplnil
-			<a href="#">Test osobnosti</a>
+			<a href="#">Jano</a> vyplnil <a href="#">Test osobnosti</a>
 		</p>
 		<div>
 			<i class="text-left">pred 2 minútami (12:45)<br><br></i>
@@ -55,15 +39,14 @@
 		<div>
 			<i class="text-left">pred 1 hodinou (17:45)<br><br></i>
 		</div>
-		<p>
-		</p>
 	</div>
 	<table class="table table-striped pull-left" style="width: 500px;">
 		<tbody class="pull-left">
+			% for test in tests:
 			<tr>
 				<td>
 					<a href="#">
-					Test osobnosti
+					${test.name}
 				</a>
 				</td>
 				<td>
@@ -76,53 +59,7 @@
 					<i class="icon-lock"></i>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<a href="#">
-					Test test
-					</a>
-					<br>
-				</td>
-				<td>
-					<a class="btn btn-mini btn-danger"><i class="icon-trash"></i> Zmazať</a>
-				</td>
-				<td>
-					<i class="icon-exclamation-sign"></i>
-				</td>
-				<td>
-					<i class="icon-lock"></i>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="#">
-					Polročná písmomná previerka z biológie
-				</a>
-				</td>
-				<td>
-					<a class="btn btn-mini btn-danger"><i class="icon-trash"></i> Zmazať</a>
-				</td>
-				<td>
-					<i class="icon-exclamation-sign"></i>
-				</td>
-				<td>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="#">
-					Maturita 2015
-				</a>
-				</td>
-				<td>
-					<a class="btn btn-mini btn-danger"><i class="icon-trash"></i> Zmazať</a>
-				</td>
-				<td>
-					<i class="icon-exclamation-sign"></i>
-				</td>
-				<td>
-				</td>
-			</tr>
+			% endfor
 		</tbody>
 	</table>
 </div>

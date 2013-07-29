@@ -283,23 +283,26 @@ def recovery_final_submit(request):
 def dashboard(request):
     """Shows dashboard.
     """
+    uid = request.userid
+    user = request.db_session.query(User).filter_by(id=uid).one()
+
     if request.userid == None:
         raise HTTPForbidden
         return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
     
-    return {'errors':[]}
+    return {'errors':[], 'tests': user.tests}
 
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
 def newtest_view(request):
     """Shows dashboard.
     """
+
     return {'errors':[]}
 
 
 @view_config(route_name='newtest', request_method='POST', renderer='project:templates/newtest.mako')
 def newtest_submission(request):
-    """Handles registration form submission.
-    Creates PDF card in 'users_data/cards/{ID}.pdf'. CSS file for it is in 'templates/pdf_card.css'.
+    """Handles test form submission.
     """
     POST = request.POST
 
