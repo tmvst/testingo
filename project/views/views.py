@@ -278,4 +278,6 @@ def recovery_final_submit(request):
 def dashboard(request):
     """Shows dashboard.
     """
+    
+    
     return {'errors':[]}
