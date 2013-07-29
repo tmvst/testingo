@@ -332,3 +332,79 @@ def create_test(request, db_session, name, description):         # pridať passw
 
     return test.id
 
+
+@view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
+def question_view(request):
+    """Shows dashboard.
+    """
+
+    return {'errors':[]}
+
+
+@view_config(route_name='newtest', request_method='POST', renderer='project:templates/newtest.mako')
+def question_submission(request):
+    """Handles test form submission.
+    """
+    POST = request.POST
+
+    question_id = create_question(request, request.db_session, 
+     POST['number'],
+     POST['text'],
+     POST['points'],
+     POST['qtype'],
+     )
+    return HTTPFound(request.route_path('newtest', question_id=question_id))
+
+    return {'errors': []}
+
+
+def create_question(request, db_session, number, text, points, qtype):         # pridať password !!!
+    """Registers a new user and returns his ID (single number).
+
+    """
+
+    test_id = Test.id
+
+    question = Question(1, text, points, qtype, test_id)
+
+    db_session.add(question)
+    db_session.flush()
+
+    return question.id
+
+@view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
+def answer_view(request):
+    """Shows dashboard.
+    """
+
+    return {'errors':[]}
+
+
+@view_config(route_name='newtest', request_method='POST', renderer='project:templates/newtest.mako')
+def answer_submission(request):
+    """Handles test form submission.
+    """
+    POST = request.POST
+
+    answer_id = create_question(request, request.db_session, 
+     POST['text'],
+     POST['correct']
+     )
+    return HTTPFound(request.route_path('newtest', answer_id=answer_id))
+
+    return {'errors': []}
+
+
+def create_answer(request, db_session, text, correct):         # pridať password !!!
+    """Registers a new user and returns his ID (single number).
+
+    """
+
+    question_id = Question.id
+
+    answer = Answer(text, correct, question)
+
+    db_session.add(answer)
+    db_session.flush()
+
+    return answer.id
