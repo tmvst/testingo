@@ -279,6 +279,7 @@ def dashboard(request):
     """Shows dashboard.
     """
     if request.userid == None:
+        raise HTTPForbidden
         return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
     
     return {'errors':[]}
