@@ -39,14 +39,4 @@ class TestLoginLogout(DatabaseTestCase):
             }
         response=register_submission(self.request)
         print(response)
-
-
-
-
-
-
-        
-
-
-
         
