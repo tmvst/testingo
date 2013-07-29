@@ -281,3 +281,9 @@ def dashboard(request):
     
     
     return {'errors':[]}
+
+@view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
+def newtest(request):
+    """Shows newtest.
+    """
+    return {'errors':[]}
