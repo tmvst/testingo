@@ -46,8 +46,8 @@
 			<tr>
 				<td>
 					<a href="#">
-					${test.name}
-				</a>
+						${test.name}
+					</a>
 				</td>
 				<td>
 					<a class="btn btn-mini btn-danger"><i class="icon-trash"></i> Zmazať</a>
