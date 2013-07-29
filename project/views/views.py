@@ -33,6 +33,10 @@ from ..models.user import (
     User, 
     )
 
+from ..models.test import (
+    Test, 
+    )
+
 from ..utils import valid_email
 
 from mako.template import Template
@@ -58,6 +62,7 @@ from ..authenticator import (
 
 
 import random
+import datetime
 #}}}
 
 @notfound_view_config(append_slash=True)
@@ -280,7 +285,41 @@ def dashboard(request):
     return {'errors':[]}
 
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
-def newtest(request):
-    """Shows newtest.
+def newtest_view(request):
+    """Shows dashboard.
     """
     return {'errors':[]}
+
+
+@view_config(route_name='newtest', request_method='POST', renderer='project:templates/newtest.mako')
+def newtest_submission(request):
+    """Handles registration form submission.
+    Creates PDF card in 'users_data/cards/{ID}.pdf'. CSS file for it is in 'templates/pdf_card.css'.
+    """
+    POST = request.POST
+
+    test_id = create_test(request, request.db_session, 
+     POST['name'],
+     POST['description'])
+    return HTTPFound(request.route_path('newtest', test_id=test_id))
+
+    return {'errors': []}
+
+
+def create_test(request, db_session, name, description):         # pridať password !!!
+    """Registers a new user and returns his ID (single number).
+
+    """
+    user_id = request.userid
+    user = request.db_session.query(User).filter_by(id=user_id).first()
+
+    date_crt = datetime.datetime.now()
+    date_mdf = datetime.datetime.now()
+
+    test = Test(name, description, "babotka", date_crt, date_mdf, user)
+
+    db_session.add(test)
+    db_session.flush()
+
+    return test.id
+
