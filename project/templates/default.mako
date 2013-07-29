@@ -45,7 +45,7 @@
                         <input type="email" name="email" class="input-small" placeholder="Email" required>
                         <input type="password" name="password" class="input-small" placeholder="Heslo" required>
                         <button type="submit" class="btn">Sign in</button>
-                        <label class="checkbox">
+                        <label>
                             <a href="${request.route_path('register')}">Zaregistrovať sa</a> |
                             <a href="${request.route_path('beg_for_recovery')}" >Zabudol som heslo</a>
                         </label>
