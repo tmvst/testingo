@@ -102,6 +102,7 @@ error_messages = {
     'duplicate_email':'E-mail je už obsadený.',
     'invalid_password':'Zadajte heslo.',
     'dont_match':'Heslá sa nezhodujú.',
+    'need_login':'Je potrebné sa prihlásiť',
     }
 
 
