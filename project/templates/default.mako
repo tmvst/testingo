@@ -25,54 +25,30 @@
                 </a>
 
                 <!-- Be sure to leave the brand out there if you want it shown -->
-                <a class="brand" href="#">Testingo</a>
+                <a class="brand" href="/">Testingo</a>
 
                 <!-- Everything you want hidden at 940px or less, place within here -->
-                <div class="nav-collapse collapse">
-                    <!-- .nav, .navbar-search, .navbar-form, etc -->
-                    <form class="navbar-form pull-right" action="${request.route_path('login')}" method="POST">
-                        <input type="email" name="email" id="email-login" class="input-small" placeholder="E-mail" required/>
-                        <input type="password" name="password" id="password-login" class="input-small" placeholder="Heslo" required/>
-                        <button type="submit" class="btn">Prihlásiť sa</button>
-                    </form>
-
-                    <ul class="nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Account
-                            <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>Ahoj</li>
-                                <a href="#">Ahoj</a>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="nav pull-right">
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="#">Link</a></li>
+                </ul>
             </div>
         </div>
     </div>
 
     <div class="container" id="main">
         <div id="header">
-            <h1><a href="/">Project</a></h1>
             <div class="login">
             % if request.userid is None:
                 <div id="log in">
-                    <form class="login-form" action="${request.route_path('login')}" method="POST">
-                        <div class="input-group">
-                            <label for="email-login">E-mail</label>
-                            <input type="email" name="email" id="email-login" required/>
-                        </div>
-                        <div class="input-group">
-                            <label for="password-login">Heslo</label>
-                            <input type="password" name="password" id="password-login" required/>    
-                        </div>
-                        <button type="submit" class="submit-form">Prihlásiť sa</button>
-                        <a class="register-button" href="${request.route_path('register')}">Zaregistrovať sa</a>
-                        <div class="recovery-password">
-                        <a href="${request.route_path('beg_for_recovery')}" >Zabudol som heslo</a>
-                        </div>
+                    <form class="form-inline">
+                        <input type="email" name="email" class="input-small" placeholder="Email" required>
+                        <input type="password" name="password" class="input-small" placeholder="Heslo" required>
+                        <button type="submit" class="btn">Sign in</button>
+                        <label class="checkbox">
+                            <a href="${request.route_path('register')}">Zaregistrovať sa</a> |
+                            <a href="${request.route_path('beg_for_recovery')}" >Zabudol som heslo</a>
+                        </label>
                     </form>
                 </div>
             % else:

@@ -1,7 +1,9 @@
 <%inherit file="default.mako" />
 <%block name="title">Úvodná stránka</%block>
 <%block name="page_content">
-<h2>Toto je úvodná stránka</h2>
+<div class="page-header">
+	<h1>Toto je úvodná stránka</h1>
+</div>
 
 <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac
     turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
