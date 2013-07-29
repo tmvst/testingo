@@ -30,7 +30,7 @@
                 <!-- Everything you want hidden at 940px or less, place within here -->
                 <ul class="nav pull-right">
                     <li><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="#">Link</a></li>
+                    <li><a href="/newtest">Nový test</a></li>
                 </ul>
             </div>
         </div>

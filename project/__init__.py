@@ -93,6 +93,7 @@ def main(global_config, **settings):
     config.add_route('get_user_info', '/get-user-info/{user_id}/')
     config.add_route('recovery_small_success', '/stratene-heslo-uspech/')
     config.add_route('dashboard', '/dashboard')
+    config.add_route('newtest', '/newtest')
 
     config.scan()
     random.seed()
