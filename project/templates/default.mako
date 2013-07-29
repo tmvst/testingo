@@ -39,7 +39,7 @@
 
     <div class="container" id="main">
         <div id="header">
-            <div class="login">
+            <div class="pull-right">
             % if request.userid is None:
                 <div id="log in">
                     <form class="form-inline" action="${request.route_path('login')}" method="POST">
