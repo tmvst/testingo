@@ -107,6 +107,7 @@ error_messages = {
     'duplicate_email':'E-mail je už obsadený.',
     'invalid_password':'Zadajte heslo.',
     'dont_match':'Heslá sa nezhodujú.',
+    'need_login':'Je potrebné sa prihlásiť',
     }
 
 
@@ -195,7 +196,7 @@ def login_submit(request):
 
     try:
         (headers, user) = request.authenticator.login(email, password)
-        return HTTPFound(location=request.route_path('home'), headers=headers)
+        return HTTPFound(location=request.route_path('dashboard'), headers=headers)
     except WrongPasswordError:
         errors.append('wrong-password')
     except NonExistingUserError:
@@ -282,6 +283,10 @@ def recovery_final_submit(request):
 def dashboard(request):
     """Shows dashboard.
     """
+    if request.userid == None:
+        raise HTTPForbidden
+        return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
+    
     return {'errors':[]}
 
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
@@ -310,6 +315,7 @@ def create_test(request, db_session, name, description):         # pridať passw
     """Registers a new user and returns his ID (single number).
 
     """
+
     user_id = request.userid
     user = request.db_session.query(User).filter_by(id=user_id).first()
 

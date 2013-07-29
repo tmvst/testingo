@@ -9,7 +9,6 @@
     <link href="${request.static_path('project:static/stylesheets/bootstrap.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
 
     <link href="${request.static_path('project:static/js/bootstrap.js')}" type="text/javascript" />
-
 </head>
 
 <body>
@@ -29,8 +28,10 @@
 
                 <!-- Everything you want hidden at 940px or less, place within here -->
                 <ul class="nav pull-right">
-                    <li><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="/newtest">Nový test</a></li>
+                    % if request.userid:
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/newtest">Nový test</a></li>
+                    % endif
                 </ul>
             </div>
         </div>
