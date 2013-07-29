@@ -22,7 +22,7 @@
 			<h3>
 				Vaše testy
 			</h3>
-			<div class="list-group pull-left" style="width: 400px;">
+			<div class="list-group">
 				% for test in tests:
 				<a href="#" class="list-group-item">
 					${test.name}
@@ -31,8 +31,8 @@
 				% endfor
 			</div>
 		</div>
-		<div class="col-lg-5 col-offset-2">
-			<div class="well pull-right text-left">
+		<div class="col-lg-6 col-offset-1">
+			<div class="well text-left">
 				<h3>
 					Aktivita
 				</h3>
