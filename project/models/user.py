@@ -2,19 +2,6 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Text,
-    Float,
-    Boolean,
-    Table,
-    ForeignKey,
-    Enum,
-    Float,
-    DateTime,
-    )
-
-from sqlalchemy.orm import (
-    scoped_session,
-    sessionmaker,
     )
 
 from sqlalchemy.ext.hybrid import (
@@ -24,9 +11,6 @@ from sqlalchemy.ext.hybrid import (
 
 from sqlalchemy.orm import (
     validates,
-    relationship,
-    scoped_session,
-    sessionmaker,
     )
 
 from bcrypt import (hashpw, gensalt)

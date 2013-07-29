@@ -2,37 +2,15 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Text,
-    Float,
     Boolean,
-    Table,
     ForeignKey,
-    Enum,
-    Float,
-    DateTime,
     )
 
 from sqlalchemy.orm import (
-    scoped_session,
-    sessionmaker,
-    )
-
-from sqlalchemy.ext.hybrid import (
-    Comparator, 
-    hybrid_property,
-    )
-
-from sqlalchemy.orm import (
-    validates,
     relationship,
-    scoped_session,
-    sessionmaker,
     backref
     )
 
-from bcrypt import (hashpw, gensalt)
-
-from ..utils import valid_email
 from . import Base
 
 class ValidationError(Exception):
