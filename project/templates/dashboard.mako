@@ -24,7 +24,7 @@
 			</h3>
 			<div class="list-group">
 				% for test in tests:
-				<a href="#" class="list-group-item">
+				<a href="${request.route_path('showtest', test_id=test.id)}" class="list-group-item">
 					${test.name}
 					<span class="glyphicon glyphicon-lock pull-right"></span>
 				</a>
