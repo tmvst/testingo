@@ -30,9 +30,11 @@ from pyramid_mailer.message import (
     )
 
 from ..models.user import (
-    User, 
+    User,
     )
-
+from ..models.answer import (
+    Answer,
+    )
 from ..models.test import (
     Test, 
     )
