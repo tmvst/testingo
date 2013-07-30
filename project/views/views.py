@@ -352,7 +352,7 @@ def question_submission(request):
      POST['number'],
      POST['text'],
      POST['points'],
-     POST['qtype'],
+     POST['qtype']
      )
     return HTTPFound(request.route_path('newtest'))
 
@@ -369,8 +369,6 @@ def create_question(request, db_session, number, text, points, qtype):         #
 
     db_session.add(question)
     db_session.flush()
-
-
 
     return question.id
 
