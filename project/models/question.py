@@ -31,7 +31,7 @@ class Question(Base):
     number = Column(String(50))
     text = Column(String(500))
     points = Column(Integer)
-    qtype = Column(Enum('O', 'S'))
+    qtype = Column(String(5))
     test_id = Column(Integer, ForeignKey('test.id'), index=True)
     test = relationship('Test', backref=backref("tests", cascade="all, delete-orphan"))
 

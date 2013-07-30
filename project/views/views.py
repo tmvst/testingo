@@ -288,13 +288,14 @@ def recovery_final_submit(request):
 def dashboard(request):
     """Shows dashboard.
     """
-    uid = request.userid
-    user = request.db_session.query(User).filter_by(id=uid).one()
 
     if request.userid == None:
         raise HTTPForbidden
         return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
-    
+
+    uid = request.userid
+    user = request.db_session.query(User).filter_by(id=uid).one()
+
     return {'errors':[], 'tests': user.tests}
 
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
@@ -306,13 +307,15 @@ def newtest_view(request):
 
 @view_config(route_name='newquestion', request_method='GET', renderer='project:templates/newquestion.mako')
 def question_view(request):
-    """Shows dashboard.
+    """Shows new question.
     """
+    testid = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
 
-    return {'errors':[]}
+    return {'errors':[], 'test':test}
 
 def answer_view(request):
-    """Shows dashboard.
+    """Shows answer.
     """
 
     return {'errors':[]}
@@ -346,32 +349,34 @@ def create_test(request, db_session, name, description):
 
     return test.id
 
+
 @view_config(route_name='newquestion', request_method='POST', renderer='project:templates/newquestion.mako')
 def question_submission(request):
-    """Handles test form submission.
+    """Handles question form submission.
     """
     POST = request.POST
+    testid = request.matchdict['test_id']
 
     question_id = create_question(request, request.db_session, 
-     POST['number'],
      POST['text'],
      POST['points'],
-     POST['qtype'],
-     request.test 
+     testid
      )
 
     return HTTPFound(request.route_path('newtest'))
 
 
-def create_question(request, db_session, number, text, points, qtype):         # pridať password !!!
+def create_question(request, db_session, text, points, qtype):         # pridať password !!!
     """Registers a new user and returns his ID (single number).
-
     """
 
     test_id = Test.id
     test = request.db_session.query(Test).filter_by(id=test_id).one()
 
-    question = Question(1, text, points, qtype, test)
+    lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
+    qnum = lastnum + 1
+
+    question = Question(qnum, text, points, 'S', test)
 
     db_session.add(question)
     db_session.flush()
@@ -416,4 +421,16 @@ def test_view(request):
         return HTTPException('Neexistujuci test')
 
     return {'test':test,'questions':questions}
+
+@view_config(route_name='showtest', request_method='POST')
+def delete_test(request):
+    """
+    Deletes selected test from db.
+    """
+    testid = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
+    request.db_session.delete(test)
+
+    return HTTPFound(request.route_path('dashboard'))
+
 

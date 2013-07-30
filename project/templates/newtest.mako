@@ -8,7 +8,6 @@
 <div class="container">
 	<p>Pokyny</p>
 	<form action="${request.route_path('newtest')}" method="POST">
-
 		<div class="control-group">
 			<div class="controls">
 				<input type="text" name="name" id="name" placeholder="Názov" required/>
