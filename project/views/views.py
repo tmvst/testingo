@@ -53,7 +53,6 @@ import os.path
 import json
 
 
-
 from sqlalchemy import (
     asc,
     desc,
@@ -66,7 +65,6 @@ from ..authenticator import (
     WrongPasswordError,
     NonExistingUserError,
     )
-
 
 import random
 import datetime
