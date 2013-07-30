@@ -6,7 +6,7 @@
 </div>
 
 <div class="container">
-<form action="${request.route_path('createlist')}" method="POST">
+<form action="${request.route_path('getlist')}" method="POST">
 <button type="submit" class="btn btn-primary pull-right">Pridať zoznam</button>
 </form>
 	<div class="control-group">

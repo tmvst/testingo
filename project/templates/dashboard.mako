@@ -4,7 +4,7 @@
 
 <div class="page-header">
 	<h1>Dashboard</h1>
-	<a href="${request.route_path('createlist')" class="btn btn-primary pull-right">Zoznamy respondentov</a>
+	<a href="${request.route_path('getlist')}" class="btn btn-primary pull-right">Zoznamy respondentov</a>
 </div>
 
 <div class="container">

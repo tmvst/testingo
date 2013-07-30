@@ -433,4 +433,9 @@ def delete_test(request):
 
     return HTTPFound(request.route_path('dashboard'))
 
+@view_config(route_name='getlist', request_method='GET', renderer='project:templates/list_respondents.mako')
+def get_list(request):
+
+    return {}
+
 
