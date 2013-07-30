@@ -36,7 +36,7 @@ from ..models.answer import (
     Answer,
     )
 from ..models.test import (
-    Test, 
+    Test,
     )
 from ..models.question import (
     Question,
@@ -82,14 +82,14 @@ def main_page_view(request):
     return {
         'page_title': 'HomePage',
         'logged': (request.userid is not None)
-        }
+    }
 
 
 class RegistrationError(Exception):
     pass
 
 
-class DuplicateUserError(RegistrationError): 
+class DuplicateUserError(RegistrationError):
     pass
 
 
@@ -98,7 +98,7 @@ def register_user(db_session, email, password):
 
     """
     user = User(email, password)
-    
+
     if db_session.query(User).filter_by(email=email).count() != 0:
         raise DuplicateUserError
 
@@ -161,7 +161,7 @@ def validate_registration_data(form_data):
     if form_data['password'] == "":
         errors['password'] = 'invalid_password'
     return errors
-    
+
 
 @view_config(route_name='get_user_info', renderer='json')
 def get_user_info(request):
@@ -239,9 +239,9 @@ def begged_for_recovery(request):
 
     link = request.route_url('new_password', user_id=str(user.id), code=user.recovery_code)
 
-    message = Message(subject='Zmena hesla',  
-                        recipients=[email],
-                        body='Ak si chcete zmeniť heslo, kliknite na nasledovný odkaz:' + link + '.')
+    message = Message(subject='Zmena hesla',
+                      recipients=[email],
+                      body='Ak si chcete zmeniť heslo, kliknite na nasledovný odkaz:' + link + '.')
 
     request.mailer.send(message)
 
@@ -261,7 +261,7 @@ def recovery_final(request):
     """
     user_id = int(request.matchdict['user_id'])
     user = request.db_session.query(User).filter_by(id=user_id).first()
-    
+
     if user == None:
         return HTTPNotFound("Neplatná obnovovacia URL. Skontrolujte odkaz na zmenu hesla a skúste znova.")
     if request.matchdict['code'] != user.recovery_code:
@@ -327,13 +327,13 @@ def newtest_submission(request):
     """
     POST = request.POST
 
-    test_id = create_test(request, request.db_session, 
-     POST['name'],
-     POST['description'])
+    test_id = create_test(request, request.db_session,
+                          POST['name'],
+                          POST['description'])
 
     return HTTPFound(request.route_path('showtest', test_id=test_id))
 
-def create_test(request, db_session, name, description): 
+def create_test(request, db_session, name, description):
     """ Creates new test and returns its id.
     """
     user_id = request.userid
@@ -357,11 +357,11 @@ def question_submission(request):
     POST = request.POST
     testid = request.matchdict['test_id']
 
-    question_id = create_question(request, request.db_session, 
-     POST['text'],
-     POST['points'],
-     testid
-     )
+    question_id = create_question(request, request.db_session,
+                                  POST['text'],
+                                  POST['points'],
+                                  testid
+    )
 
     return HTTPFound(request.route_path('showtest',test_id=testid))
 
@@ -388,10 +388,10 @@ def answer_submission(request):
     """
     POST = request.POST
 
-    question_id = create_answer(request, request.db_session, 
-     POST['text'],
-     POST['correct']
-     )
+    question_id = create_answer(request, request.db_session,
+                                POST['text'],
+                                POST['correct']
+    )
     return HTTPFound(request.route_path('newtest'))
 
 
