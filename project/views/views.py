@@ -363,14 +363,14 @@ def question_submission(request):
      testid
      )
 
-    return HTTPFound(request.route_path('newtest'))
+    return HTTPFound(request.route_path('showtest',test_id=testid))
 
 
 def create_question(request, db_session, text, points, qtype):         # pridať password !!!
     """Registers a new user and returns his ID (single number).
     """
 
-    test_id = Test.id
+    test_id = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=test_id).one()
 
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
@@ -437,5 +437,7 @@ def delete_test(request):
 def get_list(request):
 
     return {}
+
+
 
 

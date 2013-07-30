@@ -20,7 +20,7 @@
 			<input type="number" id="points" name="points" class="form-control" placeholder="Body" required>
 		</div>
 		<button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
-		<button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+		<!--<button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>-->
 	</form>
 </div>
 </%block>
