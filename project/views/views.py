@@ -53,7 +53,6 @@ import os.path
 import json
 
 
-
 from sqlalchemy import (
     asc,
     desc,
@@ -66,7 +65,6 @@ from ..authenticator import (
     WrongPasswordError,
     NonExistingUserError,
     )
-
 
 import random
 import datetime
@@ -290,13 +288,14 @@ def recovery_final_submit(request):
 def dashboard(request):
     """Shows dashboard.
     """
-    uid = request.userid
-    user = request.db_session.query(User).filter_by(id=uid).one()
 
     if request.userid == None:
         raise HTTPForbidden
         return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
-    
+
+    uid = request.userid
+    user = request.db_session.query(User).filter_by(id=uid).one()
+
     return {'errors':[], 'tests': user.tests}
 
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
@@ -316,7 +315,7 @@ def question_view(request):
     return {'errors':[], 'test':test}
 
 def answer_view(request):
-    """Shows .
+    """Shows answer.
     """
 
     return {'errors':[]}
@@ -350,9 +349,10 @@ def create_test(request, db_session, name, description):
 
     return test.id
 
+
 @view_config(route_name='newquestion', request_method='POST', renderer='project:templates/newquestion.mako')
 def question_submission(request):
-    """Handles test form submission.
+    """Handles question form submission.
     """
     POST = request.POST
     testid = request.matchdict['test_id']
@@ -368,7 +368,6 @@ def question_submission(request):
 
 def create_question(request, db_session, text, points, qtype):         # pridať password !!!
     """Registers a new user and returns his ID (single number).
-
     """
 
     test_id = Test.id
@@ -422,4 +421,16 @@ def test_view(request):
         return HTTPException('Neexistujuci test')
 
     return {'test':test,'questions':questions}
+
+@view_config(route_name='showtest', request_method='POST')
+def delete_test(request):
+    """
+    Deletes selected test from db.
+    """
+    testid = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
+    request.db_session.delete(test)
+
+    return HTTPFound(request.route_path('dashboard'))
+
 
