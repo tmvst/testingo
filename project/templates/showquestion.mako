@@ -6,8 +6,8 @@
     </div>
 
     <div class="container">
-        <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-            <button type="submit" class="btn btn-danger pull-right">Zmazať otazku</button>
+        <form action="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}" method="POST">
+            <button type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
         </form>
         <div class="control-group">
             <div class="controls">
@@ -16,7 +16,7 @@
             <h4>${question.text}</h4>
             <div class="list-group">
                     % if len(answers) is 0:
-                        <span> Otazka neobsahuje ziadne moznosti</span>
+                        <span> Otázka neobsahuje žiadne možnosti</span>
                     % else:
                     % for answer in answers:
                         ${answer.text}
