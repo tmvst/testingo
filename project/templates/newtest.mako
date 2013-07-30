@@ -32,7 +32,6 @@
 				<a class="btn">Pridať odpoveď</a>
 				<button type="submit" class="btn btn-primary">Vytvoriť test</button>
 				<button type="submit" class="btn">Pridať otázku k DB</button>
-
 			</div>
 		</div>
 	</form>
