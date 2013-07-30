@@ -94,6 +94,7 @@ def main(global_config, **settings):
     config.add_route('recovery_small_success', '/stratene-heslo-uspech/')
     config.add_route('dashboard', '/dashboard')
     config.add_route('newtest', '/newtest')
+    config.add_route('newquestion', '/newquestion')
 
     config.scan()
     random.seed()
