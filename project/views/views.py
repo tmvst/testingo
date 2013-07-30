@@ -313,12 +313,9 @@ def newtest_submission(request):
 
     return {'errors': []}
 
-
 def create_test(request, db_session, name, description): 
-    """Registers a new user and returns his ID (single number).
-
+    """ Creates new test and returns its id.
     """
-
     user_id = request.userid
     user = request.db_session.query(User).filter_by(id=user_id).first()
 
