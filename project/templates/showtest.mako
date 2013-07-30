@@ -7,7 +7,7 @@
 
 <div class="container">
 <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-<button type="submit" class="btn btn-primary pull-right">Zmazať</button>
+	<button type="submit" class="btn btn-danger pull-right">Zmazať test</button>
 </form>
 	<div class="control-group">
 		<div class="controls">
