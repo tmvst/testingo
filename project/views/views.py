@@ -306,6 +306,12 @@ def question_view(request):
 
     return {'errors':[]}
 
+def answer_view(request):
+    """Shows dashboard.
+    """
+
+    return {'errors':[]}
+
 
 @view_config(route_name='newtest', request_method='POST', renderer='project:templates/newtest.mako')
 def newtest_submission(request):
@@ -348,9 +354,7 @@ def question_submission(request):
      POST['points'],
      POST['qtype'],
      )
-    return HTTPFound(request.route_path('newtest', question_id=question_id))
-
-    return {'errors': []}
+    return HTTPFound(request.route_path('newtest'))
 
 
 def create_question(request, db_session, number, text, points, qtype):         # pridať password !!!
@@ -359,11 +363,41 @@ def create_question(request, db_session, number, text, points, qtype):         #
     """
 
     test_id = Test.id
+    test = request.db_session.query(Test).filter_by(id=test_id).one()
 
-    question = Question(1, text, points, qtype, test_id)
+    question = Question(1, text, points, qtype, test)
 
     db_session.add(question)
     db_session.flush()
 
+
+
     return question.id
+
+def answer_submission(request):
+    """Handles test form submission.
+    """
+    POST = request.POST
+
+    question_id = create_answer(request, request.db_session, 
+     POST['text'],
+     POST['correct']
+     )
+    return HTTPFound(request.route_path('newtest'))
+
+
+def create_answer(request, db_session, text, correct):         # pridať password !!!
+    """Registers a new user and returns his ID (single number).
+
+    """
+
+    question_id = Question.id
+    question = request.db_session.query(Question).filter_by(id=question_id).one()
+
+    answer = Answer(1, text, correct, question)
+
+    db_session.add(answer)
+    db_session.flush()
+
+    return answer.id
 
