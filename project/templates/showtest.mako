@@ -6,18 +6,22 @@
 </div>
 
 <div class="container">
-		<div class="control-group">
-			<div class="controls">
-				<textarea name="description" id="description" >${test.description}</textarea>
-			</div>
-            <h3>
-				Otazky
-			</h3>
-			<div class="list-group">
-				    % for question in questions:
-					    ${question.text}
-				    % endfor
-			</div>
+	<div class="control-group">
+		<div class="controls">
+			<p>${test.description}</p>
 		</div>
+		<h3>
+			Otázky
+		</h3>
+		<div class="list-group">
+			% if len(questions) is 0:
+				<span> Test neobsahuje žiadne otázky </span>
+			% else:
+				% for question in questions:
+					${question.text}
+				% endfor
+			% endif
+		</div>
+	</div>
 </div>
 </%block>
