@@ -439,7 +439,7 @@ def get_list(request):
     return {}
 
 @view_config(route_name='showquestion', request_method='GET', renderer='project:templates/showquestion.mako')
-def question_view(request):
+def view_question(request):
     testid = request.matchdict['test_id']
     questionid = request.matchdict["question_id"]
     test = request.db_session.query(Test).filter_by(id=testid).one()
@@ -449,6 +449,18 @@ def question_view(request):
         raise HTTPException
         return HTTPException('Neexistujuca otazka')
     return {'test':test,'question':question, 'answers':answers}
+
+@view_config(route_name='showquestion', request_method='POST')
+def question_delete(request):
+    """
+    Deletes selected question from test and db.
+    """
+    testid = request.matchdict['test_id']
+    questionid = request.matchdict['question_id']
+    question= request.db_session.query(Question).filter_by(id=questionid).one()
+    request.db_session.delete(question)
+
+    return HTTPFound(request.route_path('showtest', test_id=testid))
 
 
 
