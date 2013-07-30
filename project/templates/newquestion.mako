@@ -1,13 +1,13 @@
 <%inherit file="default.mako" />
-<%block name="title">Nový test</%block>
+<%block name="title">Nová otázka</%block>
 <%block name="page_content">
 <div class="page-header">
-	<h1>Nový test</h1>
+	<h1>Nová otázka</h1>
 </div>
 
 <div class="container">
 	<p>Pokyny</p>
-	<form action="${request.route_path('newtest')}" method="POST">
+	<form action="${request.route_path('newquestion')}" method="POST">
 		<div class="control-group">
 			<div class="controls">
 				<input type="text" name="name" id="name" placeholder="Názov" required/>

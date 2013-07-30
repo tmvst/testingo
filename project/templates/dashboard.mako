@@ -10,7 +10,6 @@
 <div class="container">
 	<p class="lead">
 		Use this document as a way to quick start any new project.
-		
 		All you get is this message and a barebones HTML document.
 	</p>
 	<div class="row">
@@ -25,7 +24,7 @@
 			</h3>
 			<div class="list-group">
 				% for test in tests:
-				<a href="#" class="list-group-item">
+				<a href="${request.route_path('showtest', test_id=test.id)}" class="list-group-item">
 					${test.name}
 					<span class="glyphicon glyphicon-lock pull-right"></span>
 				</a>
