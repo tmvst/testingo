@@ -36,6 +36,9 @@ from ..models.user import (
 from ..models.test import (
     Test, 
     )
+from ..models.question import (
+    Question,
+    )
 
 from ..utils import valid_email
 
@@ -399,4 +402,16 @@ def create_answer(request, db_session, text, correct):         # pridať passwor
     db_session.flush()
 
     return answer.id
+
+@view_config(route_name='showtest', request_method='GET', renderer='project:templates/showtest.mako')
+def test_view(request):
+
+    testid = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
+    questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
+    if test is None:
+        raise HTTPException
+        return HTTPException('Neexistujuci test')
+
+    return {'test':test,'questions':questions}
 
