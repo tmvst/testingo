@@ -438,6 +438,18 @@ def get_list(request):
 
     return {}
 
+@view_config(route_name='showquestion', request_method='GET', renderer='project:templates/showquestion.mako')
+def question_view(request):
+    testid = request.matchdict['test_id']
+    questionid = request.matchdict["question_id"]
+    test = request.db_session.query(Test).filter_by(id=testid).one()
+    question = request.db_session.query(Question).filter_by(id=questionid).one()
+    answers = request.db_session.query(Answer).filter_by(question=question).all()
+    if test is None:
+        raise HTTPException
+        return HTTPException('Neexistujuca otazka')
+    return {'test':test,'question':question, 'answers':answers}
+
 
 
 
