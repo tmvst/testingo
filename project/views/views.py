@@ -313,7 +313,7 @@ def answer_view(request):
     return {'errors':[]}
 
 
-@view_config(route_name='newtest', request_method='POST', renderer='project:templates/newtest.mako')
+@view_config(route_name='newtest', request_method='POST')
 def newtest_submission(request):
     """Handles test form submission.
     """
@@ -322,9 +322,8 @@ def newtest_submission(request):
     test_id = create_test(request, request.db_session, 
      POST['name'],
      POST['description'])
-    return HTTPFound(request.route_path('newtest', test_id=test_id))
 
-    return {'errors': []}
+    return HTTPFound(request.route_path('showtest', test_id=test_id))
 
 def create_test(request, db_session, name, description): 
     """ Creates new test and returns its id.
@@ -353,7 +352,9 @@ def question_submission(request):
      POST['text'],
      POST['points'],
      POST['qtype'],
+     request.test 
      )
+
     return HTTPFound(request.route_path('newtest'))
 
 
@@ -369,8 +370,6 @@ def create_question(request, db_session, number, text, points, qtype):         #
 
     db_session.add(question)
     db_session.flush()
-
-
 
     return question.id
 
