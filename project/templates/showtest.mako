@@ -10,9 +10,13 @@
 		<div class="controls">
 			<p>${test.description}</p>
 		</div>
+		
 		<h3>
 			Otázky
 		</h3>
+
+		<a href="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Pridať otázku</a>
+
 		<div class="list-group">
 			% if len(questions) is 0:
 				<span> Test neobsahuje žiadne otázky </span>

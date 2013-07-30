@@ -2,38 +2,25 @@
 <%block name="title">Nová otázka</%block>
 <%block name="page_content">
 <div class="page-header">
-	<h1>Nová otázka</h1>
+	<h1>Nová otázka do testu ${test.name}</h1>
 </div>
 
 <div class="container">
-	<p>Pokyny</p>
-	<form action="${request.route_path('newquestion')}" method="POST">
-		<div class="control-group">
-			<div class="controls">
-				<input type="text" name="name" id="name" placeholder="Názov" required/>
-			</div>
+	<form action="${request.route_path('newquestion', test_id=test.id)}" method="POST">
+		<div class="form-group">
+			<label for="text">Znenie otázky</label>
+			<textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
 		</div>
-		<div class="control-group">
-			<div class="controls">
-				<textarea name="description" id="description" placeholder="Opis" ></textarea>
-			</div>
-
-			<div class="controls">
-				<textarea name="text" id="text" placeholder="Znenie otázky"></textarea>
-				<textarea name="text" id="text" placeholder="body"></textarea>
-				<label class="radio">
-					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-					<input type="text" name="a1" id="a1" placeholder="Odpoveď 1" required/>
-				</label>
-				<label class="radio">
-					<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-					<input type="text" name="a2" id="a2" placeholder="Odpoveď 2" required/>
-				</label>
-				<a class="btn">Pridať odpoveď</a>
-				<button type="submit" class="btn btn-primary">Vytvoriť test</button>
-				<button type="submit" class="btn">Pridať otázku k DB</button>
-			</div>
+		<div class="form-group">
+			<label for="odpoved">Správna odpoveď</label>
+			<input type="text" id="odpoved" name="odpoved" class="form-control" placeholder="Správna odpoveď" required>
 		</div>
+		<div class="form-group">
+			<label for="points">Body</label>
+			<input type="number" id="points" name="points" class="form-control" placeholder="Body" required>
+		</div>
+		<button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
+		<button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
 	</form>
 </div>
 </%block>
