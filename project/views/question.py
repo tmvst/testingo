@@ -27,7 +27,7 @@ def view_question(request):
     questionid = request.matchdict["question_id"]
     test = request.db_session.query(Test).filter_by(id=testid).one()
     question = request.db_session.query(Question).filter_by(id=questionid).one()
-    answers = request.db_session.query(Answer).filter_by(question=question,correct=1).all()
+    answers = request.db_session.query(Answer).filter_by(question=question).all()
     if test is None:
         raise HTTPException
         return HTTPException('Neexistujuca otazka')
