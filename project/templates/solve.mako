@@ -5,12 +5,15 @@
         <h1>${test.name}</h1>
     </div>
 
-    <div class="control-group">
-        <div class="controls">
-            <p>${test.description}</p>
-        </div>
+    <div class="container">
+        
+        <div class="control-group">
+            <div class="controls">
+                <p>${test.description}</p>
+            </div>
 
         <h2>Otázky</h2>
+
 
 
         % if len(test.questions) is 0:
@@ -35,5 +38,8 @@
                 </div>
             % endfor
         % endif
+            
+        </div>
+
     </div>
 </%block>

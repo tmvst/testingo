@@ -30,6 +30,6 @@ def view_question(request):
     if test is None:
         raise HTTPException
         return HTTPException('Neexistujuci test')
-        
+
     return {'test':test}
 
