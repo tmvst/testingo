@@ -4,7 +4,7 @@ from pyramid import testing
 
 from ..models.user import User
 from . import DatabaseTestCase
-from ..views.views import (
+from ..views.user import (
         register_submission,
         )
 from mock import Mock
