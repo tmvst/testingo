@@ -73,7 +73,7 @@ def newtest_view(request):
     return {'errors':[]}
 
 @view_config(route_name='showtest', request_method='POST')
-def question_submission(request):
+def test_show(request):
     """Handles question form submission.
     """
     POST = request.POST
@@ -84,6 +84,16 @@ def question_submission(request):
         request.db_session.delete(test)
         return HTTPFound(request.route_path('dashboard'))
 
+    if '_share' in POST:
+        testid = request.matchdict['test_id']
+        #test = request.db_session.query(Test).filter_by(id=testid).one()
+        share_test(request,testid)
+        return HTTPFound(request.route_path('showtest',test_id=testid))
+    else:
+        question_submission(request)
+
+def question_submission(request):
+    POST = request.POST
     testid = request.matchdict['test_id']
 
     question_id = create_question(request, request.db_session,
@@ -141,4 +151,6 @@ def share_test(request, test_id):
 
     raise HTTPException
     return HTTPException('Nie tvoj test!')
+
+
 
