@@ -1,20 +1,12 @@
-import transaction
-
 from pyramid import testing
+from mock import Mock
 
 from ..models.user import User
 from . import DatabaseTestCase
 from ..views.user import (
         register_submission,
         )
-from mock import Mock
 
-from pyramid.httpexceptions import (
-    HTTPException,
-    HTTPNotFound,
-    HTTPFound,
-    HTTPForbidden,
-    )
 
 class TestLoginLogout(DatabaseTestCase):
 
