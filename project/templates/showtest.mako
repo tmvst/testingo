@@ -15,13 +15,11 @@
                 <p>${test.description}</p>
             </div>
 
-            <h3>
-                Otázky
-            </h3>
-
+            <h2>Otázky</h2>
             <p>
-            <a href="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Pridať otázku</a>
+            <a href="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary btn-small">Pridať otázku</a>
             </p>
+
             % if len(questions) is 0:
                     <span> Test neobsahuje žiadne otázky </span>
             % else:
@@ -29,7 +27,8 @@
                         <div class="panel">
                             <div class="panel-heading">
                             	<a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
-                                <h4>Otázka č.${question.number}</h4></a>
+                                	<h4>Otázka č.${question.number}</h4>
+                                </a>
                         	</div>
                             <strong>${question.text}</strong>
                         </div>
