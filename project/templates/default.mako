@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="${request.static_path('project:static/stylesheets/custom.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
     <link href="${request.static_path('project:static/stylesheets/bootstrap.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
     <link href="${request.static_path('project:static/stylesheets/bootstrap-glyphicons.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="${request.static_path('project:static/stylesheets/custom.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="${request.static_path('project:static/js/bootstrap.js')}"></script>
@@ -27,12 +27,17 @@
             <a class="navbar-brand" href="/">Testingo <span class="glyphicon glyphicon-ok"></span></a>
 
             <!-- Everything you want hidden at 940px or less, place within here -->
+            % if request.userid:
             <ul class="nav navbar-nav pull-right">
-                % if request.userid:
                 <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
-                <li><a href="${request.route_path('newtest')}">Nový test</a></li>
-                % endif
+                <li><p class="navbar-text">Prihlásený ${request.user.email}</p></li>
+                <li>
+                    <form class="navbar-form navbutton" action="${request.route_path('logout')}" method="POST">
+                        <button type="submit" class="btn btn-default btn-small navbar-btn">Odhlásiť</button>
+                    </form>
+                </li>
             </ul>
+            % endif
         </div>
     </div>
 </div>
@@ -52,11 +57,6 @@
                     </span>
                 </form>
             </div>
-            % else:
-            <form action="${request.route_path('logout')}" method="POST">
-                <span>Prihlásený ${request.user.email}</span>
-                <button type="submit" class="btn btn-default">Odhlásiť</button>
-            </form>
             % endif
         </div>
     </div>
