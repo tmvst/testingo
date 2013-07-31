@@ -8,13 +8,17 @@
 
     <div class="container">
         <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-            <button type="submit" class="btn btn-danger pull-right">Zmazať test</button>
+            <button type="submit" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span> Zmazať test</button>
                 <input type="hidden" name="_method" value="DELETE">
         </form>
+        % if test.share_token is None:
         <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-            <button type="submit" class="btn btn-success pull-right">Zdieľať test</button>
+            <button type="submit" class="btn btn-success pull-right"><span class="glyphicon glyphicon-share"></span> Zdieľať test</button>
                 <input type="hidden" name="_share" value="SHARE">
         </form>
+        % else:
+        <span>${test.share_token}</span>
+        % endif
         <div class="control-group">
             <div class="controls">
                 <p>${test.description}</p>
@@ -22,7 +26,8 @@
 
             <h2>Otázky</h2>
             <p>
-            <a href="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary btn-small">Pridať otázku</a>
+            <a href="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary btn-small">
+                <span class="glyphicon glyphicon-plus"></span> Pridať otázku</a>
             </p>
 
             % if len(questions) is 0:
