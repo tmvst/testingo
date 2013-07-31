@@ -28,7 +28,14 @@
                         <div class="panel">
                             <div class="panel-heading">
                             	<a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
-                                	<h3 class="panel-title">Otázka č.${question.number}</h3>
+                                	<h3 class="panel-title">Otázka č.${question.number} 
+                                	% if question.points:
+                                		<span class="badge pull-right">
+                                			${question.points}b
+                                		</span>
+                                	% endif
+                                	</h3>
+
                                 </a>
                         	</div>
                             <strong>${question.text}</strong>

@@ -13,11 +13,11 @@
             </div>
             <div class="form-group">
                 <label for="odpoved">Správna odpoveď</label>
-                <input type="text" id="odpoved" name="odpoved" class="form-control" placeholder="Správna odpoveď" required>
+                <input type="text" id="odpoved" name="odpoved" class="form-control" placeholder="Správna odpoveď">
             </div>
             <div class="form-group">
                 <label for="points">Body</label>
-                <input type="number" id="points" name="points" class="form-control" placeholder="Body" required>
+                <input type="number" id="points" name="points" class="form-control" placeholder="Body">
             </div>
             <button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
             <button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>

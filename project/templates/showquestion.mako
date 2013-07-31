@@ -2,7 +2,7 @@
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
     <div class="page-header">
-        <a href="${request.route_path('showtest',test_id=test.id)}"><h1>${test.name}</h1></a>
+        <h1>Otázka č.${question.number} z testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
     </div>
 
     <div class="container">
@@ -10,9 +10,6 @@
             <button type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
         </form>
         <div class="control-group">
-            <div class="controls">
-                <h3>Otázka č.${question.number}</h3>
-            </div>
             <h4>${question.text}</h4>
             <div class="list-group">
                     % if len(answers) is 0:
