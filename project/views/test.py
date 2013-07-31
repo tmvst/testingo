@@ -25,7 +25,6 @@ from ..models.answer import (
 from ..models.question import (
     Question,
     )
-from pyramid.response import Response
 #}}}
 
 @view_config(route_name='newtest', request_method='POST')
