@@ -27,9 +27,11 @@
             % else:
                 % for question in questions:
                         <div class="panel">
-                            <div class="panel-heading"><a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
-                                <h4>Otázka č.${question.number}</h4></a></div>
-                            <h5>${question.text}</h5>
+                            <div class="panel-heading">
+                            	<a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
+                                <h4>Otázka č.${question.number}</h4></a>
+                        	</div>
+                            <strong>${question.text}</strong>
                         </div>
                 % endfor
             % endif
