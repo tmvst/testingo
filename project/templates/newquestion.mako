@@ -6,21 +6,52 @@
     </div>
 
     <div class="container">
-        <form action="${request.route_path('newquestion', test_id=test.id)}" method="POST">
-            <div class="form-group">
-                <label for="text">Znenie otázky</label>
-                <textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
+        <ul id="dtab" class="nav nav-tabs">
+                <li class="active"><a href="#openquestion" data-toggle="tab">Otvorená otázka</a></li>
+                <li><a href="#checkquestion" data-toggle="tab">Otázka s možnosťami</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="openquestion">
+                <form action="${request.route_path('newquestion', test_id=test.id)}" method="POST">
+                    <div class="form-group">
+                        <label for="text">Znenie otázky</label>
+                        <textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="odpoved">Správna odpoveď</label>
+                        <input type="text" id="odpoved" name="odpoved" class="form-control" placeholder="Správna odpoveď">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="points">Body</label>
+                        <input type="number" id="points" name="points" class="form-control" placeholder="Body">
+                    </div>
+
+                    <button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
+                    <button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+                </form> 
             </div>
-            <div class="form-group">
-                <label for="odpoved">Správna odpoveď</label>
-                <input type="text" id="odpoved" name="odpoved" class="form-control" placeholder="Správna odpoveď">
+
+            <div class="tab-pane" id="checkquestion">
+                <form action="${request.route_path('newquestion', test_id=test.id)}" method="POST">
+                    <div class="form-group">
+                        <label for="text">Znenie otázky</label>
+                        <textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
+                    </div>
+
+                    <label><input type="checkbox" value="whatever">whatever</label>
+
+                    <div class="form-group">
+                        <label for="points">Body</label>
+                        <input type="number" id="points" name="points" class="form-control" placeholder="Body">
+                    </div>
+
+                    <button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
+                    <button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="points">Body</label>
-                <input type="number" id="points" name="points" class="form-control" placeholder="Body">
-            </div>
-            <button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
-            <button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
-        </form>
+        </div>
     </div>
 </%block>
