@@ -27,9 +27,5 @@ def view_question(request):
     test_token = request.matchdict['token']
     test = request.db_session.query(Test).filter_by(share_token=test_token).one()
 
-    if test is None:
-        raise HTTPException
-        return HTTPException('Neexistujuci test')
-
     return {'test':test}
 
