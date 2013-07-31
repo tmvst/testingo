@@ -14,28 +14,27 @@
 	</p>
 	<div class="row">
 		<div class="col-lg-5">
-			<ul class="nav nav-tabs">
-				<li><a href="#home" data-toggle="tab">Vaše testy</a></li>
+
+			<ul id="dtab" class="nav nav-tabs">
+				<li class="active"><a href="#home" data-toggle="tab">Vaše testy</a></li>
 				<li><a href="#profile" data-toggle="tab">Vyplnené testy</a></li>
 			</ul>
-
-			<!-- <div class="btn-group">
-				<a href="#" class="btn btn-primary">Admin</a>
-				<a href="#" class="btn btn-default">Respondent<br></a>
-			</div> -->
-
-			<h3>
-				Vaše testy
-			</h3>
-			<div class="list-group">
-				% for test in tests:
-				<a href="${request.route_path('showtest', test_id=test.id)}" class="list-group-item">
-					${test.name}
-					<span class="glyphicon glyphicon-lock pull-right"></span>
-				</a>
-				% endfor
+			<p></p>
+			<div class="tab-content">
+				<div class="tab-pane fade active in" id="home">
+					<div class="list-group">
+						% for test in tests:
+						<a href="${request.route_path('showtest', test_id=test.id)}" class="list-group-item">
+							${test.name}
+							<span class="glyphicon glyphicon-lock pull-right"></span>
+						</a>
+						% endfor
+					</div>
+				</div>
+				<div class="tab-pane" id="profile">2</div>
 			</div>
 		</div>
+
 		<div class="col-lg-6 col-offset-1">
 			<div class="well text-left">
 				<h3>

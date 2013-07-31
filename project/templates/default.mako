@@ -7,7 +7,8 @@
     <link href="${request.static_path('project:static/stylesheets/bootstrap.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
     <link href="${request.static_path('project:static/stylesheets/bootstrap-glyphicons.css')}" media="screen, projection" rel="stylesheet" type="text/css" />
 
-    <link href="${request.static_path('project:static/js/bootstrap.js')}" type="text/javascript" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="${request.static_path('project:static/js/bootstrap.js')}"></script>
 </head>
 
 <body>
