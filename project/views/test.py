@@ -90,7 +90,7 @@ def test_show(request):
         share_test(request,testid)
         return HTTPFound(request.route_path('showtest',test_id=testid))
     else:
-        question_submission(request)
+        return question_submission(request)
 
 def question_submission(request):
     POST = request.POST
