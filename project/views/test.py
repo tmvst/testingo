@@ -1,4 +1,6 @@
 #{{{
+import random
+
 import datetime
 
 from pyramid.view import (
@@ -127,3 +129,16 @@ def create_answer(request, db_session, text, correct,question_id):         # pri
     db_session.flush()
 
     return answer.id
+
+def share_test(request, test_id):
+    test = request.db_session.query(Test).filter_by(id=test_id).one()
+
+    if request.userid is test.user.id:
+        token = str(random.getrandbits(70))
+        test.share_token = token
+
+        return token
+
+    raise HTTPException
+    return HTTPException('Nie tvoj test!')
+
