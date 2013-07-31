@@ -81,6 +81,11 @@ def question_submission(request):
                                   testid
     )
 
+    answer_id = create_answer(request, request.db_session,
+                                POST['odpoved'],
+                                1,question_id
+    )
+
     return HTTPFound(request.route_path('showtest',test_id=testid))
 
 
@@ -101,27 +106,13 @@ def create_question(request, db_session, text, points, qtype):         # pridať
 
     return question.id
 
-def answer_submission(request):
-    """Handles test form submission.
-    """
-    POST = request.POST
-
-    question_id = create_answer(request, request.db_session,
-                                POST['text'],
-                                POST['correct']
-    )
-    return HTTPFound(request.route_path('newtest'))
-
-
-def create_answer(request, db_session, text, correct):         # pridať password !!!
-    """Registers a new user and returns his ID (single number).
+def create_answer(request, db_session, text, correct,question_id):         # pridať password !!!
+    """Creates a new answer for the question.
 
     """
-
-    question_id = Question.id
     question = request.db_session.query(Question).filter_by(id=question_id).one()
 
-    answer = Answer(1, text, correct, question)
+    answer = Answer( text, correct, question)
 
     db_session.add(answer)
     db_session.flush()
