@@ -7,18 +7,20 @@
     </div>
 
     <div class="container">
-        <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-            <button type="submit" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span> Zmazať test</button>
-                <input type="hidden" name="_method" value="DELETE">
-        </form>
-        % if test.share_token is None:
-        <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-            <button type="submit" class="btn btn-success pull-right"><span class="glyphicon glyphicon-share"></span> Zdieľať test</button>
-                <input type="hidden" name="_share" value="SHARE">
-        </form>
-        % else:
-        <span>${test.share_token}</span>
-        % endif
+        <div class="pull-right">
+            <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
+                <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Zmazať test</button>
+                    <input type="hidden" name="_method" value="DELETE">
+            </form>
+            % if test.share_token is None:
+            <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
+                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-share"></span> Zdieľať test</button>
+                    <input type="hidden" name="_share" value="SHARE">
+            </form>
+            % else:
+            <span>${test.share_token}</span>
+            % endif
+        </div>
         <div class="control-group">
             <div class="controls">
                 <p>${test.description}</p>
