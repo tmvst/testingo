@@ -23,7 +23,11 @@
                 </a>
 
                 <!-- Be sure to leave the brand out there if you want it shown -->
-                <a class="navbar-brand" href="/">Testingo <span class="glyphicon glyphicon-ok"></span></a>
+                % if request.userid is None:
+                    <a class="navbar-brand" href="/">Testingo <span class="glyphicon glyphicon-ok"></span></a>
+                % else:
+                    <a class="navbar-brand" href="${request.route_path('dashboard')}">Testingo <span class="glyphicon glyphicon-ok"></span></a>
+                % endif
 
                 <!-- Everything you want hidden at 940px or less, place within here -->
                 <ul class="nav navbar-nav pull-right">
