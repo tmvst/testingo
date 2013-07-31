@@ -2,7 +2,7 @@
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
     <div class="page-header">
-        <a href="${request.route_path('showtest',test_id=test.id)}" method="GET"><h1>${test.name}</h1></a>
+        <a href="${request.route_path('showtest',test_id=test.id)}"><h1>${test.name}</h1></a>
     </div>
 
     <div class="container">
