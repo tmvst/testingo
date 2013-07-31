@@ -1,6 +1,5 @@
 import unittest
 from pyramid import testing
-from ..models.user import User
 from ..views.views import (
         dashboard,
         )
@@ -18,6 +17,5 @@ class MyTest(unittest.TestCase):
         request.context = testing.DummyResource()
         request.userid = None
         self.request = request
-        #print(response,type(response))
         self.assertRaises(HTTPForbidden,dashboard,request)
 
