@@ -14,10 +14,15 @@
 	</p>
 	<div class="row">
 		<div class="col-lg-5">
-			<div class="btn-group">
+			<ul class="nav nav-tabs">
+				<li><a href="#home" data-toggle="tab">Vaše testy</a></li>
+				<li><a href="#profile" data-toggle="tab">Vyplnené testy</a></li>
+			</ul>
+
+			<!-- <div class="btn-group">
 				<a href="#" class="btn btn-primary">Admin</a>
 				<a href="#" class="btn btn-default">Respondent<br></a>
-			</div>
+			</div> -->
 
 			<h3>
 				Vaše testy
