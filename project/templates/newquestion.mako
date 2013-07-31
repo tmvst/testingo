@@ -2,7 +2,7 @@
 <%block name="title">Nová otázka</%block>
 <%block name="page_content">
     <div class="page-header">
-        <h1>Nová otázka do testu ${test.name}</h1>
+        <h1>Nová otázka do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
     </div>
 
     <div class="container">
