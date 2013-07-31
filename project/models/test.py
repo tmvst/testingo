@@ -33,6 +33,7 @@ class Test(Base):
     password = Column(String(20))
     date_crt = Column(DateTime)
     date_mdf = Column(DateTime)
+    share_token = Column(String(30))
     user_id = Column(Integer, ForeignKey('uzer.id'), index=True)
     user = relationship('User', backref=backref("tests", cascade="all, delete-orphan"))
 

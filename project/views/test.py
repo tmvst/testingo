@@ -1,4 +1,6 @@
 #{{{
+import random
+
 import datetime
 
 from pyramid.view import (
@@ -71,7 +73,7 @@ def newtest_view(request):
     return {'errors':[]}
 
 @view_config(route_name='showtest', request_method='POST')
-def question_submission(request):
+def test_show(request):
     """Handles question form submission.
     """
     POST = request.POST
@@ -82,6 +84,16 @@ def question_submission(request):
         request.db_session.delete(test)
         return HTTPFound(request.route_path('dashboard'))
 
+    if '_share' in POST:
+        testid = request.matchdict['test_id']
+        #test = request.db_session.query(Test).filter_by(id=testid).one()
+        share_test(request,testid)
+        return HTTPFound(request.route_path('showtest',test_id=testid))
+    else:
+        question_submission(request)
+
+def question_submission(request):
+    POST = request.POST
     testid = request.matchdict['test_id']
 
     question_id = create_question(request, request.db_session,
@@ -127,3 +139,18 @@ def create_answer(request, db_session, text, correct,question_id):         # pri
     db_session.flush()
 
     return answer.id
+
+def share_test(request, test_id):
+    test = request.db_session.query(Test).filter_by(id=test_id).one()
+
+    if request.userid is test.user.id:
+        token = str(random.getrandbits(70))
+        test.share_token = token
+
+        return token
+
+    raise HTTPException
+    return HTTPException('Nie tvoj test!')
+
+
+
