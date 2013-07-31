@@ -11,7 +11,7 @@
         </form>
         <div class="control-group">
             <div class="controls">
-                <h3>${question.number}</h3>
+                <h3>Otázka č.${question.number}</h3>
             </div>
             <h4>${question.text}</h4>
             <div class="list-group">
@@ -19,7 +19,9 @@
                         <span> Otázka neobsahuje žiadne možnosti</span>
                     % else:
                     % for answer in answers:
-                        ${answer.text}
+                    <p class="text-success">
+                        ${answer.text} <br>
+                        </p>
                     % endfor
                     % endif
             </div>

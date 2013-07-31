@@ -33,7 +33,7 @@
                             <strong>${question.text}</strong>
                             <p class="text-success">
                             	% for ans in question.answers:
-                            		${ans.text}
+                            		${ans.text} <br>
                             	% endfor
                             </p>
                         </div>
