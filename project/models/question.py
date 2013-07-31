@@ -28,7 +28,7 @@ class Question(Base):
     """
     __tablename__ = 'question'
     id = Column(Integer, primary_key=True) 
-    number = Column(String(50))
+    number = Column(Integer)
     text = Column(String(500))
     points = Column(Integer)
     qtype = Column(String(5))

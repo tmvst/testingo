@@ -458,6 +458,11 @@ def question_delete(request):
     testid = request.matchdict['test_id']
     questionid = request.matchdict['question_id']
     question= request.db_session.query(Question).filter_by(id=questionid).one()
+    question_number=question.number
+    questions_with_number_to_be_changed = request.db_session.query(Question).filter(Question.number >question.number).all()
+    for q in questions_with_number_to_be_changed:
+        q.number=q.number-1
+        request.db_session.save(q);
     request.db_session.delete(question)
 
     return HTTPFound(request.route_path('showtest', test_id=testid))
