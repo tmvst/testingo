@@ -2,23 +2,30 @@
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
-    <div class="page-header">
-        <h1>${test.name}</h1>
-    </div>
+<div class="page-header">
+    <h1>${test.name}</h1>
+    <form class="pull-right" action="${request.route_path('showtest', test_id=test.id)}" method="POST">
+        <button type="submit" class="btn btn-danger">
+            <span class="glyphicon glyphicon-trash"></span> Zmazať test
+        </button>
+        <input type="hidden" name="_method" value="DELETE">
+    </form>
+</div>
 
     <div class="container">
         <div class="pull-right">
-            <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-                <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Zmazať test</button>
-                    <input type="hidden" name="_method" value="DELETE">
-            </form>
             % if test.share_token is None:
             <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-share"></span> Zdieľať test</button>
+                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-share-alt"></span> Zdieľať test</button>
                     <input type="hidden" name="_share" value="SHARE">
             </form>
             % else:
-            <span>${test.share_token}</span>
+            <div class="input-group sharetoken">
+            <input class="form-control" id="focusedInput" type="text" value="http://0.0.0.0:6543/solve/${test.share_token}" readonly="readonly">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top"><span class="glyphicon glyphicon-paperclip"></span></button>
+                </span>
+            </div>
             % endif
         </div>
         <div class="control-group">

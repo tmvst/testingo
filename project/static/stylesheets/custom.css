@@ -13,3 +13,11 @@ body {
 .navbutton {
 	margin-left: 7px;
 }
+
+.sharetoken {
+	width: 395px;
+}
+
+.form-control[readonly] {
+	cursor: text;
+}
