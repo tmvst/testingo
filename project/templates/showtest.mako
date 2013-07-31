@@ -11,10 +11,14 @@
             <button type="submit" class="btn btn-danger pull-right">Zmazať test</button>
                 <input type="hidden" name="_method" value="DELETE">
         </form>
+        % if test.share_token is None:
         <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
             <button type="submit" class="btn btn-success pull-right">Zdieľať test</button>
                 <input type="hidden" name="_share" value="SHARE">
         </form>
+        % else:
+        <span>${test.share_token}</span>
+        % endif
         <div class="control-group">
             <div class="controls">
                 <p>${test.description}</p>
