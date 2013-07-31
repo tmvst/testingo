@@ -68,7 +68,7 @@ def answer_view(request):
 
 
 
-@view_config(route_name='newquestion', request_method='POST', renderer='project:templates/newquestion.mako')
+@view_config(route_name='newquestion', request_method='POST')
 def question_submission(request):
     """Handles question form submission.
     """
@@ -86,7 +86,7 @@ def question_submission(request):
                                 1,question_id
     )
 
-    return HTTPFound(request.route_path('showtest',test_id=testid))
+    return HTTPFound(request.route_path('newquestion',test_id=testid))
 
 
 def create_question(request, db_session, text, points, qtype):         # pridať password !!!

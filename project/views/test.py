@@ -15,9 +15,13 @@ from ..models.user import (
 from ..models.test import (
     Test,
     )
+from ..models.answer import (
+    Answer,
+)
 from ..models.question import (
     Question,
     )
+from pyramid.response import Response
 #}}}
 
 @view_config(route_name='newtest', request_method='POST')
@@ -59,19 +63,67 @@ def test_view(request):
 
     return {'test':test,'questions':questions}
 
-@view_config(route_name='showtest', request_method='POST')
-def delete_test(request):
-    """
-    Deletes selected test from db.
-    """
-    testid = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=testid).one()
-    request.db_session.delete(test)
-
-    return HTTPFound(request.route_path('dashboard'))
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
 def newtest_view(request):
     """Shows new test.
     """
 
     return {'errors':[]}
+
+@view_config(route_name='showtest', request_method='POST')
+def question_submission(request):
+    """Handles question form submission.
+    """
+    POST = request.POST
+
+    if '_method' in POST:
+        testid = request.matchdict['test_id']
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+        request.db_session.delete(test)
+        return HTTPFound(request.route_path('dashboard'))
+
+    testid = request.matchdict['test_id']
+
+    question_id = create_question(request, request.db_session,
+                                  POST['text'],
+                                  POST['points'],
+                                  testid
+    )
+
+    answer_id = create_answer(request, request.db_session,
+                                POST['odpoved'],
+                                1,question_id
+    )
+
+    return HTTPFound(request.route_path('showtest',test_id=testid))
+
+
+def create_question(request, db_session, text, points, qtype):         # pridať password !!!
+    """Registers a new user and returns his ID (single number).
+    """
+
+    test_id = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=test_id).one()
+
+    lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
+    qnum = lastnum + 1
+
+    question = Question(qnum, text, points, 'S', test)
+
+    db_session.add(question)
+    db_session.flush()
+
+    return question.id
+
+def create_answer(request, db_session, text, correct,question_id):         # pridať password !!!
+    """Creates a new answer for the question.
+
+    """
+    question = request.db_session.query(Question).filter_by(id=question_id).one()
+
+    answer = Answer( text, correct, question)
+
+    db_session.add(answer)
+    db_session.flush()
+
+    return answer.id
