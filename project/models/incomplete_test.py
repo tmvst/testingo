@@ -32,7 +32,7 @@ class Incomplete_test(Base):
     user_id = Column(Integer, ForeignKey('uzer.id'), index=True)
     user = relationship('User', backref=backref("incomplete_tests", cascade="all, delete-orphan"))
     test_id = Column(Integer, ForeignKey('test.id'), index=True)
-    test = relationship('Test', backref=backref("incomplete_tests", cascade="all, delete-orphan"))
+    test = relationship('Test', backref=backref("tests", cascade="all, delete-orphan"))
 
     def __init__(self, date_crt, date_mdf, user, test):
         """Initialization of class.

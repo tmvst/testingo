@@ -33,7 +33,7 @@ class Question(Base):
     points = Column(Integer)
     qtype = Column(String(5))
     test_id = Column(Integer, ForeignKey('test.id'), index=True)
-    test = relationship('Test', backref=backref("tests", cascade="all, delete-orphan"))
+    test = relationship('Test', backref=backref("questions", cascade="all, delete-orphan"))
 
     def __init__(self, number, text, points, qtype, test):
         """Initialization of class.

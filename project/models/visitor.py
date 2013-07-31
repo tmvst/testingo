@@ -30,7 +30,7 @@ class Visitor(Base):
     id = Column(Integer, primary_key=True) 
     email = Column(String(50), unique=True)
     user_id = Column(Integer, ForeignKey('uzer.id'), index=True)
-    user = relationship('User', backref=backref("visitors", cascade="all, delete-orphan"))
+    user = relationship('User', backref=backref("visitor", cascade="all, delete-orphan"))
 
     @validates('email')
     def validate_email(self, key, address):
