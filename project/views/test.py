@@ -9,6 +9,8 @@ from pyramid.view import (
 from pyramid.httpexceptions import (
     HTTPException,
     HTTPFound,
+    HTTPForbidden,
+    HTTPUnauthorized
     )
 
 from ..models.user import (
@@ -19,7 +21,7 @@ from ..models.test import (
     )
 from ..models.answer import (
     Answer,
-)
+    )
 from ..models.question import (
     Question,
     )
@@ -59,11 +61,19 @@ def test_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
     questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
+    if request.userid is None:
+        raise  HTTPForbidden
+        return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
+
+    if request.userid is not test.user_id:
+        raise  HTTPUnauthorized
+        return  HTTPUnauthorized('Nie je to tvoj test')
+
     if test is None:
         raise HTTPException
         return HTTPException('Neexistujuci test')
-
-    return {'test':test,'questions':questions}
+    else:
+        return {'test':test,'questions':questions}
 
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
 def newtest_view(request):
@@ -77,20 +87,19 @@ def test_show(request):
     """Handles question form submission.
     """
     POST = request.POST
-
+    testid = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
     if '_method' in POST:
-        testid = request.matchdict['test_id']
         test = request.db_session.query(Test).filter_by(id=testid).one()
         request.db_session.delete(test)
         return HTTPFound(request.route_path('dashboard'))
 
     if '_share' in POST:
-        testid = request.matchdict['test_id']
-        #test = request.db_session.query(Test).filter_by(id=testid).one()
         share_test(request,testid)
         return HTTPFound(request.route_path('showtest',test_id=testid))
     else:
         return question_submission(request)
+
 
 def question_submission(request):
     POST = request.POST
@@ -103,8 +112,8 @@ def question_submission(request):
     )
 
     answer_id = create_answer(request, request.db_session,
-                                POST['odpoved'],
-                                1,question_id
+                              POST['odpoved'],
+                              1,question_id
     )
 
     return HTTPFound(request.route_path('showtest',test_id=testid))

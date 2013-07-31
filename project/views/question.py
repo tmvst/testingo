@@ -6,6 +6,8 @@ from pyramid.view import (
 from pyramid.httpexceptions import (
     HTTPException,
     HTTPFound,
+    HTTPForbidden,
+    HTTPUnauthorized
     )
 
 from ..models.answer import (
@@ -28,6 +30,12 @@ def view_question(request):
     test = request.db_session.query(Test).filter_by(id=testid).one()
     question = request.db_session.query(Question).filter_by(id=questionid).one()
     answers = request.db_session.query(Answer).filter_by(question=question).all()
+    if request.userid is None:
+        raise  HTTPForbidden
+        return  HTTPForbidden('Nie je to tvoja otázka')
+    if request.userid is not test.user_id:
+        raise  HTTPUnauthorized
+        return  HTTPUnauthorized('Pre prístup je nutné sa prihlásiť')
     if test is None:
         raise HTTPException
         return HTTPException('Neexistujuca otazka')
@@ -82,8 +90,8 @@ def question_submission(request):
     )
 
     answer_id = create_answer(request, request.db_session,
-                                POST['odpoved'],
-                                1,question_id
+                              POST['odpoved'],
+                              1,question_id
     )
 
     return HTTPFound(request.route_path('newquestion',test_id=testid))
