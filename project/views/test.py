@@ -25,6 +25,9 @@ from ..models.answer import (
 from ..models.question import (
     Question,
     )
+from ..models.incomplete_test import (
+    Incomplete_test,
+)
 #}}}
 
 @view_config(route_name='newtest', request_method='POST')
@@ -60,6 +63,7 @@ def test_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
     questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
+    solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
     if request.userid is None:
         raise  HTTPForbidden
         return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
@@ -72,7 +76,7 @@ def test_view(request):
         raise HTTPException
         return HTTPException('Neexistujuci test')
     else:
-        return {'test':test,'questions':questions}
+        return {'test':test,'questions':questions,'solved_tests':solved_tests}
 
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
 def newtest_view(request):
