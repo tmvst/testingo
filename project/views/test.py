@@ -82,6 +82,11 @@ def test_view(request):
 def newtest_view(request):
     """Shows new test.
     """
+    testid = request.matchdict['test_id']
+    test=request.db_session.query(Test).filter_by(id=testid).one()
+    if len(test.share_token):
+        return HTTPFound(request.route_path('showtest', test_id=testid))
+
 
     return {'errors':[]}
 
