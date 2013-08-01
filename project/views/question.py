@@ -25,6 +25,9 @@ from ..models.question import (
 
 @view_config(route_name='showquestion', request_method='GET', renderer='project:templates/showquestion.mako')
 def view_question(request):
+    """
+    Shows requested question.
+    """
     testid = request.matchdict['test_id']
     questionid = request.matchdict["question_id"]
     test = request.db_session.query(Test).filter_by(id=testid).one()
@@ -82,7 +85,7 @@ def question_submission(request):
     """
     POST = request.POST
     testid = request.matchdict['test_id']
-    test=request.db_session.query(Test).filter_by(id=testid).one()
+
     restrict_access(request)
 
     question_id = create_question(request, request.db_session,
@@ -100,7 +103,7 @@ def question_submission(request):
 
 
 def create_question(request, db_session, text, points, qtype):         # pridať password !!!
-    """Registers a new user and returns his ID (single number).
+    """Creates a new question and returns its id.
     """
 
     test_id = request.matchdict['test_id']

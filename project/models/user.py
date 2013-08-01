@@ -58,9 +58,9 @@ class User(Base):
         email: User email, used as a login, so it's must be unique
         password: User Password
         active: Indicates, whether user-account is active
-        games: relationship to table Game
+        recovery_code: random sequence generated for password recovery procedure
     """
-    __tablename__ = 'uzer'
+    __tablename__ = 'user'
     id = Column(Integer, primary_key=True) 
     email = Column(String(50), unique=True)
     _password = Column(String(100), nullable=False)

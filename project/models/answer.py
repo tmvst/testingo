@@ -17,14 +17,15 @@ class ValidationError(Exception):
     pass
 
 class Answer(Base):
-    """Database table User.
+    """Database table Answer.
 
     Attributes:
         id: Identificator of object
-        email: User email, used as a login, so it's must be unique
-        password: User Password
-        active: Indicates, whether user-account is active
-        games: relationship to table Game
+        text: Text of the answer
+        correct: 1 - correct answer for question
+                0 - incorrect answer as defined by admin
+        question_id: FK to question table
+        question: relationship to table question - object
     """
     __tablename__ = 'answer'
     id = Column(Integer, primary_key=True) 
@@ -41,6 +42,6 @@ class Answer(Base):
         self.question = question
 
     def __repr__(self):
-        """Returns representative object of class User.
+        """Returns representative object of class Answer.
         """
         return "Answer<{text}>".format(text=self.text)

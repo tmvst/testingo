@@ -26,10 +26,10 @@ class Visitor(Base):
         id: Identificator of object
         email: User email, used as a login, so it's must be unique
     """
-    __tablename__ = 'vizitor'
+    __tablename__ = 'visitor'
     id = Column(Integer, primary_key=True) 
     email = Column(String(50), unique=True)
-    user_id = Column(Integer, ForeignKey('uzer.id'), index=True)
+    user_id = Column(Integer, ForeignKey('user.id'), index=True)
     user = relationship('User', backref=backref("visitor", cascade="all, delete-orphan"))
 
     @validates('email')
@@ -45,7 +45,7 @@ class Visitor(Base):
         self.user = user
 
     def __repr__(self):
-        """Returns representative object of class User.
+        """Returns representative object of class Visitor.
         """
         return "User<{email}>".format(email=self.email)
 

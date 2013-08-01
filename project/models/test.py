@@ -21,10 +21,13 @@ class Test(Base):
 
     Attributes:
         id: Identificator of object
-        email: User email, used as a login, so it's must be unique
-        password: User Password
-        active: Indicates, whether user-account is active
-        games: relationship to table Game
+        name: name of the test
+        description: short description of the test and its question, can be used as Instructions for the user
+        password: test password - not currently implemented - babotka for now
+        date_crt:date when the test was created by admin
+        date_mdf:date when the test was modified - added/deleted or question, changed desc.
+        share_token: unique number to serve as a access token to a test
+        user: relationship to table User
     """
     __tablename__ = 'test'
     id = Column(Integer, primary_key=True) 
@@ -34,7 +37,7 @@ class Test(Base):
     date_crt = Column(DateTime)
     date_mdf = Column(DateTime)
     share_token = Column(String(30))
-    user_id = Column(Integer, ForeignKey('uzer.id'), index=True)
+    user_id = Column(Integer, ForeignKey('user.id'), index=True)
     user = relationship('User', backref=backref("tests", cascade="all, delete-orphan"))
 
     def __init__(self, name, description, password, date_crt, date_mdf, user):
@@ -48,6 +51,6 @@ class Test(Base):
         self.user = user
 
     def __repr__(self):
-        """Returns representative object of class User.
+        """Returns representative object of class Test.
         """
         return "Test<{name}>".format(name=self.name)

@@ -18,13 +18,15 @@ class ValidationError(Exception):
 
 class Complete_answer(Base):
     """Database table User.
-
-    Attributes:
+      Attributes:
         id: Identificator of object
-        email: User email, used as a login, so it's must be unique
-        password: User Password
-        active: Indicates, whether user-account is active
-        games: relationship to table Game
+        text: Text of the answer
+        correct: automatically assigned by comparing to correct answer defined by admin
+                if it is an open answer, then judged by user
+        question_id: FK to question table
+        question: relationship to table question - object
+        answer_id: FK to answer table - to the admin defined answer
+        answer: relationship to table answer
     """
     __tablename__ = 'complete_answer'
     id = Column(Integer, primary_key=True) 
@@ -47,6 +49,6 @@ class Complete_answer(Base):
         self.question = question
         
     def __repr__(self):
-        """Returns representative object of class User.
+        """Returns representative object of class Complete_Answer.
         """
         return "Complete_answer<{text}>".format(text=self.text)

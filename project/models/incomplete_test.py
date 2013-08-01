@@ -20,16 +20,16 @@ class Incomplete_test(Base):
 
     Attributes:
         id: Identificator of object
-        email: User email, used as a login, so it's must be unique
-        password: User Password
-        active: Indicates, whether user-account is active
-        games: relationship to table Game
+        date_crt: datetime when the user submitted solved test
+        date_mdf: last modification of solving the test ( not currently implemented)
+        test: relationship to table Test
+        user: relationship to table Answer
     """
     __tablename__ = 'incomplete_test'
     id = Column(Integer, primary_key=True) 
     date_crt = Column(DateTime)
     date_mdf = Column(DateTime)
-    user_id = Column(Integer, ForeignKey('uzer.id'), index=True)
+    user_id = Column(Integer, ForeignKey('user.id'), index=True)
     user = relationship('User', backref=backref("incomplete_tests", cascade="all, delete-orphan"))
     test_id = Column(Integer, ForeignKey('test.id'), index=True)
     test = relationship('Test', backref=backref("tests", cascade="all, delete-orphan"))
@@ -43,6 +43,6 @@ class Incomplete_test(Base):
         self.test = test
 
     def __repr__(self):
-        """Returns representative object of class User.
+        """Returns representative object of class Incomplete_test.
         """
         return "Incomplete_Test<{test_id}>".format(test_id=self.test.id)

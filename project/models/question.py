@@ -21,10 +21,11 @@ class Question(Base):
 
     Attributes:
         id: Identificator of object
-        email: User email, used as a login, so it's must be unique
-        password: User Password
-        active: Indicates, whether user-account is active
-        games: relationship to table Game
+        number: order of the question in test
+        text: text of the question
+        points; value in points
+        qtype: type of question - phrase,open,multiple,checklist,-- to be defined later
+        test: relationship to table Test
     """
     __tablename__ = 'question'
     id = Column(Integer, primary_key=True) 
@@ -45,6 +46,6 @@ class Question(Base):
         self.test = test
 
     def __repr__(self):
-        """Returns representative object of class User.
+        """Returns representative object of class Question.
         """
         return "Question<{number}>".format(number=self.number)
