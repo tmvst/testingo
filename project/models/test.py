@@ -28,6 +28,7 @@ class Test(Base):
         date_mdf:date when the test was modified - added/deleted or question, changed desc.
         share_token: unique number to serve as a access token to a test
         user: relationship to table User
+        sum_points=suma bodov za otazky
     """
     __tablename__ = 'test'
     id = Column(Integer, primary_key=True) 
@@ -39,6 +40,7 @@ class Test(Base):
     share_token = Column(String(30))
     user_id = Column(Integer, ForeignKey('user.id'), index=True)
     user = relationship('User', backref=backref("tests", cascade="all, delete-orphan"))
+    sum_points=Column(Integer)
 
     def __init__(self, name, description, password, date_crt, date_mdf, user):
         """Initialization of class.
@@ -49,6 +51,7 @@ class Test(Base):
         self.date_crt = date_crt
         self.date_mdf = date_mdf
         self.user = user
+        self.sum_points=0
 
     def __repr__(self):
         """Returns representative object of class Test.

@@ -6,9 +6,11 @@
     </div>
 
     <div class="container">
-        <form action="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}" method="POST">
-            <button type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
-        </form>
+        %if question.test.share_token is None:
+            <form action="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}" method="POST">
+                <button type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
+            </form>
+        %endif
         <div class="control-group">
             <h4>${question.text}</h4>
             <div class="list-group">
@@ -16,9 +18,9 @@
                         <span> Otázka neobsahuje žiadne možnosti</span>
                     % else:
                     % for answer in answers:
-                    <p class="text-success">
-                        ${answer.text} <br>
-                        </p>
+                            <p class="text-success">
+                            ${answer.text} <br>
+                            </p>
                     % endfor
                     % endif
             </div>

@@ -53,6 +53,7 @@ def create_test(request, db_session, name, description):
 
     test = Test(name, description, "babotka", date_crt, date_mdf, user)
 
+
     db_session.add(test)
     db_session.flush()
 
@@ -128,7 +129,7 @@ def create_question(request, db_session, text, points, qtype):         # pridať
 
     test_id = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=test_id).one()
-
+    test.sum_points=test.sum_points + int(points)
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     qnum = lastnum + 1
 

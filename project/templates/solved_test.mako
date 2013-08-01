@@ -19,7 +19,21 @@
                         <div class="panel">
                             <div class="panel-heading">
                             	<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
-                                	<h3 class="panel-title">Otázka č.${question[0].number}</h3>
+
+                                	% if question[1].correct == 1:
+                                	<h3 class="panel-title">Otázka č.${question[0].number}
+                                	<span class="badge pull-right">
+                                     ${question[0].points}b
+
+                                  </span>
+                                  </h3>
+                                  %else:
+                                  <h3 class="panel-title">Otázka č.${question[0].number}
+                                  <span class="badge pull-right">
+                                     ${0}b
+                                  </span>
+                                  </h3>
+                                	%endif
                                 </a>
                         	</div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</strong></p>
@@ -28,11 +42,13 @@
                                     <strong>Správna odpoveď uźívateľa:</strong>
                                         ${question[1].text} <br>
                                     </p>
+
                                 %else:
                                     <p class="text-danger">
                                     <strong>Nesprávna odpoveď uźívateľa:</strong>
                                         ${question[1].text} <br>
                                     </p>
+
                             	% endif
 
                         </div>

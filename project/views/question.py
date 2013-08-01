@@ -52,13 +52,14 @@ def question_delete(request):
     restrict_access(request)
     testid = request.matchdict['test_id']
     questionid = request.matchdict['question_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
     question= request.db_session.query(Question).filter_by(id=questionid).one()
     question_number=question.number
     questions_with_number_to_be_changed = request.db_session.query(Question).filter(Question.number > question_number).all()
     for q in questions_with_number_to_be_changed:
         q.number=q.number-1
 
-
+    test.sum_points-=question.points
     request.db_session.delete(question)
     request.db_session.flush()
     return HTTPFound(request.route_path('showtest', test_id=testid))
@@ -85,7 +86,6 @@ def question_submission(request):
     """
     POST = request.POST
     testid = request.matchdict['test_id']
-
     restrict_access(request)
 
     question_id = create_question(request, request.db_session,
@@ -99,6 +99,7 @@ def question_submission(request):
                               1,question_id
     )
 
+
     return HTTPFound(request.route_path('newquestion',test_id=testid))
 
 
@@ -108,7 +109,7 @@ def create_question(request, db_session, text, points, qtype):         # pridať
 
     test_id = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=test_id).one()
-
+    test.sum_points=test.sum_points + int(points)
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     qnum = lastnum + 1
 

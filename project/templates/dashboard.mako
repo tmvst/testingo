@@ -26,7 +26,12 @@
 						% for test in tests:
 						<a href="${request.route_path('showtest', test_id=test.id)}" class="list-group-item">
 							${test.name}
-							<span class="glyphicon glyphicon-lock pull-right"></span>
+                            %if test.share_token:
+                                <span class="glyphicon glyphicon-lock pull-right"></span>
+                            %else:
+                                <span class="glyphicon glyphicon-edit pull-right"></span>
+                            %endif
+
 						</a>
 						% endfor
 					</div>
