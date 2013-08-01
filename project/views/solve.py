@@ -8,6 +8,8 @@ from pyramid.view import (
 from pyramid.httpexceptions import (
     HTTPException,
     HTTPFound,
+    HTTPForbidden,
+    HTTPUnauthorized
     )
 
 from ..models.user import (
@@ -65,11 +67,36 @@ def submit_test(request):
         q_number+=1
         question = request.db_session.query(Question).filter_by(test_id=test.id,number=q_number).one()
         correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
-        complete_answer=Complete_answer(ans,0,incomplete_test,correct_answer)
-        if ((question.qtype is 'S') and (ans is correct_answer.text)):
+        complete_answer=Complete_answer(ans,0,incomplete_test,correct_answer,question)
+        if ((question.qtype is 'S') and (ans == correct_answer.text)):
             complete_answer.correct=1
         request.db_session.add(complete_answer)
     request.db_session.add(incomplete_test)
 
     request.db_session.flush()
     return HTTPFound(request.route_path('dashboard'))
+
+@view_config(route_name='solved_test', request_method='GET', renderer='project:templates/solved_test.mako')
+def show_solved_test(request):
+    POST = request.POST
+
+    incomplete_test_id = request.matchdict['incomplete_test_id']
+    incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()
+    test = request.db_session.query(Test).filter_by(id=incomplete_test.test_id).one()
+    complete_answers = request.db_session.query(Complete_answer).filter_by(incomp_test=incomplete_test).all()
+    questions=[a.question for a in complete_answers]
+    user_answers=[a for a in complete_answers]
+    questions_and_answers =zip(questions,user_answers)
+    if request.userid is None:
+        raise  HTTPForbidden
+        return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
+
+    if request.userid is not test.user_id:
+        raise  HTTPUnauthorized
+        return  HTTPUnauthorized('Nie je to tebou vytvorený test')
+
+    return {'incomplete_test':incomplete_test,'questions_and_answers':questions_and_answers}
+
+
+
+

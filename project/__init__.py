@@ -99,7 +99,7 @@ def main(global_config, **settings):
     config.add_route('getlist', '/getlist')
     config.add_route('showquestion', '/test/{test_id}/question/{question_id}')
     config.add_route('solve', 'solve/{token}')
-
+    config.add_route('solved_test','solved_test/{incomplete_test_id}')
 
     config.scan()
     random.seed()
