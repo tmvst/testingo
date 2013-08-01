@@ -65,9 +65,7 @@ def question_view(request):
     """
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
-    if len(test.share_token):
-        return HTTPFound(request.route_path('showtest', test_id=testid))
-
+    restrict_access(request,test)
     return {'errors':[], 'test':test}
 
 def answer_view(request):
@@ -131,3 +129,9 @@ def create_answer(request, db_session, text, correct,question_id):         # pri
     db_session.flush()
 
     return answer.id
+def restrict_access(request,test):
+    testid = request.matchdict['test_id']
+    test=request.db_session.query(Test).filter_by(id=testid).one()
+    if len(test.share_token):
+        return HTTPFound(request.route_path('showtest', test_id=testid))
+    return {}
