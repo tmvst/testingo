@@ -65,7 +65,11 @@ def submit_test(request):
         q_number+=1
         question = request.db_session.query(Question).filter_by(test_id=test.id,number=q_number).one()
         correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
-        request.db_session.add(Complete_answer(ans,0,incomplete_test,correct_answer))
+        complete_answer=Complete_answer(ans,0,incomplete_test,correct_answer)
+        if ((question.qtype is 'S') and (ans is correct_answer.text)):
+            complete_answer.correct=1
+        request.db_session.add(complete_answer)
     request.db_session.add(incomplete_test)
+
     request.db_session.flush()
     return HTTPFound(request.route_path('dashboard'))
