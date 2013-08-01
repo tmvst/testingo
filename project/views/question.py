@@ -82,6 +82,9 @@ def question_submission(request):
     """
     POST = request.POST
     testid = request.matchdict['test_id']
+    test=request.db_session.query(Test).filter_by(id=testid).one()
+    if test.share_token is not None:
+        return HTTPFound(request.route_path('showtest', test_id=testid))
 
     question_id = create_question(request, request.db_session,
                                   POST['text'],

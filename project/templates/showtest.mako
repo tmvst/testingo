@@ -34,10 +34,12 @@
         </div>
 
         <h2>Otázky</h2>
+        % if test.share_token is None:
         <p>
             <a href="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary btn-small">
                 <span class="glyphicon glyphicon-plus"></span> Pridať otázku</a>
         </p>
+        %endif
 
         % if len(questions) is 0:
                 <span> Test neobsahuje žiadne otázky </span>
@@ -69,7 +71,7 @@
             <div class="panel">
                 <div class="panel-heading">
                     <a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
-                        <p>${solved_test.id}</p>
+                        <p>${solved_test.user.email}</p>
                         <p>${solved_test.date_crt}</p>
                     </a>
                 </div>
