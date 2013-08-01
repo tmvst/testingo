@@ -36,7 +36,7 @@
                                 	%endif
                                 </a>
                         	</div>
-                            <p><strong>Znenie otázky <br></strong>${question[0].text}</strong></p>
+                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
                             	% if question[1].correct == 1:
                                     <p class="text-success">
                                     <strong>Správna odpoveď uźívateľa:</strong>

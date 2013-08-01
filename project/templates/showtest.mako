@@ -33,10 +33,10 @@
                 <p>${test.description}</p>
             </div>
 
-            <h2>Otázky</h2>
-            <span class="badge pull-right">
+            <h2>Otázky s celkovým počtom bodov
+            <span class="badge">
                                      ${test.sum_points}b
-                                  </span>
+                                  </span></h2>
             % if test.share_token is None:
                     <p>
                         <a href="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary btn-small">
