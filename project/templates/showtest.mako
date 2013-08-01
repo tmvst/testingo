@@ -59,5 +59,14 @@
                 % endfor
             % endif
         </div>
+
+        <div class="pull-right" style="width: 300px;">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Riešitelia</h3>
+            </div>
+            Panel content
+        </div>
+        </div>
     </div>
 </%block>
