@@ -46,6 +46,7 @@ def question_delete(request):
     """
     Deletes selected question from test and db.
     """
+    restrict_access(request)
     testid = request.matchdict['test_id']
     questionid = request.matchdict['question_id']
     question= request.db_session.query(Question).filter_by(id=questionid).one()
@@ -65,7 +66,6 @@ def question_view(request):
     """
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
-    restrict_access(request,test)
     return {'errors':[], 'test':test}
 
 def answer_view(request):
@@ -83,8 +83,7 @@ def question_submission(request):
     POST = request.POST
     testid = request.matchdict['test_id']
     test=request.db_session.query(Test).filter_by(id=testid).one()
-    if len(test.share_token):
-        return HTTPFound(request.route_path('showtest', test_id=testid))
+    restrict_access(request)
 
     question_id = create_question(request, request.db_session,
                                   POST['text'],
@@ -129,9 +128,9 @@ def create_answer(request, db_session, text, correct,question_id):         # pri
     db_session.flush()
 
     return answer.id
-def restrict_access(request,test):
+def restrict_access(request):
     testid = request.matchdict['test_id']
     test=request.db_session.query(Test).filter_by(id=testid).one()
-    if len(test.share_token):
+    if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
     return {}
