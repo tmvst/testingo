@@ -5,14 +5,20 @@
     % if error == ['nonequal-passwords']:
         <font color="red">heslá nie sú rovnaké.</font><br>
     % endif
+    <table>
+     <tr>
     <div class="input-group">
-    	<label for="password">Heslo</label>
-    	<input type="password" name="password" id="password" required/>
+    	<td><label for="password">Heslo</label></td>
+    	<td><input type="password" name="password" id="password" required/></td>
   	</div>
+     </tr>
+        <tr>
   	<div class="input-group">
-    	<label for="password_repeat">Heslo znovu</label>
-    	<input type="password" name="password_repeat" id="password_repeat" required/>
+    	<td><label for="password_repeat">Heslo znovu</label></td>
+    	<td><input type="password" name="password_repeat" id="password_repeat" required/></td>
   	</div>
-    <button type="submit" class="submit-form">Zmeniť heslo</button>
+        </tr>
+    </table>
+     <button type="submit" class="btn btn-primary">Zmeniť heslo</button>
 </form>
 </%block>

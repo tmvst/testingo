@@ -52,6 +52,7 @@ error_messages = {
     'invalid_password':'Zadajte heslo.',
     'dont_match':'Heslá sa nezhodujú.',
     'need_login':'Je potrebné sa prihlásiť',
+    'short_password' : 'Heslo musí mať minimálne 6 znakov/číslic'
     }
 
 
@@ -99,6 +100,8 @@ def validate_registration_data(form_data):
         errors['password'] = 'dont_match'
     if form_data['password'] == "":
         errors['password'] = 'invalid_password'
+    # if len(form_data['password']) < 5:
+    #     errors['password'] =  'short_password'
     return errors
 
 

@@ -1,17 +1,21 @@
 <%inherit file="default.mako" />
 <%block name="title">Renovacia hesla</%block>
 <%block name="page_content">
-<h2>Zmena hesla</h2>
-<div id="lost_pasword">
-	<form method="POST">
-		% if error == ['no-email']:
-			<font color="red"> Zly email </font><br>
-		% endif
-		<div class="input-group">
-		<label for="email">E-mail</label>
-		<input type="email" id="email" name="email" required/>
-		</div>
-		<button type="submit" class="submit-form">Zmeniť heslo</button>
-	</form>
-</div>
+    <h2>Zmena hesla</h2>
+    <div id="lost_pasword">
+        <table>
+            <form method="POST">
+                % if error == ['no-email']:
+                        <font color="red"> Zly email </font><br>
+                % endif
+                <tr>
+                <div class="input-group">
+                    <td><label for="email">E-mail</label></td>
+                    <td><input type="email" id="email" name="email" required/></td>
+                </div>
+                    </tr>
+                <tr><td><button type="submit" class="btn btn-primary">Zmeniť heslo</button></td></tr>
+            </form>
+        </table>
+    </div>
 </%block>

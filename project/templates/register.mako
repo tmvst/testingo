@@ -1,27 +1,39 @@
 <%inherit file="default.mako" />
 <%block name="title">Zaregistrujte sa!</%block>
 <%block name="page_content">
-<h2>Zaregistrujte sa!</h2>
-<%def name="error(field)">
-% if field in errors:
-    <span class='error'>${error_messages[errors[field]]}</span>
-% endif
-</%def>
-<form method="POST">
-    <div class="input-group">
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" required/>
-        ${error('email')}
-    </div>
-    <div class="input-group">
-        <label for="password">Heslo</label>
-        <input type="password" name="password" id="password" required/>
-        ${error('password')}
-    </div>
-    <div class="input-group">
-        <label for="password_repeat">Heslo znovu</label>
-        <input type="password" name="password_repeat" id="password_repeat" required/>
-    </div>
-    <button type="submit" class="submit-form">Zaregistrovať sa</button>
-</form>
+    <h2>Zaregistrujte sa!</h2>
+    <%def name="error(field)">
+        % if field in errors:
+            <span class='error'>${error_messages[errors[field]]}</span>
+        % endif
+    </%def>
+    <table>
+        <form method="POST">
+
+            <div class="input-group">
+                <tr>
+                    <div class="input-group">
+                        <td><label for="email">E-mail</label></td>
+                        <td><input type="email" name="email" id="email" required/></td>
+                    ${error('email')}
+                    </div>
+                </tr>
+                <tr>
+                    <div class="input-group">
+                        <td><label>Heslo</label></td>
+                        <td><input type="password" name="password" id="password"required/></td>
+                    ${error('password')}
+                    </div>
+                </tr>
+                <tr>
+                    <div class="input-group">
+                        <td><label>Heslo znovu</label></td>
+                        <td><input type="password" name="password_repeat" id="password_repeat"required/></td>
+                    </div>
+                </tr>
+            </div>
+            <tr><td><button type="submit" class="btn btn-primary">Zaregistrovať sa</button></td></tr>
+
+        </form>
+    </table>
 </%block>
