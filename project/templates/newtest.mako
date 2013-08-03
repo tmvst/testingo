@@ -19,5 +19,6 @@
 			<button type="submit" class="btn btn-primary">Vytvoriť test</button>
 		</div>
 	</form>
+    <a href="${request.route_path('dashboard')}"> <button type="submit" class="btn btn-danger">Zrušiť</button></a>
 </div>
 </%block>
