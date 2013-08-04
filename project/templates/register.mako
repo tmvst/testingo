@@ -14,21 +14,21 @@
                 <tr>
                     <div class="input-group">
                         <td><label for="email">E-mail</label></td>
-                        <td><input type="email" name="email" id="email" required/></td>
+                        <td><input type="email" name="email" id="email" class="form-control" style="width: 220px;" required/></td>
                     ${error('email')}
                     </div>
                 </tr>
                 <tr>
                     <div class="input-group">
                         <td><label>Heslo</label></td>
-                        <td><input type="password" name="password" id="password"required/></td>
+                        <td><input type="password" name="password" id="password" class="form-control" style="width: 220px;" required/></td>
                     ${error('password')}
                     </div>
                 </tr>
                 <tr>
                     <div class="input-group">
                         <td><label>Heslo znovu</label></td>
-                        <td><input type="password" name="password_repeat" id="password_repeat"required/></td>
+                        <td><input type="password" name="password_repeat" id="password_repeat" class="form-control" style="width: 220px;" required/></td>
                     </div>
                 </tr>
             </div>
