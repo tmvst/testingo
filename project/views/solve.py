@@ -35,9 +35,14 @@ from ..models.question import (
 
 @view_config(route_name='solve', request_method='GET', renderer='project:templates/solve.mako')
 def view_question(request):
-    test_token = request.matchdict['token']
-    test = request.db_session.query(Test).filter_by(share_token=test_token).one()
-    
+    try:
+        test_token = request.matchdict['token']
+        test = request.db_session.query(Test).filter_by(share_token=test_token).one()
+        if request.db_session.query(Incomplete_test).filter_by(test=test,user_id=request.userid):
+            raise HTTPException
+    except HTTPException:
+
+        return HTTPFound(request.route_path('dashboard'))
 
     return {'test':test}
 
