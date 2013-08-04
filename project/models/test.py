@@ -39,7 +39,7 @@ class Test(Base):
     date_mdf = Column(DateTime)
     share_token = Column(String(30))
     user_id = Column(Integer, ForeignKey('user.id'), index=True)
-    user = relationship('User', backref=backref("tests", cascade="all, delete-orphan"))
+    user = relationship('User', backref=backref("tests",order_by=date_crt.desc(), cascade="all, delete-orphan"))
     sum_points=Column(Integer)
 
     def __init__(self, name, description, password, date_crt, date_mdf, user):

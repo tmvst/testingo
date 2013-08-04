@@ -98,7 +98,7 @@ class User(Base):
     def __repr__(self):
         """Returns representative object of class User.
         """
-        return "User<{email}>".format(email=self.email)
+        return "{email}".format(email=self.email)
 
 
 class InvalidEmailError(ValidationError):
