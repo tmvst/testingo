@@ -44,7 +44,7 @@ def show_filled_test(request):
         raise  HTTPForbidden
         return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
 
-    if request.userid is not test.user_id:
+    if request.userid is not incomplete_test.user_id:
         raise  HTTPUnauthorized
         return  HTTPUnauthorized('Nie je to tebou vyplnený test')
 
