@@ -69,21 +69,4 @@
 	</div>
 </div>
 
-<div id="answer"></div>
-
-<div class="form-group">
-	<label for="points">Body</label>
-	<input type="number" id="points" name="points" class="form-control" placeholder="Body">
-</div>
-
-<button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
-<button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
-
-</form>
-<a href="${request.route_path('dashboard')}"> <button type="submit" class="btn btn-danger">Zrušiť</button></a>
-
-</div>
-</div>
-</div>
-
 </%block>
