@@ -49,10 +49,12 @@ def question_delete(request):
     """
     Deletes selected question from test and db.
     """
-    restrict_access(request)
+
     testid = request.matchdict['test_id']
-    questionid = request.matchdict['question_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
+    if test.share_token:
+        return HTTPFound(request.route_path('showtest', test_id=testid))
+    questionid = request.matchdict['question_id']
     question= request.db_session.query(Question).filter_by(id=questionid).one()
     question_number=question.number
     questions_with_number_to_be_changed = request.db_session.query(Question).filter(Question.number > question_number).all()
