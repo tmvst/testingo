@@ -45,13 +45,7 @@
 					<textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
 				</div>
 
-				<label>
-					<input type="Checkbox" value="">
-					<input type="newCheckbox" id = "checkboxName">
-				</label>                   
-
-				<input type="button" value="Pridať odpoveď" onClick="addTask()" id = "taskAdder">
-				<div id="toBeDone"></div>
+				<div id="answer"></div>
 
 				<div class="form-group">
 					<label for="points">Body</label>

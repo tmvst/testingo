@@ -1,21 +1,21 @@
- $ ()->
-  answer=$('#answer')
-  main.html(answer_template()) 
-  main.html(button_template())
-  $('#submit').click(process_submit)
-                    
-  process_submit = () ->
-    $('#answer').append(answer_template())
-
 answer_template= () ->
-"""
-    <label>
-    <input type="Checkbox" value="">
-    <input type="newCheckbox" id = "checkboxName">
-    </label> 
-"""
+	"""
+	<label>
+	</label> 
+	<input type="Checkbox" value="">
+	<input type="newCheckbox" id ="checkboxName"> <br> 
+	"""
 
 button_template= () ->
-"""
-    <button id='submit'> Pridať odpoveď </button>
-"""
+	"""
+	<a class="btn btn-default btn-small" id='submit'> Pridať odpoveď </a> <br> 
+	"""
+
+process_submit = () ->
+	$('#answer').append(answer_template())
+
+$ ()->
+	answer=$('#answer')
+	answer.html(answer_template()) 
+	answer.html(button_template())
+	$('#submit').click(process_submit)

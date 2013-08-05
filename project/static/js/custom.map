@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "custom.js",
+  "sourceRoot": "../../../../../../../../Library/Application Support/Sublime Text 3/Packages",
+  "sources": [
+    "../../../../Code/Python/Spot/testingo/Testingo/project/static/js/custom.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA,4CAAA;;AAAA,CAAA,EAAiB,MAAA,MAAjB;CAAiB,QAChB;CADgB;;AAQjB,CARA,EAQiB,MAAA,MAAjB;CAAiB,QAChB;CADgB;;AAKjB,CAbA,EAaiB,MAAA,KAAjB;CACC,KAAA,GAAA,MAAoB;CADJ;;AAGjB,CAhBA,EAgBE,MAAA;CACD,KAAA;CAAA,CAAA,CAAO,GAAP,GAAO;CAAP,CACA,EAAA,EAAM,SAAM;CADZ,CAEA,EAAA,EAAM,SAAM;CACZ,IAAA,IAAA,KAAA;CAJC"
+}
