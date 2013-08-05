@@ -2,7 +2,7 @@
 var answer_template, button_template, process_submit;
 
 answer_template = function() {
-  return "<label>\n</label> \n<input type=\"Checkbox\" value=\"\">\n<input name=\"odpoved\" type=\"newCheckbox\" id=\"checkboxName\"> <br> ";
+  return "<label>\n</label> \n<input name=\"checkOdpoved\" type=\"checkbox\" value=\"\">\n<input name=\"odpoved\" class=\"checkInput\"> <br> ";
 };
 
 button_template = function() {
