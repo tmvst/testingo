@@ -9,7 +9,6 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="${request.static_path('project:static/js/bootstrap.js')}"></script>
-      <script src="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"></script>
 </head>
 
 <body>

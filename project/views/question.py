@@ -86,8 +86,10 @@ def question_submission(request):
     """
     POST = request.POST
     testid = request.matchdict['test_id']
-    restrict_access(request)
+    test=request.db_session.query(Test).filter_by(id=testid).one()
 
+    if test.share_token:
+        return HTTPFound(request.route_path('showtest', test_id=testid))
     question_id = create_question(request, request.db_session,
                                   POST['text'],
                                   POST['points'],
@@ -109,6 +111,8 @@ def create_question(request, db_session, text, points, qtype):         # pridať
 
     test_id = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=test_id).one()
+    print('XXXX'*1000)
+    print(test.share_token)
     test.sum_points=test.sum_points + int(points)
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     qnum = lastnum + 1
@@ -132,9 +136,3 @@ def create_answer(request, db_session, text, correct,question_id):         # pri
     db_session.flush()
 
     return answer.id
-def restrict_access(request):
-    testid = request.matchdict['test_id']
-    test=request.db_session.query(Test).filter_by(id=testid).one()
-    if test.share_token:
-        return HTTPFound(request.route_path('showtest', test_id=testid))
-    return {}
