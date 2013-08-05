@@ -29,11 +29,13 @@
                         <input type="number" id="points" name="points" class="form-control" placeholder="Body">
                     </div>
 
+                    <div class="form-group pull-left">
                     <button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
                     <button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+                    </div>
 
+                    <div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
                 </form>
-                    <a href="${request.route_path('dashboard')}"> <button type="submit" class="btn btn-danger">Zrušiť</button></a>
             </div>
 
             <div class="tab-pane" id="checkquestion">
@@ -51,7 +53,23 @@
                     <input type="button" value="Pridať odpoveď" onClick="addTask()" id = "taskAdder">
                     <div id="toBeDone"></div>
 
-                    <SCRIPT language="JavaScript">
+                    <div class="form-group">
+                        <label for="points">Body</label>
+                        <input type="number" id="points" name="points" class="form-control" placeholder="Body">
+                    </div>
+
+                    <div class="form-group pull-left">
+                    <button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
+                    <button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+                    </div>
+
+                    <div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <SCRIPT language="JavaScript">
                         var addTask = function () {
                             var nCheckbox = document.createElement("input");
                             nCheckbox.type = "checkbox";
@@ -69,19 +87,4 @@
                             document.getElementById("toBeDone").appendChild(document.createElement("br"));
                          }
                     </SCRIPT>
-
-                    <div class="form-group">
-                        <label for="points">Body</label>
-                        <input type="number" id="points" name="points" class="form-control" placeholder="Body">
-                    </div>
-
-                    <button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
-                    <button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
-
-                </form>
-                   <a href="${request.route_path('dashboard')}"> <button type="submit" class="btn btn-danger">Zrušiť</button></a>
-
-            </div>
-        </div>
-    </div>
 </%block>
