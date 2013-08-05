@@ -41,34 +41,12 @@
                     <div class="form-group">
                         <label for="text">Znenie otázky</label>
                         <textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
-                    </div>
+                    </div>                  
 
-                    <label>
-                        <input type="Checkbox" value="">
-                        <input type="newCheckbox" id = "checkboxName">
-                    </label>                   
+                    <div id="answer"></div>
 
-                    <input type="button" value="Pridať odpoveď" onClick="addTask()" id = "taskAdder">
-                    <div id="toBeDone"></div>
 
-                    <SCRIPT language="JavaScript">
-                        var addTask = function () {
-                            var nCheckbox = document.createElement("input");
-                            nCheckbox.type = "checkbox";
-                            document.getElementById("toBeDone").appendChild(nCheckbox);
-
-                            var newCheckbox = document.createElement("input");
-                            newCheckbox.type = "newcheckbox";
-                            document.getElementById("toBeDone").appendChild(newCheckbox);
-
-                            var label = document.createElement('label');
-                            label.htmlFor = document.getElementById("checkboxName").value;
-                            label.appendChild(document.createTextNode(document.getElementById("checkboxName").value));
-
-                            document.getElementById("toBeDone").appendChild(label);
-                            document.getElementById("toBeDone").appendChild(document.createElement("br"));
-                         }
-                    </SCRIPT>
+                  
 
                     <div class="form-group">
                         <label for="points">Body</label>
