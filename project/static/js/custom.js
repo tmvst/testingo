@@ -3,7 +3,7 @@
   var answer_template, button_template, process_submit;
 
   answer_template = function() {
-    return "<label>\n</label> \n<input type=\"Checkbox\" value=\"\">\n<input type=\"newCheckbox\" id =\"checkboxName\"> <br> ";
+    return "<label>\n</label> \n<input name=\"checkOdpoved\" type=\"checkbox\" value=\"\">\n<input name=\"odpoved\" class=\"checkInput\"> <br> ";
   };
 
   button_template = function() {
@@ -12,9 +12,6 @@
 
   process_submit = function() {
     return $('#answer').append(answer_template());
-    <div id='cnt'>
-            #{count_template 0}
-        </div>
   };
 
   $(function() {
@@ -23,7 +20,6 @@
     answer.html(answer_template());
     answer.html(button_template());
     return $('#submit').click(process_submit);
-
   });
 
 }).call(this);
