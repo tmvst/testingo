@@ -3,7 +3,7 @@ answer_template= () ->
 	<label>
 	</label> 
 	<input type="Checkbox" value="">
-	<input type="newCheckbox" id ="checkboxName"> <br> 
+	<input name="odpoved" type="newCheckbox" id="checkboxName"> <br> 
 	"""
 
 button_template= () ->
