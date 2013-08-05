@@ -101,11 +101,12 @@ def test_show(request):
         request.db_session.delete(test)
         return HTTPFound(request.route_path('dashboard'))
 
-    if '_share' in POST:
+    elif '_share' in POST:
         share_test(request,testid)
         return HTTPFound(request.route_path('showtest',test_id=testid))
     else:
-        return question_submission(request)
+        question_submission(request)
+        return HTTPFound(request.route_path('showtest',test_id=testid))
 
 def share_test(request, test_id):
     test = request.db_session.query(Test).filter_by(id=test_id).one()
