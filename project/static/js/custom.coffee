@@ -2,8 +2,8 @@ answer_template= () ->
 	"""
 	<label>
 	</label> 
-	<input type="Checkbox" value="">
-	<input name="odpoved" type="newCheckbox" id="checkboxName"> <br> 
+	<input name="checkOdpoved" type="checkbox" value="">
+	<input name="odpoved" id="checkboxName"> <br> 
 	"""
 
 button_template= () ->
