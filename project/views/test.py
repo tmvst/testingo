@@ -28,6 +28,9 @@ from ..models.question import (
 from ..models.incomplete_test import (
     Incomplete_test,
 )
+from ..views.question import (
+    question_submission,
+)
 #}}}
 
 @view_config(route_name='newtest', request_method='POST')
@@ -103,55 +106,6 @@ def test_show(request):
         return HTTPFound(request.route_path('showtest',test_id=testid))
     else:
         return question_submission(request)
-
-
-def question_submission(request):
-    POST = request.POST
-    testid = request.matchdict['test_id']
-
-    question_id = create_question(request, request.db_session,
-                                  POST['text'],
-                                  POST['points'],
-                                  testid
-    )
-
-    answer_id = create_answer(request, request.db_session,
-                              POST['odpoved'],
-                              1,question_id
-    )
-
-    return HTTPFound(request.route_path('showtest',test_id=testid))
-
-
-def create_question(request, db_session, text, points, qtype):         # pridať password !!!
-    """Registers a new user and returns his ID (single number).
-    """
-
-    test_id = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=test_id).one()
-    test.sum_points=test.sum_points + int(points)
-    lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
-    qnum = lastnum + 1
-
-    question = Question(qnum, text, points, 'S', test)
-
-    db_session.add(question)
-    db_session.flush()
-
-    return question.id
-
-def create_answer(request, db_session, text, correct,question_id):         # pridať password !!!
-    """Creates a new answer for the question.
-
-    """
-    question = request.db_session.query(Question).filter_by(id=question_id).one()
-
-    answer = Answer( text, correct, question)
-
-    db_session.add(answer)
-    db_session.flush()
-
-    return answer.id
 
 def share_test(request, test_id):
     test = request.db_session.query(Test).filter_by(id=test_id).one()

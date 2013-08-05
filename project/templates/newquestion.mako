@@ -29,11 +29,13 @@
                         <input type="number" id="points" name="points" class="form-control" placeholder="Body">
                     </div>
 
+                    <div class="form-group pull-left">
                     <button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
                     <button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+                    </div>
 
+                    <div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
                 </form>
-                    <a href="${request.route_path('dashboard')}"> <button type="submit" class="btn btn-danger">Zrušiť</button></a>
             </div>
 
             <div class="tab-pane" id="checkquestion">
@@ -41,12 +43,34 @@
                     <div class="form-group">
                         <label for="text">Znenie otázky</label>
                         <textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
-                    </div>                  
+                    </div>
+
+                    <label>
+                        <input type="Checkbox" value="">
+                        <input type="newCheckbox" id = "checkboxName">
+                    </label>                   
+
+                    <input type="button" value="Pridať odpoveď" onClick="addTask()" id = "taskAdder">
+                    <div id="toBeDone"></div>
+
+                    <div class="form-group">
+                        <label for="points">Body</label>
+                        <input type="number" id="points" name="points" class="form-control" placeholder="Body">
+                    </div>
+
+                    <div class="form-group pull-left">
+                    <button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
+                    <button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+                    </div>
+
+                    <div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
 
                     <div id="answer"></div>
-
-
-                  
+               
 
                     <div class="form-group">
                         <label for="points">Body</label>
@@ -62,4 +86,5 @@
             </div>
         </div>
     </div>
+
 </%block>
