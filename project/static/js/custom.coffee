@@ -1,9 +1,10 @@
 answer_template= () ->
 	"""
-	<label>
-	</label> 
+	<div class="answerblock">
 	<input name="checkOdpoved" type="checkbox" value="">
-	<input name="odpoved" class="checkInput"> <br> 
+	<input name="odpoved" class="checkInput"> 
+	<div class="btn btn-default btn-small delete-button"> Zmazať odpoveď </div> <br> 
+	</div>
 	"""
 
 button_template= () ->
@@ -19,14 +20,11 @@ update_cnt = () ->
     cnt=$('.checkInput').length
 
 delete_entry = (e) ->
-"""
-	pre vymazanie checkboxu, nepouziva sa zatial
-	neptreba aktual. pocet
-"""
-   $(e.target).parent().remove()
+	#alert("Tu som hallo")
+	$(e.target).parent().remove()
 
-$ ()->
+$(document).ready () ->
 	answer=$('#answer')
-	answer.html(answer_template()) 
 	answer.html(button_template())
 	$('#submit').click(process_submit)
+	$('#answer').on('click', '.delete-button', delete_entry)

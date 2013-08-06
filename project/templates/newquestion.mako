@@ -26,8 +26,8 @@
 				</div>
 
 				<div class="form-group">
-					<label for="points">Body</label>
-					<input type="number" id="points" name="points" class="form-control" placeholder="Body">
+					<label for="points1">Body</label>
+					<input type="number" id="points1" name="points" class="form-control" placeholder="Body">
 				</div>
 
 				<div class="form-group pull-left">
@@ -52,8 +52,8 @@
 				<div id="answer"></div>
 
 				<div class="form-group">
-					<label for="points">Body</label>
-					<input type="number" id="points" name="points" class="form-control" placeholder="Body">
+					<label for="points2">Body</label>
+					<input type="number" id="points2" name="points" class="form-control" placeholder="Body">
 				</div>
 
 				<div class="form-group pull-left">
