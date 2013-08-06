@@ -1,8 +1,10 @@
+ix = 1
+
 answer_template= () ->
 	"""
 	<div class="answerblock">
-	<input name="checkOdpoved" type="checkbox" value="">
-	<input name="odpoved" class="checkInput"> 
+	<input name="check#{ix}" type="checkbox" value="">
+	<input name="text#{ix}" class="checkInput"> 
 	<div class="btn btn-default btn-small delete-button"> Zmazať odpoveď </div> <br> 
 	</div>
 	"""
@@ -14,6 +16,7 @@ button_template= () ->
 
 process_submit = () ->
 	$('#answer').append(answer_template())
+	ix++
 	update_cnt()
 
 update_cnt = () ->
