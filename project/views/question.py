@@ -83,14 +83,7 @@ def answer_view(request):
 
 
 @view_config(route_name='newquestion', request_method='POST')
-def wrapper(request):
-    POST = request.POST
-    testid = request.matchdict['test_id']
-    test=request.db_session.query(Test).filter_by(id=testid).one()
-    q_type=POST['q_type']
-    question_submission(request,q_type)
-    return HTTPFound(request.route_path('newquestion',test_id=testid))
-def question_submission(request,q_type):
+def question_submission(request):
     """Handles question form submission.
     """
     POST = request.POST
@@ -102,50 +95,38 @@ def question_submission(request,q_type):
     question_id = create_question(request, request.db_session,
                                   POST['text'],
                                   POST['points'],
-                                  q_type
+                                  testid
     )
-    if q_type =='S':
-        answer_id = create_answer(request, request.db_session,
-                                  POST['odpoved'],
-                                  1,question_id
-        )
 
+    answer_id = create_answer(request, request.db_session,
+                              POST['odpoved'],
+                              1,question_id
+    )
 
-    elif q_type == 'C':
-        answers =  POST.getall('odpoved')
-        correctness = POST.getall('checkOdpoved')
-        answers_with_correctness =zip(answers,correctness)
-        for a in answers_with_correctness:
-            if a[1]:
-                create_answer(request,request.db_session,
-                          a[0],
-                          1,question_id)
-            else:
-                create_answer(request,request.db_session,
-                          a[0],
-                          0,question_id)
 
     return HTTPFound(request.route_path('newquestion',test_id=testid))
 
 
-def create_question(request, db_session, text, points, q_type):         # pridať password !!!
+def create_question(request, db_session, text, points, qtype):         # pridať password !!!
     """Creates a new question and returns its id.
     """
 
     test_id = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=test_id).one()
+    print('XXXX'*1000)
+    print(test.share_token)
     test.sum_points=test.sum_points + int(points)
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     qnum = lastnum + 1
 
-    question = Question(qnum, text, points, q_type, test)
+    question = Question(qnum, text, points, 'S', test)
 
     db_session.add(question)
     db_session.flush()
 
     return question.id
 
-def create_answer(request, db_session, text, correct,question_id):         # pridať password !!!
+def create_answer(request, db_session, text, correct,question_id):         
     """Creates a new answer for the question.
 
     """

@@ -2,11 +2,13 @@ ix = 1
 
 answer_template= () ->
 	"""
-	<div class="answerblock">
-	<input name="check#{ix}" type="checkbox" value="">
-	<input name="text#{ix}" class="checkInput"> 
-	<div class="btn btn-default btn-small delete-button"> Zmazať odpoveď </div> <br> 
-	</div>
+	
+		<div class="answerblock">
+		<input class="checkInput" name="check#{ix}" type="checkbox" value="">
+		<input name="text#{ix}" class="checkInput"> 
+		<div class="btn btn-default btn-small delete-button"> Zmazať odpoveď </div> <br> 
+		</div>
+
 	"""
 
 button_template= () ->
@@ -20,14 +22,35 @@ process_submit = () ->
 	update_cnt()
 
 update_cnt = () ->
-    cnt=$('.checkInput').length
+	cnt=$('.checkInput').length
 
 delete_entry = (e) ->
 	#alert("Tu som hallo")
 	$(e.target).parent().remove()
+
+form_submit = () ->
+	textQ= $('input[name=text]').val()
+	bodyQ= $('input[name=points]').val()
+	fields = $(":input.checkInput").serializeArray()
+
+	console.log "Tu som"
+	console.log post_url
+
+	$.ajax(
+		url: post_url
+		type: "post"
+		data: (text: textQ
+				points: bodyQ
+				fields: fields
+		)
+
+		)
+	return false
+
 
 $(document).ready () ->
 	answer=$('#answer')
 	answer.html(button_template())
 	$('#submit').click(process_submit)
 	$('#answer').on('click', '.delete-button', delete_entry)
+	$("#input_form_checkbox").submit(form_submit)
