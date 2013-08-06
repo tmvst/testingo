@@ -1,6 +1,11 @@
 <%inherit file="default.mako" />
 <%block name="title">Nová otázka</%block>
 <%block name="page_content">
+
+<script type="text/javascript">
+	post_url="${request.route_path('newquestion', test_id=test.id)}"
+</script>
+
 <div class="page-header">
 	<h1>Nová otázka do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
 </div>
@@ -43,7 +48,7 @@
 		</div>
 
 		<div class="tab-pane" id="checkquestion">
-			<form action="${request.route_path('newquestion', test_id=test.id)}" method="POST">
+			<form action="#" id="input_form_checkbox">
 				<div class="form-group">
 					<label for="text">Znenie otázky</label>
 					<textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
@@ -58,7 +63,7 @@
 
 				<div class="form-group pull-left">
 					<button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
-					<button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+					<button type="submit" formaction="#" class="btn btn-default">Uložiť a skončiť</button>
                     <input type="hidden" name="q_type" value="C">
 				</div>
 
