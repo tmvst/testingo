@@ -19,6 +19,7 @@
 					<textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
 				</div>
 
+
 				<div class="form-group">
 					<label for="odpoved">Správna odpoveď</label>
 					<input type="text" id="odpoved" name="odpoved" class="form-control" placeholder="Správna odpoveď">
@@ -30,8 +31,11 @@
 				</div>
 
 				<div class="form-group pull-left">
+                    <input type="hidden" name="q_type" value="S">
 					<button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
 					<button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+
+
 				</div>
 
 				<div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
@@ -55,6 +59,7 @@
 				<div class="form-group pull-left">
 					<button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
 					<button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
+                    <input type="hidden" name="q_type" value="C">
 				</div>
 
 				<div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
