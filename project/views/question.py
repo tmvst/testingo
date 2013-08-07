@@ -19,7 +19,7 @@ from ..models.test import (
 from ..models.question import (
     Question,
     )
-
+import json
 
 #}}}
 
@@ -83,7 +83,15 @@ def answer_view(request):
 
 
 @view_config(route_name='newquestion', request_method='POST')
-def question_submission(request):
+def wrapper(request):
+    POST = request.POST
+    testid = request.matchdict['test_id']
+    test=request.db_session.query(Test).filter_by(id=testid).one()
+    print(POST)
+    q_type=POST['q_type']
+    question_submission(request,q_type)
+    return HTTPFound(request.route_path('newquestion',test_id=testid))
+def question_submission(request,q_type):
     """Handles question form submission.
     """
     POST = request.POST
@@ -95,40 +103,57 @@ def question_submission(request):
     question_id = create_question(request, request.db_session,
                                   POST['text'],
                                   POST['points'],
-                                  testid
+                                  q_type
     )
+    if q_type =='S':
+        answer_id = create_answer(request, request.db_session,
+                                  POST['odpoved'],
+                                  1,question_id
+        )
 
-    answer_id = create_answer(request, request.db_session,
-                              POST['odpoved'],
-                              1,question_id
-    )
+    elif q_type=='C':
+        ans= POST['answers']
+        corr=POST['correctness']
 
+        # counter =1
+        # answer = 'text'+ str(counter)
+        # correctness = 'check' + str(counter)
+        # while POST[answer]:
+        #
+        #     if correctness:
+        #         create_answer(request,request.db_session,
+        #                   POST[answer],
+        #                   1,question_id)
+        #     else:
+        #         create_answer(request,request.db_session,
+        #                   POST[answer],
+        #                   0,question_id)
+        #     counter+=1
+        #     answer = 'text'+ counter
+        #     correctness = 'check' + counter
 
     return HTTPFound(request.route_path('newquestion',test_id=testid))
 
 
-def create_question(request, db_session, text, points, qtype):         # pridať password !!!
+def create_question(request, db_session, text, points, q_type):         # pridať password !!!
     """Creates a new question and returns its id.
     """
 
     test_id = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=test_id).one()
-    print('XXXX'*1000)
-    print(test.share_token)
     test.sum_points=test.sum_points + int(points)
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     qnum = lastnum + 1
 
-    question = Question(qnum, text, points, 'S', test)
+    question = Question(qnum, text, points, q_type, test)
 
     db_session.add(question)
     db_session.flush()
 
     return question.id
 
-def create_answer(request, db_session, text, correct,question_id):         
+def create_answer(request, db_session, text, correct,question_id):         # pridať password !!!
     """Creates a new answer for the question.
-
     """
     question = request.db_session.query(Question).filter_by(id=question_id).one()
 

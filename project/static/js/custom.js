@@ -5,11 +5,11 @@
   ix = 1;
 
   answer_template = function() {
-    return "<div class=\"answerblock\">\n<input class=\"checkInput\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n<input name=\"text" + ix + "\" class=\"checkInput\"> \n<div class=\"btn btn-default btn-small delete-button\"> Zmazať odpoveď </div> <br> \n</div>";
+    return "<div class=\"answerblock\">\n<input class=\"checkInputC\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n<input name=\"text" + ix + "\" class=\"checkInput\">\n<div class=\"btn btn-default btn-small delete-button\"> Zmazať odpoveď </div> <br>\n</div>";
   };
 
   button_template = function() {
-    return "<a class=\"btn btn-default btn-small\" id='submit'> Pridať odpoveď </a> <br> ";
+    return "<a class=\"btn btn-default btn-small\" id='submit'> Pridať odpoveď </a> <br>";
   };
 
   process_submit = function() {
@@ -28,17 +28,21 @@
   };
 
   form_submit = function() {
-    var bodyQ, fields, textQ;
-    textQ = $('input[name=text]').val();
-    bodyQ = $('input[name=points]').val();
-    fields = $(":input.checkInput").serializeArray();
+    var answers, bodyQ, correctness, q_type, textQ;
+    q_type = $("input[name='q_typeC']").val();
+    textQ = $("textarea[name='textC']").val();
+    bodyQ = $("input[name='points2']").val();
+    answers = $("input.checkInput").serializeArray();
+    correctness = $("input.checkInputC").serializeArray();
     $.ajax({
       url: post_url,
       type: "post",
       data: {
+        q_type: q_type,
         text: textQ,
         points: bodyQ,
-        fields: fields
+        answers: answers,
+        correctness: correctness
       }
     }).done(function(response) {
       return alert("Done!");
@@ -58,3 +62,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=custom.map
+*/
