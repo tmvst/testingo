@@ -36,11 +36,14 @@
       url: post_url,
       type: "post",
       data: {
-        text: textQ({
-          points: bodyQ,
-          fields: fields
-        })
+        text: textQ,
+        points: bodyQ,
+        fields: fields
       }
+    }).done(function(response) {
+      return alert("Done!");
+    }).fail(function() {
+      return alert("Fail!");
     });
     return false;
   };

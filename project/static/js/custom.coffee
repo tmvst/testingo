@@ -20,28 +20,32 @@ process_submit = () ->
 	update_cnt()
 
 update_cnt = () ->
-	cnt=$('.checkInput').length
+	cnt = $('.checkInput').length
 
 delete_entry = (e) ->
 	$(e.target).parent().remove()
 
 form_submit = () ->
-	textQ= $('input[name=text]').val()
-	bodyQ= $('input[name=points]').val()
+	textQ = $('input[name=text]').val()
+	bodyQ = $('input[name=points]').val()
 	fields = $(":input.checkInput").serializeArray()
 
-	$.ajax (
+	$.ajax
 		url: post_url
 		type: "post"
-		data: (	text: textQ
-				points: bodyQ
-				fields: fields )
-		)
+		data: (	
+			text: textQ
+			points: bodyQ
+			fields: fields )
+	.done (response) -> 
+		alert "Done!"
+	.fail () -> 
+		alert "Fail!"
 	return false
 
 
 $(document).ready () ->
-	answer=$('#answer')
+	answer = $('#answer')
 	answer.html(button_template())
 	$('#submit').click(process_submit)
 	$('#answer').on('click', '.delete-button', delete_entry)
