@@ -40,7 +40,7 @@ form_submit = () ->
 	.done (response) -> 
 		alert "Done!"
 	.fail () -> 
-		alert "Fail!"
+		alert "Fail!"	
 	return false
 
 
