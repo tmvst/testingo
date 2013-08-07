@@ -30,17 +30,12 @@ form_submit = () ->
 	bodyQ= $('input[name=points]').val()
 	fields = $(":input.checkInput").serializeArray()
 
-	console.log "Tu som"
-	console.log post_url
-
-	$.ajax(
+	$.ajax (
 		url: post_url
 		type: "post"
-		data: (text: textQ
+		data: (	text: textQ
 				points: bodyQ
-				fields: fields
-		)
-
+				fields: fields )
 		)
 	return false
 
