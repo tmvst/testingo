@@ -35,7 +35,19 @@
                     </a>
                     </div>
                         <label for="user_answer">${question.text}</label>
-                        <textarea class="form-control" name="user_answer" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required></textarea>
+
+
+                        % if question.qtype == 'S':
+                             <textarea class="form-control" name="user_answer" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required></textarea>
+
+                        % elif question.qtype == 'C':
+                            %for ans in question.answers:
+                                  <p><input class="checkInputC" name="check${ans.id}" type="checkbox" value="">
+                              <label name="text${ans.id}">${ans.text}</label></p>
+                                </p>
+                            %endfor
+
+                        % endif
                     </div>
                 % endfor
             % endif
