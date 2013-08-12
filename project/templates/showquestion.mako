@@ -7,9 +7,9 @@
 
     <div class="container">
         %if question.test.share_token is None:
-            <form action="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}" method="POST">
-                <button type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
-            </form>
+                <form action="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}" method="POST">
+                    <button type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
+                </form>
         %endif
         <div class="control-group">
             <h4>${question.text}
@@ -19,53 +19,59 @@
             </h4>
 
             <div class="list-group">
-                % if len(answers) is 0:
-                    <span> Otázka neobsahuje žiadne možnosti</span>
-                % else:
-                    % for answer in answers:
-                        <p class="text-success">
-                            ${answer.text} <br>
-                        </p>
-                    % endfor
-                % endif
+                    % if len(answers) is 0:
+                        <span> Otázka neobsahuje žiadne možnosti</span>
+                    % else:
+                        % for answer in answers:
+                            % if answer.correct == 1:
+                                    <p class="text-success">
+                                    ${answer.text} <br>
+                                    </p>
+                            %else:
+                                    <p class="text-danger">
+                                    ${answer.text} <br>
+                                    </p>
+                            % endif
+                        % endfor
+                    % endif
             </div>
         </div>
     </div>
 
     <div class="answer_s">
 
-    <h2>Vyplnené odpovede</h2>
+        <h2>Vyplnené odpovede</h2>
 
         % if len(emails_and_answers) is 0:
-            <span> Test nevyplnili žiadni respondenti </span>
+                <span> Test nevyplnili žiadni respondenti </span>
         % else:
             % for respondent, answer in emails_and_answers:
                 <div class="panel">
-                    <div class="panel-heading">
+                <div class="panel-heading">
 
-                        <h3 class="panel-title">${respondent}
-                        % if answer.correct == 1:        
-                            <span class="badge pull-right">
+                <h3 class="panel-title">${respondent}
+                % if answer.correct == 1:
+                        <span class="badge pull-right">
                                 ${answer.question.points}b
                             </span>
-                        %else:
-                            <span class="badge pull-right">
+                %else:
+                        <span class="badge pull-right">
                                 ${0}b
                             </span>
-                        %endif
-                        </h3>
-                    </div>
+                %endif
+                </h3>
+                </div>
 
                     <p><strong>Odpoveď <br></strong>${answer.text}</p>
-                    % if answer.correct == 1:
+                % if answer.correct == 1:
                         <p class="text-success">
                             <strong>Správna odpoveď</strong>
                         </p>
-                    %else:
+                %else:
                         <p class="text-danger">
                             <strong>Nesprávna odpoveď</strong>
                         </p>
-                    % endif
+                % endif
 
                 </div>
             % endfor

@@ -64,9 +64,16 @@
                     </a>
                     </div>
                         <strong>${question.text}</strong>
-                    <p class="text-success">
-                        % for ans in question.answers:
-                        ${ans.text} <br>
+                         % for answer in question.answers:
+                            % if answer.correct == 1:
+                                    <p class="text-success">
+                                    ${answer.text} <br>
+                                    </p>
+                            %else:
+                                    <p class="text-danger">
+                                    ${answer.text} <br>
+                                    </p>
+                            % endif
                         % endfor
                     </p>
                     </div>
