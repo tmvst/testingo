@@ -21,3 +21,15 @@ body {
 .form-control[readonly] {
 	cursor: text;
 }
+
+.answerblock .checkInputC {
+	display: inline-block;
+}
+
+.answerblock .checkInput {
+	width: 250px;
+	display: inline-block;
+	height: 30px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
