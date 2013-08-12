@@ -45,7 +45,7 @@ form_submit = () ->
 			answers: answers
 			correctness: correctness
 	.done (response) ->
-		top.location.href="/"
+		top.location.href = "/"
 	.fail () -> 
 		alert "Fail!"	
 	return false
