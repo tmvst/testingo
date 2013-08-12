@@ -46,7 +46,7 @@
         correctness: correctness
       })
     }).done(function(response) {
-      return top.location.href = "/";
+      return top.location.href = "/dashboard";
     }).fail(function() {
       return alert("Fail!");
     });
@@ -63,3 +63,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=custom.map
+*/

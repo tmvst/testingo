@@ -104,21 +104,22 @@ def answer_view(request):
     return {'errors':[]}
 
 @view_config(route_name='newquestion', request_method='POST')
-def wrapperC(request):
+def new_question_wrapper(request):
     testid = request.matchdict['test_id']
-    json=request.json_body
-    q_type=json['q_type']
-    points=json['points']
-    text=json['text']
-    question_submission(request,q_type,text,points)
-    return HTTPFound(request.route_path('newquestion',test_id=testid))
-def wrapperS(request):
-    POST = request.POST
-    testid = request.matchdict['test_id']
-    q_type=POST['q_type']
-    text=POST['text']
-    points=POST['points']
-    question_submission(request,q_type,text,points)
+
+    try:
+        request.json_body
+        json=request.json_body
+        q_type=json['q_type']
+        points=json['points']
+        text=json['text']
+    except ValueError:
+        POST = request.POST
+        q_type=POST['q_type']
+        text=POST['text']
+        points=POST['points']
+    finally:
+        question_submission(request,q_type,text,points)
     return HTTPFound(request.route_path('newquestion',test_id=testid))
 def question_submission(request,q_type,text,points):
     """Handles question form submission.
