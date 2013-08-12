@@ -5,7 +5,7 @@
   ix = 1;
 
   answer_template = function() {
-    return "<div class=\"answerblock\">\n<input class=\"checkInputC\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n<input name=\"text" + ix + "\" class=\"checkInput\">\n<div class=\"btn btn-default btn-small delete-button\"> Zmazať odpoveď </div> <br>\n</div>";
+    return "<div class=\"answerblock\">\n<input class=\"checkInputC\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n<input name=\"text" + ix + "\" class=\"checkInput form-control\">\n<div class=\"btn btn-default btn-small delete-button\"> Zmazať odpoveď </div> <br>\n</div>";
   };
 
   button_template = function() {
@@ -36,16 +36,17 @@
     correctness = $("input.checkInputC").serializeArray();
     $.ajax({
       url: post_url,
-      type: "post",
-      data: {
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({
         q_type: q_type,
         text: textQ,
         points: bodyQ,
         answers: answers,
         correctness: correctness
-      }
+      })
     }).done(function(response) {
-      return alert("Done!");
+      return top.location.href = "/";
     }).fail(function() {
       return alert("Fail!");
     });
@@ -62,3 +63,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=custom.map
+*/

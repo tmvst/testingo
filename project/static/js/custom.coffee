@@ -5,7 +5,7 @@ answer_template= () ->
 	"""
 		<div class="answerblock">
 		<input class="checkInputC" name="check#{ix}" type="checkbox" value="">
-		<input name="text#{ix}" class="checkInput">
+		<input name="text#{ix}" class="checkInput form-control">
 		<div class="btn btn-default btn-small delete-button"> Zmazať odpoveď </div> <br>
 		</div>
 	"""
@@ -33,18 +33,19 @@ form_submit = () ->
 	answers = $("input.checkInput").serializeArray()
 	correctness = $("input.checkInputC").serializeArray()
 
+
 	$.ajax
 		url: post_url
-		type: "post"
-		data: (
+		type: "POST"
+		contentType: "application/json; charset=utf-8"
+		data: JSON.stringify
 			q_type: q_type
 			text: textQ
 			points: bodyQ
 			answers: answers
 			correctness: correctness
-			)
 	.done (response) ->
-		alert "Done!"
+		top.location.href="/"
 	.fail () -> 
 		alert "Fail!"	
 	return false
