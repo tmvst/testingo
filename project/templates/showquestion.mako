@@ -13,10 +13,11 @@
         %endif
         <div class="control-group">
             <h4>${question.text}
-            <span class="badge pull-right">
+                <span class="badge float-left">
                 max. ${question.points}b
             </span>
             </h4>
+
             <div class="list-group">
                 % if len(answers) is 0:
                     <span> Otázka neobsahuje žiadne možnosti</span>
