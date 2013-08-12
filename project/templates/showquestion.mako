@@ -12,17 +12,21 @@
             </form>
         %endif
         <div class="control-group">
-            <h4>${question.text}</h4>
+            <h4>${question.text}
+            <span class="badge pull-right">
+                max. ${question.points}b
+            </span>
+            </h4>
             <div class="list-group">
-                    % if len(answers) is 0:
-                        <span> Otázka neobsahuje žiadne možnosti</span>
-                    % else:
+                % if len(answers) is 0:
+                    <span> Otázka neobsahuje žiadne možnosti</span>
+                % else:
                     % for answer in answers:
-                            <p class="text-success">
+                        <p class="text-success">
                             ${answer.text} <br>
-                            </p>
+                        </p>
                     % endfor
-                    % endif
+                % endif
             </div>
         </div>
     </div>
@@ -37,9 +41,31 @@
             % for respondent, answer in emails_and_answers:
                 <div class="panel">
                     <div class="panel-heading">
-                        <h3 class="panel-title">${respondent}</h3>
+
+                        <h3 class="panel-title">${respondent}
+                        % if answer.correct == 1:        
+                            <span class="badge pull-right">
+                                ${answer.question.points}b
+                            </span>
+                        %else:
+                            <span class="badge pull-right">
+                                ${0}b
+                            </span>
+                        %endif
+                        </h3>
                     </div>
+
                     <p><strong>Odpoveď <br></strong>${answer.text}</p>
+                    % if answer.correct == 1:
+                        <p class="text-success">
+                            <strong>Správna odpoveď</strong>
+                        </p>
+                    %else:
+                        <p class="text-danger">
+                            <strong>Nesprávna odpoveď</strong>
+                        </p>
+                    % endif
+
                 </div>
             % endfor
         % endif
