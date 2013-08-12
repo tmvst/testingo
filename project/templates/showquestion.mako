@@ -30,18 +30,16 @@
     <div class="answer_s">
 
     <h2>Vyplnené odpovede</h2>
-    hjkasfôk 
-    ${len(emails_and_answers)}
 
         % if len(emails_and_answers) is 0:
             <span> Test nevyplnili žiadni respondenti </span>
         % else:
-            % for respondent in emails_and_answers:
+            % for respondent, answer in emails_and_answers:
                 <div class="panel">
                     <div class="panel-heading">
-                        <h3 class="panel-title">${respondent[0]}</h3>
+                        <h3 class="panel-title">${respondent}</h3>
                     </div>
-                    <p><strong>Odpoveď <br></strong>${respondent[1]}</p>
+                    <p><strong>Odpoveď <br></strong>${answer.text}</p>
                 </div>
             % endfor
         % endif

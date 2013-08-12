@@ -62,9 +62,9 @@ def view_respondents_answer(request):
     tests=[a.incomp_test for a in respondanswers]
     res_users=[a.user for a in tests]
     res_email=[a.email for a in res_users]
-    emails_and_answers =zip(res_email,respondanswers)
-
-    return{'emails_and_answers':emails_and_answers}
+    emails_and_answers =list(zip(res_email,respondanswers))
+    print(emails_and_answers)
+    return emails_and_answers
 
 
 @view_config(route_name='showquestion', request_method='POST')
