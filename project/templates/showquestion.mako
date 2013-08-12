@@ -12,17 +12,21 @@
             </form>
         %endif
         <div class="control-group">
-            <h4>${question.text}</h4>
+            <h4>${question.text}
+            <span class="badge pull-right">
+                max. ${question.points}b
+            </span>
+            </h4>
             <div class="list-group">
-                    % if len(answers) is 0:
-                        <span> Otázka neobsahuje žiadne možnosti</span>
-                    % else:
+                % if len(answers) is 0:
+                    <span> Otázka neobsahuje žiadne možnosti</span>
+                % else:
                     % for answer in answers:
-                            <p class="text-success">
+                        <p class="text-success">
                             ${answer.text} <br>
-                            </p>
+                        </p>
                     % endfor
-                    % endif
+                % endif
             </div>
         </div>
     </div>
@@ -54,11 +58,11 @@
                     <p><strong>Odpoveď <br></strong>${answer.text}</p>
                     % if answer.correct == 1:
                         <p class="text-success">
-                        <strong>Správna odpoveď</strong>
+                            <strong>Správna odpoveď</strong>
                         </p>
                     %else:
                         <p class="text-danger">
-                        <strong>Nesprávna odpoveď</strong>
+                            <strong>Nesprávna odpoveď</strong>
                         </p>
                     % endif
 
