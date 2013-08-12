@@ -104,60 +104,67 @@ def answer_view(request):
     return {'errors':[]}
 
 @view_config(route_name='newquestion', request_method='POST')
-def wrapper(request):
-    POST = request.POST
+def wrapperC(request):
     testid = request.matchdict['test_id']
-    test=request.db_session.query(Test).filter_by(id=testid).one()
-    print('DXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-    print(request.json_body)
-    print('DXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     json=request.json_body
     q_type=json['q_type']
-    question_submission(request,q_type)
+    points=json['points']
+    text=json['text']
+    question_submission(request,q_type,text,points)
     return HTTPFound(request.route_path('newquestion',test_id=testid))
-def question_submission(request,q_type):
+def wrapperS(request):
+    POST = request.POST
+    testid = request.matchdict['test_id']
+    q_type=POST['q_type']
+    text=POST['text']
+    points=POST['points']
+    question_submission(request,q_type,text,points)
+    return HTTPFound(request.route_path('newquestion',test_id=testid))
+def question_submission(request,q_type,text,points):
     """Handles question form submission.
     """
-    POST = request.POST
-    json=request.json_body
     testid = request.matchdict['test_id']
     test=request.db_session.query(Test).filter_by(id=testid).one()
 
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
     question_id = create_question(request, request.db_session,
-                                  json['text'],
-                                  json['points'],
+                                  text,
+                                  points,
                                   q_type
     )
     if q_type =='S':
+        POST = request.POST
         answer_id = create_answer(request, request.db_session,
                                   POST['odpoved'],
                                   1,question_id
         )
 
     elif q_type=='C':
+        json=request.json_body
         counter=1
         counterc=0
         answers=json['answers']
         correctness=json['correctness']
-
+        print(correctness)
         if correctness:
             for a in answers :
                 ans=a['value']
-                if 'check'+str(counter) == correctness[counterc]['name']:
+
+                if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
                     create_answer(request,request.db_session,
-                                ans,
-                                1,
-                                question_id)
+                                    ans,
+                                    1,
+                                    question_id)
                     counterc+=1
+
 
                 else:
                     create_answer(request,request.db_session,
-                                ans,
+                                    ans,
                                 0,question_id)
-
                 counter+=1
+
         else:
             for a in answers :
                 ans=a['value']

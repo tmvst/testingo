@@ -105,7 +105,7 @@ def test_show(request):
         share_test(request,testid)
         return HTTPFound(request.route_path('showtest',test_id=testid))
     else:
-        question_submission(request,POST['q_type'])
+        question_submission(request,POST['q_type'],POST['text'],POST['points'])
         return HTTPFound(request.route_path('showtest',test_id=testid))
 
 def share_test(request, test_id):
