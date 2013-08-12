@@ -19,6 +19,9 @@ from ..models.test import (
 from ..models.question import (
     Question,
     )
+from ..models.complete_answer import (
+    Complete_answer,
+    )
 
 
 #}}}
@@ -35,14 +38,31 @@ def view_question(request):
     answers = request.db_session.query(Answer).filter_by(question=question).all()
     if request.userid is None:
         raise  HTTPForbidden
-        return  HTTPForbidden('Nie je to tvoja otázka')
+        return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
     if request.userid is not test.user_id:
         raise  HTTPUnauthorized
-        return  HTTPUnauthorized('Pre prístup je nutné sa prihlásiť')
+        return  HTTPUnauthorized('Nie je to tvoja otázka')
     if test is None:
         raise HTTPException
         return HTTPException('Neexistujuca otazka')
-    return {'test':test,'question':question, 'answers':answers}
+    emails_and_answers = view_respondents_answer(request)
+    return {'test':test,'question':question, 'answers':answers, 'emails_and_answers':emails_and_answers}
+
+def view_respondents_answer(request):
+    """
+    odpovede a emaily respondentov
+    """
+    testid = request.matchdict['test_id']
+    questionid = request.matchdict["question_id"]
+    correctasnwerid = request.db_session.query(Answer).filter_by(id=questionid).one()
+    respondanswers = request.db_session.query(Complete_answer).filter_by(answer=correctasnwerid).all()
+    tests=[a.incomp_test for a in respondanswers]
+    res_users=[a.user for a in tests]
+    res_email=[a.email for a in res_users]
+    emails_and_answers =zip(res_email,respondanswers)
+
+    return{'emails_and_answers':emails_and_answers}
+
 
 @view_config(route_name='showquestion', request_method='POST')
 def question_delete(request):
@@ -79,8 +99,6 @@ def answer_view(request):
     """
 
     return {'errors':[]}
-
-
 
 @view_config(route_name='newquestion', request_method='POST')
 def question_submission(request):
