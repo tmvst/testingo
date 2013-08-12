@@ -33,18 +33,19 @@ form_submit = () ->
 	answers = $("input.checkInput").serializeArray()
 	correctness = $("input.checkInputC").serializeArray()
 
+
 	$.ajax
 		url: post_url
-		type: "post"
-		data: (
+		type: "POST"
+		contentType: "application/json; charset=utf-8"
+		data: JSON.stringify
 			q_type: q_type
 			text: textQ
 			points: bodyQ
 			answers: answers
 			correctness: correctness
-			)
 	.done (response) ->
-		alert "Done!"
+		top.location.href="/"
 	.fail () -> 
 		alert "Fail!"	
 	return false

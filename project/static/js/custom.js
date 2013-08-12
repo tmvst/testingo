@@ -36,16 +36,17 @@
     correctness = $("input.checkInputC").serializeArray();
     $.ajax({
       url: post_url,
-      type: "post",
-      data: {
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({
         q_type: q_type,
         text: textQ,
         points: bodyQ,
         answers: answers,
         correctness: correctness
-      }
+      })
     }).done(function(response) {
-      return alert("Done!");
+      return top.location.href = "/";
     }).fail(function() {
       return alert("Fail!");
     });
@@ -62,3 +63,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=custom.map
+*/

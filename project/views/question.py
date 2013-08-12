@@ -108,22 +108,26 @@ def wrapper(request):
     POST = request.POST
     testid = request.matchdict['test_id']
     test=request.db_session.query(Test).filter_by(id=testid).one()
-    print(POST)
-    q_type=POST['q_type']
+    print('DXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+    print(request.json_body)
+    print('DXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+    json=request.json_body
+    q_type=json['q_type']
     question_submission(request,q_type)
     return HTTPFound(request.route_path('newquestion',test_id=testid))
 def question_submission(request,q_type):
     """Handles question form submission.
     """
     POST = request.POST
+    json=request.json_body
     testid = request.matchdict['test_id']
     test=request.db_session.query(Test).filter_by(id=testid).one()
 
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
     question_id = create_question(request, request.db_session,
-                                  POST['text'],
-                                  POST['points'],
+                                  json['text'],
+                                  json['points'],
                                   q_type
     )
     if q_type =='S':
@@ -133,27 +137,38 @@ def question_submission(request,q_type):
         )
 
     elif q_type=='C':
-        ans= POST['answers']
-        corr=POST['correctness']
+        counter=1
+        counterc=0
+        answers=json['answers']
+        correctness=json['correctness']
 
-        # counter =1
-        # answer = 'text'+ str(counter)
-        # correctness = 'check' + str(counter)
-        # while POST[answer]:
-        #
-        #     if correctness:
-        #         create_answer(request,request.db_session,
-        #                   POST[answer],
-        #                   1,question_id)
-        #     else:
-        #         create_answer(request,request.db_session,
-        #                   POST[answer],
-        #                   0,question_id)
-        #     counter+=1
-        #     answer = 'text'+ counter
-        #     correctness = 'check' + counter
+        if correctness:
+            for a in answers :
+                ans=a['value']
+                if 'check'+str(counter) == correctness[counterc]['name']:
+                    create_answer(request,request.db_session,
+                                ans,
+                                1,
+                                question_id)
+                    counterc+=1
+
+                else:
+                    create_answer(request,request.db_session,
+                                ans,
+                                0,question_id)
+
+                counter+=1
+        else:
+            for a in answers :
+                ans=a['value']
+                create_answer(request,request.db_session,
+                                ans,
+                                0,question_id)
+
 
     return HTTPFound(request.route_path('newquestion',test_id=testid))
+
+
 
 
 def create_question(request, db_session, text, points, q_type):         # pridať password !!!
