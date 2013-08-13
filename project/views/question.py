@@ -86,17 +86,6 @@ def question_delete(request):
     request.db_session.flush()
     return HTTPFound(request.route_path('showtest', test_id=testid))
 
-@view_config(route_name='newquestion', request_method='GET', renderer='project:templates/newquestion.mako')
-def question_view(request):
-    """Shows new question.
-    """
-    testid = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=testid).one()
-
-    if qtype == 's': create_question_s(request, db_session, text, points, q_type)
-
-    return {'errors':[], 'test':test}
-
 def answer_view(request):
     """Shows answer.
     """
@@ -191,10 +180,16 @@ def create_answer(request, db_session, text, correct, question_id):         # pr
     return answer.id
 
 
-def create_answer_s(request, db_session, text):
-    """Docs needed
-    """
-    pass
+@view_config(route_name='newquestion_s', request_method='GET', renderer='project:templates/newquestion_s.mako')
+def s_question_view(request):
+    testid = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
 
-def create_answer_o():
-    pass
+    return {'errors':[], 'test':test}
+
+@view_config(route_name='newquestion_c', request_method='GET', renderer='project:templates/newquestion_c.mako')
+def s_question_view(request):
+    testid = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
+
+    return {'errors':[], 'test':test}

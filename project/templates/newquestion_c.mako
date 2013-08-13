@@ -3,7 +3,7 @@
 <%block name="page_content">
 
 <script type="text/javascript">
-	post_url="${request.route_path('newquestion', test_id=test.id)}"
+	post_url="${request.route_path('newquestion_c', test_id=test.id)}"
 </script>
 
 <div class="page-header">
@@ -25,10 +25,12 @@
 		<div id="answer"></div>
 
 		<div class="form-group pull-left">
-			<button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
+			<button type="submit" formaction="${request.route_path('newquestion_c', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
 			<button type="submit" formaction="#" class="btn btn-default">Uložiť a skončiť</button>
 		</div>
 
 		<div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
 	</form>
 </div>
+
+</%block>
