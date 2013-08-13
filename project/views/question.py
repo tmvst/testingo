@@ -24,8 +24,6 @@ from ..models.complete_answer import (
     Complete_answer,
     )
 
-import json
-
 
 #}}}
 
