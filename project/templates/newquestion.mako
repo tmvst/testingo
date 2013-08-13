@@ -18,7 +18,7 @@
 
 	<div class="tab-content">
 		<div class="tab-pane fade active in" id="openquestion">
-			<form action="${request.route_path('newquestion', test_id=test.id)}" method="POST">
+			<form action="#" id="input_form_s">
 				<div class="form-group">
 				 <input type="hidden" name="q_type" value="S">
 					<label for="text">Znenie otázky</label>
@@ -39,9 +39,7 @@
 				<div class="form-group pull-left">
 
 					<button type="submit" formaction="${request.route_path('newquestion', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
-					<button type="submit" formaction="${request.route_path('showtest', test_id=test.id)}" class="btn btn-default">Uložiť a skončiť</button>
-
-
+					<button type="submit" formaction="#" class="btn btn-default">Uložiť a skončiť</button>
 				</div>
 
 				<div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
@@ -51,9 +49,9 @@
 		<div class="tab-pane" id="checkquestion">
 			<form action="#" id="input_form_checkbox">
 				<div class="form-group">
-				 <input type="hidden" name="q_typeC" value="C">
+				 <input type="hidden" name="q_type" value="C">
 					<label for="text">Znenie otázky</label>
-					<textarea class="form-control" name="textC" id="textC" rows="3" placeholder="Znenie otázky" required></textarea>
+					<textarea class="form-control" name="text" id="textC" rows="3" placeholder="Znenie otázky" required></textarea>
 				</div>
 
 				<div id="answer"></div>

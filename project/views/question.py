@@ -107,20 +107,15 @@ def answer_view(request):
 def new_question_wrapper(request):
     testid = request.matchdict['test_id']
 
-    try:
-        request.json_body
-        json=request.json_body
-        q_type=json['q_type']
-        points=json['points']
-        text=json['text']
-    except ValueError:
-        POST = request.POST
-        q_type=POST['q_type']
-        text=POST['text']
-        points=POST['points']
-    finally:
-        question_submission(request,q_type,text,points)
+    request.json_body
+    json=request.json_body
+    q_type=json['q_type']
+    points=json['points']
+    text=json['text']
+
+    question_submission(request,q_type,text,points)
     return HTTPFound(request.route_path('newquestion',test_id=testid))
+
 def question_submission(request,q_type,text,points):
     """Handles question form submission.
     """
@@ -135,9 +130,8 @@ def question_submission(request,q_type,text,points):
                                   q_type
     )
     if q_type =='S':
-        POST = request.POST
         answer_id = create_answer(request, request.db_session,
-                                  POST['odpoved'],
+                                  request.json_body['answer'],
                                   1,question_id
         )
 
