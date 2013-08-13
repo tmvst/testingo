@@ -92,64 +92,6 @@ def answer_view(request):
 
     return {'errors':[]}
 
-@view_config(route_name='newquestion', request_method='POST')
-def new_question_wrapper(request):
-    testid = request.matchdict['test_id']
-
-    request.json_body
-    json=request.json_body
-    q_type=json['q_type']
-    points=json['points']
-    text=json['text']
-
-    question_submission(request,q_type,text,points)
-    return HTTPFound(request.route_path('newquestion',test_id=testid))
-
-def question_submission(request,q_type,text,points):
-    """Handles question form submission.
-    """
-    testid = request.matchdict['test_id']
-    test=request.db_session.query(Test).filter_by(id=testid).one()
-
-    if test.share_token:
-        return HTTPFound(request.route_path('showtest', test_id=testid))
-    question_id = create_question(request, request.db_session,
-                                  text,
-                                  points,
-                                  q_type
-    )
-    if q_type =='S':
-        answer_id = create_answer(request, request.db_session,
-                                  request.json_body['answer'],
-                                  1,question_id
-        )
-
-    elif q_type=='C':
-        json=request.json_body
-        counter=1
-        counterc=0
-        answers=json['answers']
-        correctness=json['correctness']
-        #print(correctness)
-        for a in answers :
-            ans=a['value']
-            if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
-                create_answer(request,request.db_session,
-                              ans,
-                              1,
-                              question_id)
-                counterc+=1
-            else:
-                create_answer(request,request.db_session,
-                              ans,
-                              0,question_id)
-            counter+=1
-
-
-    return HTTPFound(request.route_path('newquestion',test_id=testid))
-
-
-
 def create_question(request, db_session, text, points, q_type):         # pridať password !!!
     """Creates a new question and returns its id.
     """
@@ -180,6 +122,10 @@ def create_answer(request, db_session, text, correct, question_id):         # pr
     return answer.id
 
 
+
+# ---------------------------------- new stuff ------- (babotkina volba) ----------------
+
+
 @view_config(route_name='newquestion_s', request_method='GET', renderer='project:templates/newquestion_s.mako')
 def s_question_view(request):
     testid = request.matchdict['test_id']
@@ -188,8 +134,81 @@ def s_question_view(request):
     return {'errors':[], 'test':test}
 
 @view_config(route_name='newquestion_c', request_method='GET', renderer='project:templates/newquestion_c.mako')
-def s_question_view(request):
+def c_question_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
 
     return {'errors':[], 'test':test}
+
+
+
+@view_config(route_name='newquestion_s', request_method='POST')
+def s_question_post(request):
+    testid = request.matchdict['test_id']
+
+    json = request.json_body
+    points = json['points']
+    text = json['text']
+
+    test = request.db_session.query(Test).filter_by(id=testid).one()
+
+    if test.share_token:
+        return HTTPFound(request.route_path('showtest', test_id=testid))
+
+    question_id = create_question(request, request.db_session,
+                                  text,
+                                  points,
+                                  'R'
+    )
+
+    # q_type reprezentuje nutnost vyplnenia (do buducna) - R == required
+
+    answer_id = create_answer(request, request.db_session,
+                              request.json_body['answer'],
+                              1,
+                              question_id
+    )
+
+    return HTTPFound(request.route_path('newquestion_s', test_id=testid))
+
+@view_config(route_name='newquestion_c', request_method='POST')
+def c_question_post(request):
+    testid = request.matchdict['test_id']
+    test=request.db_session.query(Test).filter_by(id=testid).one()
+
+    json = request.json_body
+    points = json['points']
+    text = json['text']
+
+    if test.share_token:
+        return HTTPFound(request.route_path('showtest', test_id=testid))
+
+    question_id = create_question(request, request.db_session,
+                                  text,
+                                  points,
+                                  'R'
+    )
+
+    # q_type reprezentuje nutnost vyplnenia (do buducna) - R == required
+
+    json = request.json_body
+    counter = 1
+    counterc = 0
+    answers = json['answers']
+    correctness = json['correctness']
+    for a in answers :
+        ans = a['value']
+        if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
+            create_answer(request,request.db_session,
+                          ans,
+                          1,
+                          question_id)
+            counterc += 1
+        else:
+            create_answer(request,request.db_session,
+                          ans,
+                          0,
+                          question_id)
+        counter += 1
+
+    return HTTPFound(request.route_path('newquestion_c', test_id=testid))

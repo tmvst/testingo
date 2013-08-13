@@ -27,7 +27,6 @@ delete_entry = (e) ->
 	$(e.target).parent().remove()
 
 form_submit = () ->
-	q_type = $("input[name='q_type']").val()
 	textQ = $("textarea[name='text']").val()
 	bodyQ = $("input[name='points']").val()
 	answers = $("input.checkInput").serializeArray()
@@ -39,7 +38,6 @@ form_submit = () ->
 		type: "POST"
 		contentType: "application/json; charset=utf-8"
 		data: JSON.stringify
-			q_type: q_type
 			text: textQ
 			points: bodyQ
 			answers: answers
@@ -60,3 +58,5 @@ $(document).ready () ->
 	
 	$("#input_form_checkbox").submit(form_submit)
 	$("#input_form_s").submit(form_submit)
+
+$('.dropdown-toggle').dropdown()

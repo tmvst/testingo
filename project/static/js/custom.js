@@ -28,8 +28,7 @@
   };
 
   form_submit = function() {
-    var answer, answers, bodyQ, correctness, q_type, textQ;
-    q_type = $("input[name='q_type']").val();
+    var answer, answers, bodyQ, correctness, textQ;
     textQ = $("textarea[name='text']").val();
     bodyQ = $("input[name='points']").val();
     answers = $("input.checkInput").serializeArray();
@@ -40,7 +39,6 @@
       type: "POST",
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify({
-        q_type: q_type,
         text: textQ,
         points: bodyQ,
         answers: answers,
@@ -64,5 +62,7 @@
     $("#input_form_checkbox").submit(form_submit);
     return $("#input_form_s").submit(form_submit);
   });
+
+  $('.dropdown-toggle').dropdown();
 
 }).call(this);

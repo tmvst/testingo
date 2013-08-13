@@ -32,7 +32,7 @@
 			<button type="submit" formaction="#" class="btn btn-default">Uložiť a skončiť</button>
 		</div>
 
-		<div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
+		<div class="pull-right"><a href="${request.route_path('showtest', test_id=test.id)}" class="btn btn-danger">Zrušiť</a></div>
 	</form>
 </div>
 
