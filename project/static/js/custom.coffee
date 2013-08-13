@@ -27,10 +27,11 @@ delete_entry = (e) ->
 	$(e.target).parent().remove()
 
 form_submit = () ->
-	q_type = $("input[name='q_typeC']").val()
-	textQ = $("textarea[name='textC']").val()
-	bodyQ = $("input[name='points2']").val()
+	q_type = $("input[name='q_type']").val()
+	textQ = $("textarea[name='text']").val()
+	bodyQ = $("input[name='points']").val()
 	answers = $("input.checkInput").serializeArray()
+	answer = $("input[name='odpoved']").val()
 	correctness = $("input.checkInputC").serializeArray()
 
 	$.ajax
@@ -42,6 +43,7 @@ form_submit = () ->
 			text: textQ
 			points: bodyQ
 			answers: answers
+			answer: answer
 			correctness: correctness
 	.done (response) ->
 		top.location.href = "/dashboard"
@@ -55,4 +57,6 @@ $(document).ready () ->
 	answer.html(button_template())
 	$('#submit').click(process_submit)
 	$('#answer').on('click', '.delete-button', delete_entry)
+	
 	$("#input_form_checkbox").submit(form_submit)
+	$("#input_form_s").submit(form_submit)
