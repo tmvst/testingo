@@ -92,6 +92,9 @@ def question_view(request):
     """
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
+
+    if qtype == 's': create_question_s(request, db_session, text, points, q_type)
+
     return {'errors':[], 'test':test}
 
 def answer_view(request):
@@ -138,7 +141,7 @@ def question_submission(request,q_type,text,points):
         counterc=0
         answers=json['answers']
         correctness=json['correctness']
-        print(correctness)
+        #print(correctness)
         for a in answers :
             ans=a['value']
             if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
@@ -175,7 +178,7 @@ def create_question(request, db_session, text, points, q_type):         # prida�
 
     return question.id
 
-def create_answer(request, db_session, text, correct,question_id):         # pridať password !!!
+def create_answer(request, db_session, text, correct, question_id):         # pridať password !!!
     """Creates a new answer for the question.
     """
     question = request.db_session.query(Question).filter_by(id=question_id).one()
@@ -186,3 +189,12 @@ def create_answer(request, db_session, text, correct,question_id):         # pri
     db_session.flush()
 
     return answer.id
+
+
+def create_answer_s(request, db_session, text):
+    """Docs needed
+    """
+    pass
+
+def create_answer_o():
+    pass
