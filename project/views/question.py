@@ -24,9 +24,6 @@ from ..models.complete_answer import (
     Complete_answer,
     )
 
-import json
-
-
 #}}}
 
 @view_config(route_name='showquestion', request_method='GET', renderer='project:templates/showquestion.mako')
@@ -148,34 +145,22 @@ def question_submission(request,q_type,text,points):
         answers=json['answers']
         correctness=json['correctness']
         print(correctness)
-        if correctness:
-            for a in answers :
-                ans=a['value']
-
-                if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
-                    create_answer(request,request.db_session,
-                                    ans,
-                                    1,
-                                    question_id)
-                    counterc+=1
-
-
-                else:
-                    create_answer(request,request.db_session,
-                                    ans,
-                                0,question_id)
-                counter+=1
-
-        else:
-            for a in answers :
-                ans=a['value']
+        for a in answers :
+            ans=a['value']
+            if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
                 create_answer(request,request.db_session,
-                                ans,
-                                0,question_id)
+                              ans,
+                              1,
+                              question_id)
+                counterc+=1
+            else:
+                create_answer(request,request.db_session,
+                              ans,
+                              0,question_id)
+            counter+=1
 
 
     return HTTPFound(request.route_path('newquestion',test_id=testid))
-
 
 
 
