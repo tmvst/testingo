@@ -166,7 +166,7 @@ def s_question_post(request):
     question_id = create_question(request, request.db_session,
                                   text,
                                   points,
-                                  'R'
+                                  'S'
     )
 
     # q_type reprezentuje nutnost vyplnenia (do buducna) - R == required
@@ -194,12 +194,11 @@ def c_question_post(request):
     question_id = create_question(request, request.db_session,
                                   text,
                                   points,
-                                  'R'
+                                  'C'
     )
 
     # q_type reprezentuje nutnost vyplnenia (do buducna) - R == required
 
-    json = request.json_body
     counter = 1
     counterc = 0
     answers = json['answers']

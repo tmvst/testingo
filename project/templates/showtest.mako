@@ -8,7 +8,7 @@
             <button type="submit" class="btn btn-danger">
                 <span class="glyphicon glyphicon-trash"></span> Zmazať test
             </button>
-            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_delete" value="DELETE">
         </form>
     </div>
 

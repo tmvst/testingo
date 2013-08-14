@@ -42,6 +42,7 @@ def view_question(request):
 
 @view_config(route_name='solve', request_method='POST', renderer='project:templates/solve.mako')
 def submit_test(request):
+    json = request.json_body
     POST = request.POST
     test_token = request.matchdict['token']
     test = request.db_session.query(Test).filter_by(share_token=test_token).one()
@@ -57,24 +58,26 @@ def submit_test(request):
 
     incomplete_test = Incomplete_test(date_crt, date_mdf, user, test)
 
-    complete_answers = POST.getall('user_answer')
+    user_answers_C = json['user_answers_C']
+    user_answers_S = json['user_answers_S']
     q_number=0
-    for ans in complete_answers:
-        q_number+=1
-        question = request.db_session.query(Question).filter_by(test_id=test.id,number=q_number).one()
-        correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
-        complete_answer=Complete_answer(ans,0,incomplete_test,correct_answer,question)
-        if ((question.qtype is 'S') and (ans == correct_answer.text)):
-            complete_answer.correct=1
-        request.db_session.add(complete_answer)
-    request.db_session.add(incomplete_test)
-
-    request.db_session.flush()
+    print(user_answers_C)
+    print(user_answers_S)
+    # for ans in user_answers_S:
+    #     question = request.db_session.query(Question).filter_by(test_id=test.id,number=q_number).one()
+    #     correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
+    #     complete_answer=Complete_answer(ans,0,incomplete_test,correct_answer,question)
+    #     if ((question.qtype is 'S') and (ans == correct_answer.text)):
+    #         complete_answer.correct=1
+    #     request.db_session.add(complete_answer)
+    #
+    # request.db_session.add(incomplete_test)
+    #
+    # request.db_session.flush()
     return HTTPFound(request.route_path('dashboard'))
 
 @view_config(route_name='solved_test', request_method='GET', renderer='project:templates/solved_test.mako')
 def show_solved_test(request):
-    POST = request.POST
 
     incomplete_test_id = request.matchdict['incomplete_test_id']
     incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()

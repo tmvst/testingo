@@ -93,7 +93,7 @@ def test_show(request):
     POST = request.POST
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
-    if POST['_method'] == 'DELETE':
+    if '_delete' in POST:
         test = request.db_session.query(Test).filter_by(id=testid).one()
         request.db_session.delete(test)
         return HTTPFound(request.route_path('dashboard'))
