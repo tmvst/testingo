@@ -2,38 +2,38 @@
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
-    <div class="page-header">
-        <h1>${test.name}</h1>
-        <form class="pull-right" action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-            <button type="submit" class="btn btn-danger">
-                <span class="glyphicon glyphicon-trash"></span> Zmazať test
-            </button>
-            <input type="hidden" name="_method" value="DELETE">
-        </form>
-    </div>
+<div class="page-header">
+	<h1>${test.name}</h1>
+	<form class="pull-right" action="${request.route_path('showtest', test_id=test.id)}" method="POST">
+		<button type="submit" class="btn btn-danger">
+			<span class="glyphicon glyphicon-trash"></span> Zmazať test
+		</button>
+		<input type="hidden" name="_method" value="DELETE">
+	</form>
+</div>
 
-    <% questions = test.questions %>
+<% questions = test.questions %>
 
-    <div class="container">
-        <div class="pull-right">
-                % if test.share_token is None:
-                    <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-share-alt"></span> Zdieľať test</button>
-                        <input type="hidden" name="_share" value="SHARE">
-                    </form>
-                % else:
-                    <div class="input-group sharetoken">
-                        <input class="form-control" id="focusedInput" type="text" value="http://0.0.0.0:6543/solve/${test.share_token}" readonly="readonly">
+<div class="container">
+	<div class="pull-right">
+		% if test.share_token is None:
+		<form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
+			<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-share-alt"></span> Zdieľať test</button>
+			<input type="hidden" name="_share" value="SHARE">
+		</form>
+		% else:
+		<div class="input-group sharetoken">
+			<input class="form-control" id="focusedInput" type="text" value="http://0.0.0.0:6543/solve/${test.share_token}" readonly="readonly">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top"><span class="glyphicon glyphicon-paperclip"></span></button>
 			</span>
-                    </div>
-                % endif
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <p>${test.description}</p>
-            </div>
+		</div>
+		% endif
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<p>${test.description}</p>
+		</div>
 
 		<h2>Otázky
 			<small>
@@ -91,35 +91,35 @@
 						% endfor
 					</div>
 
-				% endfor
-				% endif
+					% endfor
+					% endif
 				</div>
 
 				<div class="col-lg-3">
-					<div class="pull-right">
-						<div class="panel">
-							<div class="panel-heading">
-								<h3 class="panel-title">Riešitelia</h3>
-							</div>
-							% if len(solved_tests) is 0:
-								<span> Test ešte nikto neriešil :(</span>
-							% else:
-								% for solved_test in solved_tests:
-								<div class="panel">
-									<div class="panel-heading">
-										<a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
-											<p>${solved_test.user.email}</p>
-											<p>${solved_test.date_crt}</p>
-										</a>
-									</div>
 
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Riešitelia</h3>
+						</div>
+						% if len(solved_tests) is 0:
+						<span> Test ešte nikto neriešil :(</span>
+							% else:
+							% for solved_test in solved_tests:
+							<div class="panel">
+								<div class="panel-heading">
+									<a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
+										<p>${solved_test.user.email}</p>
+										<p>${solved_test.date_crt}</p>
+									</a>
 								</div>
-								%endfor
+
+							</div>
+							%endfor
 							%endif
 						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
-		</%block>
+			</%block>
 
