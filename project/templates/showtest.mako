@@ -39,14 +39,19 @@
 			</span></h2>
 			% if test.share_token is None:
 			<p>
-				<a href="${request.route_path('newquestion_s', test_id=test.id)}" class="btn btn-primary btn-small">
-					<span class="glyphicon glyphicon-plus"></span> Pridať otázku fráza</a>
-
-				<a href="${request.route_path('newquestion_c', test_id=test.id)}" class="btn btn-primary btn-small">
-					<span class="glyphicon glyphicon-plus"></span> Pridať otázku checkbox</a>
-
-				</p>
-				%endif
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary btn-small dropdown-toggle" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-plus"></span> Pridať otázku <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="${request.route_path('newquestion_s', test_id=test.id)}">Fráza</a></li>
+						<li><a href="${request.route_path('newquestion_c', test_id=test.id)}">Checkbox</a></li>
+						<li><a href="#">Rádio</a></li>
+						<li><a href="#">Otvorená</a></li>
+					</ul>
+				</div>
+			</p>
+			%endif
 
 				% if len(questions) is 0:
 				<span> Test neobsahuje žiadne otázky </span>
