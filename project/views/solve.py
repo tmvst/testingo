@@ -23,22 +23,22 @@ from ..models.answer import (
     )
 from ..models.incomplete_test import (
     Incomplete_test
-)
+    )
 from ..models.complete_answer import (
     Complete_answer,
-)
+    )
 from ..models.question import (
     Question,
-)
+    )
 
 #}}}
 
 @view_config(route_name='solve', request_method='GET', renderer='project:templates/solve.mako')
 def view_question(request):
 
-        test_token = request.matchdict['token']
-        test = request.db_session.query(Test).filter_by(share_token=test_token).one()
-        return {'test':test, 'token':test_token}
+    test_token = request.matchdict['token']
+    test = request.db_session.query(Test).filter_by(share_token=test_token).one()
+    return {'test':test, 'token':test_token}
 
 @view_config(route_name='solve', request_method='POST')
 def submit_test(request):
@@ -59,21 +59,24 @@ def submit_test(request):
 
     user_answers_C = json['user_answers_C']
     user_answers_S = json['user_answers_S']
-    print('ty kokot'*100)
 
-    print(user_answers_C)
-    print(user_answers_S)
-    # for ans in user_answers_S:
-    #     question = request.db_session.query(Question).filter_by(test_id=test.id,number=q_number).one()
-    #     correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
-    #     complete_answer=Complete_answer(ans,0,incomplete_test,correct_answer,question)
-    #     if ((question.qtype is 'S') and (ans == correct_answer.text)):
-    #         complete_answer.correct=1
-    #     request.db_session.add(complete_answer)
-    #
-    # request.db_session.add(incomplete_test)
-    #
-    # request.db_session.flush()
+    # here we go through each S answer that user has filled, we substring the question's id from the field name
+    # user_answerXX and get its correct answer
+    # then we compare whether user answer is equal to it if so , we change the complete answer object attribute
+    # correct to 1 and save it do DB
+    for ans in user_answers_S:
+        print()
+        answer_text=ans['value']
+        question = request.db_session.query(Question).filter_by(id=ans['name'][11:]).one()
+        correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
+        complete_answer=Complete_answer(answer_text,0,incomplete_test,correct_answer,question)
+        if answer_text == correct_answer.text:
+            complete_answer.correct=1
+        request.db_session.add(complete_answer)
+
+    request.db_session.add(incomplete_test)
+
+    request.db_session.flush()
     return HTTPFound(request.route_path('dashboard'))
 
 @view_config(route_name='solved_test', request_method='GET', renderer='project:templates/solved_test.mako')
