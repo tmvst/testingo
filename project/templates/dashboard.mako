@@ -13,7 +13,7 @@
             All you get is this message and a barebones HTML document.
         </p>
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-6">
 
                 <ul id="dtab" class="nav nav-tabs">
                     <li class="active"><a href="#created_tests" data-toggle="tab">Vaše testy</a></li>
@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 col-offset-1">
+            <div class="col-lg-6">
                 <div class="well text-left">
                     <h3>
                         Aktivita

@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
 
@@ -39,7 +39,7 @@
                 <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
                 <li><p class="navbar-text">Prihlásený ${request.user.email}</p></li>
                 <li>
-                    <form class="navbar-form navbutton" action="${request.route_path('logout')}" method="POST">
+                    <form action="${request.route_path('logout')}" method="POST">
                         <button type="submit" class="btn btn-default btn-small navbar-btn">Odhlásiť</button>
                     </form>
                 </li>
