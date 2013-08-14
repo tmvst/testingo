@@ -138,7 +138,6 @@ def c_question_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
 
-    #questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
     solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
 
     return {'errors':[], 'test':test,'solved_tests':solved_tests}
@@ -164,7 +163,7 @@ def s_question_post(request):
                                   'S'
     )
 
-    # q_type reprezentuje nutnost vyplnenia (do buducna) - R == required
+    # q_type reprezentuje typ otazky S,C,R,O
 
     answer_id = create_answer(request, request.db_session,
                               request.json_body['answer'],
@@ -192,7 +191,7 @@ def c_question_post(request):
                                   'C'
     )
 
-    # q_type reprezentuje nutnost vyplnenia (do buducna) - R == required
+     # q_type reprezentuje typ otazky S,C,R,O
 
     counter = 1
     counterc = 0

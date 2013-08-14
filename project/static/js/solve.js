@@ -6,7 +6,7 @@
     var user_answers_C, user_answers_S;
     user_answers_S = $("input.user_answers_S").serializeArray();
     user_answers_C = $("input.user_answers_C").serializeArray();
-    return $.ajax({
+    $.ajax({
       url: post_url,
       type: "POST",
       contentType: "application/json; charset=utf-8",
@@ -17,23 +17,17 @@
     }).done(function(response) {
       return top.location.href = "/dashboard";
     }).fail(function(response) {
+      alert('kkt');
       return console.log(response);
     });
+    return false;
   };
-
-  return false;
 
   $(document).ready(function() {
     $('#form_solve').submit(function() {
       return false;
     });
-    return $("#solve_test").click(function() {
-      return form_submit();
-    });
+    return $("#solve_test").click(form_submit);
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=solve.map
-*/

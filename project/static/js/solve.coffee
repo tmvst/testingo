@@ -12,10 +12,10 @@ form_submit = () ->
   .done (response) ->
       top.location.href = "/dashboard"
   .fail (response) ->
+      alert('kkt')
       console.log response
-
-return false
+  return false
 
 $(document).ready () ->
   $('#form_solve').submit(() -> false)
-  $("#solve_test").click(() -> form_submit())
+  $("#solve_test").click(form_submit)

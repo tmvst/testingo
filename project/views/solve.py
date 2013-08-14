@@ -38,12 +38,11 @@ def view_question(request):
 
         test_token = request.matchdict['token']
         test = request.db_session.query(Test).filter_by(share_token=test_token).one()
-        return {'test':test}
+        return {'test':test, 'token':test_token}
 
-@view_config(route_name='solve', request_method='POST', renderer='project:templates/solve.mako')
+@view_config(route_name='solve', request_method='POST')
 def submit_test(request):
     json = request.json_body
-    POST = request.POST
     test_token = request.matchdict['token']
     test = request.db_session.query(Test).filter_by(share_token=test_token).one()
     if test is None:
@@ -60,7 +59,8 @@ def submit_test(request):
 
     user_answers_C = json['user_answers_C']
     user_answers_S = json['user_answers_S']
-    q_number=0
+    print('ty kokot'*100)
+
     print(user_answers_C)
     print(user_answers_S)
     # for ans in user_answers_S:
