@@ -101,17 +101,21 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">Riešitelia</h3>
 							</div>
-							% for solved_test in solved_tests:
-							<div class="panel">
-								<div class="panel-heading">
-									<a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
-										<p>${solved_test.user.email}</p>
-										<p>${solved_test.date_crt}</p>
-									</a>
-								</div>
+							% if len(solved_tests) is 0:
+								<span> Test ešte nikto neriešil :(</span>
+							% else:
+								% for solved_test in solved_tests:
+								<div class="panel">
+									<div class="panel-heading">
+										<a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
+											<p>${solved_test.user.email}</p>
+											<p>${solved_test.date_crt}</p>
+										</a>
+									</div>
 
-							</div>
-							%endfor
+								</div>
+								%endfor
+							%endif
 						</div>
 					</div>
 				</div>
