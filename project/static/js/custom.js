@@ -27,30 +27,47 @@
     return $(e.target).parent().remove();
   };
 
-  form_submit = function(redir, event) {
+  form_submit = function(redir) {
     var answer, answers, bodyQ, correctness, textQ;
-    textQ = $("textarea[name='text']").val();
-    bodyQ = $("input[name='points']").val();
-    answers = $("input.checkInput").serializeArray();
-    answer = $("input[name='odpoved']").val();
-    correctness = $("input.checkInputC").serializeArray();
-    $.ajax({
-      url: post_url,
-      type: "POST",
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify({
-        text: textQ,
-        points: bodyQ,
-        answers: answers,
-        answer: answer,
-        correctness: correctness
-      })
-    }).done(function(response) {
-      return top.location.href = redir;
-    }).fail(function(response) {
-      return console.log(response);
+    $('#form_s').validate({
+      rules: {
+        text: {
+          required: true
+        },
+        points: {
+          number: true
+        }
+      },
+      messages: {
+        text: "Prosím zadajte text otázky",
+        points: {
+          number: "Body musia byť číslo"
+        }
+      }
     });
-    event.preventDefault();
+    if ($('#form_s').valid()) {
+      textQ = $("textarea[name='text']").val();
+      bodyQ = $("input[name='points']").val();
+      answers = $("input.checkInput").serializeArray();
+      answer = $("input[name='odpoved']").val();
+      correctness = $("input.checkInputC").serializeArray();
+      $.ajax({
+        url: post_url,
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({
+          text: textQ,
+          points: bodyQ,
+          answers: answers,
+          answer: answer,
+          correctness: correctness
+        })
+      }).done(function(response) {
+        return top.location.href = redir;
+      }).fail(function(response) {
+        return console.log(response);
+      });
+    }
     return false;
   };
 
@@ -60,11 +77,14 @@
     answer.html(button_template());
     $('#submit').click(process_submit);
     $('#answer').on('click', '.delete-button', delete_entry);
-    $("#save_and_add").submit(function(event) {
-      return form_submit(post_url, event);
+    $('#form_s').submit(function() {
+      return false;
     });
-    return $("#save_and_end").submit(function(event) {
-      return form_submit(test_url, event);
+    $("#save_and_add").click(function() {
+      return form_submit(post_url);
+    });
+    return $("#save_and_end").click(function() {
+      return form_submit(test_url);
     });
   });
 

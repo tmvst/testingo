@@ -26,28 +26,41 @@ update_cnt = () ->
 delete_entry = (e) ->
 	$(e.target).parent().remove()
 
-form_submit = (redir, event) ->
-	textQ = $("textarea[name='text']").val()
-	bodyQ = $("input[name='points']").val()
-	answers = $("input.checkInput").serializeArray()
-	answer = $("input[name='odpoved']").val()
-	correctness = $("input.checkInputC").serializeArray()
+form_submit = (redir) ->
+	$('#form_s').validate
+		rules:
+			text:
+				required: true
+			points:
+				number: true
+		messages:
+			text: "Prosím zadajte text otázky"
+			points:
+				number: "Body musia byť číslo"
 
-	$.ajax
-		url: post_url
-		type: "POST"
-		contentType: "application/json; charset=utf-8"
-		data: JSON.stringify
-			text: textQ
-			points: bodyQ
-			answers: answers
-			answer: answer
-			correctness: correctness
-	.done (response) ->
-		top.location.href = redir
-	.fail (response) -> 
-		console.log response
-	event.preventDefault()
+	if $('#form_s').valid()
+
+		textQ = $("textarea[name='text']").val()
+		bodyQ = $("input[name='points']").val()
+		answers = $("input.checkInput").serializeArray()
+		answer = $("input[name='odpoved']").val()
+		correctness = $("input.checkInputC").serializeArray()
+
+		$.ajax
+			url: post_url
+			type: "POST"
+			contentType: "application/json; charset=utf-8"
+			data: JSON.stringify
+				text: textQ
+				points: bodyQ
+				answers: answers
+				answer: answer
+				correctness: correctness
+		.done (response) ->
+			top.location.href = redir
+		.fail (response) -> 
+			console.log response
+
 	return false
 
 
@@ -57,5 +70,6 @@ $(document).ready () ->
 	$('#submit').click(process_submit)
 	$('#answer').on('click', '.delete-button', delete_entry)
 	
-	$("#save_and_add").submit((event) -> form_submit(post_url, event))
-	$("#save_and_end").submit((event) -> form_submit(test_url, event))
+	$('#form_s').submit(() -> false)
+	$("#save_and_add").click(() -> form_submit(post_url))
+	$("#save_and_end").click(() -> form_submit(test_url))
