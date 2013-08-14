@@ -23,6 +23,9 @@ from ..models.question import (
 from ..models.complete_answer import (
     Complete_answer,
     )
+from ..models.incomplete_test import (
+    Incomplete_test,
+)
 
 #}}}
 
@@ -139,8 +142,9 @@ def c_question_view(request):
     test = request.db_session.query(Test).filter_by(id=testid).one()
 
     #questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
+    solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
 
-    return {'errors':[], 'test':test}
+    return {'errors':[], 'test':test,'solved_tests':solved_tests}
 
 
 
