@@ -3,14 +3,23 @@
 <%block name="page_content">
 
 <script type="text/javascript">
-	post_url="${request.route_path('newquestion_s', test_id=test.id)}"
-</script>
+        post_url="${request.route_path('newquestion_c', test_id=test.id)}"
+        $(document).ready(function()
+                {
+
+                    var windowHeight = $(window).height();
+                    $("#newq").css("padding-bottom", (windowHeight/2));
+                    $("html,body").scrollTop($(document).height()-1);
+                }
+        )
+    </script>
+    <%include file="showquestions.mako"/>
 
 <div class="page-header">
 	<h1>Nová otázka (fráza) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
 </div>
 
-<div class="container">
+<div class="container" id="newq">
 	<form action="#" id="input_form_s">
 		<div class="form-group">
 			<label for="text">Znenie otázky</label>

@@ -1,7 +1,8 @@
-% if len(questions) is 0:
+<h3>Otázky v teste ${test.name}</h3>
+% if len(test.questions) is 0:
                     <span> Test neobsahuje žiadne otázky </span>
             % else:
-                % for question in questions:
+                % for question in test.questions:
                     <div class="panel">
                     <div class="panel-heading">
 
