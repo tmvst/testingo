@@ -55,10 +55,11 @@ def view_respondents_answer(request):
     """
     odpovede a emaily respondentov
     """
-    testid = request.matchdict['test_id']
+
     questionid = request.matchdict["question_id"]
-    correctasnwerid = request.db_session.query(Answer).filter_by(id=questionid).one()
-    respondanswers = request.db_session.query(Complete_answer).filter_by(answer=correctasnwerid).all()
+    correctasnwerids = request.db_session.query(Answer).filter_by(question_id=questionid).all()
+    for correct_answ_id in correctasnwerids:
+        respondanswers = request.db_session.query(Complete_answer).filter_by(answer=correct_answ_id).all()
     tests=[a.incomp_test for a in respondanswers]
     res_users=[a.user for a in tests]
     res_email=[a.email for a in res_users]
@@ -88,12 +89,6 @@ def question_delete(request):
     request.db_session.delete(question)
     request.db_session.flush()
     return HTTPFound(request.route_path('showtest', test_id=testid))
-
-def answer_view(request):
-    """Shows answer.
-    """
-
-    return {'errors':[]}
 
 def create_question(request, db_session, text, points, q_type):         # pridať password !!!
     """Creates a new question and returns its id.

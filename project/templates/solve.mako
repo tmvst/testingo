@@ -21,7 +21,7 @@
                     <span> Test neobsahuje žiadne otázky </span>
             % else:
                 <form action="#" id="form_solve">
-                % for question in test.questions:
+                    % for question in test.questions:
                     <div class="panel">
                     <div class="panel-heading">
                     <a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
@@ -51,14 +51,15 @@
 
                     % endif
                     </div>
-                % endfor
+                    % endfor
+                </form>
             % endif
 
 
             <div class="form-group">
                 <button type="submit" formaction="#" class="btn btn-primary" id="solve_test">Odoslať test</button>
             </div>
-        </form>
+
 
         </div>
 

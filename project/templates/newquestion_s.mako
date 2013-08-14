@@ -2,6 +2,7 @@
 <%block name="title">Nová otázka - fráza</%block>
 <%block name="page_content">
 
+<script src="${request.static_path('project:static/js/question.js')}"></script>
 <script type="text/javascript">
 	post_url="${request.route_path('newquestion_s', test_id=test.id)}"
 	test_url="${request.route_path('showtest', test_id=test.id)}"

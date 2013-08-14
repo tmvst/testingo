@@ -15,7 +15,6 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 
-    <script src="${request.static_path('project:static/js/custom.js')}"></script>
 </head>
 
 <body>
