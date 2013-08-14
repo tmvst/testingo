@@ -1,7 +1,7 @@
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
-    <script src="${request.static_path('project:static/js/custom.js')}"></script>
+    <script src="${request.static_path('project:static/js/solve.js')}"></script>
     <div class="page-header">
         <h1>${test.name}</h1>
     </div>
