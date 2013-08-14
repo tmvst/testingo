@@ -16,6 +16,8 @@
                     <span> Test neobsahuje žiadne otázky a ani odpovede </span>
             % else:
                 % for question in questions_and_answers:
+                % if question[0].qtype == 'S':
+
                         <div class="panel">
                             <div class="panel-heading">
                             	<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
@@ -52,6 +54,41 @@
                             	% endif
 
                         </div>
+                       % endif
+                 % elfif question[0].qtype == 'C':
+
+                        <div class="panel">
+                            <div class="panel-heading">
+                            	<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
+
+                                	% if question[1].correct == 1:
+                                	<h3 class="panel-title">Otázka č.${question[0].number}
+
+                                  </h3>
+                                  %else:
+                                  <h3 class="panel-title">Otázka č.${question[0].number}
+
+                                  </h3>
+                                	%endif
+                                </a>
+                        	</div>
+                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                            	% if question[1].correct == 1:
+                                    <p class="text-success">
+                                    <strong>Správna odpoveď uźívateľa:</strong>
+                                        ${question[1].text} <br>
+                                    </p>
+
+                                %else:
+                                    <p class="text-danger">
+                                    <strong>Nesprávna odpoveď uźívateľa:</strong>
+                                        ${question[1].text} <br>
+                                    </p>
+
+                            	% endif
+
+                        </div>
+                       % endif
                 % endfor
             % endif
         </div>
