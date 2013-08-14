@@ -35,14 +35,14 @@
 			<p>${test.description}</p>
 		</div>
 
-		<h2>Otázky s celkovým počtom bodov
-			<span class="badge">
-				${test.sum_points}b
-			</span></h2>
+		<h2>Otázky
+			<small>
+				s celkovým počtom bodov ${test.sum_points}
+			</small></h2>
 			% if test.share_token is None:
 			<p>
 				<div class="btn-group">
-					<button type="button" class="btn btn-primary btn-small dropdown-toggle" data-toggle="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-plus"></span> Pridať otázku <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
