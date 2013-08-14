@@ -1,7 +1,6 @@
 form_submit = () ->
   user_answers_S = $("input.user_answers_S").serializeArray()
-  user_answers_C = $("input.user_answers_C").serializeArray()
-
+  user_answers_C = $("input.user_answers_C").serialize()
   $.ajax
     url: post_url
     type: "POST"

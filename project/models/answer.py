@@ -44,4 +44,6 @@ class Answer(Base):
     def __repr__(self):
         """Returns representative object of class Answer.
         """
-        return "Answer<{text}>".format(text=self.text)
+        return "Answer<{id}>".format(id=self.id)
+    def __eq__(self, other):
+        return self.id == other.id

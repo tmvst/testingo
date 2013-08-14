@@ -30,6 +30,7 @@ from ..models.complete_answer import (
 from ..models.question import (
     Question,
     )
+import re
 
 #}}}
 
@@ -57,15 +58,16 @@ def submit_test(request):
 
     incomplete_test = Incomplete_test(date_crt, date_mdf, user, test)
 
-    user_answers_C = json['user_answers_C']
+    user_answers_C= json['user_answers_C']
     user_answers_S = json['user_answers_S']
+    uac=user_answers_C.replace('&','').split('=')
+    uac.remove('')
 
     # here we go through each S answer that user has filled, we substring the question's id from the field name
     # user_answerXX and get its correct answer
     # then we compare whether user answer is equal to it if so , we change the complete answer object attribute
     # correct to 1 and save it do DB
     for ans in user_answers_S:
-        print()
         answer_text=ans['value']
         question = request.db_session.query(Question).filter_by(id=ans['name'][11:]).one()
         correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
@@ -74,9 +76,34 @@ def submit_test(request):
             complete_answer.correct=1
         request.db_session.add(complete_answer)
 
-    request.db_session.add(incomplete_test)
+    # now the same shit for C question, we get the answer's id directly from checkbox's name
+    # answer_text as a attribute of db object and model complete_answer's gonna be either
+    # 0-user uchecked,
+    # 1 -user checked
 
-    request.db_session.flush()
+    questions_c=request.db_session.query(Question).filter_by(test=test,qtype='C').all()
+
+    for q in questions_c:
+        answers_c= q.answers
+        print(answers_c)
+        for ans in answers_c:
+            correct_answer=request.db_session.query(Answer).filter_by(id=ans.id).one()
+            if str('check'+str(ans.id)) in uac and ans.correct == 1:
+                uac.remove(str('check'+str(ans.id)))
+                complete_answer=Complete_answer(str(1),1,incomplete_test,correct_answer,q)
+                request.db_session.add(complete_answer)
+            elif str('check'+str(ans.id))  in uac and ans.correct == 0:
+                complete_answer=Complete_answer(str(1),0,incomplete_test,correct_answer,q)
+                request.db_session.add(complete_answer)
+            elif str('check'+str(ans.id)) not in uac and ans.correct == 1:
+                complete_answer=Complete_answer(str(0),0,incomplete_test,correct_answer,q)
+                request.db_session.add(complete_answer)
+            elif str('check'+str(ans.id)) not in uac and ans.correct == 0:
+                complete_answer=Complete_answer(str(0),1,incomplete_test,correct_answer,q)
+                request.db_session.add(complete_answer)
+
+            request.db_session.add(incomplete_test)
+            request.db_session.flush()
     return HTTPFound(request.route_path('dashboard'))
 
 @view_config(route_name='solved_test', request_method='GET', renderer='project:templates/solved_test.mako')

@@ -1,5 +1,3 @@
-import datetime
-
 from pyramid.view import (
     view_config,
     )
@@ -10,29 +8,21 @@ from pyramid.httpexceptions import (
     HTTPUnauthorized
     )
 
-from ..models.user import (
-    User,
-    )
+
 from ..models.test import (
     Test,
     )
-from ..models.answer import (
-    Answer,
-    )
+
 from ..models.incomplete_test import (
     Incomplete_test
 )
 from ..models.complete_answer import (
     Complete_answer,
 )
-from ..models.question import (
-    Question,
-)
+
 
 @view_config(route_name='filled_test', request_method='GET', renderer='project:templates/filled_test.mako')
 def show_filled_test(request):
-    POST = request.POST
-
     incomplete_test_id = request.matchdict['incomplete_test_id']
     incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()
     test = request.db_session.query(Test).filter_by(id=incomplete_test.test_id).one()

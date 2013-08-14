@@ -47,8 +47,9 @@
                     % elif question.qtype == 'C':
                         %for ans in question.answers:
                                 <!--id oodpovede v nazve text area-->
+
                                 <p><input class="user_answers_C" name="check${ans.id}" type="checkbox" value="">
-                                    <label name="text${ans.id}">${ans.text}</label></p>
+                                    <label class="checkbox_labels" name="text${ans.id}">${ans.text}</label></p>
                         %endfor
 
                     % endif
