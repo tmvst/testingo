@@ -42,7 +42,7 @@
 			% if test.share_token is None:
 			<p>
 				<div class="btn-group">
-					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+					<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-plus"></span> Pridať otázku <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">

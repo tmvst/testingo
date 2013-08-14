@@ -31,7 +31,7 @@
 
             <div class="form-group">
                 <label for="points2">Body</label>
-                <input type="number" id="points" name="points" class="form-control" placeholder="Body">
+                <input type="number" id="points" name="points" class="form-control" placeholder="Body" required>
             </div>
 
             <div id="answer"></div>

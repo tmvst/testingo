@@ -3,7 +3,8 @@
 <%block name="page_content">
 
 <script type="text/javascript">
-        post_url="${request.route_path('newquestion_c', test_id=test.id)}"
+        post_url="${request.route_path('newquestion_s', test_id=test.id)}"
+        test_url="${request.route_path('showtest', test_id=test.id)}"
         $(document).ready(function()
                 {
 
@@ -20,7 +21,7 @@
 </div>
 
 <div class="container" id="newq">
-	<form action="#" id="input_form_s">
+	<form action="#">
 		<div class="form-group">
 			<label for="text">Znenie otázky</label>
 			<textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
@@ -28,7 +29,7 @@
 
 		<div class="form-group">
 			<label for="points1">Body</label>
-			<input type="number" id="points1" name="points" class="form-control" placeholder="Body">
+			<input type="number" id="points1" name="points" class="form-control" placeholder="Body" required>
 		</div>
 
 		<div class="form-group">
@@ -37,8 +38,8 @@
 		</div>
 
 		<div class="form-group pull-left">
-			<button type="submit" formaction="${request.route_path('newquestion_s', test_id=test.id)}" class="btn btn-primary">Uložiť a pridať ďalšiu</button>
-			<button type="submit" formaction="#" class="btn btn-default">Uložiť a skončiť</button>
+			<button type="submit" formaction="#" class="btn btn-primary" id="save_and_add">Uložiť a pridať ďalšiu</button>
+			<button type="submit" formaction="#" class="btn btn-default" id="save_and_end">Uložiť a skončiť</button>
 		</div>
 
 		<div class="pull-right"><a href="${request.route_path('showtest', test_id=test.id)}" class="btn btn-danger">Zrušiť</a></div>

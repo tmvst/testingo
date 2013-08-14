@@ -26,7 +26,7 @@ update_cnt = () ->
 delete_entry = (e) ->
 	$(e.target).parent().remove()
 
-form_submit = () ->
+form_submit = (redir, event) ->
 	textQ = $("textarea[name='text']").val()
 	bodyQ = $("input[name='points']").val()
 	answers = $("input.checkInput").serializeArray()
@@ -44,9 +44,10 @@ form_submit = () ->
 			answer: answer
 			correctness: correctness
 	.done (response) ->
-		top.location.href = "/dashboard"
-	.fail () -> 
-		alert "Fail!"
+		top.location.href = redir
+	.fail (response) -> 
+		console.log response
+	event.preventDefault()
 	return false
 
 
@@ -56,7 +57,5 @@ $(document).ready () ->
 	$('#submit').click(process_submit)
 	$('#answer').on('click', '.delete-button', delete_entry)
 	
-	$("#input_form_checkbox").submit(form_submit)
-	$("#input_form_s").submit(form_submit)
-
-$('.dropdown-toggle').dropdown()
+	$("#save_and_add").submit((event) -> form_submit(post_url, event))
+	$("#save_and_end").submit((event) -> form_submit(test_url, event))

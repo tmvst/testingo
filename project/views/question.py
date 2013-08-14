@@ -101,6 +101,8 @@ def create_question(request, db_session, text, points, q_type):         # prida≈
 
     test_id = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=test_id).one()
+    if points is '':
+        points = 0
     test.sum_points=test.sum_points + int(points)
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     qnum = lastnum + 1

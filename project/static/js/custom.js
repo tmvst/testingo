@@ -27,7 +27,7 @@
     return $(e.target).parent().remove();
   };
 
-  form_submit = function() {
+  form_submit = function(redir, event) {
     var answer, answers, bodyQ, correctness, textQ;
     textQ = $("textarea[name='text']").val();
     bodyQ = $("input[name='points']").val();
@@ -46,10 +46,11 @@
         correctness: correctness
       })
     }).done(function(response) {
-      return top.location.href = "/dashboard";
-    }).fail(function() {
-      return alert("Fail!");
+      return top.location.href = redir;
+    }).fail(function(response) {
+      return console.log(response);
     });
+    event.preventDefault();
     return false;
   };
 
@@ -59,10 +60,12 @@
     answer.html(button_template());
     $('#submit').click(process_submit);
     $('#answer').on('click', '.delete-button', delete_entry);
-    $("#input_form_checkbox").submit(form_submit);
-    return $("#input_form_s").submit(form_submit);
+    $("#save_and_add").submit(function(event) {
+      return form_submit(post_url, event);
+    });
+    return $("#save_and_end").submit(function(event) {
+      return form_submit(test_url, event);
+    });
   });
-
-  $('.dropdown-toggle').dropdown();
 
 }).call(this);
