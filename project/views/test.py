@@ -93,7 +93,7 @@ def test_show(request):
     POST = request.POST
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
-    if '_method' in POST:
+    if POST['_method'] == 'DELETE':
         test = request.db_session.query(Test).filter_by(id=testid).one()
         request.db_session.delete(test)
         return HTTPFound(request.route_path('dashboard'))
@@ -101,8 +101,8 @@ def test_show(request):
     elif '_share' in POST:
         share_test(request,testid)
         return HTTPFound(request.route_path('showtest',test_id=testid))
+        
     else:
-        #question_submission(request,POST['q_type'],POST['text'],POST['points']) 				!!!WTF
         return HTTPFound(request.route_path('showtest',test_id=testid))
 
 def share_test(request, test_id):
