@@ -12,6 +12,8 @@
 	</form>
 </div>
 
+<% questions = test.questions %>
+
 <div class="container">
 	<div class="pull-right">
 		% if test.share_token is None:

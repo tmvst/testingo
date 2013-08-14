@@ -138,6 +138,8 @@ def c_question_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
 
+    #questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
+
     return {'errors':[], 'test':test}
 
 

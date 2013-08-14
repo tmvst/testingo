@@ -10,6 +10,8 @@
 	<h1>Nová otázka (checkbox) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
 </div>
 
+<%include file="showtest.mako"/>
+
 <div class="container">
 	<form action="#" id="input_form_checkbox">
 		<div class="form-group">
