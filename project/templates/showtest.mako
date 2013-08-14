@@ -12,6 +12,7 @@
         </form>
     </div>
 
+
     <% questions = test.questions %>
 
     <div class="container">
@@ -35,91 +36,90 @@
                 <p>${test.description}</p>
             </div>
 
-		<h2>Otázky
-			<small>
-				s celkovým počtom bodov ${test.sum_points}
-			</small></h2>
-			% if test.share_token is None:
-			<p>
-				<div class="btn-group">
-					<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-plus"></span> Pridať otázku <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="${request.route_path('newquestion_s', test_id=test.id)}">Fráza</a></li>
-						<li><a href="${request.route_path('newquestion_c', test_id=test.id)}">Checkbox</a></li>
-						<li><a href="#">Rádio</a></li>
-						<li><a href="#">Otvorená</a></li>
-					</ul>
-				</div>
-			</p>
-			%endif
+            <h2>Otázky
+                <small>
+                    s celkovým počtom bodov ${test.sum_points}
+                </small></h2>
+            % if test.share_token is None:
+                    <p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-plus"></span> Pridať otázku <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="${request.route_path('newquestion_s', test_id=test.id)}">Fráza</a></li>
+                            <li><a href="${request.route_path('newquestion_c', test_id=test.id)}">Checkbox</a></li>
+                            <li><a href="#">Rádio</a></li>
+                            <li><a href="#">Otvorená</a></li>
+                        </ul>
+                    </div>
+                    </p>
+            %endif
 
-			<div class="row">
-				<div class="col-lg-9">
+            <div class="row">
+                <div class="col-lg-9">
 
-					% if len(questions) is 0:
-					<span> Test neobsahuje žiadne otázky </span>
-					% else:
-					% for question in questions:
-					<div class="panel">
-						<div class="panel-heading">
+                        % if len(questions) is 0:
+                            <span> Test neobsahuje žiadne otázky </span>
+                        % else:
+                        % for question in questions:
+                            <div class="panel">
+                            <div class="panel-heading">
 
-							<a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
+                            <a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
 
-								<h3 class="panel-title">Otázka č.${question.number}
-									% if question.points:
-									<span class="badge pull-right">
+                            <h3 class="panel-title">Otázka č.${question.number}
+                            % if question.points:
+                                    <span class="badge pull-right">
 										${question.points}b
 									</span>
-									% endif
-								</h3>
+                            % endif
+                            </h3>
 
-							</a>
-						</div>
-						<strong>${question.text}</strong>
-						% for answer in question.answers:
-						% if answer.correct == 1:
-						<p class="text-success">
-							${answer.text} <br>
-						</p>
-						%else:
-						<p class="text-danger">
-							${answer.text} <br>
-						</p>
-						% endif
-						% endfor
-					</div>
+                            </a>
+                            </div>
+                                <strong>${question.text}</strong>
+                            % for answer in question.answers:
+                                % if answer.correct == 1:
+                                        <p class="text-success">
+                                        ${answer.text} <br>
+                                        </p>
+                                %else:
+                                        <p class="text-danger">
+                                        ${answer.text} <br>
+                                        </p>
+                                % endif
+                            % endfor
+                            </div>
 
-				% endfor
-				% endif
-				</div>
+                        % endfor
+                        % endif
+                </div>
 
-				<div class="col-lg-3">
-					<div class="pull-right">
-						<div class="panel">
-							<div class="panel-heading">
-								<h3 class="panel-title">Riešitelia</h3>
-							</div>
-							% if len(solved_tests) is 0:
-								<span> Test ešte nikto neriešil :(</span>
-							% else:
-								% for solved_test in solved_tests:
-								<div class="panel">
-									<div class="panel-heading">
-										<a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
-											<p>${solved_test.user.email}</p>
-											<p>${solved_test.date_crt}</p>
-										</a>
-									</div>
+                <div class="col-lg-3">
 
-								</div>
-								%endfor
-							%endif
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</%block>
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Riešitelia</h3>
+                        </div>
+                        % if len(solved_tests) is 0:
+                                <span> Test ešte nikto neriešil :(</span>
+                        % else:
+                            % for solved_test in solved_tests:
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
+                                                <p>${solved_test.user.email}</p>
+                                                <p>${solved_test.date_crt}</p>
+                                            </a>
+                                        </div>
 
+                                    </div>
+                            %endfor
+                        %endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</%block>

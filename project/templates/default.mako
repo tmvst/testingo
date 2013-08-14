@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fixed-top navbar-inverse navbar-custom">
         <div class="navbar-inner">
             <div class="container">
 
@@ -40,7 +40,7 @@
                 <li><p class="navbar-text">Prihlásený ${request.user.email}</p></li>
                 <li>
                     <form action="${request.route_path('logout')}" method="POST">
-                        <button type="submit" class="btn btn-default btn-small navbar-btn">Odhlásiť</button>
+                        <button type="submit" class="btn btn-link navbar-btn">Odhlásiť</button>
                     </form>
                 </li>
             </ul>
