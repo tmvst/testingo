@@ -6,13 +6,13 @@ answer_template= () ->
 		<div class="answerblock">
 		<input class="checkInputC" name="check#{ix}" type="checkbox" value="">
 		<input name="text#{ix}" class="checkInput form-control">
-		<div class="btn btn-default btn-small delete-button"> Zmazať </div> <br>
+		<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
 
 button_template= () ->
 	"""
-	<a class="btn btn-default btn-small" id='submit'> Pridať odpoveď </a> <br>
+	<a class="btn btn-default btn-sm" id='submit'> Pridať odpoveď </a> <br>
 	"""
 
 process_submit = () ->
@@ -71,5 +71,13 @@ $(document).ready () ->
 	$('#answer').on('click', '.delete-button', delete_entry)
 	
 	$('#form_s').submit(() -> false)
-	$("#save_and_add").click(() -> form_submit(post_url))
+
+	new_s_url = test_url + "/new-phrase-question"
+	new_c_url = test_url + "/new-checkbox-question"
+	new_r_url = test_url + "/new-radio-question"
+	new_o_url = test_url + "/new-open-question"
+
+	$("#save_and_add_s").click(() -> form_submit(new_s_url))
+	$("#save_and_add_c").click(() -> form_submit(new_c_url))
+
 	$("#save_and_end").click(() -> form_submit(test_url))

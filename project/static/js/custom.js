@@ -5,11 +5,11 @@
   ix = 1;
 
   answer_template = function() {
-    return "<div class=\"answerblock\">\n<input class=\"checkInputC\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n<input name=\"text" + ix + "\" class=\"checkInput form-control\">\n<div class=\"btn btn-default btn-small delete-button\"> Zmazať </div> <br>\n</div>";
+    return "<div class=\"answerblock\">\n<input class=\"checkInputC\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n<input name=\"text" + ix + "\" class=\"checkInput form-control\">\n<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
   };
 
   button_template = function() {
-    return "<a class=\"btn btn-default btn-small\" id='submit'> Pridať odpoveď </a> <br>";
+    return "<a class=\"btn btn-default btn-sm\" id='submit'> Pridať odpoveď </a> <br>";
   };
 
   process_submit = function() {
@@ -72,7 +72,7 @@
   };
 
   $(document).ready(function() {
-    var answer;
+    var answer, new_c_url, new_o_url, new_r_url, new_s_url;
     answer = $('#answer');
     answer.html(button_template());
     $('#submit').click(process_submit);
@@ -80,8 +80,15 @@
     $('#form_s').submit(function() {
       return false;
     });
-    $("#save_and_add").click(function() {
-      return form_submit(post_url);
+    new_s_url = test_url + "/new-phrase-question";
+    new_c_url = test_url + "/new-checkbox-question";
+    new_r_url = test_url + "/new-radio-question";
+    new_o_url = test_url + "/new-open-question";
+    $("#save_and_add_s").click(function() {
+      return form_submit(new_s_url);
+    });
+    $("#save_and_add_c").click(function() {
+      return form_submit(new_c_url);
     });
     return $("#save_and_end").click(function() {
       return form_submit(test_url);
