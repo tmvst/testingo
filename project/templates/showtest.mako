@@ -53,59 +53,59 @@
 			</p>
 			%endif
 
-				% if len(questions) is 0:
-				<span> Test neobsahuje žiadne otázky </span>
-				% else:
-				% for question in questions:
-				<div class="panel">
-					<div class="panel-heading">
-
-						<a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
-
-							<h3 class="panel-title">Otázka č.${question.number}
-								% if question.points:
-								<span class="badge pull-right">
-									${question.points}b
-								</span>
-								% endif
-							</h3>
-
-						</a>
-					</div>
-					<strong>${question.text}</strong>
-					% for answer in question.answers:
-					% if answer.correct == 1:
-					<p class="text-success">
-						${answer.text} <br>
-					</p>
-					%else:
-					<p class="text-danger">
-						${answer.text} <br>
-					</p>
-					% endif
-					% endfor
-				</p>
-			</div>
-			% endfor
-			% endif
-		</div>
-
-		<div class="pull-right" style="width: 300px;">
+			% if len(questions) is 0:
+			<span> Test neobsahuje žiadne otázky </span>
+			% else:
+			% for question in questions:
 			<div class="panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">Riešitelia</h3>
-				</div>
-				% for solved_test in solved_tests:
-				<div class="panel">
-					<div class="panel-heading">
-						<a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
-							<p>${solved_test.user.email}</p>
-							<p>${solved_test.date_crt}</p>
-						</a>
-					</div>
 
+					<a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
+
+						<h3 class="panel-title">Otázka č.${question.number}
+							% if question.points:
+							<span class="badge pull-right">
+								${question.points}b
+							</span>
+							% endif
+						</h3>
+
+					</a>
 				</div>
-				%endfor
-			</div>
+				<strong>${question.text}</strong>
+				% for answer in question.answers:
+				% if answer.correct == 1:
+				<p class="text-success">
+					${answer.text} <br>
+				</p>
+				%else:
+				<p class="text-danger">
+					${answer.text} <br>
+				</p>
+				% endif
+				% endfor
+			</p>
 		</div>
-		</%block>
+		% endfor
+		% endif
+	</div>
+
+	<div class="pull-right" style="width: 300px;">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">Riešitelia</h3>
+			</div>
+			% for solved_test in solved_tests:
+			<div class="panel">
+				<div class="panel-heading">
+					<a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
+						<p>${solved_test.user.email}</p>
+						<p>${solved_test.date_crt}</p>
+					</a>
+				</div>
+
+			</div>
+			%endfor
+		</div>
+	</div>
+	</%block>
