@@ -1,6 +1,7 @@
 <%inherit file="default.mako" />
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
+<script src="${request.static_path('project:static/js/edit.js')}"></script>
 <div class="page-header">
     <h1>${incomplete_test.test.name}</h1>
 </div>
@@ -24,15 +25,16 @@
 
                                 	% if question[1][0].correct == 1:
                                 	<h3 class="panel-title">Otázka č.${question[0].number}
-                                	<span class="badge pull-right">
-                                     ${question[0].points}b
-
-                                  </span>
+                                    <a href="#" class="pull-right zbody"> Upraviť hodnotenie </a>
+                                    <span class="badge pull-right">
+                                        ${question[0].points}b
+                                    </span>
                                   </h3>
                                   %else:
                                   <h3 class="panel-title">Otázka č.${question[0].number}
+                                  <a href="#" class="pull-right zbody"> Upraviť hodnotenie </a>
                                   <span class="badge pull-right">
-                                     ${0}b
+                                        ${0}b
                                   </span>
                                   </h3>
                                 	%endif
