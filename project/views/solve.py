@@ -115,11 +115,9 @@ def show_solved_test(request):
     questions_and_answers=[]
     for q in questions:
         q_answers = request.db_session.query(Complete_answer).filter_by(incomp_test=incomplete_test,question=q).all()
-        list=[q, q_answers]
+        q_points = q.points
+        list=[q, q_answers,q_points]
         questions_and_answers.append(list)
-    # for q in questions_and_answers:
-    #     print(q[0])
-    #     print('dfd')
     if request.userid is None:
         raise HTTPForbidden
         return HTTPForbidden('Pre prístup je nutné sa prihlásiť')

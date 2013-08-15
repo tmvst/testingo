@@ -25,15 +25,15 @@
 
                                 	% if question[1][0].correct == 1:
                                 	<h3 class="panel-title">Otázka č.${question[0].number}
-                                    <a href="#" class="pull-right zbody"> Upraviť hodnotenie </a>
-                                    <span class="badge pull-right">
+                                    <a href="#" class="pull-right zbody" id="c${question[0].id}"> Upraviť hodnotenie </a>
+                                    <span id="b${question[0].id}" class="badge pull-right">
                                         ${question[0].points}b
                                     </span>
                                   </h3>
                                   %else:
                                   <h3 class="panel-title">Otázka č.${question[0].number}
-                                  <a href="#" class="pull-right zbody"> Upraviť hodnotenie </a>
-                                  <span class="badge pull-right">
+                                  <a href="#" id="c${question[0].id}"class="pull-right zbody"> Upraviť hodnotenie </a>
+                                  <span id="b${question[0].id}" class="badge pull-right">
                                         ${0}b
                                   </span>
                                   </h3>
