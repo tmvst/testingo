@@ -85,7 +85,6 @@ def submit_test(request):
 
     for q in questions_c:
         answers_c= q.answers
-        print(answers_c)
         for ans in answers_c:
             correct_answer=request.db_session.query(Answer).filter_by(id=ans.id).one()
             if str('check'+str(ans.id)) in uac and ans.correct == 1:
@@ -112,10 +111,15 @@ def show_solved_test(request):
     incomplete_test_id = request.matchdict['incomplete_test_id']
     incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()
     test = request.db_session.query(Test).filter_by(id=incomplete_test.test_id).one()
-    complete_answers = request.db_session.query(Complete_answer).filter_by(incomp_test=incomplete_test).all()
-    questions = [a.question for a in complete_answers]
-    user_answers = [a for a in complete_answers]
-    questions_and_answers = zip(questions, user_answers)
+    questions = test.questions
+    questions_and_answers=[]
+    for q in questions:
+        q_answers = request.db_session.query(Complete_answer).filter_by(incomp_test=incomplete_test,question=q).all()
+        list=[q, q_answers]
+        questions_and_answers.append(list)
+    # for q in questions_and_answers:
+    #     print(q[0])
+    #     print('dfd')
     if request.userid is None:
         raise HTTPForbidden
         return HTTPForbidden('Pre prístup je nutné sa prihlásiť')

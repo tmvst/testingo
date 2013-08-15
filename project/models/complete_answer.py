@@ -51,4 +51,4 @@ class Complete_answer(Base):
     def __repr__(self):
         """Returns representative object of class Complete_Answer.
         """
-        return "Complete_answer<{text}>".format(text=self.text)
+        return "Complete_answer<{id}>".format(id=self.id)

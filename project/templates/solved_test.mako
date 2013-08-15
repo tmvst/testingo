@@ -22,7 +22,7 @@
                             <div class="panel-heading">
                             	<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
 
-                                	% if question[1].correct == 1:
+                                	% if question[1][0].correct == 1:
                                 	<h3 class="panel-title">Otázka č.${question[0].number}
                                 	<span class="badge pull-right">
                                      ${question[0].points}b
@@ -39,53 +39,55 @@
                                 </a>
                         	</div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
-                            	% if question[1].correct == 1:
+                            	% if question[1][0].correct == 1:
                                     <p class="text-success">
                                     <strong>Správna odpoveď uźívateľa:</strong>
-                                        ${question[1].text} <br>
+                                        ${question[1][0].text} <br>
                                     </p>
 
                                 %else:
                                     <p class="text-danger">
                                     <strong>Nesprávna odpoveď uźívateľa:</strong>
-                                        ${question[1].text} <br>
+                                        ${question[1][0].text} <br>
                                     </p>
 
                             	% endif
 
                         </div>
-                       % endif
-                 % elfif question[0].qtype == 'C':
+                 % elif question[0].qtype == 'C':
 
                         <div class="panel">
                             <div class="panel-heading">
                             	<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
-
-                                	% if question[1].correct == 1:
-                                	<h3 class="panel-title">Otázka č.${question[0].number}
-
-                                  </h3>
-                                  %else:
                                   <h3 class="panel-title">Otázka č.${question[0].number}
-
-                                  </h3>
-                                	%endif
                                 </a>
                         	</div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
-                            	% if question[1].correct == 1:
-                                    <p class="text-success">
-                                    <strong>Správna odpoveď uźívateľa:</strong>
-                                        ${question[1].text} <br>
-                                    </p>
+                                % for ans in question[1]:
 
-                                %else:
-                                    <p class="text-danger">
-                                    <strong>Nesprávna odpoveď uźívateľa:</strong>
-                                        ${question[1].text} <br>
-                                    </p>
+                                    % if ans.correct == 1:
+                                        %if int(ans.text) == 0:
+                                            <span><p class="text-success"><input type="checkbox" disabled="disabled">
+                                              ${ans.answer.text}</p></span>
+                                        %else:
 
-                            	% endif
+                                             <span><p class="text-success"><input type="checkbox" disabled="disabled" checked="checked">
+                                             ${ans.answer.text}</p></span>
+                                        %endif
+
+                                    %else:
+                                        %if int(ans.text) == 0:
+                                           <span>  <p class="text-danger"><input type="checkbox" disabled="disabled">
+                                          ${ans.answer.text}</p></span>
+
+                                        %else:
+
+                                             <span><p class="text-danger"><input type="checkbox" disabled="disabled" checked="checked">
+                                             ${ans.answer.text}</p></span>
+                                        %endif
+
+                            	    % endif
+                                % endfor
 
                         </div>
                        % endif
