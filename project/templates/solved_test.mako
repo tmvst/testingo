@@ -24,16 +24,18 @@
                             	<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
 
                                 	% if question[1][0].correct == 1:
-                                	<h3 class="panel-title">Otázka č.${question[0].number}
-                                    <a href="#" class="pull-right zbody" id="c${question[0].id}"> Upraviť hodnotenie </a>
-                                    <span id="b${question[0].id}" class="badge pull-right">
+
+                                	<h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
+                                    <a href="#" class="pull-right zbody" id="c${question[0].id}" name="${question[0].points}b"> Upraviť hodnotenie </a>
+                                    <span class="badge pull-right" id="b${question[0].id}">
                                         ${question[0].points}b
                                     </span>
                                   </h3>
                                   %else:
-                                  <h3 class="panel-title">Otázka č.${question[0].number}
-                                  <a href="#" id="c${question[0].id}"class="pull-right zbody"> Upraviť hodnotenie </a>
-                                  <span id="b${question[0].id}" class="badge pull-right">
+
+                                  <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
+                                  <a href="#" class="pull-right zbody" id="c${question[0].id}" name="0b"> Upraviť hodnotenie </a>
+                                  <span class="badge pull-right" id="b${question[0].id}">
                                         ${0}b
                                   </span>
                                   </h3>
