@@ -5,6 +5,8 @@
         <h1>Vitaj</h1>
     </div>
 
-    <h1>FILL TEST aj SOLVE TEST su uplne pokakane s tymi checkboxami teraz pri GET-e , treba vymysliet
-        ako to zipovat zajtra pri mongoDB</h1>
+    <h1>Dorobiť tabulku vyplnene otazky pre ukladanie bodovania pri editácií
+    	Zobrazovanie bodov pri checkboxoch + uprava bodov
+    	KASLIME NA TO!
+    </h1>
 </%block>
