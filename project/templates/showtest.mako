@@ -79,16 +79,25 @@
                             </a>
                             </div>
                                 <strong>${question.text}</strong>
+                            <br>
                             % for answer in question.answers:
+
+                                % if (question.qtype == "C"):
+                                    <input class="checkInputC pull-left" type="checkbox" value="">
+                                % elif (question.qtype == "R"):
+                                    <input class="radioR pull-left" type="radio" value="">
+                                % endif
+
                                 % if answer.correct == 1:
                                         <p class="text-success">
-                                        ${answer.text} <br>
+                                        ${answer.text} 
                                         </p>
-                                %else:
+                                % else:
                                         <p class="text-danger">
-                                        ${answer.text} <br>
+                                        ${answer.text} 
                                         </p>
                                 % endif
+
                             % endfor
                             </div>
 
