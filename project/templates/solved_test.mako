@@ -109,27 +109,36 @@
                                     </span>
                         	</div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
-                                % for ans in question[1]:
-                                    % if ans.correct == 1:
-                                        %if int(ans.text) == 0:
-                                            <span><p class="text-success"><input type="radio" disabled="disabled">
-                                              ${ans.answer.text}</p></span>
-                                        %else:
-                                             <span><p class="text-success"><input type="radio" disabled="disabled" checked="checked">
-                                             ${ans.answer.text}</p></span>
-                                        %endif
+                                % for ans in question[0].answers:
+
+                                %if question[1][0].correct == 1:
+                                    %if ans.correct ==1:
+                                          <span><p class="text-success"><input type="radio" disabled="disabled" checked="checked">
+                                          ${ans.text}</p></span>
                                     %else:
-                                        %if int(ans.text) == 0:
-                                           <span>  <p class="text-danger"><input type="radio" disabled="disabled">
-                                          ${ans.answer.text}</p></span>
+                                             <span><p><input type="radio" disabled="disabled" >
+                                             ${ans.text}</p></span>
 
-                                        %else:
+                                    %endif
 
-                                             <span><p class="text-danger"><input type="radio" disabled="disabled" checked="checked">
-                                             ${ans.answer.text}</p></span>
-                                        %endif
+                                %else:
+                                     %if ((int(question[1][0].text) == ans.id) and (ans.id != int(question[1][0].answer_id))):
+                                                 <span> <p class="text-danger"><input type="radio" disabled="disabled" checked="checked">
+                                                 ${ans.text}</p></span>
+                                     %elif  int(ans.id) == int(question[1][0].answer_id):
+                                             <span> <p class="text-success"><input type="radio" disabled="disabled" >
+                                                 ${ans.text}</p></span>
+                                     %else:
+                                            <span> <p><input type="radio" disabled="disabled">
+                                            ${ans.text}</p></span>
 
-                            	    % endif
+
+                                     %endif
+                                %endif
+
+
+
+
                                 % endfor
 
                         </div>
