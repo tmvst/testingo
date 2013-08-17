@@ -51,7 +51,6 @@ form_submit = (redir) ->
 				text: textQ
 				points: bodyQ
 				answers: answers
-				answer: answer
 		.done (response) ->
 			top.location.href = redir
 		.fail (response) -> 
