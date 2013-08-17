@@ -1,19 +1,19 @@
 <%inherit file="default.mako" />
-<%block name="title">Nová otázka - fráza</%block>
+<%block name="title">Nová otázka - radio</%block>
 <%block name="page_content">
 
-<script src="${request.static_path('project:static/js/question_s.js')}"></script>
+<script src="${request.static_path('project:static/js/question_r.js')}"></script>
 <script type="text/javascript">
-	post_url="${request.route_path('newquestion_s', test_id=test.id)}"
+	post_url="${request.route_path('newquestion_r', test_id=test.id)}"
 	test_url="${request.route_path('showtest', test_id=test.id)}"
 </script>
 
 <div class="page-header">
-	<h1>Nová otázka (fráza) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
+	<h1>Nová otázka (radio) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a> </h1>
 </div>
 
 <div class="container" id="newq">
-	<form action="#" id="form_s">
+	<form action="#" id="form_r">
 		<div class="form-group">
 			<label for="text">Znenie otázky</label>
 			<textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>
@@ -24,7 +24,7 @@
 			<input id="points" name="points" class="form-control" placeholder="Body">
 		</div>
 
-		<div id="answer_s"></div>
+		<div id="answer_r"></div>
 
 		<div class="form-group btn-group pull-left">
 			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">

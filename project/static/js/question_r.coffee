@@ -3,9 +3,11 @@ ix = 1
 answer_template= () ->
 	"""
 		<div class="answerblock">
-		<input class="checkInputC" name="check#{ix}" type="checkbox" value="">
-		<input name="text#{ix}" class="checkInput form-control">
-		<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+		<input name="Rtext#{ix}" class="radiotext form-control pull-left">
+		<div class="btn btn-default btn-sm delete-button pull-right"> Zmazať </div> <br>
+		<input class="Rradio" name="1radio#{ix}" type="radio" value=""> áno
+		<input class="Rradio" name="2radio#{ix}" type="radio" value=""> nie
+		#<input class="Rradio" name="3radio#{ix}" type="radio" value=""> možno
 		</div>
 	"""
 
@@ -15,18 +17,18 @@ button_template= () ->
 	"""
 
 process_submit = () ->
-	$('#answer').append(answer_template())
+	$('#answer_r').append(answer_template())
 	ix++
 	update_cnt()
 
 update_cnt = () ->
-	cnt = $('.checkInput').length
+	cnt = $('.radiotext').length
 
 delete_entry = (e) ->
 	$(e.target).parent().remove()
 
 form_submit = (redir) ->
-	$('#form_c').validate
+	$('#form_r').validate
 		rules:
 			text:
 				required: true
@@ -37,12 +39,12 @@ form_submit = (redir) ->
 			points:
 				number: "Body musia byť číslo"
 
-	if $('#form_c').valid()
+	if $('#form_r').valid()
 
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
-		answers = $("input.checkInput").serializeArray()
-		correctness = $("input.checkInputC").serializeArray()
+		answers = $("input.radiotext").serializeArray()
+		correctness = $("input.Rradio").serializeArray()
 
 		$.ajax
 			url: post_url
@@ -62,12 +64,12 @@ form_submit = (redir) ->
 
 
 $(document).ready () ->
-	answer = $('#answer')
+	answer = $('#answer_r')
 	answer.html(button_template())
 	$('#submit').click(process_submit)
-	$('#answer').on('click', '.delete-button', delete_entry)
+	$('#answer_r').on('click', '.delete-button', delete_entry)
 
-	$('#form_c').submit(() -> false)
+	$('#form_r').submit(() -> false)
 
 	new_s_url = test_url + "/new-phrase-question"
 	new_c_url = test_url + "/new-checkbox-question"

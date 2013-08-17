@@ -1,32 +1,5 @@
-ix_s = 1
-
-answer_template= () ->
-	"""
-		<div class="form-group">
-			<label for="odpoved">#{ix_s}.</label>
-			<input type="text" id="s#{ix}" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď">
-			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
-		</div>
-	"""
-
-button_template= () ->
-	"""
-	<a class="btn btn-default btn-sm" id='submit'> Pridať odpoveď </a> <br>
-	"""
-
-process_submit = () ->
-	$('#answer_s').append(answer_template())
-	ix_s++
-	update_cnt()
-
-update_cnt = () ->
-	cnt = $('.phrase').length
-
-delete_entry = (e) ->
-	$(e.target).parent().remove()
-
 form_submit = (redir) ->
-	$('#form_s').validate
+	$('#form_o').validate
 		rules:
 			text:
 				required: true
@@ -37,11 +10,12 @@ form_submit = (redir) ->
 			points:
 				number: "Body musia byť číslo"
 
-	if $('#form_s').valid()
+	if $('#form_o').valid()
 
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
-		answers = $("input.phrase").serializeArray()
+		console.log(bodyQ)
+		console.log(textQ)
 
 		$.ajax
 			url: post_url
@@ -50,7 +24,6 @@ form_submit = (redir) ->
 			data: JSON.stringify
 				text: textQ
 				points: bodyQ
-				answers: answers
 		.done (response) ->
 			top.location.href = redir
 		.fail (response) -> 
@@ -60,12 +33,8 @@ form_submit = (redir) ->
 
 
 $(document).ready () ->
-	answer = $('#answer_s')
-	answer.html(button_template())
-	$('#submit').click(process_submit)
-	$('#answer_s').on('click', '.delete-button', delete_entry)
-	
-	$('#form_s').submit(() -> false)
+	answer = $('#answer_o')
+	$('#form_o').submit(() -> false)
 
 	new_s_url = test_url + "/new-phrase-question"
 	new_c_url = test_url + "/new-checkbox-question"

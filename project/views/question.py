@@ -144,7 +144,23 @@ def c_question_view(request):
 
     return {'errors':[], 'test':test,'solved_tests':solved_tests}
 
+@view_config(route_name='newquestion_r', request_method='GET', renderer='project:templates/newquestion_r.mako')
+def r_question_view(request):
+    testid = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
 
+    solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
+
+    return {'errors':[], 'test':test,'solved_tests':solved_tests}
+
+@view_config(route_name='newquestion_o', request_method='GET', renderer='project:templates/newquestion_o.mako')
+def o_question_view(request):
+    testid = request.matchdict['test_id']
+    test = request.db_session.query(Test).filter_by(id=testid).one()
+
+    solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
+
+    return {'errors':[], 'test':test,'solved_tests':solved_tests}
 
 @view_config(route_name='newquestion_s', request_method='POST')
 def s_question_post(request):
@@ -220,3 +236,57 @@ def c_question_post(request):
         counter += 1
 
     return HTTPFound(request.route_path('newquestion_c', test_id=testid))
+
+@view_config(route_name='newquestion_r', request_method='POST')
+def r_question_post(request):
+    testid = request.matchdict['test_id']
+
+    json = request.json_body
+    points = json['points']
+    text = json['text']
+
+    test = request.db_session.query(Test).filter_by(id=testid).one()
+
+    if test.share_token:
+        return HTTPFound(request.route_path('showtest', test_id=testid))
+
+    question_id = create_question(request, request.db_session,
+                                  text,
+                                  points,
+                                  'R'
+    )
+
+    # q_type reprezentuje typ otazky S,C,R,O
+
+    counter = 1
+    answers = json['answers']
+    for a in answers :
+        ans = a['value']
+        create_answer(request,request.db_session,
+                      ans,
+                      1,
+                      question_id)
+        counter += 1
+
+    return HTTPFound(request.route_path('newquestion_r', test_id=testid))
+
+@view_config(route_name='newquestion_o', request_method='POST')
+def o_question_post(request):
+    testid = request.matchdict['test_id']
+
+    json = request.json_body
+    points = json['points']
+    text = json['text']
+
+    test = request.db_session.query(Test).filter_by(id=testid).one()
+
+    if test.share_token:
+        return HTTPFound(request.route_path('showtest', test_id=testid))
+
+    question_id = create_question(request, request.db_session,
+                                  text,
+                                  points,
+                                  'O'
+    )
+
+    return HTTPFound(request.route_path('newquestion_o', test_id=testid))

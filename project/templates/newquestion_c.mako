@@ -33,8 +33,8 @@
 			<ul class="dropdown-menu">
 				<li><a href="" id="save_and_add_s">Fráza</a></li>
 				<li><a href="" id="save_and_add_c">Checkbox</a></li>
-				<li><a href="#">Rádio</a></li>
-				<li><a href="#">Otvorená</a></li>
+				<li><a href="" id="save_and_add_r">Rádio</a></li>
+				<li><a href="" id="save_and_add_o">Otvorená</a></li>
 			</ul>
 		</div>
 		<button type="submit" formaction="#" class="btn btn-default" id="save_and_end" style="margin-left: 5px;">Uložiť a skončiť</button>

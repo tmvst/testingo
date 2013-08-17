@@ -49,8 +49,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="${request.route_path('newquestion_s', test_id=test.id)}">Fráza</a></li>
                             <li><a href="${request.route_path('newquestion_c', test_id=test.id)}">Checkbox</a></li>
-                            <li><a href="#">Rádio</a></li>
-                            <li><a href="#">Otvorená</a></li>
+                            <li><a href="${request.route_path('newquestion_r', test_id=test.id)}">Rádio</a></li>
+                            <li><a href="${request.route_path('newquestion_o', test_id=test.id)}">Otvorená</a></li>
                         </ul>
                     </div>
                     </p>
