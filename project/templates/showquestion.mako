@@ -35,12 +35,16 @@
                                 % else:
                                         % if (question.qtype == "C"):
                                         <input class="checkInputC pull-left" type="checkbox" value=""disabled>
-                                    % elif (question.qtype == "R"):
-                                        <input class="radioR pull-left" type="radio" value="" disabled>
-                                    % endif
-                                        <p class="text-danger">
+                                            <p class="text-danger">
                                         ${answer.text}
                                         </p>
+                                    % elif (question.qtype == "R"):
+                                        <input class="radioR pull-left" type="radio" value="" disabled>
+                                            <p>
+                                        ${answer.text}
+                                        </p>
+                                    % endif
+
                                 % endif
                             % endfor
                     % endif

@@ -177,7 +177,7 @@ def s_question_post(request):
 
     question_id = create_question(request, request.db_session,
                                   text,
-                                  points,
+                                  int(points),
                                   'S'
     )
 
@@ -210,7 +210,7 @@ def c_question_post(request):
 
     question_id = create_question(request, request.db_session,
                                   text,
-                                  points,
+                                  int(points),
                                   'C'
     )
 
@@ -252,7 +252,7 @@ def r_question_post(request):
 
     question_id = create_question(request, request.db_session,
                                   text,
-                                  points,
+                                  int(points),
                                   'R'
     )
 
@@ -294,7 +294,7 @@ def o_question_post(request):
 
     question_id = create_question(request, request.db_session,
                                   text,
-                                  points,
+                                  int(points),
                                   'O'
     )
 

@@ -28,7 +28,12 @@
                                 	<h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
                                     <a href="#" class="pull-right zbody" id="c${question[0].id}" name="${question[0].points}b"> Upraviť hodnotenie </a>
                                     <span class="badge pull-right" id="b${question[0].id}">
-                                        ${question[2]}/${question[0].points}b
+                                        %if int(question[2] - question[2])==0:
+                                             ${int(question[2])}
+                                        %else:
+                                             ${"%.1f" % question[2]}
+                                        %endif
+                                       /${int(question[0].points)}b
                                     </span>
                                   </h3>
                                   %else:
@@ -66,7 +71,12 @@
                                   <h3 class="panel-title">Otázka č.${question[0].number}
                                 </a>
                                  <span class="badge pull-right" id="b${question[0].id}">
-                                        ${"%.1f" % question[2]}/${question[0].points}b
+                                          %if int(question[2] - question[2])==0:
+                                             ${int(question[2])}
+                                        %else:
+                                             ${"%.1f" % question[2]}
+                                        %endif
+                                       /${int(question[0].points)}b
                                     </span>
                         	</div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
@@ -105,7 +115,12 @@
                                   <h3 class="panel-title">Otázka č.${question[0].number}
                                 </a>
                                  <span class="badge pull-right" id="b${question[0].id}">
-                                        ${"%.1f" % question[2]}/${question[0].points}b
+                                        %if int(question[2] - question[2])==0:
+                                             ${int(question[2])}
+                                        %else:
+                                             ${"%.1f" % question[2]}
+                                        %endif
+                                       /${int(question[0].points)}b
                                     </span>
                         	</div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
