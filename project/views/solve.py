@@ -63,6 +63,8 @@ def submit_test(request):
     user_answers_C= json['user_answers_C']
     user_answers_S = json['user_answers_S']
     user_answers_R = json['user_answers_R']
+    user_answers_O = json['user_answers_O']
+    print(user_answers_O)
     uac=user_answers_C.replace('&','').split('=')
     uac.remove('')
     uar=user_answers_R.split('&')
@@ -142,6 +144,14 @@ def submit_test(request):
             request.db_session.add(complete_question)
 
 
+    for ua in user_answers_O:
+
+        q=request.db_session.query(Question).filter_by(id=ua['name'][11:],qtype='O').one()
+        complete_question = CompleteQuestion(incomplete_test,q)
+        correct_answer = request.db_session.query(Answer).filter_by(correct=1,question_id=q.id).one()
+        complete_answer=Complete_answer(ua['value'],0,incomplete_test,correct_answer,q,complete_question)
+        complete_answer.points=0
+        request.db_session.add(complete_answer)
     request.db_session.add(incomplete_test)
     request.db_session.flush()
     return HTTPFound(request.route_path('dashboard'))

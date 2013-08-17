@@ -285,6 +285,8 @@ def o_question_post(request):
     json = request.json_body
     points = json['points']
     text = json['text']
+    answer = json['answer']
+    print(answer)
 
     test = request.db_session.query(Test).filter_by(id=testid).one()
 
@@ -296,5 +298,9 @@ def o_question_post(request):
                                   int(points),
                                   'O'
     )
+    create_answer(request,request.db_session,
+                          answer,
+                          1,
+                          question_id)
 
     return HTTPFound(request.route_path('newquestion_o', test_id=testid))

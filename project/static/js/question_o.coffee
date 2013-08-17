@@ -14,8 +14,10 @@ form_submit = (redir) ->
 
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
+		answer = $("textarea[name='odpoved']").val()
 		console.log(bodyQ)
 		console.log(textQ)
+		console.log(answer)
 
 		$.ajax
 			url: post_url
@@ -24,9 +26,10 @@ form_submit = (redir) ->
 			data: JSON.stringify
 				text: textQ
 				points: bodyQ
+				answer: answer
 		.done (response) ->
 			top.location.href = redir
-		.fail (response) -> 
+		.fail (response) ->
 			console.log response
 
 	return false
