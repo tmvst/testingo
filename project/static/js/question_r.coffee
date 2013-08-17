@@ -7,7 +7,6 @@ answer_template= () ->
 		<div class="btn btn-default btn-sm delete-button pull-right"> Zmazať </div> <br>
 		<input class="Rradio" name="1radio#{ix}" type="radio" value=""> áno
 		<input class="Rradio" name="2radio#{ix}" type="radio" value=""> nie
-		#<input class="Rradio" name="3radio#{ix}" type="radio" value=""> možno
 		</div>
 	"""
 
