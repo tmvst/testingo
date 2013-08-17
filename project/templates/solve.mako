@@ -2,9 +2,9 @@
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/solve.js')}"></script>
-        <script type="text/javascript">
-	post_url="${request.route_path('solve', token=token)}"
-</script>
+    <script type="text/javascript">
+        post_url="${request.route_path('solve', token=token)}"
+    </script>
     <div class="page-header">
         <h1>${test.name}</h1>
     </div>
@@ -39,8 +39,9 @@
 
                         <!--id otazky v nazve text area-->
                     % if question.qtype == 'S':
-                            <input class="form-control user_answers_S"  name="user_answer${question.id}" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required>
-
+                        %for ans in question.answers:
+                              <input class="form-control user_answers_S"  name="user_answer${question.id}" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required>
+                        %endfor
                     % elif question.qtype == 'C':
                         %for ans in question.answers:
                                 <!--id oodpovede v nazve text area-->
@@ -48,6 +49,16 @@
                                 <p><input class="user_answers_C" name="check${ans.id}" type="checkbox" value="">
                                     <label class="checkbox_labels" name="text${ans.id}">${ans.text}</label></p>
                         %endfor
+                    % elif question.qtype == 'R':
+                        %for ans in question.answers:
+                                <!--id oodpovede v nazve text area-->
+
+                                <p><input class="user_answers_R" name="radio${question.id}" id="radio${ans.id}" type="radio" value="">
+                                    <label name="text${ans.id}">${ans.text}</label></p>
+                        %endfor
+                    % elif question.qtype == 'O':
+                            <textarea class="form-control user_answers_O"  name="user_answer${question.id}" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required> </textarea>
+
 
                     % endif
                     </div>
