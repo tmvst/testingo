@@ -5,7 +5,7 @@
   ix = 1;
 
   answer_template = function() {
-    return "<div class=\"answerblock\">\n<input class=\"checkInputC\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n<input name=\"text" + ix + "\" class=\"checkInput form-control\">\n<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
+    return "<div class=\"answerblock\">\n<input class=\"checkInputC\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n<input name=\"text" + ix + "\" class=\"checkInput form-control\">\n<class=\"btn btn-default btn-sm delete-button\" value=\"zmazať\"><br>\n</div>";
   };
 
   button_template = function() {

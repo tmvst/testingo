@@ -5,7 +5,7 @@
   ix_s = 1;
 
   answer_template = function() {
-    return "<div class=\"form-group\">\n	<label for=\"odpoved\">" + ix_s + ".</label>\n	<input type=\"text\" id=\"odpoved\" name=\"odpoved\" class=\"phrase form-control\" placeholder=\"Správna odpoveď\">\n	<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
+    return "<div class=\"form-group\">\n	<label for=\"odpoved\">" + ix_s + ".</label>\n	<input type=\"text\" id=\"s" + ix + "\" name=\"odpoved\" class=\"phrase form-control\" placeholder=\"Správna odpoveď\">\n	<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
   };
 
   button_template = function() {
@@ -20,7 +20,7 @@
 
   update_cnt = function() {
     var cnt;
-    return cnt = $('.checkInput').length;
+    return cnt = $('.phrase').length;
   };
 
   delete_entry = function(e) {
@@ -28,7 +28,7 @@
   };
 
   form_submit = function(redir) {
-    var answer, answers, bodyQ, textQ;
+    var answers, bodyQ, textQ;
     $('#form_s').validate({
       rules: {
         text: {
@@ -49,7 +49,6 @@
       textQ = $("textarea[name='text']").val();
       bodyQ = $("input[name='points']").val();
       answers = $("input.phrase").serializeArray();
-      answer = $("input[name='odpoved']").val();
       $.ajax({
         url: post_url,
         type: "POST",

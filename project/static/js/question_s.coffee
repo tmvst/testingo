@@ -4,7 +4,7 @@ answer_template= () ->
 	"""
 		<div class="form-group">
 			<label for="odpoved">#{ix_s}.</label>
-			<input type="text" id="odpoved" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď">
+			<input type="text" id="s#{ix}" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď">
 			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
@@ -20,7 +20,7 @@ process_submit = () ->
 	update_cnt()
 
 update_cnt = () ->
-	cnt = $('.checkInput').length
+	cnt = $('.phrase').length
 
 delete_entry = (e) ->
 	$(e.target).parent().remove()
@@ -42,7 +42,6 @@ form_submit = (redir) ->
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
 		answers = $("input.phrase").serializeArray()
-		answer = $("input[name='odpoved']").val()
 
 		$.ajax
 			url: post_url

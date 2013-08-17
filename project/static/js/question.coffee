@@ -6,7 +6,7 @@ answer_template= () ->
 		<div class="answerblock">
 		<input class="checkInputC" name="check#{ix}" type="checkbox" value="">
 		<input name="text#{ix}" class="checkInput form-control">
-		<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+		<class="btn btn-default btn-sm delete-button" value="zmazať"><br>
 		</div>
 	"""
 
