@@ -26,7 +26,7 @@
 
 		<div id="answer_o">
 			<label for="odpoved">Správna odpoveď</label>
-			<input type="text" id="s#{ix}" name="odpoved" class="phrase form-control" placeholder="Odpoveď...">
+			<input type="text" id="s#{ix}" name="odpoved" class="phrase form-control" placeholder="Odpoveď nevypĺňať...">
 		</div>
 
 		<div class="form-group btn-group pull-left">

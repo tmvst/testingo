@@ -5,7 +5,7 @@
   ix = 1;
 
   answer_template = function() {
-    return "<div class=\"answerblock\">\n<input name=\"Rtext" + ix + "\" class=\"radiotext form-control pull-left\">\n<div class=\"btn btn-default btn-sm delete-button pull-right\"> Zmazať </div> <br>\n<input class=\"Rradio\" name=\"1radio" + ix + "\" type=\"radio\" value=\"\"> áno\n<input class=\"Rradio\" name=\"2radio" + ix + "\" type=\"radio\" value=\"\"> nie\n</div>";
+    return "<div class=\"answerblock\">\n" + ix + ". block odpovede:\n<br>\n<input class=\"Rradio pull-left\" name=\"radio1" + ix + "\" type=\"radio\" value=\"\"> \n<input name=\"text1" + ix + "\" class=\"radiotext form-control\">\n<input class=\"Rradio pull-left\" name=\"radio2" + ix + "\" type=\"radio\" value=\"\">\n<input name=\"text2" + ix + "\" class=\"radiotext form-control\">\n<div class=\"btn btn-default btn-sm delete-button pull-right\"> Zmazať </div> <br>\n</div>";
   };
 
   button_template = function() {

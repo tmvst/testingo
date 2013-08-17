@@ -97,10 +97,7 @@
                                         ${answer.text} 
                                         </p>
                                 % endif
-
                             % endfor
-                            </div>
-
                         % endfor
                         % endif
                 </div>

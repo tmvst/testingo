@@ -264,19 +264,26 @@ def r_question_post(request):
     correctness = json['correctness']
     for a in answers :
         ans = a['value']
-        if counterc < len(correctness) and '1radio'+str(counter) == correctness[counterc]['name']:
+
+        if counterc < len(correctness) and 'radio1'+str(counter) == correctness[counterc]['name']:
             create_answer(request,request.db_session,
                           ans,
                           1,
                           question_id)
             counterc += 1
-        elif counterc < len(correctness) and '2radio'+str(counter) != correctness[counterc]['name']:
+        elif counterc < len(correctness) and 'radio2'+str(counter) == correctness[counterc]['name']:
+            create_answer(request,request.db_session,
+                          ans,
+                          1,
+                          question_id)
+            counterc += 1
+        else:
             create_answer(request,request.db_session,
                           ans,
                           0,
                           question_id)
-            counter += 1
-
+            counterc += 1
+        counter += 1
 
     return HTTPFound(request.route_path('newquestion_r', test_id=testid))
 

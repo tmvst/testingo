@@ -3,10 +3,13 @@ ix = 1
 answer_template= () ->
 	"""
 		<div class="answerblock">
-		<input name="Rtext#{ix}" class="radiotext form-control pull-left">
+		#{ix}. block odpovede:
+		<br>
+		<input class="Rradio pull-left" name="radio1#{ix}" type="radio" value=""> 
+		<input name="text1#{ix}" class="radiotext form-control">
+		<input class="Rradio pull-left" name="radio2#{ix}" type="radio" value="">
+		<input name="text2#{ix}" class="radiotext form-control">
 		<div class="btn btn-default btn-sm delete-button pull-right"> Zmazať </div> <br>
-		<input class="Rradio" name="1radio#{ix}" type="radio" value=""> áno
-		<input class="Rradio" name="2radio#{ix}" type="radio" value=""> nie
 		</div>
 	"""
 

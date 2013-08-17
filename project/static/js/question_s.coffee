@@ -4,7 +4,7 @@ answer_template= () ->
 	"""
 		<div class="form-group">
 			<label for="odpoved">#{ix_s}.</label>
-			<input type="text" id="s#{ix}" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď">
+			<input type="text" id="s#{ix_s}" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď">
 			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
