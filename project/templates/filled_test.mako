@@ -47,13 +47,13 @@
                         % for ans in question[1]:
                             % if ans.correct == 1:
                                     <p class="text-success">
-                                        <strong>Správna odpoveď uźívateľa:</strong>
+                                        <strong>Správna odpoveď :</strong>
                                     ${ans.text} <br>
                                     </p>
 
                             %else:
                                     <p class="text-danger">
-                                        <strong>Nesprávna odpoveď uźívateľa:</strong>
+                                        <strong>Nesprávna odpoveď:</strong>
                                     ${ans.text} <br>
                                     </p>
 
