@@ -53,7 +53,7 @@
                         %for ans in question.answers:
                                 <!--id oodpovede v nazve text area-->
 
-                                <p><input class="user_answers_R" name="radio${question.id}" id="radio${ans.id}" type="radio" value="">
+                                <p><input class="user_answers_R" name="radio${question.id}" id="radio${ans.id}" type="radio" value="${ans.id}">
                                     <label name="text${ans.id}">${ans.text}</label></p>
                         %endfor
                     % elif question.qtype == 'O':

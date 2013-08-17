@@ -62,8 +62,11 @@ def submit_test(request):
 
     user_answers_C= json['user_answers_C']
     user_answers_S = json['user_answers_S']
+    user_answers_R = json['user_answers_R']
     uac=user_answers_C.replace('&','').split('=')
     uac.remove('')
+    uar=user_answers_R.split('&')
+    print(uar)
 
     # here we go through each S answer that user has filled, we substring the question's id from the field name
     # user_answerXX and get its correct answer
@@ -114,6 +117,22 @@ def submit_test(request):
                 complete_answer.points=q.points/len(answers_c)
                 request.db_session.add(complete_answer)
             request.db_session.add(complete_question)
+
+    questions_r=request.db_session.query(Question).filter_by(test=test,qtype='R').all()
+
+    for q in questions_r:
+        complete_question = CompleteQuestion(incomplete_test,q)
+        correct_answer = request.db_session.query(Answer).filter_by(question_id=q.id,correct=1).one()
+        if str('radio'+str(q.id)+'='+str(correct_answer.id)) in uar:
+            complete_answer=Complete_answer(str(1),1,incomplete_test,correct_answer,q,complete_question)
+            complete_answer.points=q.points
+            request.db_session.add(complete_answer)
+        else:
+            complete_answer=Complete_answer(str(1),0,incomplete_test,correct_answer,q,complete_question)
+            complete_answer.points=0
+            request.db_session.add(complete_answer)
+            request.db_session.add(complete_question)
+
 
     request.db_session.add(incomplete_test)
     request.db_session.flush()
