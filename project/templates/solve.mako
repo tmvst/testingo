@@ -45,21 +45,17 @@
                     % elif question.qtype == 'C':
                         %for ans in question.answers:
                                 <!--id oodpovede v nazve text area-->
-
                                 <p><input class="user_answers_C" name="check${ans.id}" type="checkbox" value="">
                                     <label class="checkbox_labels" name="text${ans.id}">${ans.text}</label></p>
                         %endfor
                     % elif question.qtype == 'R':
                         %for ans in question.answers:
                                 <!--id oodpovede v nazve text area-->
-
-                                <p><input class="user_answers_R" name="radio${question.id}" id="radio${ans.id}" type="radio" value="">
+                                <p><input class="user_answers_R" name="radio${question.id}" value="${ans.id}" type="radio" value="">
                                     <label name="text${ans.id}">${ans.text}</label></p>
                         %endfor
                     % elif question.qtype == 'O':
                             <input class="form-control user_answers_O"  name="user_answer${question.id}" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required>
-
-
                     % endif
                     </div>
                 % endfor

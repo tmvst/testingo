@@ -6,7 +6,7 @@
     var user_answers_C, user_answers_O, user_answers_R, user_answers_S;
     user_answers_S = $("input.user_answers_S").serializeArray();
     user_answers_C = $("input.user_answers_C").serialize();
-    user_answers_R = $("input.user_answers_R").serializeArray();
+    user_answers_R = $("input.user_answers_R").serialize();
     user_answers_O = $("input.user_answers_O").serializeArray();
     $.ajax({
       url: post_url,
@@ -21,7 +21,7 @@
     }).done(function(response) {
       return top.location.href = "/dashboard";
     }).fail(function(response) {
-      alert('kkt');
+      alert('nepodarilo sa. bohuzial :( prepac');
       return console.log(response);
     });
     return false;
@@ -35,7 +35,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=solve.map
-*/

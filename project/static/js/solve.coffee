@@ -1,7 +1,7 @@
 form_submit = () ->
   user_answers_S = $("input.user_answers_S").serializeArray()
   user_answers_C = $("input.user_answers_C").serialize()
-  user_answers_R = $("input.user_answers_R").serializeArray()
+  user_answers_R = $("input.user_answers_R").serialize()
   user_answers_O = $("input.user_answers_O").serializeArray()
   $.ajax
     url: post_url
@@ -15,7 +15,7 @@ form_submit = () ->
   .done (response) ->
       top.location.href = "/dashboard"
   .fail (response) ->
-      alert('kkt')
+      alert('nepodarilo sa. bohuzial :( prepac')
       console.log response
   return false
 
