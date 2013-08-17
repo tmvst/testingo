@@ -30,6 +30,9 @@ from ..models.complete_answer import (
 from ..models.question import (
     Question,
     )
+from ..models.complete_question import (
+    CompleteQuestion,
+    )
 import re
 
 #}}}
@@ -70,11 +73,17 @@ def submit_test(request):
     for ans in user_answers_S:
         answer_text=ans['value']
         question = request.db_session.query(Question).filter_by(id=ans['name'][11:]).one()
+        complete_question = CompleteQuestion(incomplete_test,question)
         correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
-        complete_answer=Complete_answer(answer_text,0,incomplete_test,correct_answer,question)
+        complete_answer=Complete_answer(answer_text,0,incomplete_test,correct_answer,question,complete_question)
+
         if answer_text == correct_answer.text:
             complete_answer.correct=1
+            complete_question.points=question.points
+        else:
+            complete_question.points=0
         request.db_session.add(complete_answer)
+        request.db_session.add(complete_question)
 
     # now the same shit for C question, we get the answer's id directly from checkbox's name
     # answer_text as a attribute of db object and model complete_answer's gonna be either

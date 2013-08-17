@@ -27,15 +27,13 @@ class CompleteQuestion(Base):
     comment = Column(String(500))
     points = Column(Float)
     incomplete_test_id = Column(Integer, ForeignKey('incomplete_test.id'), index=True)
-    incomplete_test = relationship('Incomplete_test', backref=backref("complete_answers", cascade="all, delete-orphan"))
+    incomplete_test = relationship('Incomplete_test', backref=backref("complete_questions", cascade="all, delete-orphan"))
     question_id = Column(Integer, ForeignKey('question.id'), index=True)
     question = relationship('Question', backref=backref("complete_question", cascade="all, delete-orphan"))
 
-    def __init__(self, points, comment, incomplete_test, answer, question):
+    def __init__(self, incomplete_test, question):
         """Initialization of class.
         """
-        self.comment = comment
-        self.points = points
         self.incomplete_test = incomplete_test
         self.question = question
 

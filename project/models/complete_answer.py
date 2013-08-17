@@ -39,7 +39,7 @@ class Complete_answer(Base):
     question_id = Column(Integer, ForeignKey('question.id'), index=True)
     question = relationship('Question', backref=backref("complete_answers", cascade="all, delete-orphan"))
     complete_question_id = Column(Integer, ForeignKey('complete_question.id'), index=True)
-    complete_question = relationship('CompleteQuestion', backref=backref("complete_answers", cascade="all, delete-orphan"))
+    complete_question = relationship('CompleteQuestion', backref=backref("complete_q_complete_answers", cascade="all, delete-orphan"))
 
     def __init__(self, text, correct, test, answer, question,complete_question):
         """Initialization of class.
