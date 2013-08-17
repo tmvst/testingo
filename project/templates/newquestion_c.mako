@@ -13,7 +13,7 @@
 </div>
 
 <div class="container" id="newq">
-	<form action="#" id="form_s">
+	<form action="#" id="form_c">
 		<div class="form-group">
 			<label for="text">Znenie otázky</label>
 			<textarea class="form-control" name="text" id="text" rows="3" placeholder="Znenie otázky" required></textarea>

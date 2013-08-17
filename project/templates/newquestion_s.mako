@@ -2,7 +2,7 @@
 <%block name="title">Nová otázka - fráza</%block>
 <%block name="page_content">
 
-<script src="${request.static_path('project:static/js/question.js')}"></script>
+<script src="${request.static_path('project:static/js/question_s.js')}"></script>
 <script type="text/javascript">
 	post_url="${request.route_path('newquestion_s', test_id=test.id)}"
 	test_url="${request.route_path('showtest', test_id=test.id)}"
@@ -24,10 +24,7 @@
 			<input id="points" name="points" class="form-control" placeholder="Body">
 		</div>
 
-		<div class="form-group">
-			<label for="odpoved">Správna odpoveď</label>
-			<input type="text" id="odpoved" name="odpoved" class="form-control" placeholder="Správna odpoveď">
-		</div>
+		<div id="answer_s"></div>
 
 		<div class="form-group btn-group pull-left">
 			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">

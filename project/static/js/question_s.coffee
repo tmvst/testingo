@@ -1,12 +1,11 @@
-
-ix = 1
+ix_s = 1
 
 answer_template= () ->
 	"""
-		<div class="answerblock">
-		<input class="checkInputC" name="check#{ix}" type="checkbox" value="">
-		<input name="text#{ix}" class="checkInput form-control">
-		<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+		<div class="form-group">
+			<label for="odpoved">#{ix_s}.</label>
+			<input type="text" id="odpoved" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď">
+			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
 
@@ -16,8 +15,8 @@ button_template= () ->
 	"""
 
 process_submit = () ->
-	$('#answer').append(answer_template())
-	ix++
+	$('#answer_s').append(answer_template())
+	ix_s++
 	update_cnt()
 
 update_cnt = () ->
@@ -27,7 +26,7 @@ delete_entry = (e) ->
 	$(e.target).parent().remove()
 
 form_submit = (redir) ->
-	$('#form_c').validate
+	$('#form_s').validate
 		rules:
 			text:
 				required: true
@@ -38,13 +37,12 @@ form_submit = (redir) ->
 			points:
 				number: "Body musia byť číslo"
 
-	if $('#form_c').valid()
+	if $('#form_s').valid()
 
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
-		answers = $("input.checkInput").serializeArray()
+		answers = $("input.phrase").serializeArray()
 		answer = $("input[name='odpoved']").val()
-		correctness = $("input.checkInputC").serializeArray()
 
 		$.ajax
 			url: post_url
@@ -55,7 +53,6 @@ form_submit = (redir) ->
 				points: bodyQ
 				answers: answers
 				answer: answer
-				correctness: correctness
 		.done (response) ->
 			top.location.href = redir
 		.fail (response) -> 
@@ -65,10 +62,10 @@ form_submit = (redir) ->
 
 
 $(document).ready () ->
-	answer = $('#answer')
+	answer = $('#answer_s')
 	answer.html(button_template())
 	$('#submit').click(process_submit)
-	$('#answer').on('click', '.delete-button', delete_entry)
+	$('#answer_s').on('click', '.delete-button', delete_entry)
 	
 	$('#form_s').submit(() -> false)
 
