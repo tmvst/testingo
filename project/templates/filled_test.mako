@@ -1,10 +1,9 @@
 <%inherit file="default.mako" />
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
-<script src="${request.static_path('project:static/js/edit.js')}"></script>
-<div class="page-header">
-    <h1>${incomplete_test.test.name}</h1>
-</div>
+    <div class="page-header">
+        <h1>${incomplete_test.test.name}</h1>
+    </div>
     <div class="container">
         <div class="control-group">
             <div class="controls">
@@ -17,80 +16,145 @@
                     <span> Test neobsahuje žiadne otázky a ani odpovede </span>
             % else:
                 % for question in questions_and_answers:
-                % if question[0].qtype == 'S':
+                    % if question[0].qtype == 'S':
 
                         <div class="panel">
-                            <div class="panel-heading">
-                                	% if question[1][0].correct == 1:
-                                	<h3 class="panel-title">Otázka č.${question[0].number}
-                                    <span class="badge pull-right">
-                                        ${question[0].points}b
-                                    </span>
-                                  </h3>
-                                  %else:
-                                  <h3 class="panel-title">Otázka č.${question[0].number}
-                                  <span class="badge pull-right">
+                        <div class="panel-heading">
+
+                        % if question[1][0].correct == 1:
+
+                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
+                            <span class="badge pull-right" id="b${question[0].id}">
+                            %if int(question[2] - question[2])==0:
+                                ${int(question[2])}
+                            %else:
+                                ${"%.1f" % question[2]}
+                            %endif
+                                /${int(question[0].points)}b
+                            </span>
+                            </h3>
+                        %else:
+
+                                <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
+                                    <span class="badge pull-right" id="b${question[0].id}">
                                         ${0}b
                                   </span>
-                                  </h3>
-                                	%endif
-                                </a>
-                        	</div>
+                                </h3>
+                        %endif
+                            </a>
+                        </div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
-                            	% if question[1][0].correct == 1:
+                        % for ans in question[1]:
+                            % if ans.correct == 1:
                                     <p class="text-success">
-                                    <strong>Správna odpoveď uźívateľa:</strong>
-                                        ${question[1][0].text} <br>
+                                        <strong>Správna odpoveď uźívateľa:</strong>
+                                    ${ans.text} <br>
                                     </p>
 
-                                %else:
+                            %else:
                                     <p class="text-danger">
-                                    <strong>Nesprávna odpoveď uźívateľa:</strong>
-                                        ${question[1][0].text} <br>
+                                        <strong>Nesprávna odpoveď uźívateľa:</strong>
+                                    ${ans.text} <br>
                                     </p>
 
-                            	% endif
+                            % endif
+                        %endfor
 
                         </div>
-                 % elif question[0].qtype == 'C':
+                    % elif question[0].qtype == 'C':
 
                         <div class="panel">
-                            <div class="panel-heading">
+                        <div class="panel-heading">
 
-                                  <h3 class="panel-title">Otázka č.${question[0].number}</h3>
-3>
-                        	</div>
+                        <h3 class="panel-title">Otázka č.${question[0].number}
+
+                        <span class="badge pull-right" id="b${question[0].id}">
+                        %if int(question[2] - question[2])==0:
+                            ${int(question[2])}
+                        %else:
+                            ${"%.1f" % question[2]}
+                        %endif
+                            /${int(question[0].points)}b
+                        </span>
+                        </div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
-                                % for ans in question[1]:
+                        % for ans in question[1]:
 
-                                    % if ans.correct == 1:
-                                        %if int(ans.text) == 0:
-                                            <span><p class="text-success"><input type="checkbox" disabled="disabled">
-                                              ${ans.answer.text}</p></span>
-                                        %else:
+                            % if ans.correct == 1:
+                                %if int(ans.text) == 0:
+                                        <span><p class="text-success"><input type="checkbox" disabled="disabled">
+                                        ${ans.answer.text}</p></span>
+                                %else:
 
-                                             <span><p class="text-success"><input type="checkbox" disabled="disabled" checked="checked">
-                                             ${ans.answer.text}</p></span>
-                                        %endif
+                                        <span><p class="text-success"><input type="checkbox" disabled="disabled" checked="checked">
+                                        ${ans.answer.text}</p></span>
+                                %endif
 
-                                    %else:
-                                        %if int(ans.text) == 0:
-                                           <span>  <p class="text-danger"><input type="checkbox" disabled="disabled">
-                                          ${ans.answer.text}</p></span>
+                            %else:
+                                %if int(ans.text) == 0:
+                                        <span>  <p class="text-danger"><input type="checkbox" disabled="disabled">
+                                        ${ans.answer.text}</p></span>
 
-                                        %else:
+                                %else:
 
-                                             <span><p class="text-danger"><input type="checkbox" disabled="disabled" checked="checked">
-                                             ${ans.answer.text}</p></span>
-                                        %endif
+                                        <span><p class="text-danger"><input type="checkbox" disabled="disabled" checked="checked">
+                                        ${ans.answer.text}</p></span>
+                                %endif
 
-                            	    % endif
-                                % endfor
+                            % endif
+                        % endfor
 
                         </div>
-                       % endif
+                    % elif question[0].qtype == 'R':
+
+                        <div class="panel">
+                        <div class="panel-heading">
+
+                        <h3 class="panel-title">Otázka č.${question[0].number}
+
+                        <span class="badge pull-right" id="b${question[0].id}">
+                        %if int(question[2] - question[2])==0:
+                            ${int(question[2])}
+                        %else:
+                            ${"%.1f" % question[2]}
+                        %endif
+                            /${int(question[0].points)}b
+                        </span>
+                        </div>
+                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                        % for ans in question[0].answers:
+
+                            %if question[1][0].correct == 1:
+                                %if ans.correct ==1:
+                                        <span><p class="text-success"><input type="radio" disabled="disabled" checked="checked">
+                                        ${ans.text}</p></span>
+                                %else:
+                                        <span><p><input type="radio" disabled="disabled" >
+                                        ${ans.text}</p></span>
+
+                                %endif
+
+                            %else:
+                                %if ((int(question[1][0].text) == ans.id) and (ans.id != int(question[1][0].answer_id))):
+                                        <span> <p class="text-danger"><input type="radio" disabled="disabled" checked="checked">
+                                        ${ans.text}</p></span>
+                                %elif  int(ans.id) == int(question[1][0].answer_id):
+                                        <span> <p class="text-success"><input type="radio" disabled="disabled" >
+                                        ${ans.text}</p></span>
+                                %else:
+                                        <span> <p><input type="radio" disabled="disabled">
+                                        ${ans.text}</p></span>
+
+
+                                %endif
+                            %endif
+                        % endfor
+                        </div>
+                    % endif
                 % endfor
             % endif
+
+
         </div>
     </div>
 </%block>

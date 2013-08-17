@@ -28,7 +28,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=edit.map
-*/

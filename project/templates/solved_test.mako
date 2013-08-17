@@ -1,7 +1,7 @@
 <%inherit file="default.mako" />
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
-<script src="${request.static_path('project:static/js/edit.js')}"></script>
+<script src="${request.static_path('project:static/js/edit_points.js')}"></script>
 <div class="page-header">
     <h1>${incomplete_test.test.name}</h1>
 </div>
