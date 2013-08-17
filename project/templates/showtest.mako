@@ -62,6 +62,7 @@
                         % if len(questions) is 0:
                             <span> Test neobsahuje žiadne otázky </span>
                         % else:
+
                         % for question in questions:
                             <div class="panel">
                             <div class="panel-heading">
@@ -81,23 +82,27 @@
                                 <strong>${question.text}</strong>
                             <br>
                             % for answer in question.answers:
-
-                                % if (question.qtype == "C"):
-                                    <input class="checkInputC pull-left" type="checkbox" value="">
-                                % elif (question.qtype == "R"):
-                                    <input class="radioR pull-left" type="radio" value="">
-                                % endif
-
                                 % if answer.correct == 1:
+                                    % if (question.qtype == "C"):
+                                        <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
+                                    % elif (question.qtype == "R"):
+                                        <input class="radioR pull-left" type="radio" value="" checked disabled >
+                                    % endif
                                         <p class="text-success">
-                                        ${answer.text} 
+                                        ${answer.text}
                                         </p>
                                 % else:
+                                        % if (question.qtype == "C"):
+                                        <input class="checkInputC pull-left" type="checkbox" value=""disabled>
+                                    % elif (question.qtype == "R"):
+                                        <input class="radioR pull-left" type="radio" value="" disabled>
+                                    % endif
                                         <p class="text-danger">
-                                        ${answer.text} 
+                                        ${answer.text}
                                         </p>
                                 % endif
                             % endfor
+                            </div>
                         % endfor
                         % endif
                 </div>

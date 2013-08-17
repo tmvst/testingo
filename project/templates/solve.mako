@@ -17,9 +17,6 @@
             </div>
 
             <h2>Otázky</h2>
-
-
-
             % if len(test.questions) is 0:
                     <span> Test neobsahuje žiadne otázky </span>
             % else:
