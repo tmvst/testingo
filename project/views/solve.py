@@ -94,11 +94,14 @@ def submit_test(request):
 
     for q in questions_c:
         answers_c= q.answers
+        complete_question = CompleteQuestion(incomplete_test,q)
+        acq_poins=0
         for ans in answers_c:
             correct_answer=request.db_session.query(Answer).filter_by(id=ans.id).one()
             if str('check'+str(ans.id)) in uac and ans.correct == 1:
                 uac.remove(str('check'+str(ans.id)))
                 complete_answer=Complete_answer(str(1),1,incomplete_test,correct_answer,q)
+                acq_points=+q.points/len(answers_c)
                 request.db_session.add(complete_answer)
             elif str('check'+str(ans.id))  in uac and ans.correct == 0:
                 complete_answer=Complete_answer(str(1),0,incomplete_test,correct_answer,q)
@@ -109,9 +112,12 @@ def submit_test(request):
             elif str('check'+str(ans.id)) not in uac and ans.correct == 0:
                 complete_answer=Complete_answer(str(0),1,incomplete_test,correct_answer,q)
                 request.db_session.add(complete_answer)
+                acq_points=+q.points/len(answers_c)
+            complete_question.points=acq_points
+            request.db_session.add(complete_question)
 
-            request.db_session.add(incomplete_test)
-            request.db_session.flush()
+    request.db_session.add(incomplete_test)
+    request.db_session.flush()
     return HTTPFound(request.route_path('dashboard'))
 
 @view_config(route_name='solved_test', request_method='GET', renderer='project:templates/solved_test.mako')
