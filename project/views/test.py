@@ -112,7 +112,3 @@ def share_test(request, test_id):
 
     raise HTTPException
     return HTTPException('Nie tvoj test!')
-
-
-
-

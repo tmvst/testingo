@@ -28,7 +28,7 @@
                                 	<h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
                                     <a href="#" class="pull-right zbody" id="c${question[0].id}" name="${question[0].points}b"> Upraviť hodnotenie </a>
                                     <span class="badge pull-right" id="b${question[0].id}">
-                                        ${question[0].points}b
+                                        ${question[2]}/${question[0].points}b
                                     </span>
                                   </h3>
                                   %else:
@@ -65,6 +65,9 @@
                             	<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
                                   <h3 class="panel-title">Otázka č.${question[0].number}
                                 </a>
+                                 <span class="badge pull-right" id="b${question[0].id}">
+                                        ${"%.1f" % question[2]}/${question[0].points}b
+                                    </span>
                         	</div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
                                 % for ans in question[1]:
