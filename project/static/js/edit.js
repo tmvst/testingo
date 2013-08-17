@@ -7,14 +7,14 @@
   input_template = void 0;
 
   input_template = function(points) {
-    return "<a href=\"#\" class=\"pull-right\"> Uložiť </a>\n<input class=\"pull-right\" value=\"" + points + "\"> ";
+    return "<a href=\"#\" class=\"pull-right\" id=> Uložiť </a>\n    <input class=\"pull-right\" value=\"" + points + "\"> ";
   };
 
-  hide_process = function(elem, name) {
+  hide_process = function(id, body) {
     var tu;
-    tu = elem.substring(1);
+    tu = id.substring(1);
     $("#b" + tu).hide();
-    $("#o" + tu).append(input_template(name));
+    $("#o" + tu).append(input_template(body));
     return $("#c" + tu).hide();
   };
 

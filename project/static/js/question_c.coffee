@@ -43,7 +43,6 @@ form_submit = (redir) ->
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
 		answers = $("input.checkInput").serializeArray()
-		answer = $("input[name='odpoved']").val()
 		correctness = $("input.checkInputC").serializeArray()
 
 		$.ajax
@@ -54,11 +53,10 @@ form_submit = (redir) ->
 				text: textQ
 				points: bodyQ
 				answers: answers
-				answer: answer
 				correctness: correctness
 		.done (response) ->
 			top.location.href = redir
-		.fail (response) -> 
+		.fail (response) ->
 			console.log response
 
 	return false
@@ -69,7 +67,7 @@ $(document).ready () ->
 	answer.html(button_template())
 	$('#submit').click(process_submit)
 	$('#answer').on('click', '.delete-button', delete_entry)
-	
+
 	$('#form_s').submit(() -> false)
 
 	new_s_url = test_url + "/new-phrase-question"

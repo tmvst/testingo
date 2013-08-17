@@ -42,7 +42,6 @@ form_submit = (redir) ->
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
 		answers = $("input.phrase").serializeArray()
-		answer = $("input[name='odpoved']").val()
 
 		$.ajax
 			url: post_url
@@ -52,7 +51,6 @@ form_submit = (redir) ->
 				text: textQ
 				points: bodyQ
 				answers: answers
-				answer: answer
 		.done (response) ->
 			top.location.href = redir
 		.fail (response) -> 
