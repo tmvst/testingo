@@ -97,6 +97,42 @@
                                 % endfor
 
                         </div>
+                  % elif question[0].qtype == 'R':
+
+                        <div class="panel">
+                            <div class="panel-heading">
+                            	<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
+                                  <h3 class="panel-title">Otázka č.${question[0].number}
+                                </a>
+                                 <span class="badge pull-right" id="b${question[0].id}">
+                                        ${"%.1f" % question[2]}/${question[0].points}b
+                                    </span>
+                        	</div>
+                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                                % for ans in question[1]:
+                                    % if ans.correct == 1:
+                                        %if int(ans.text) == 0:
+                                            <span><p class="text-success"><input type="radio" disabled="disabled">
+                                              ${ans.answer.text}</p></span>
+                                        %else:
+                                             <span><p class="text-success"><input type="radio" disabled="disabled" checked="checked">
+                                             ${ans.answer.text}</p></span>
+                                        %endif
+                                    %else:
+                                        %if int(ans.text) == 0:
+                                           <span>  <p class="text-danger"><input type="radio" disabled="disabled">
+                                          ${ans.answer.text}</p></span>
+
+                                        %else:
+
+                                             <span><p class="text-danger"><input type="radio" disabled="disabled" checked="checked">
+                                             ${ans.answer.text}</p></span>
+                                        %endif
+
+                            	    % endif
+                                % endfor
+
+                        </div>
                        % endif
                 % endfor
             % endif

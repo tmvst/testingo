@@ -3,16 +3,20 @@
   var form_submit;
 
   form_submit = function() {
-    var user_answers_C, user_answers_S;
+    var user_answers_C, user_answers_O, user_answers_R, user_answers_S;
     user_answers_S = $("input.user_answers_S").serializeArray();
     user_answers_C = $("input.user_answers_C").serialize();
+    user_answers_R = $("input.user_answers_R").serializeArray();
+    user_answers_O = $("input.user_answers_O").serializeArray();
     $.ajax({
       url: post_url,
       type: "POST",
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify({
         user_answers_S: user_answers_S,
-        user_answers_C: user_answers_C
+        user_answers_C: user_answers_C,
+        user_answers_R: user_answers_R,
+        user_answers_O: user_answers_O
       })
     }).done(function(response) {
       return top.location.href = "/dashboard";
@@ -31,3 +35,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=solve.map
+*/

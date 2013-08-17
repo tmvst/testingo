@@ -1,6 +1,8 @@
 form_submit = () ->
   user_answers_S = $("input.user_answers_S").serializeArray()
   user_answers_C = $("input.user_answers_C").serialize()
+  user_answers_R = $("input.user_answers_R").serializeArray()
+  user_answers_O = $("input.user_answers_O").serializeArray()
   $.ajax
     url: post_url
     type: "POST"
@@ -8,6 +10,8 @@ form_submit = () ->
     data: JSON.stringify
       user_answers_S: user_answers_S
       user_answers_C: user_answers_C
+      user_answers_R: user_answers_R
+      user_answers_O: user_answers_O
   .done (response) ->
       top.location.href = "/dashboard"
   .fail (response) ->

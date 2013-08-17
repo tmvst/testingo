@@ -22,17 +22,27 @@
                     % if len(answers) is 0:
                         <span> Otázka neobsahuje žiadne možnosti</span>
                     % else:
-                        % for answer in answers:
-                            % if answer.correct == 1:
-                                    <p class="text-success">
-                                    ${answer.text} <br>
-                                    </p>
-                            %else:
-                                    <p class="text-danger">
-                                    ${answer.text} <br>
-                                    </p>
-                            % endif
-                        % endfor
+                    % for answer in question.answers:
+                                % if answer.correct == 1:
+                                    % if (question.qtype == "C"):
+                                        <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
+                                    % elif (question.qtype == "R"):
+                                        <input class="radioR pull-left" type="radio" value="" checked disabled >
+                                    % endif
+                                        <p class="text-success">
+                                        ${answer.text}
+                                        </p>
+                                % else:
+                                        % if (question.qtype == "C"):
+                                        <input class="checkInputC pull-left" type="checkbox" value=""disabled>
+                                    % elif (question.qtype == "R"):
+                                        <input class="radioR pull-left" type="radio" value="" disabled>
+                                    % endif
+                                        <p class="text-danger">
+                                        ${answer.text}
+                                        </p>
+                                % endif
+                            % endfor
                     % endif
             </div>
         </div>
