@@ -48,19 +48,21 @@
                                 </a>
                         	</div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
-                            	% if question[1][0].correct == 1:
+                            % for ans in question[1]:
+                            	% if ans.correct == 1:
                                     <p class="text-success">
                                     <strong>Správna odpoveď uźívateľa:</strong>
-                                        ${question[1][0].text} <br>
+                                        ${ans.text} <br>
                                     </p>
 
                                 %else:
                                     <p class="text-danger">
                                     <strong>Nesprávna odpoveď uźívateľa:</strong>
-                                        ${question[1][0].text} <br>
+                                        ${ans.text} <br>
                                     </p>
 
                             	% endif
+                            %endfor
 
                         </div>
                  % elif question[0].qtype == 'C':

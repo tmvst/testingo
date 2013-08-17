@@ -71,19 +71,27 @@ def submit_test(request):
     # user_answerXX and get its correct answer
     # then we compare whether user answer is equal to it if so , we change the complete answer object attribute
     # correct to 1 and save it do DB
-    for ans in user_answers_S:
-        answer_text=ans['value']
-        question = request.db_session.query(Question).filter_by(id=ans['name'][11:]).one()
-        complete_question = CompleteQuestion(incomplete_test,question)
-        correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
-        complete_answer=Complete_answer(answer_text,0,incomplete_test,correct_answer,question,complete_question)
 
-        if answer_text == correct_answer.text:
-            complete_answer.correct=1
-            complete_answer.points=question.points
-        else:
-            complete_question.points=0
-        request.db_session.add(complete_answer)
+    questions_s=request.db_session.query(Question).filter_by(test=test,qtype='S').all()
+
+    for q in questions_s:
+        answers_s= q.answers
+        complete_question = CompleteQuestion(incomplete_test,q)
+        for ans in answers_s:
+            correct_answer = request.db_session.query(Answer).filter_by(correct=1,id=ans.id).one()
+            for ua in user_answers_S:
+                right_u_answer={}
+                if ua['name']==str(str(q.id)+'&'+str(ans.id)):
+                    right_u_answer=ua
+                    user_answers_S.remove(right_u_answer)
+                    break
+            complete_answer=Complete_answer(right_u_answer['value'],0,incomplete_test,correct_answer,q,complete_question)
+            if complete_answer.text == correct_answer.text:
+                complete_answer.correct=1
+                complete_answer.points=q.points/len(answers_s)
+            else:
+                complete_answer.points=0
+            request.db_session.add(complete_answer)
         request.db_session.add(complete_question)
 
     # now the same shit for C question, we get the answer's id directly from checkbox's name
@@ -123,7 +131,6 @@ def submit_test(request):
         complete_question = CompleteQuestion(incomplete_test,q)
         correct_answer = request.db_session.query(Answer).filter_by(question_id=q.id,correct=1).one()
         selected_answer=[s for s in uar if 'radio'+str(q.id) in s]
-        print(selected_answer)
         if str('radio'+str(q.id)+'='+str(correct_answer.id)) in uar:
             complete_answer=Complete_answer(str(selected_answer[0][selected_answer[0].find("=")+1:]),1,incomplete_test,correct_answer,q,complete_question)
             complete_answer.points=q.points

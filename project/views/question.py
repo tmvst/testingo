@@ -183,8 +183,8 @@ def s_question_post(request):
 
     # q_type reprezentuje typ otazky S,C,R,O
 
-    counter = 1
-    counterc = 0
+
+
     answers = json['answers']
     for a in answers :
         ans = a['value']
@@ -192,7 +192,6 @@ def s_question_post(request):
                       ans,
                       1,
                       question_id)
-        counter += 1
 
     return HTTPFound(request.route_path('newquestion_s', test_id=testid))
 

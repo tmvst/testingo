@@ -40,7 +40,8 @@
                         <!--id otazky v nazve text area-->
                     % if question.qtype == 'S':
                         %for ans in question.answers:
-                              <input class="form-control user_answers_S"  name="user_answer${question.id}" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required>
+                             <p><input class="form-control user_answers_S"  name="${question.id}&${ans.id}"   rows="2" placeholder="Sem vpíšte svoju odpoveď " required>
+                                </p>
                         %endfor
                     % elif question.qtype == 'C':
                         %for ans in question.answers:
