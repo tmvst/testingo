@@ -38,8 +38,10 @@ class Complete_answer(Base):
     answer = relationship('Answer', backref=backref("complete_answers", cascade="all, delete-orphan"))
     question_id = Column(Integer, ForeignKey('question.id'), index=True)
     question = relationship('Question', backref=backref("complete_answers", cascade="all, delete-orphan"))
+    complete_question_id = Column(Integer, ForeignKey('complete_question.id'), index=True)
+    complete_question = relationship('CompleteQuestion', backref=backref("complete_answers", cascade="all, delete-orphan"))
 
-    def __init__(self, text, correct, test, answer, question):
+    def __init__(self, text, correct, test, answer, question,complete_question):
         """Initialization of class.
         """
         self.text = text
@@ -47,6 +49,7 @@ class Complete_answer(Base):
         self.incomp_test = test
         self.answer = answer
         self.question = question
+        self.complete_question=complete_question
         
     def __repr__(self):
         """Returns representative object of class Complete_Answer.

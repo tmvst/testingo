@@ -3,7 +3,7 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    Enum,
+    Float,
     )
 
 from sqlalchemy.orm import (
@@ -31,7 +31,7 @@ class Question(Base):
     id = Column(Integer, primary_key=True) 
     number = Column(Integer)
     text = Column(String(500))
-    points = Column(Integer)
+    points = Column(Float)
     qtype = Column(String(5))
     test_id = Column(Integer, ForeignKey('test.id'), index=True)
     test = relationship('Test', backref=backref("questions", cascade="all, delete-orphan"))
