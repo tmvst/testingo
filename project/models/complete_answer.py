@@ -4,6 +4,7 @@ from sqlalchemy import (
     String,
     Boolean,
     ForeignKey,
+    Float,
     )
 
 from sqlalchemy.orm import (
@@ -32,6 +33,7 @@ class Complete_answer(Base):
     id = Column(Integer, primary_key=True) 
     text = Column(String(500))
     correct = Column(Boolean)
+    points = Column(Float)
     incomp_test_id = Column(Integer, ForeignKey('incomplete_test.id'), index=True)
     incomp_test = relationship('Incomplete_test', backref=backref("complete_answers", cascade="all, delete-orphan"))
     answer_id = Column(Integer, ForeignKey('answer.id'), index=True)

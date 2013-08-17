@@ -33,7 +33,6 @@ from ..models.question import (
 from ..models.complete_question import (
     CompleteQuestion,
     )
-import re
 
 #}}}
 
@@ -79,7 +78,7 @@ def submit_test(request):
 
         if answer_text == correct_answer.text:
             complete_answer.correct=1
-            complete_question.points=question.points
+            complete_answer.points=question.points
         else:
             complete_question.points=0
         request.db_session.add(complete_answer)
@@ -95,25 +94,25 @@ def submit_test(request):
     for q in questions_c:
         answers_c= q.answers
         complete_question = CompleteQuestion(incomplete_test,q)
-        acq_poins=0
         for ans in answers_c:
             correct_answer=request.db_session.query(Answer).filter_by(id=ans.id).one()
             if str('check'+str(ans.id)) in uac and ans.correct == 1:
                 uac.remove(str('check'+str(ans.id)))
-                complete_answer=Complete_answer(str(1),1,incomplete_test,correct_answer,q)
-                acq_points=+q.points/len(answers_c)
+                complete_answer=Complete_answer(str(1),1,incomplete_test,correct_answer,q,complete_question)
+                complete_answer.points=q.points/len(answers_c)
                 request.db_session.add(complete_answer)
             elif str('check'+str(ans.id))  in uac and ans.correct == 0:
-                complete_answer=Complete_answer(str(1),0,incomplete_test,correct_answer,q)
+                complete_answer=Complete_answer(str(1),0,incomplete_test,correct_answer,q,complete_question)
+                complete_answer.points=0
                 request.db_session.add(complete_answer)
             elif str('check'+str(ans.id)) not in uac and ans.correct == 1:
-                complete_answer=Complete_answer(str(0),0,incomplete_test,correct_answer,q)
+                complete_answer=Complete_answer(str(0),0,incomplete_test,correct_answer,q,complete_question)
+                complete_answer.points=0
                 request.db_session.add(complete_answer)
             elif str('check'+str(ans.id)) not in uac and ans.correct == 0:
-                complete_answer=Complete_answer(str(0),1,incomplete_test,correct_answer,q)
+                complete_answer=Complete_answer(str(0),1,incomplete_test,correct_answer,q,complete_question)
+                complete_answer.points=q.points/len(answers_c)
                 request.db_session.add(complete_answer)
-                acq_points=+q.points/len(answers_c)
-            complete_question.points=acq_points
             request.db_session.add(complete_question)
 
     request.db_session.add(incomplete_test)
@@ -130,8 +129,8 @@ def show_solved_test(request):
     questions_and_answers=[]
     for q in questions:
         q_answers = request.db_session.query(Complete_answer).filter_by(incomp_test=incomplete_test,question=q).all()
-        q_points = q.points
-        list=[q, q_answers,q_points]
+        acq_points =  sum(float(a.points) for  a in q_answers)
+        list=[q, q_answers,acq_points]
         questions_and_answers.append(list)
     if request.userid is None:
         raise HTTPForbidden
