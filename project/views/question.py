@@ -131,7 +131,9 @@ def s_question_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
 
-    return {'errors':[], 'test':test}
+    solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
+
+    return {'errors':[], 'test':test,'solved_tests':solved_tests}
 
 @view_config(route_name='newquestion_c', request_method='GET', renderer='project:templates/newquestion_c.mako')
 def c_question_view(request):
@@ -165,11 +167,16 @@ def s_question_post(request):
 
     # q_type reprezentuje typ otazky S,C,R,O
 
-    answer_id = create_answer(request, request.db_session,
-                              request.json_body['answer'],
-                              1,
-                              question_id
-    )
+    counter = 1
+    counterc = 0
+    answers = json['answers']
+    for a in answers :
+        ans = a['value']
+        create_answer(request,request.db_session,
+                      ans,
+                      1,
+                      question_id)
+        counter += 1
 
     return HTTPFound(request.route_path('newquestion_s', test_id=testid))
 

@@ -1,4 +1,3 @@
-
 ix = 1
 
 answer_template= () ->
