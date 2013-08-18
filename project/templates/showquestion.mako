@@ -1,6 +1,7 @@
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
+    <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
     <div class="page-header">
         <h1>Otázka č.${question.number} z testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
     </div>
@@ -25,7 +26,7 @@
                     % for answer in question.answers:
                         % if answer.correct == 1:
                             % if (question.qtype == "C"):
-                                    <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
+                                    <input class="checkInputC pull-left" type="checkbox" value="" checked disabled>
                             % elif (question.qtype == "R"):
                                     <input class="radioR pull-left" type="radio" value="" checked disabled >
                             % endif
@@ -64,8 +65,8 @@
                     <div class="panel-heading">
 
                         <h3 class="panel-title"> ${answered_q[1][0]}
+                     <a href="#" class="pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" > Upraviť hodnotenie </a>
                          <span class="badge pull-right" id="b${answered_q[0].id}">
-
                         %if int(answered_q[2] - answered_q[2])==0:
                             ${int(answered_q[2])}
                         %else:
