@@ -186,12 +186,6 @@
                             ${question[1][0].text}</p>
 
                         </div>
-
-
-
-
-
-
                     % endif
                 % endfor
             % endif
