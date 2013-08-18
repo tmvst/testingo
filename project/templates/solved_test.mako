@@ -61,8 +61,6 @@
                                     ${ans.text} <br>
                                     </p>
                             	% endif
-
-                            % endif
                         %endfor
 
                         </div>

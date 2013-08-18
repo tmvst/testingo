@@ -48,8 +48,8 @@ def view_question(request):
     if test is None:
         raise HTTPException
         return HTTPException('Neexistujuca otazka')
-    emails_and_answers = view_respondents_answer(request)
-    return {'test':test,'question':question, 'answers':answers, 'emails_and_answers':emails_and_answers}
+    emails_and_answers_and_text = view_respondents_answer(request)
+    return {'test':test,'question':question, 'answers':answers, 'emails_and_answers_and_text':emails_and_answers_and_text}
 
 def view_respondents_answer(request):
     """
@@ -57,14 +57,18 @@ def view_respondents_answer(request):
     """
 
     questionid = request.matchdict["question_id"]
-    correctasnwerids = request.db_session.query(Answer).filter_by(question_id=questionid).all()
-    for correct_answ_id in correctasnwerids:
-        respondanswers = request.db_session.query(Complete_answer).filter_by(answer=correct_answ_id).all()
+    complete_questions = request.db_session.query(Question).filter_by(id=questionid).all()
+    for compl_question_id in complete_questions:
+        respondanswers = request.db_session.query(Complete_answer).filter_by(question=compl_question_id).all()
+    
     tests=[a.incomp_test for a in respondanswers]
     res_users=[a.user for a in tests]
     res_email=[a.email for a in res_users]
-    emails_and_answers =list(zip(res_email,respondanswers))
-    print(emails_and_answers)
+    answers_text=[b.answer for b in respondanswers]
+    answer_text=[b.text for b in answers_text]
+
+    emails_and_answers =list(zip(res_email,respondanswers,answer_text))
+    print(list(zip(res_email,respondanswers,answer_text)))
     return emails_and_answers
 
 

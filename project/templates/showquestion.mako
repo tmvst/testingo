@@ -56,10 +56,10 @@
 
         <h2>Vyplnené odpovede</h2>
 
-        % if len(emails_and_answers) is 0:
+        % if len(emails_and_answers_and_text) is 0:
                 <span> Test nevyplnili žiadni respondenti </span>
         % else:
-            % for respondent, answer in emails_and_answers:
+            % for respondent, answer, text in emails_and_answers_and_text:
                 <div class="panel">
                 <div class="panel-heading">
 
@@ -76,7 +76,7 @@
                 </h3>
                 </div>
 
-                    <p><strong>Odpoveď <br></strong>${answer.text}</p>
+                    <p><strong>Odpoveď <br></strong>${text}</p>
                 % if answer.correct == 1:
                         <p class="text-success">
                             <strong>Správna odpoveď</strong>
