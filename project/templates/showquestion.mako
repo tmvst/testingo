@@ -63,7 +63,18 @@
                 <div class="panel">
                     <div class="panel-heading">
 
-                        <h3 class="panel-title"> ${answered_q[1][0]} </h3></div>
+                        <h3 class="panel-title"> ${answered_q[1][0]}
+                         <span class="badge pull-right" id="b${answered_q[0].id}">
+
+                        %if int(answered_q[2] - answered_q[2])==0:
+                            ${int(answered_q[2])}
+                        %else:
+                            ${"%.1f" %answered_q[2]}
+                        %endif
+                            /${int(answered_q[0].question.points)}b
+                        </span>
+
+                        </h3></div>
                 %if answered_q[0].question.qtype =='R':
                     %for answer in answered_q[0].question.answers:
                         %if answered_q[1][1][0].answer_id == answer.id and answered_q[1][1][0].correct ==1 :

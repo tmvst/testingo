@@ -3,7 +3,7 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    Float
+    DateTime
     )
 
 from sqlalchemy.orm import (
@@ -23,6 +23,8 @@ class CompleteQuestion(Base):
     __tablename__ = 'complete_question'
     id = Column(Integer, primary_key=True)
     comment = Column(String(500))
+    date_crt = Column(DateTime)
+    date_mdf = Column(DateTime)
     incomplete_test_id = Column(Integer, ForeignKey('incomplete_test.id'), index=True)
     incomplete_test = relationship('Incomplete_test', backref=backref("complete_questions", cascade="all, delete-orphan"))
     question_id = Column(Integer, ForeignKey('question.id'), index=True)

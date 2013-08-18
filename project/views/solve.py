@@ -79,6 +79,8 @@ def submit_test(request):
     for q in questions_s:
         answers_s= q.answers
         complete_question = CompleteQuestion(incomplete_test,q)
+        complete_question.date_crt = datetime.datetime.now()
+        complete_question.date_mdf = datetime.datetime.now()
         for ans in answers_s:
             correct_answer = request.db_session.query(Answer).filter_by(correct=1,id=ans.id).one()
             for ua in user_answers_S:
@@ -106,6 +108,8 @@ def submit_test(request):
     for q in questions_c:
         answers_c= q.answers
         complete_question = CompleteQuestion(incomplete_test,q)
+        complete_question.date_crt = datetime.datetime.now()
+        complete_question.date_mdf = datetime.datetime.now()
         for ans in answers_c:
             correct_answer=request.db_session.query(Answer).filter_by(id=ans.id).one()
             if str('check'+str(ans.id)) in uac and ans.correct == 1:
@@ -131,6 +135,8 @@ def submit_test(request):
 
     for q in questions_r:
         complete_question = CompleteQuestion(incomplete_test,q)
+        complete_question.date_crt = datetime.datetime.now()
+        complete_question.date_mdf = datetime.datetime.now()
         correct_answer = request.db_session.query(Answer).filter_by(question_id=q.id,correct=1).one()
         selected_answer=[s for s in uar if 'radio'+str(q.id) in s]
         if str('radio'+str(q.id)+'='+str(correct_answer.id)) in uar:
@@ -148,6 +154,8 @@ def submit_test(request):
 
         q=request.db_session.query(Question).filter_by(id=ua['name'][11:],qtype='O').one()
         complete_question = CompleteQuestion(incomplete_test,q)
+        complete_question.date_crt = datetime.datetime.now()
+        complete_question.date_mdf = datetime.datetime.now()
         correct_answer = request.db_session.query(Answer).filter_by(correct=1,question_id=q.id).one()
         complete_answer=Complete_answer(ua['value'],0,incomplete_test,correct_answer,q,complete_question)
         complete_answer.points=0
@@ -158,7 +166,6 @@ def submit_test(request):
 
 @view_config(route_name='solved_test', request_method='GET', renderer='project:templates/solved_test.mako')
 def show_solved_test(request):
-
     incomplete_test_id = request.matchdict['incomplete_test_id']
     incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()
     test = request.db_session.query(Test).filter_by(id=incomplete_test.test_id).one()

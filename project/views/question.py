@@ -25,7 +25,7 @@ from ..models.complete_answer import (
     )
 from ..models.incomplete_test import (
     Incomplete_test,
-)
+    )
 
 #}}}
 
@@ -61,8 +61,8 @@ def view_respondents_answer(request):
     list=[]
     for cq in question.complete_question:
         user_and_answers =[cq.incomplete_test.user,request.db_session.query(Complete_answer).filter_by(question=question,incomp_test=cq.incomplete_test).all()]
-        item=[cq,user_and_answers]
-        print( [str(a.text) for a in cq.question.answers])
+        acq_points =  sum(float(a.points) for a in user_and_answers[1])
+        item=[cq,user_and_answers,acq_points]
         list.append(item)
     print(list)
     # answers_text=answers_text.append([ a for a in c_q.answers])
@@ -219,7 +219,7 @@ def c_question_post(request):
                                   'C'
     )
 
-     # q_type reprezentuje typ otazky S,C,R,O
+    # q_type reprezentuje typ otazky S,C,R,O
 
     counter = 1
     counterc = 0
@@ -305,8 +305,8 @@ def o_question_post(request):
                                   'O'
     )
     create_answer(request,request.db_session,
-                          answer,
-                          1,
-                          question_id)
+                  answer,
+                  1,
+                  question_id)
 
     return HTTPFound(request.route_path('newquestion_o', test_id=testid))
