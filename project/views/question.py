@@ -57,20 +57,37 @@ def view_respondents_answer(request):
     """
 
     questionid = request.matchdict["question_id"]
-    complete_questions = request.db_session.query(Question).filter_by(id=questionid).all()
-    for compl_question_id in complete_questions:
-        respondanswers = request.db_session.query(Complete_answer).filter_by(question=compl_question_id).all()
+    complete_questions = request.db_session.query(Question).filter_by(id=questionid).one()
+
+    respondanswers = request.db_session.query(Complete_answer).filter_by(question=complete_questions).all()
     
     tests=[a.incomp_test for a in respondanswers]
     res_users=[a.user for a in tests]
     res_email=[a.email for a in res_users]
-    
-    answers_text=[b.answer for b in respondanswers]
-    answer_text=[b.text for b in answers_text]
 
-    emails_and_answers =list(zip(res_email,respondanswers,answer_text))
-    print(list(zip(res_email,respondanswers,answer_text)))
-    return emails_and_answers
+    if complete_questions.qtype is 'S':
+        
+        answers_text=[b.text for b in respondanswers]
+        emails_and_answers =list(zip(res_email,respondanswers,answers_text))
+
+        return emails_and_answers
+
+    if complete_questions.qtype is 'O':
+
+        answers_text=[b.text for b in respondanswers]
+        emails_and_answers =list(zip(res_email,respondanswers,answers_text))
+
+        return emails_and_answers
+
+    if complete_questions.qtype is 'C':
+
+        answers_text=[b.answer.text for b in respondanswers]
+        emails_and_answers =list(zip(res_email,respondanswers,answers_text))
+
+        return emails_and_answers
+
+    if complete_questions.qtype is 'R':
+        pass
 
 
 @view_config(route_name='showquestion', request_method='POST')

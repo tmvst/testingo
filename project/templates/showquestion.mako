@@ -59,34 +59,64 @@
         % if len(emails_and_answers_and_text) is 0:
                 <span> Test nevyplnili žiadni respondenti </span>
         % else:
+            <script text=javascript>
+                var quest
+            </script>
             % for respondent, answer, text in emails_and_answers_and_text:
-                <div class="panel">
-                <div class="panel-heading">
+                    % if quest != answer.complete_question:
+                        <div class="panel">
+                        <div class="panel-heading">
+                        <h3 class="panel-title">${respondent}
+                    % endif
 
-                <h3 class="panel-title">${respondent}
-                % if answer.correct == 1:
+                    <% guest = answer.complete_question %>
+
+                    % if (answer.correct == 1) or (answer.question.qtype == 'O'):
                         <span class="badge pull-right">
-                                ${answer.question.points}b
-                            </span>
-                %else:
+                            ${answer.question.points}b
+                        </span>
+                    %else:
                         <span class="badge pull-right">
-                                ${0}b
-                            </span>
-                %endif
+                            ${0}b
+                        </span>
+                    %endif
+                
                 </h3>
                 </div>
 
-                    <p><strong>Odpoveď <br></strong>${text}</p>
-                % if answer.correct == 1:
-                        <p class="text-success">
-                            <strong>Správna odpoveď</strong>
-                        </p>
-                %else:
-                        <p class="text-danger">
-                            <strong>Nesprávna odpoveď</strong>
-                        </p>
-                % endif
+                    % if answer.correct == 1:
 
+                        %if answer.question.qtype=="O":
+                            <p><i>${text}</i></p>
+
+                        % elif (answer.question.qtype == "C"):
+                            <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
+                            <p class="text-success">
+                                ${text}
+                            </p>
+
+                        % elif (answer.question.qtype == "R"):
+                            <input class="radioR pull-left" type="radio" value="" checked disabled >
+                            <p class="text-success">
+                                ${text}
+                            </p>
+                        % endif
+
+                    % else:
+
+                        % if (answer.question.qtype == "C"):
+                            <input class="checkInputC pull-left" type="checkbox" value=""disabled>
+                            <p class="text-danger">
+                                ${text}
+                            </p>
+
+                        % elif (answer.question.qtype == "R"):
+                            <input class="radioR pull-left" type="radio" value="" disabled>
+                            <p>
+                                ${text}
+                            </p>
+                        % endif
+                    % endif
                 </div>
             % endfor
         % endif
