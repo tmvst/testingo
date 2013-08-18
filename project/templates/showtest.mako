@@ -72,7 +72,7 @@
                             <h3 class="panel-title">Otázka č.${question.number}
                             % if question.points:
                                     <span class="badge pull-right">
-										${question.points}b
+										${int(question.points)}b
 									</span>
                             % endif
                             </h3>
@@ -83,23 +83,36 @@
                             <br>
                             % for answer in question.answers:
                                 % if answer.correct == 1:
-                                    % if (question.qtype == "C"):
+                                    %if question.qtype=="O":
+                                         <p><i>
+                                        ${answer.text}</i>
+                                        </p>
+
+                                    % elif (question.qtype == "C"):
                                         <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
-                                    % elif (question.qtype == "R"):
-                                        <input class="radioR pull-left" type="radio" value="" checked disabled >
-                                    % endif
-                                        <p class="text-success">
+                                         <p class="text-success">
                                         ${answer.text}
                                         </p>
+                                    % elif (question.qtype == "R"):
+                                        <input class="radioR pull-left" type="radio" value="" checked disabled >
+                                         <p class="text-success">
+                                        ${answer.text}
+                                        </p>
+                                    % endif
+
                                 % else:
                                         % if (question.qtype == "C"):
                                         <input class="checkInputC pull-left" type="checkbox" value=""disabled>
-                                    % elif (question.qtype == "R"):
-                                        <input class="radioR pull-left" type="radio" value="" disabled>
-                                    % endif
-                                        <p class="text-danger">
+                                            <p class="text-danger">
                                         ${answer.text}
                                         </p>
+                                    % elif (question.qtype == "R"):
+                                        <input class="radioR pull-left" type="radio" value="" disabled>
+                                            <p>
+                                        ${answer.text}
+                                        </p>
+                                    % endif
+
                                 % endif
                             % endfor
                             </div>

@@ -63,28 +63,37 @@ def submit_test(request):
     user_answers_C= json['user_answers_C']
     user_answers_S = json['user_answers_S']
     user_answers_R = json['user_answers_R']
+    user_answers_O = json['user_answers_O']
+    print(user_answers_O)
     uac=user_answers_C.replace('&','').split('=')
     uac.remove('')
     uar=user_answers_R.split('&')
-    print(uar)
 
     # here we go through each S answer that user has filled, we substring the question's id from the field name
     # user_answerXX and get its correct answer
     # then we compare whether user answer is equal to it if so , we change the complete answer object attribute
     # correct to 1 and save it do DB
-    for ans in user_answers_S:
-        answer_text=ans['value']
-        question = request.db_session.query(Question).filter_by(id=ans['name'][11:]).one()
-        complete_question = CompleteQuestion(incomplete_test,question)
-        correct_answer = request.db_session.query(Answer).filter_by(question_id=question.id,correct=1).one()
-        complete_answer=Complete_answer(answer_text,0,incomplete_test,correct_answer,question,complete_question)
 
-        if answer_text == correct_answer.text:
-            complete_answer.correct=1
-            complete_answer.points=question.points
-        else:
-            complete_question.points=0
-        request.db_session.add(complete_answer)
+    questions_s=request.db_session.query(Question).filter_by(test=test,qtype='S').all()
+
+    for q in questions_s:
+        answers_s= q.answers
+        complete_question = CompleteQuestion(incomplete_test,q)
+        for ans in answers_s:
+            correct_answer = request.db_session.query(Answer).filter_by(correct=1,id=ans.id).one()
+            for ua in user_answers_S:
+                right_u_answer={}
+                if ua['name']==str(str(q.id)+'&'+str(ans.id)):
+                    right_u_answer=ua
+                    user_answers_S.remove(right_u_answer)
+                    break
+            complete_answer=Complete_answer(right_u_answer['value'],0,incomplete_test,correct_answer,q,complete_question)
+            if complete_answer.text == correct_answer.text:
+                complete_answer.correct=1
+                complete_answer.points=q.points/len(answers_s)
+            else:
+                complete_answer.points=0
+            request.db_session.add(complete_answer)
         request.db_session.add(complete_question)
 
     # now the same shit for C question, we get the answer's id directly from checkbox's name
@@ -123,17 +132,26 @@ def submit_test(request):
     for q in questions_r:
         complete_question = CompleteQuestion(incomplete_test,q)
         correct_answer = request.db_session.query(Answer).filter_by(question_id=q.id,correct=1).one()
+        selected_answer=[s for s in uar if 'radio'+str(q.id) in s]
         if str('radio'+str(q.id)+'='+str(correct_answer.id)) in uar:
-            complete_answer=Complete_answer(str(1),1,incomplete_test,correct_answer,q,complete_question)
+            complete_answer=Complete_answer(str(selected_answer[0][selected_answer[0].find("=")+1:]),1,incomplete_test,correct_answer,q,complete_question)
             complete_answer.points=q.points
             request.db_session.add(complete_answer)
         else:
-            complete_answer=Complete_answer(str(1),0,incomplete_test,correct_answer,q,complete_question)
+            complete_answer=Complete_answer(str(selected_answer[0][selected_answer[0].find("=")+1:]),0,incomplete_test,correct_answer,q,complete_question)
             complete_answer.points=0
             request.db_session.add(complete_answer)
             request.db_session.add(complete_question)
 
 
+    for ua in user_answers_O:
+
+        q=request.db_session.query(Question).filter_by(id=ua['name'][11:],qtype='O').one()
+        complete_question = CompleteQuestion(incomplete_test,q)
+        correct_answer = request.db_session.query(Answer).filter_by(correct=1,question_id=q.id).one()
+        complete_answer=Complete_answer(ua['value'],0,incomplete_test,correct_answer,q,complete_question)
+        complete_answer.points=0
+        request.db_session.add(complete_answer)
     request.db_session.add(incomplete_test)
     request.db_session.flush()
     return HTTPFound(request.route_path('dashboard'))

@@ -6,10 +6,10 @@
     </div>
 
     <h2><ul>
-        <li>Dorobiť tabulku vyplnene otazky pre ukladanie bodovania pri editácií</li>
-        <li>Zobrazovanie bodov pri checkboxoch + uprava bodov</li>
-        <li>radio button otazka, otvorena otazka - da sa robit nezavisle od vsetkeho teda  po uroven spracovania</li>
-        <li>doplnanie komentaru k vyplnenej otazke , dalsi vhodny atribut k tomu meta modelu uzivatelskej odpovede</li>
+        <li>pre Basku: vyplnene odpovede pri show questions - aby sa zgrupovali podla otazok, robila si ty tak mozes upravit</li>
+        <li>Spravit otvorenu otazku tj, interface pre vyplnani, jej vyhodnotenie</li>
+        <li>Moznost upravit body pri vsetkych typoch otazok - tazky oriesok ? ci nie ? asi ano :)</li>
+        <li>Komentare? primarne od  adminov testov ==> angazovanie complete_question </li>
     </ul>
     </h2>
 </%block>

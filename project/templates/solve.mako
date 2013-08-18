@@ -8,9 +8,7 @@
     <div class="page-header">
         <h1>${test.name}</h1>
     </div>
-
     <div class="container">
-
         <div class="control-group">
             <div class="controls">
                 <p>${test.description}</p>
@@ -40,7 +38,8 @@
                         <!--id otazky v nazve text area-->
                     % if question.qtype == 'S':
                         %for ans in question.answers:
-                              <input class="form-control user_answers_S"  name="user_answer${question.id}" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required>
+                                <p><input class="form-control user_answers_S"  name="${question.id}&${ans.id}"   rows="2" placeholder="Sem vpíšte svoju odpoveď " required>
+                                </p>
                         %endfor
                     % elif question.qtype == 'C':
                         %for ans in question.answers:
@@ -58,8 +57,6 @@
                         %endfor
                     % elif question.qtype == 'O':
                             <textarea class="form-control user_answers_O"  name="user_answer${question.id}" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required> </textarea>
-
-
                     % endif
                     </div>
                 % endfor
@@ -68,12 +65,6 @@
                     </div>
                 </form>
             % endif
-
-
-
-
-
         </div>
-
     </div>
 </%block>

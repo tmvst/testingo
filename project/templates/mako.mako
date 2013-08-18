@@ -60,7 +60,6 @@
                                         <strong>Nesprávna odpoveď uźívateľa:</strong>
                                     ${ans.text} <br>
                                     </p>
-                            	% endif
 
                             % endif
                         %endfor
@@ -71,7 +70,7 @@
                         <div class="panel">
                         <div class="panel-heading">
                             <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
-                                <h3 class="panel-title">Otázka č.${question[0].number}
+                                <h3 class="panel-title">Otázka č.${question[0].number}</h3>
                             </a>
                         <span class="badge pull-right" id="b${question[0].id}">
                         %if int(question[2] - question[2])==0:
@@ -81,7 +80,6 @@
                         %endif
                             /${int(question[0].points)}b
                         </span>
-                        </h3>
                         </div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
                         % for ans in question[1]:
@@ -109,13 +107,14 @@
 
                             % endif
                         % endfor
+
                         </div>
                     % elif question[0].qtype == 'R':
 
                         <div class="panel">
                         <div class="panel-heading">
                             <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
-                                <h3 class="panel-title">Otázka č.${question[0].number}
+                                <h3 class="panel-title">Otázka č.${question[0].number}</h3>
                             </a>
                         <span class="badge pull-right" id="b${question[0].id}">
                         %if int(question[2] - question[2])==0:
@@ -125,7 +124,6 @@
                         %endif
                             /${int(question[0].points)}b
                         </span>
-                        </h3>
                         </div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
                         % for ans in question[0].answers:
@@ -167,7 +165,7 @@
                         <div class="panel">
                         <div class="panel-heading">
                             <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
-                                <h3 class="panel-title">Otázka č.${question[0].number}
+                                <h3 class="panel-title">Otázka č.${question[0].number}</h3>
                             </a>
                         <span class="badge pull-right" id="b${question[0].id}">
                         %if int(question[2] - question[2])==0:
@@ -177,13 +175,11 @@
                         %endif
                             /${int(question[0].points)}b
                         </span>
-                        </h3>
                         </div>
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
 
-                             <p><strong>Užívateľová odpoveď <br></strong></p>
-
-                            ${question[1][0].text}</p>
+                            <span> <p><input type="radio" disabled="disabled">
+                            ${question[1][0].text}</p></span>
 
                         </div>
 

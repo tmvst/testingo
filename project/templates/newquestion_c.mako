@@ -1,8 +1,7 @@
 <%inherit file="default.mako" />
 <%block name="title">Nová otázka - checkbox</%block>
 <%block name="page_content">
-
-<script src="${request.static_path('project:static/js/question.js')}"></script>
+<script src="${request.static_path('project:static/js/question_c.js')}"></script>
 <script type="text/javascript">
 	post_url="${request.route_path('newquestion_c', test_id=test.id)}"
 	test_url="${request.route_path('showtest', test_id=test.id)}"
