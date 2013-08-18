@@ -64,6 +64,7 @@ def view_respondents_answer(request):
     tests=[a.incomp_test for a in respondanswers]
     res_users=[a.user for a in tests]
     res_email=[a.email for a in res_users]
+    
     answers_text=[b.answer for b in respondanswers]
     answer_text=[b.text for b in answers_text]
 
