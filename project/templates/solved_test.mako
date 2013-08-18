@@ -56,7 +56,6 @@
                                     </p>
 
                             	% endif
-
                         </div>
                  % elif question[0].qtype == 'C':
 
