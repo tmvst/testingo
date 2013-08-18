@@ -15,7 +15,7 @@ class TestLoginLogout(DatabaseTestCase):
         request = testing.DummyRequest()
         request.db_session = self.db_session
         request.route_url = Mock()
-        u1=User('user1', 'user1@gmail.com', 'user1_pass')
+        u1=User('user1@gmail.com', 'user1_pass')
         self.u1=u1
         request.db_session.add_all([u1])
         request.db_session.commit()
