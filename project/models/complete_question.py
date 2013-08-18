@@ -37,4 +37,4 @@ class CompleteQuestion(Base):
     def __repr__(self):
         """Returns representative object of class Complete_Answer.
         """
-        return "Complete_answer<{id}>".format(id=self.id)
+        return "Complete_question<{id}>".format(id=self.id)

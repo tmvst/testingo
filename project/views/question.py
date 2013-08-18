@@ -48,8 +48,8 @@ def view_question(request):
     if test is None:
         raise HTTPException
         return HTTPException('Neexistujuca otazka')
-    emails_and_answers_and_text = view_respondents_answer(request)
-    return {'test':test,'question':question, 'answers':answers, 'emails_and_answers_and_text':emails_and_answers_and_text}
+    list_of_answers = view_respondents_answer(request)
+    return {'test':test,'question':question, 'answers':answers, 'list_of_answers':list_of_answers}
 
 def view_respondents_answer(request):
     """
@@ -57,21 +57,21 @@ def view_respondents_answer(request):
     """
 
     questionid = request.matchdict["question_id"]
-    complete_questions = request.db_session.query(Question).filter_by(id=questionid).all()
-    for compl_question_id in complete_questions:
-        respondanswers = request.db_session.query(Complete_answer).filter_by(question=compl_question_id).all()
-    
-    tests=[a.incomp_test for a in respondanswers]
-    res_users=[a.user for a in tests]
-    res_email=[a.email for a in res_users]
-    
-    answers_text=[b.answer for b in respondanswers]
-    answer_text=[b.text for b in answers_text]
+    question = request.db_session.query(Question).filter_by(id=questionid).one()
+    list=[]
+    for cq in question.complete_question:
+        user_and_answers =[cq.incomplete_test.user,request.db_session.query(Complete_answer).filter_by(question=question,incomp_test=cq.incomplete_test).all()]
+        item=[cq,user_and_answers]
+        list.append(item)
+    print(list)
+    # answers_text=answers_text.append([ a for a in c_q.answers])
+    #
+    # tests=[a.incomp_test for a in respondanswers]
+    # res_users=[a.user for a in tests]
+    # res_email=[a.email for a in res_users]
 
-    emails_and_answers =list(zip(res_email,respondanswers,answer_text))
-    print(list(zip(res_email,respondanswers,answer_text)))
-    return emails_and_answers
 
+    return list
 
 @view_config(route_name='showquestion', request_method='POST')
 def question_delete(request):

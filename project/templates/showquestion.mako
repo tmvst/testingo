@@ -23,30 +23,30 @@
                         <span> Otázka neobsahuje žiadne možnosti</span>
                     % else:
                     % for answer in question.answers:
-                                % if answer.correct == 1:
-                                    % if (question.qtype == "C"):
-                                        <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
-                                    % elif (question.qtype == "R"):
-                                        <input class="radioR pull-left" type="radio" value="" checked disabled >
-                                    % endif
-                                        <p class="text-success">
-                                        ${answer.text}
-                                        </p>
-                                % else:
-                                        % if (question.qtype == "C"):
-                                        <input class="checkInputC pull-left" type="checkbox" value=""disabled>
-                                            <p class="text-danger">
-                                        ${answer.text}
-                                        </p>
-                                    % elif (question.qtype == "R"):
-                                        <input class="radioR pull-left" type="radio" value="" disabled>
-                                            <p>
-                                        ${answer.text}
-                                        </p>
-                                    % endif
+                        % if answer.correct == 1:
+                            % if (question.qtype == "C"):
+                                    <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
+                            % elif (question.qtype == "R"):
+                                    <input class="radioR pull-left" type="radio" value="" checked disabled >
+                            % endif
+                                <p class="text-success">
+                                ${answer.text}
+                                </p>
+                        % else:
+                            % if (question.qtype == "C"):
+                                    <input class="checkInputC pull-left" type="checkbox" value=""disabled>
+                                    <p class="text-danger">
+                                    ${answer.text}
+                                    </p>
+                            % elif (question.qtype == "R"):
+                                    <input class="radioR pull-left" type="radio" value="" disabled>
+                                    <p>
+                                    ${answer.text}
+                                    </p>
+                            % endif
 
-                                % endif
-                            % endfor
+                        % endif
+                    % endfor
                     % endif
             </div>
         </div>
@@ -56,38 +56,79 @@
 
         <h2>Vyplnené odpovede</h2>
 
-        % if len(emails_and_answers_and_text) is 0:
+        % if len(list_of_answers) is 0:
                 <span> Test nevyplnili žiadni respondenti </span>
         % else:
-            % for respondent, answer, text in emails_and_answers_and_text:
+            % for answered_q in list_of_answers:
                 <div class="panel">
-                <div class="panel-heading">
+                    <div class="panel-heading">
 
-                <h3 class="panel-title">${respondent}
-                % if answer.correct == 1:
-                        <span class="badge pull-right">
-                                ${answer.question.points}b
-                            </span>
-                %else:
-                        <span class="badge pull-right">
-                                ${0}b
-                            </span>
+                        <h3 class="panel-title"> ${answered_q[1][0]} </h3></div>
+                %if answered_q[0].question.qtype =='R':
+                    %for answer in answered_q[0].question.answers:
+                        %if answered_q[1][1][0].answer_id == answer.id and answered_q[1][1][0].correct ==1 :
+
+                                <span><p class="text-success"><input type="radio" disabled="disabled" checked="checked">
+                                ${answer.text}</p></span>
+                        %elif answered_q[1][1][0].answer_id != answer.id and answered_q[1][1][0].correct ==1 :
+                                <span><p><input type="radio" disabled="disabled" >
+                                ${answer.text}</p></span>
+                        %elif answered_q[1][1][0].answer_id == answer.id and answered_q[1][1][0].correct ==0 :
+                                <span> <p class="text-danger"><input type="radio" disabled="disabled" checked="checked">
+                                ${answer.text}</p></span>
+                        %elif answered_q[1][1][0].answer_id != answer.id and answered_q[1][1][0].correct ==0 :
+                                <span> <p><input type="radio" disabled="disabled">
+                                ${answer.text}</p></span>
+                        %endif
+
+                    %endfor
+                %elif answered_q[0].question.qtype =='C':
+                    %for answer in answered_q[1][1]:
+
+                        %if answer.text== str(1) and  answer.correct == int(1) :
+                                <span><p class="text-success"><input type="checkbox" disabled="disabled" checked="checked">
+                                ${answer.answer.text}</p></span>
+                        %elif answer.text==str(0) and  answer.correct == int(1) :
+                                <span><p class="text-success"><input type="checkbox" disabled="disabled" >
+                                ${answer.answer.text}</p></span>
+                        %elif answer.text==str(1) and  answer.correct ==int(0) :
+                                <span> <p class="text-danger"><input type="checkbox" disabled="disabled" checked="checked">
+                                ${answer.answer.text}</p></span>
+                        %elif answer.text==str(0) and  answer.correct ==int(0) :
+                                <span> <p class="text-danger"><input type="checkbox" disabled="disabled">
+                                ${answer.answer.text}</p></span>
+                        %endif
+
+                    %endfor
+
+
+                %elif answered_q[0].question.qtype =='S':
+                    %for answer in answered_q[1][1]:
+                        %if answer.correct == int(1):
+                                <p class="text-success">
+                                    <strong>Správna odpoveď užívateľa:</strong>
+                                ${answer.text} <br>
+                                </p>
+                        %elif answer.correct == int(0):
+                                <p class="text-danger">
+                                    <strong>Nesprávna odpoveď užívateľa:</strong>
+                                ${answer.text} <br>
+                                </p>
+
+                        %endif
+
+                    %endfor
+
+                %elif answered_q[0].question.qtype =='O':
+                    %for answer in answered_q[1][1]:
+                            <p>
+                                <strong>Odpoveď užívateľa:</strong>
+                            ${answer.text} <br></p>
+                    %endfor
                 %endif
-                </h3>
                 </div>
 
-                    <p><strong>Odpoveď <br></strong>${text}</p>
-                % if answer.correct == 1:
-                        <p class="text-success">
-                            <strong>Správna odpoveď</strong>
-                        </p>
-                %else:
-                        <p class="text-danger">
-                            <strong>Nesprávna odpoveď</strong>
-                        </p>
-                % endif
 
-                </div>
             % endfor
         % endif
     </div>
