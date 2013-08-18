@@ -106,12 +106,12 @@
                     %for answer in answered_q[1][1]:
                         %if answer.correct == int(1):
                                 <p class="text-success">
-                                    <strong>Správna odpoveď užívateľa:</strong>
+                                    <strong>Správna odpoveď uźívateľa:</strong>
                                 ${answer.text} <br>
                                 </p>
                         %elif answer.correct == int(0):
                                 <p class="text-danger">
-                                    <strong>Nesprávna odpoveď užívateľa:</strong>
+                                    <strong>Nesprávna odpoveď uźívateľa:</strong>
                                 ${answer.text} <br>
                                 </p>
 
@@ -122,7 +122,7 @@
                 %elif answered_q[0].question.qtype =='O':
                     %for answer in answered_q[1][1]:
                             <p>
-                                <strong>Odpoveď užívateľa:</strong>
+                                <strong>Odpoveď uívateľa:</strong>
                             ${answer.text} <br></p>
                     %endfor
                 %endif

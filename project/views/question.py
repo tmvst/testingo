@@ -62,6 +62,7 @@ def view_respondents_answer(request):
     for cq in question.complete_question:
         user_and_answers =[cq.incomplete_test.user,request.db_session.query(Complete_answer).filter_by(question=question,incomp_test=cq.incomplete_test).all()]
         item=[cq,user_and_answers]
+        print( [str(a.text) for a in cq.question.answers])
         list.append(item)
     print(list)
     # answers_text=answers_text.append([ a for a in c_q.answers])
