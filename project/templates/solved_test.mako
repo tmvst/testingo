@@ -60,8 +60,7 @@
                                         <strong>Nesprávna odpoveď uźívateľa:</strong>
                                     ${ans.text} <br>
                                     </p>
-
-                            % endif
+                            	% endif
                         %endfor
 
                         </div>
@@ -109,7 +108,6 @@
 
                             % endif
                         % endfor
-
                         </div>
                     % elif question[0].qtype == 'R':
 
@@ -188,12 +186,6 @@
                             ${question[1][0].text}</p>
 
                         </div>
-
-
-
-
-
-
                     % endif
                 % endfor
             % endif
