@@ -79,42 +79,49 @@
 
                             </a>
                             </div>
+                            <div class="panel-body">
                                 <strong>${question.text}</strong>
-                            <br>
+                                <br>
                             % for answer in question.answers:
                                 % if answer.correct == 1:
                                     %if question.qtype=="O":
-                                         <p><i>
-                                        ${answer.text}</i>
-                                        </p>
+                                            <p><i>
+                                            ${answer.text}</i>
+                                            </p>
+                                    % elif (question.qtype == "S"):
+                                            
+                                            <p class="text-success">
+                                            ${answer.text}
+                                            </p>
 
                                     % elif (question.qtype == "C"):
-                                        <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
-                                         <p class="text-success">
-                                        ${answer.text}
-                                        </p>
+                                            <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
+                                            <p class="text-success">
+                                            ${answer.text}
+                                            </p>
                                     % elif (question.qtype == "R"):
-                                        <input class="radioR pull-left" type="radio" value="" checked disabled >
-                                         <p class="text-success">
-                                        ${answer.text}
-                                        </p>
+                                            <input class="radioR pull-left" type="radio" value="" checked disabled >
+                                            <p class="text-success">
+                                            ${answer.text}
+                                            </p>
                                     % endif
 
                                 % else:
-                                        % if (question.qtype == "C"):
-                                        <input class="checkInputC pull-left" type="checkbox" value=""disabled>
+                                    % if (question.qtype == "C"):
+                                            <input class="checkInputC pull-left" type="checkbox" value=""disabled>
                                             <p class="text-danger">
-                                        ${answer.text}
-                                        </p>
+                                            ${answer.text}
+                                            </p>
                                     % elif (question.qtype == "R"):
-                                        <input class="radioR pull-left" type="radio" value="" disabled>
+                                            <input class="radioR pull-left" type="radio" value="" disabled>
                                             <p>
-                                        ${answer.text}
-                                        </p>
+                                            ${answer.text}
+                                            </p>
                                     % endif
 
                                 % endif
                             % endfor
+                            </div>
                             </div>
                         % endfor
                         % endif
@@ -127,17 +134,16 @@
                             <h3 class="panel-title">Riešitelia</h3>
                         </div>
                         % if len(solved_tests) is 0:
-                                <span> Test ešte nikto neriešil :(</span>
+                                <div class="panel-body">
+                                    <span> Test ešte nikto neriešil :(</span>
+                                </div>
                         % else:
                             % for solved_test in solved_tests:
-                                    <div class="panel">
-                                        <div class="panel-heading">
-                                            <a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
-                                                <p>${solved_test.user.email}</p>
-                                                <p>${solved_test.date_crt}</p>
-                                            </a>
-                                        </div>
-
+                                    <div class="panel-body">
+                                        <a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
+                                        ${solved_test.user.email}</a> <br>
+                                    ${solved_test.date_crt}
+                                        <hr>
                                     </div>
                             %endfor
                         %endif

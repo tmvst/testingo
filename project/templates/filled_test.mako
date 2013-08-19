@@ -43,6 +43,7 @@
                         %endif
                             </a>
                         </div>
+                        <div class="panel-body">
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
                         % for ans in question[1]:
                             % if ans.correct == 1:
@@ -59,7 +60,7 @@
 
                             % endif
                         %endfor
-
+                        </div>
                         </div>
                     % elif question[0].qtype == 'C':
 
@@ -75,8 +76,9 @@
                             ${"%.1f" % question[2]}
                         %endif
                             /${int(question[0].points)}b
-                        </span>
+                        </span></h3>
                         </div>
+                        <div class="panel-body">
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
                         % for ans in question[1]:
 
@@ -103,8 +105,43 @@
 
                             % endif
                         % endfor
+                        </div>
 
                         </div>
+
+
+                    % elif question[0].qtype == 'O':
+
+                        <div class="panel">
+                        <div class="panel-heading">
+
+                        <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
+                        <span class="badge pull-right" id="b${question[0].id}">
+                        %if int(question[2] - question[2])==0:
+                            ${int(question[2])}
+                        %else:
+                            ${"%.1f" % question[2]}
+                        %endif
+                            /${int(question[0].points)}b
+                        </span>
+                        </h3>
+
+
+                        </div>
+                        <div class="panel-body">
+                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                        % for ans in question[1]:
+                                <p>
+                                    <strong>Odpoveď užívateľa:</strong>
+                                ${ans.text} <br>
+                                </p>
+
+                        %endfor
+                        </div>
+
+                        </div>
+
+
                     % elif question[0].qtype == 'R':
 
                         <div class="panel">
@@ -119,8 +156,9 @@
                             ${"%.1f" % question[2]}
                         %endif
                             /${int(question[0].points)}b
-                        </span>
+                        </span> </h3>
                         </div>
+                        <div class="panel-body">
                             <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
                         % for ans in question[0].answers:
 
@@ -149,6 +187,7 @@
                                 %endif
                             %endif
                         % endfor
+                        </div>
                         </div>
                     % endif
                 % endfor
