@@ -26,9 +26,6 @@ from ..models.complete_answer import (
 from ..models.incomplete_test import (
     Incomplete_test,
     )
-from ..models.complete_question import (
-    CompleteQuestion,
-    )
 
 #}}}
 
@@ -157,7 +154,7 @@ def update_points_in_questions(request):
         print("U____________________________________________p R otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
         answer.points = points
-        request.db_session.merge(answer)        
+        request.db_session.merge(answer)
 
     elif question.qtype is 'C':
         print("U____________________________________________p C otazka : ",question.id)
@@ -169,8 +166,6 @@ def update_points_in_questions(request):
     request.db_session.flush()
 
     return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
-
-
 
 
 # ---------------------------------- new stuff ------- (babotkina volba) ----------------
@@ -232,8 +227,6 @@ def s_question_post(request):
     )
 
     # q_type reprezentuje typ otazky S,C,R,O
-
-
 
     answers = json['answers']
     for a in answers :
@@ -313,7 +306,7 @@ def r_question_post(request):
     correctness = json['correctness']
     for a in answers :
         ans = a['value']
-        if counterc < len(correctness) and 'radio'+str(counter) == correctness[counterc]['name']:
+        if counterc < len(correctness) and 'radio'+str(counter) == correctness[counterc]['value']:
             create_answer(request,request.db_session,
                           ans,
                           1,
@@ -383,7 +376,7 @@ def update_points_in_question(request):
         print("U____________________________________________p R otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
         answer.points = points
-        request.db_session.merge(answer)        
+        request.db_session.merge(answer)
 
     elif question.qtype is 'C':
         print("U____________________________________________p C otazka : ",question.id)
