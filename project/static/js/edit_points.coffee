@@ -1,7 +1,7 @@
   hide_process = undefined
   input_template = undefined
   input_template = (points) ->
-    "<a href=\"#\" class=\"pull-right\" id=> Uložiť </a>\n
+    "<a href=\"#\" class=\"pull-right\"> Uložiť </a>\n
     <input class=\"pull-right\" value=\"" + points + "\"> "
 
   hide_process = (id, body) ->
