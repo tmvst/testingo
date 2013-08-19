@@ -95,28 +95,28 @@
                                             </p>
 
                                     % elif (question.qtype == "C"):
-                                            <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
-                                            <p class="text-success">
+                                    		<p class="text-success">
+                                            <input class="checkInputC" type="checkbox" alue="" checked disabled>
                                             ${answer.text}
                                             </p>
                                     % elif (question.qtype == "R"):
-                                            <input class="radioR pull-left" type="radio" value="" checked disabled >
-                                            <p class="text-success">
+                                    		<span><p class="text-success">
+                                            <input class="radioR" type="radio" value="" checked disabled >
                                             ${answer.text}
-                                            </p>
+                                            </p></span>
                                     % endif
 
                                 % else:
                                     % if (question.qtype == "C"):
-                                            <input class="checkInputC pull-left" type="checkbox" value=""disabled>
-                                            <p class="text-danger">
+                                            <span><p class="text-danger">
+                                            <input class="checkInputC" type="checkbox" value=""disabled>
                                             ${answer.text}
-                                            </p>
+                                            </p></span>
                                     % elif (question.qtype == "R"):
-                                            <input class="radioR pull-left" type="radio" value="" disabled>
-                                            <p>
+                                            <span><p>
+                                            <input class="radioR" type="radio" value="" disabled>
                                             ${answer.text}
-                                            </p>
+                                            </p></span>
                                     % endif
 
                                 % endif
