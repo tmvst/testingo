@@ -61,7 +61,7 @@ def test_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
     questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
-    solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
+    solved_tests=test.incomplete_tests
     if request.userid is None:
         raise  HTTPForbidden
         return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
