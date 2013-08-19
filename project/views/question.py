@@ -324,11 +324,15 @@ def update_points_in_question(request):
     id_question = json['id_question']
 
     question = request.db_session.query(Question).filter_by(id=id_question).one()
+    
     if question.qtype is 'S':
         print("Up S otazka : ",question.id)
+        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
+        for ans in answer:
+            ans.points = float(points)/len(answer)
+            request.db_session.merge(ans)
 
     elif question.qtype is 'O':
-        print("Up O otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
         answer.points = points
         request.db_session.merge(answer)
