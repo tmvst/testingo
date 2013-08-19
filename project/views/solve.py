@@ -64,7 +64,6 @@ def submit_test(request):
     user_answers_S = json['user_answers_S']
     user_answers_R = json['user_answers_R']
     user_answers_O = json['user_answers_O']
-    print(user_answers_O)
     uac=user_answers_C.replace('&','').split('=')
     uac.remove('')
     uar=user_answers_R.split('&')

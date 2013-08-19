@@ -68,7 +68,7 @@
                                    Užívtateľ s emailom  <a href="#">${incomplete_test.user}</a> vyplnil test názvom <a href="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}" >
                                 ${incomplete_test.test.name}</a>
                                     <div>
-                                        <i class="text-left">dňa ${incomplete_test.date_crt.strftime('%d.%m.%Y')} v čase ${incomplete_test.date_crt.strftime('%H:%M')}</i>
+                                        <i class="text-left">${h.pretty_date(incomplete_test.date_crt)}</i>
                                     </div></p>
                                 </div>
                                 %if counter == 3:
