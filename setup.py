@@ -18,6 +18,7 @@ requires = [
     'py3k-bcrypt',
     'mock',
     'py_postgresql',
+    'psycopg2',
     ]
 
 setup(name='project',
