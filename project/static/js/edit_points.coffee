@@ -14,4 +14,4 @@
     ebody = undefined
     ebody = $(".zbody")
     $(".zbody").click ->
-      hide_process @id, @name
+      	hide_process @id, @name
