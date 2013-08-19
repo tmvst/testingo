@@ -52,7 +52,7 @@ def dashboard(request):
     uid = request.userid
     user = request.db_session.query(User).filter_by(id=uid).one()
 
-    return {'errors':[], 'tests': user.tests}
+    return {'errors':[], 'tests': user.tests,'userid':uid}
 
 
 @view_config(route_name='getlist', request_method='GET', renderer='project:templates/list_respondents.mako')
