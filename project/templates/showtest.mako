@@ -137,7 +137,8 @@
 						<div class="panel-body">
 							<a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
 								${solved_test.user.email}</a> <br>
-									${solved_test.date_crt}
+									<% kedy = h.pretty_date(solved_test.date_crt) %>
+									${kedy}
 								<hr>
 							</div>
 							%endfor

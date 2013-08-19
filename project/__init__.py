@@ -27,6 +27,7 @@ from .models import (
 from .models.user import User
 
 from .helpers import attr
+from project import helpers
 
 from .authenticator import Authenticator
 
@@ -42,6 +43,7 @@ def main(global_config, **settings):
         request = event['request']
         event['attr'] = attr
         event['user'] = request.user
+        event['h'] = helpers
 
     def prepare_request(event): #{{{
         """Add some additional information to the request object.
