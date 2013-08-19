@@ -44,8 +44,8 @@
                                  <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
                                 <a href="#" class="pull-right zbody" id="c${question[0].id}" name="${question[2]}"> Upraviť hodnotenie </a>
                             <span class="badge pull-right" id="b${question[0].id}">
-                                        ${0}b
-                                  </span>
+                                ${question[2]}/${int(question[0].points)}b
+                            </span>
                                 </h3>
                             %endif
                         </a>
