@@ -138,14 +138,14 @@
                                     <span> Test ešte nikto neriešil :(</span>
                                 </div>
                         % else:
+                        	<div class="panel-body">
                             % for solved_test in solved_tests:
-                                    <div class="panel-body">
-                                        <a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
-                                        ${solved_test.user.email}</a> <br>
-                                    	${h.pretty_date(solved_test.date_crt)}
-                                        <hr>
-                                    </div>
+                                    <a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
+                                    ${solved_test.user.email}</a> <br>
+                                    ${h.pretty_date(solved_test.date_crt)}
+                                    <hr>
                             %endfor
+                            </div>
                         %endif
                     </div>
                 </div>
