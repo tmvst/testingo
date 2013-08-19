@@ -33,6 +33,7 @@
 
                     </a>
                     </div>
+                         <div class="panel-body">
                         <label for="user_answer">${question.text}</label>
 
                         <!--id otazky v nazve text area-->
@@ -58,6 +59,7 @@
                     % elif question.qtype == 'O':
                             <textarea class="form-control user_answers_O"  name="user_answer${question.id}" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required> </textarea>
                     % endif
+                    </div>
                     </div>
                 % endfor
                     <div class="form-group">

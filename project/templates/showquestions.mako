@@ -18,42 +18,45 @@
 
         </a>
         </div>
+            <div class="panel-body">
             <strong>${question.text}</strong>
             <br>
-        % for answer in question.answers:
+
+            % for answer in question.answers:
             % if answer.correct == 1:
                 %if question.qtype=="O":
                         <p><i>
-                    ${answer.text}</i>
-                    </p>
+                        ${answer.text}</i>
+                        </p>
 
                 % elif (question.qtype == "C"):
-                    <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
+                        <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
                         <p class="text-success">
-                    ${answer.text}
-                    </p>
+                        ${answer.text}
+                        </p>
                 % elif (question.qtype == "R"):
-                    <input class="radioR pull-left" type="radio" value="" checked disabled >
+                        <input class="radioR pull-left" type="radio" value="" checked disabled >
                         <p class="text-success">
-                    ${answer.text}
-                    </p>
+                        ${answer.text}
+                        </p>
                 % endif
 
-                % else:
-                        % if (question.qtype == "C"):
+            % else:
+                % if (question.qtype == "C"):
                         <input class="checkInputC pull-left" type="checkbox" value=""disabled>
-                            <p class="text-danger">
+                        <p class="text-danger">
                         ${answer.text}
                         </p>
-                        % elif (question.qtype == "R"):
+                % elif (question.qtype == "R"):
                         <input class="radioR pull-left" type="radio" value="" disabled>
-                            <p>
-                        ${answer.text}
+                        <p>
+                            $b{answer.text}
                         </p>
-                    % endif
-
                 % endif
-        % endfor
+
+            % endif
+            % endfor
+        </div>
             </p>
         </div>
     % endfor

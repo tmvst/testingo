@@ -62,21 +62,22 @@
         % else:
             % for answered_q in list_of_answers:
                 <div class="panel">
-                    <div class="panel-heading">
+                <div class="panel-heading">
 
-                        <h3 class="panel-title"> ${answered_q[1][0]}
-                     <a href="#" class="pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" > Upraviť hodnotenie </a>
-                         <span class="badge pull-right" id="b${answered_q[0].id}">
-                        %if int(answered_q[2] - answered_q[2])==0:
-                            ${int(answered_q[2])}
-                        %else:
-                            ${"%.1f" %answered_q[2]}
-                        %endif
-                            /${int(answered_q[0].question.points)}b
-                        </span>
+                <h3 class="panel-title"> ${answered_q[1][0]}
+                    <a href="#" class="pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" > Upraviť hodnotenie </a>
+                <span class="badge pull-right" id="b${answered_q[0].id}">
+                %if int(answered_q[2] - answered_q[2])==0:
+                    ${int(answered_q[2])}
+                %else:
+                    ${"%.1f" %answered_q[2]}
+                %endif
+                    /${int(answered_q[0].question.points)}b
+                </span>
 
-                        </h3></div>
-                %if answered_q[0].question.qtype =='R':
+                </h3></div>
+                <div class="panel-body">
+                    %if answered_q[0].question.qtype =='R':
                     %for answer in answered_q[0].question.answers:
                         %if answered_q[1][1][0].answer_id == answer.id and answered_q[1][1][0].correct ==1 :
 
@@ -94,7 +95,7 @@
                         %endif
 
                     %endfor
-                %elif answered_q[0].question.qtype =='C':
+                    %elif answered_q[0].question.qtype =='C':
                     %for answer in answered_q[1][1]:
 
                         %if answer.text== str(1) and  answer.correct == int(1) :
@@ -114,7 +115,7 @@
                     %endfor
 
 
-                %elif answered_q[0].question.qtype =='S':
+                    %elif answered_q[0].question.qtype =='S':
                     %for answer in answered_q[1][1]:
                         %if answer.correct == int(1):
                                 <p class="text-success">
@@ -131,13 +132,14 @@
 
                     %endfor
 
-                %elif answered_q[0].question.qtype =='O':
+                    %elif answered_q[0].question.qtype =='O':
                     %for answer in answered_q[1][1]:
                             <p>
                                 <strong>Odpoveď uívateľa:</strong>
                             ${answer.text} <br></p>
                     %endfor
-                %endif
+                    %endif
+                </div>
                 </div>
 
 
