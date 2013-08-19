@@ -23,8 +23,10 @@ from ..models.complete_answer import (
 
 @view_config(route_name='filled_test', request_method='GET', renderer='project:templates/filled_test.mako')
 def show_filled_test(request):
+
     incomplete_test_id = request.matchdict['incomplete_test_id']
     incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()
+
     test = request.db_session.query(Test).filter_by(id=incomplete_test.test_id).one()
     questions = test.questions
     questions_and_answers=[]
@@ -41,4 +43,4 @@ def show_filled_test(request):
         raise HTTPUnauthorized
         return HTTPUnauthorized('Nie je to tebou vytvorený test')
 
-    return {'incomplete_test':incomplete_test,'questions_and_answers':questions_and_answers}
+    return {'incomplete_test':incomplete_test,'questions_and_answers':questions_and_answers, 'userid': request.userid}

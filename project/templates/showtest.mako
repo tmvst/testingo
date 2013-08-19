@@ -89,7 +89,7 @@
                                             ${answer.text}</i>
                                             </p>
                                     % elif (question.qtype == "S"):
-                                            
+
                                             <p class="text-success">
                                             ${answer.text}
                                             </p>

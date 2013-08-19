@@ -1,4 +1,9 @@
 <%inherit file="default.mako" />
+%if userid==incomplete_test.user_id:
+      <%include file="solved_test.mako"/>
+
+%else:
+
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
     <div class="page-header">
@@ -197,3 +202,4 @@
         </div>
     </div>
 </%block>
+%endif
