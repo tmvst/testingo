@@ -26,24 +26,21 @@
                     % for answer in question.answers:
                         % if answer.correct == 1:
                             % if (question.qtype == "C"):
-                                    <input class="checkInputC pull-left" type="checkbox" value="" checked disabled>
+                                    <span><p class="text-success"><input class="checkInputC" type="checkbox" value="" checked disabled="disabled">
                             % elif (question.qtype == "R"):
-                                    <input class="radioR pull-left" type="radio" value="" checked disabled >
+                                    <span><p class="text-success"><input class="radioR" type="radio" value="" checked disabled="disabled" >
                             % endif
-                                <p class="text-success">
                                 ${answer.text}
-                                </p>
+                                </p></span>
                         % else:
                             % if (question.qtype == "C"):
-                                    <input class="checkInputC pull-left" type="checkbox" value=""disabled>
-                                    <p class="text-danger">
+                                    <span><p class="text-danger"><input class="checkInputC" type="checkbox" value="" disabled="disabled">
                                     ${answer.text}
-                                    </p>
+                                    </p></span>
                             % elif (question.qtype == "R"):
-                                    <input class="radioR pull-left" type="radio" value="" disabled>
-                                    <p>
+                                    <span><p><input class="radioR" type="radio" value="" disabled="disabled">
                                     ${answer.text}
-                                    </p>
+                                    </p></span>
                             % endif
 
                         % endif
