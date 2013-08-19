@@ -55,7 +55,6 @@ def view_respondents_answer(request):
     """
     odpovede a emaily respondentov
     """
-
     questionid = request.matchdict["question_id"]
     question = request.db_session.query(Question).filter_by(id=questionid).one()
     list=[]
@@ -64,13 +63,6 @@ def view_respondents_answer(request):
         acq_points =  sum(float(a.points) for a in user_and_answers[1])
         item=[cq,user_and_answers,acq_points]
         list.append(item)
-    print(list)
-    # answers_text=answers_text.append([ a for a in c_q.answers])
-    #
-    # tests=[a.incomp_test for a in respondanswers]
-    # res_users=[a.user for a in tests]
-    # res_email=[a.email for a in res_users]
-
 
     return list
 
@@ -128,7 +120,7 @@ def create_answer(request, db_session, text, correct, question_id):         # pr
     return answer.id
 
 def update_points_in_questions(request):
-    print("tu somIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+
     testid = request.matchdict['incomplete_test_id']
 
     json = request.json_body
@@ -138,26 +130,22 @@ def update_points_in_questions(request):
     question = request.db_session.query(Question).filter_by(id=id_question).one()
 
     if question.qtype is 'S':
-        print("U____________________________________________p S otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
         for ans in answer:
             ans.points = float(points)/len(answer)
             request.db_session.merge(ans)
 
     elif question.qtype is 'O':
-        print("U____________________________________________p O otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
         answer.points = points
         request.db_session.merge(answer)
 
     elif question.qtype is 'R':
-        print("U____________________________________________p R otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
         answer.points = points
         request.db_session.merge(answer)
 
     elif question.qtype is 'C':
-        print("U____________________________________________p C otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
         for ans in answer:
             ans.points = float(points)/len(answer)
@@ -329,7 +317,6 @@ def o_question_post(request):
     points = json['points']
     text = json['text']
     answer = json['answer']
-    print(answer)
 
     test = request.db_session.query(Test).filter_by(id=testid).one()
 
@@ -350,7 +337,6 @@ def o_question_post(request):
 
 @view_config(route_name='solved_test', request_method='POST')
 def update_points_in_question(request):
-    print("tu som")
     testid = request.matchdict['incomplete_test_id']
 
     json = request.json_body
@@ -360,26 +346,24 @@ def update_points_in_question(request):
     question = request.db_session.query(Question).filter_by(id=id_question).one()
 
     if question.qtype is 'S':
-        print("U____________________________________________p S otazka : ",question.id)
+
         answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
         for ans in answer:
             ans.points = float(points)/len(answer)
             request.db_session.merge(ans)
 
     elif question.qtype is 'O':
-        print("U____________________________________________p O otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
         answer.points = points
         request.db_session.merge(answer)
 
     elif question.qtype is 'R':
-        print("U____________________________________________p R otazka : ",question.id)
+
         answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
         answer.points = points
         request.db_session.merge(answer)
 
     elif question.qtype is 'C':
-        print("U____________________________________________p C otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
         for ans in answer:
             ans.points = float(points)/len(answer)
