@@ -26,6 +26,9 @@ from ..models.complete_answer import (
 from ..models.incomplete_test import (
     Incomplete_test,
     )
+from ..models.complete_question import (
+    CompleteQuestion,
+    )
 
 #}}}
 
@@ -310,3 +313,37 @@ def o_question_post(request):
                   question_id)
 
     return HTTPFound(request.route_path('newquestion_o', test_id=testid))
+
+@view_config(route_name='solved_test', request_method='POST')
+def update_points_in_question(request):
+    print("tu som")
+    testid = request.matchdict['incomplete_test_id']
+
+    json = request.json_body
+    points = json['points']
+    id_question = json['id_question']
+
+    question = request.db_session.query(Question).filter_by(id=id_question).one()
+    
+    if question.qtype is 'S':
+        print("Up S otazka : ",question.id)
+        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
+        for ans in answer:
+            ans.points = float(points)/len(answer)
+            request.db_session.merge(ans)
+
+    elif question.qtype is 'O':
+        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
+        answer.points = points
+        request.db_session.merge(answer)
+
+    elif question.qtype is 'R':
+        print("Up R otazka : ",question.id)
+
+    elif question.qtype is 'C':
+        print("Up C otazka : ",question.id)
+
+    request.db_session.flush()
+
+    return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+

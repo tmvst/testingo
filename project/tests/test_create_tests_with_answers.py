@@ -55,6 +55,9 @@ class TestCreateTests(DatabaseTestCase):
                     o_question_post(self.request)
                 elif qtype is 'C':
                     c_question_post(self.request)
-                print('Otazka c.' +str(j)+ str(qtype))
+                print('     Otazka c.' +str(j)+ str(qtype))
+
+
+
 
         
