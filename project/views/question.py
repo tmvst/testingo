@@ -130,6 +130,47 @@ def create_answer(request, db_session, text, correct, question_id):         # pr
 
     return answer.id
 
+def update_points_in_questions(request):
+    print("tu somIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+    testid = request.matchdict['incomplete_test_id']
+
+    json = request.json_body
+    points = json['points']
+    id_question = json['id_question']
+
+    question = request.db_session.query(Question).filter_by(id=id_question).one()
+
+    if question.qtype is 'S':
+        print("U____________________________________________p S otazka : ",question.id)
+        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
+        for ans in answer:
+            ans.points = float(points)/len(answer)
+            request.db_session.merge(ans)
+
+    elif question.qtype is 'O':
+        print("U____________________________________________p O otazka : ",question.id)
+        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
+        answer.points = points
+        request.db_session.merge(answer)
+
+    elif question.qtype is 'R':
+        print("U____________________________________________p R otazka : ",question.id)
+        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
+        answer.points = points
+        request.db_session.merge(answer)        
+
+    elif question.qtype is 'C':
+        print("U____________________________________________p C otazka : ",question.id)
+        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
+        for ans in answer:
+            ans.points = float(points)/len(answer)
+            request.db_session.merge(ans)
+
+    request.db_session.flush()
+
+    return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+
+
 
 
 # ---------------------------------- new stuff ------- (babotkina volba) ----------------
@@ -324,26 +365,33 @@ def update_points_in_question(request):
     id_question = json['id_question']
 
     question = request.db_session.query(Question).filter_by(id=id_question).one()
-    
+
     if question.qtype is 'S':
-        print("Up S otazka : ",question.id)
+        print("U____________________________________________p S otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
         for ans in answer:
             ans.points = float(points)/len(answer)
             request.db_session.merge(ans)
 
     elif question.qtype is 'O':
+        print("U____________________________________________p O otazka : ",question.id)
         answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
         answer.points = points
         request.db_session.merge(answer)
 
     elif question.qtype is 'R':
-        print("Up R otazka : ",question.id)
+        print("U____________________________________________p R otazka : ",question.id)
+        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
+        answer.points = points
+        request.db_session.merge(answer)        
 
     elif question.qtype is 'C':
-        print("Up C otazka : ",question.id)
+        print("U____________________________________________p C otazka : ",question.id)
+        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
+        for ans in answer:
+            ans.points = float(points)/len(answer)
+            request.db_session.merge(ans)
 
     request.db_session.flush()
 
     return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
-
