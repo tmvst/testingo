@@ -136,15 +136,15 @@
 						% for solved_test in solved_tests:
 						<div class="panel-body">
 							<a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
-								<p>${solved_test.user.email}</p>
-								<p>${solved_test.date_crt}</p>
-							</a>
+								${solved_test.user.email}</a> <br>
+									${solved_test.date_crt}
+								<hr>
+							</div>
+							%endfor
+							%endif
 						</div>
-						%endfor
-						%endif
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	</%block>
+		</%block>
