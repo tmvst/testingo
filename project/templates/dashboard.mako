@@ -38,8 +38,12 @@
                     </div>
                     <div class="tab-pane" id="solved_tests">
                         <div class="list-group">
-                                % for test in user.incomplete_tests:
+                            % for test in user.incomplete_tests:
+                            %if user.id == userid:
+                                <a href="${request.route_path('solved_test', incomplete_test_id=test.id)}" class="list-group-item">
+                                %else:
                                     <a href="${request.route_path('filled_test', incomplete_test_id=test.id)}" class="list-group-item">
+                            %endif:
                                     ${test.test.name}
                                         <span class="glyphicon glyphicon-check pull-right"></span>
                                     </a>
@@ -57,26 +61,26 @@
 
                     % for test in user.tests:
                         <%
-                        counter=0
-                       %>
-                        <h4><a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h4>
+                            counter=0
+                        %>
+                            <h4><a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h4>
                         %for incomplete_test in test.incomplete_tests:
-                       <%
-                        counter+=1
-                       %>
+                            <%
+                                counter+=1
+                            %>
                                 <div><p>
-                                   Užívtateľ s emailom  <a href="#">${incomplete_test.user}</a> vyplnil test názvom <a href="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}" >
+                                    Užívtateľ s emailom  <a href="#">${incomplete_test.user}</a> vyplnil test názvom <a href="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}" >
                                 ${incomplete_test.test.name}</a>
                                     <div>
-                                        <i class="text-left">dňa ${incomplete_test.date_crt.strftime('%d.%m.%Y')} v čase ${incomplete_test.date_crt.strftime('%H:%M')}</i>
+                                        <i class="text-left">${h.pretty_date(incomplete_test.date_crt)}</i>
                                     </div></p>
                                 </div>
-                                %if counter == 3:
-                                    <% break %>
-                                %endif
+                            %if counter == 3:
+                                <% break %>
+                            %endif
 
                         % endfor
-                        <br>
+                            <br>
                     % endfor
 
                 </div>

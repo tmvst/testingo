@@ -89,34 +89,34 @@
                                             ${answer.text}</i>
                                             </p>
                                     % elif (question.qtype == "S"):
-                                            
+
                                             <p class="text-success">
                                             ${answer.text}
                                             </p>
 
                                     % elif (question.qtype == "C"):
-                                            <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
-                                            <p class="text-success">
+                                    		<p class="text-success">
+                                            <input class="checkInputC" type="checkbox" alue="" checked disabled>
                                             ${answer.text}
                                             </p>
                                     % elif (question.qtype == "R"):
-                                            <input class="radioR pull-left" type="radio" value="" checked disabled >
-                                            <p class="text-success">
+                                    		<span><p class="text-success">
+                                            <input class="radioR" type="radio" value="" checked disabled >
                                             ${answer.text}
-                                            </p>
+                                            </p></span>
                                     % endif
 
                                 % else:
                                     % if (question.qtype == "C"):
-                                            <input class="checkInputC pull-left" type="checkbox" value=""disabled>
-                                            <p class="text-danger">
+                                            <span><p class="text-danger">
+                                            <input class="checkInputC" type="checkbox" value=""disabled>
                                             ${answer.text}
-                                            </p>
+                                            </p></span>
                                     % elif (question.qtype == "R"):
-                                            <input class="radioR pull-left" type="radio" value="" disabled>
-                                            <p>
+                                            <span><p>
+                                            <input class="radioR" type="radio" value="" disabled>
                                             ${answer.text}
-                                            </p>
+                                            </p></span>
                                     % endif
 
                                 % endif
@@ -138,14 +138,14 @@
                                     <span> Test ešte nikto neriešil :(</span>
                                 </div>
                         % else:
+                        	<div class="panel-body">
                             % for solved_test in solved_tests:
-                                    <div class="panel-body">
-                                        <a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
-                                        ${solved_test.user.email}</a> <br>
-                                    ${solved_test.date_crt}
-                                        <hr>
-                                    </div>
+                                    <a href="${request.route_path('solved_test',incomplete_test_id=solved_test.id)}" method="GET">
+                                    ${solved_test.user.email}</a> <br>
+                                    ${h.pretty_date(solved_test.date_crt)}
+                                    <hr>
                             %endfor
+                            </div>
                         %endif
                     </div>
                 </div>

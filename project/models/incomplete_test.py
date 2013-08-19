@@ -31,7 +31,7 @@ class Incomplete_test(Base):
     date_crt = Column(DateTime)
     date_mdf = Column(DateTime)
     user_id = Column(Integer, ForeignKey('user.id'), index=True)
-    user = relationship('User', backref=backref("incomplete_tests", cascade="all, delete-orphan"))
+    user = relationship('User', backref=backref("incomplete_tests",order_by=date_crt.desc(), cascade="all, delete-orphan"))
     test_id = Column(Integer, ForeignKey('test.id'), index=True)
     test = relationship('Test', backref=backref("incomplete_tests",order_by=date_crt.desc(), cascade="all, delete-orphan"))
 
