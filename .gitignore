@@ -39,3 +39,7 @@ nosetests.xml
 env
 .idea
 Testingo/
+
+# Custom
+development.ini
+heroku.ini
