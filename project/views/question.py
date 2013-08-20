@@ -26,6 +26,9 @@ from ..models.complete_answer import (
 from ..models.incomplete_test import (
     Incomplete_test,
     )
+from ..models.complete_question import (
+    CompleteQuestion,
+    )
 
 #}}}
 

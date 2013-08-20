@@ -173,11 +173,11 @@ def show_solved_test(request):
     questions = incomplete_test.complete_questions
     questions_and_answers=[]
     for q in questions:
-        q_answers = request.db_session.query(Complete_answer).filter_by(complete_question=q).all()
+        q_answers = q.complete_q_complete_answers
         acq_points =  sum(float(a.points) for  a in q_answers)
         list=[q, q_answers,acq_points]
         questions_and_answers.append(list)
-    print(questions_and_answers)
+    
     if request.userid is None:
         raise HTTPForbidden
         return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
