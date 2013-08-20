@@ -16,27 +16,27 @@
                     <span> Test neobsahuje žiadne otázky a ani odpovede </span>
             % else:
                 % for question in questions_and_answers:
-                    % if question[0].qtype == 'S':
+                    % if question[0].question.qtype == 'S':
 
                         <div class="panel">
                         <div class="panel-heading">
 
                         % if question[1][0].correct == 1:
 
-                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
-                            <span class="badge pull-right" id="b${question[0].id}">
+                            <h3 class="panel-title" id="o${question[0].question.id}">Otázka č.${question[0].question.number}
+                            <span class="badge pull-right" id="b${question[0].question.id}">
                             %if int(question[2] - question[2])==0:
                                 ${int(question[2])}
                             %else:
                                 ${"%.1f" % question[2]}
                             %endif
-                                /${int(question[0].points)}b
+                                /${int(question[0].question.points)}b
                             </span>
                             </h3>
                         %else:
 
-                                <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
-                                    <span class="badge pull-right" id="b${question[0].id}">
+                                <h3 class="panel-title" id="o${question[0].question.id}">Otázka č.${question[0].question.number}
+                                    <span class="badge pull-right" id="b${question[0].question.id}">
                                         ${0}b
                                   </span>
                                 </h3>
@@ -44,7 +44,7 @@
                             </a>
                         </div>
                         <div class="panel-body">
-                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                            <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
                         % for ans in question[1]:
                             % if ans.correct == 1:
                                     <p class="text-success">
@@ -62,24 +62,24 @@
                         %endfor
                         </div>
                         </div>
-                    % elif question[0].qtype == 'C':
+                    % elif question[0].question.qtype == 'C':
 
                         <div class="panel">
                         <div class="panel-heading">
 
-                        <h3 class="panel-title">Otázka č.${question[0].number}
+                        <h3 class="panel-title">Otázka č.${question[0].question.number}
 
-                        <span class="badge pull-right" id="b${question[0].id}">
+                        <span class="badge pull-right" id="b${question[0].question.id}">
                         %if int(question[2] - question[2])==0:
                             ${int(question[2])}
                         %else:
                             ${"%.1f" % question[2]}
                         %endif
-                            /${int(question[0].points)}b
+                            /${int(question[0].question.points)}b
                         </span></h3>
                         </div>
                         <div class="panel-body">
-                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                            <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
                         % for ans in question[1]:
 
                             % if ans.correct == 1:
@@ -110,26 +110,26 @@
                         </div>
 
 
-                    % elif question[0].qtype == 'O':
+                    % elif question[0].question.qtype == 'O':
 
                         <div class="panel">
                         <div class="panel-heading">
 
-                        <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
-                        <span class="badge pull-right" id="b${question[0].id}">
+                        <h3 class="panel-title" id="o${question[0].question.id}">Otázka č.${question[0].question.number}
+                        <span class="badge pull-right" id="b${question[0].question.id}">
                         %if int(question[2] - question[2])==0:
                             ${int(question[2])}
                         %else:
                             ${"%.1f" % question[2]}
                         %endif
-                            /${int(question[0].points)}b
+                            /${int(question[0].question.points)}b
                         </span>
                         </h3>
 
 
                         </div>
                         <div class="panel-body">
-                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                            <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
                         % for ans in question[1]:
                                 <p>
                                     <strong>Odpoveď užívateľa:</strong>
@@ -142,25 +142,25 @@
                         </div>
 
 
-                    % elif question[0].qtype == 'R':
+                    % elif question[0].question.qtype == 'R':
 
                         <div class="panel">
                         <div class="panel-heading">
 
-                        <h3 class="panel-title">Otázka č.${question[0].number}
+                        <h3 class="panel-title">Otázka č.${question[0].question.number}
 
-                        <span class="badge pull-right" id="b${question[0].id}">
+                        <span class="badge pull-right" id="b${question[0].question.id}">
                         %if int(question[2] - question[2])==0:
                             ${int(question[2])}
                         %else:
                             ${"%.1f" % question[2]}
                         %endif
-                            /${int(question[0].points)}b
+                            /${int(question[0].question.points)}b
                         </span> </h3>
                         </div>
                         <div class="panel-body">
-                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
-                        % for ans in question[0].answers:
+                            <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
+                        % for ans in question[0].question.answers:
 
                             %if question[1][0].correct == 1:
                                 %if ans.correct ==1:

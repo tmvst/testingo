@@ -343,31 +343,19 @@ def update_points_in_question(request):
     points = json['points']
     id_question = json['id_question']
 
-    question = request.db_session.query(Question).filter_by(id=id_question).one()
+    complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
+    qtype=complete_question.question.qtype
 
-    if question.qtype is 'S':
-
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
+    if qtype is 'S' or 'C':
+        answer = complete_question.complete_q_complete_answers
         for ans in answer:
             ans.points = float(points)/len(answer)
             request.db_session.merge(ans)
 
-    elif question.qtype is 'O':
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
-        answer.points = points
+    elif qtype is 'O' or 'R':
+        answer = complete_question = request.db_session.query(Complete_answer).filter_by(complete_question=complete_question).one()
+        answer.points=points
         request.db_session.merge(answer)
-
-    elif question.qtype is 'R':
-
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
-        answer.points = points
-        request.db_session.merge(answer)
-
-    elif question.qtype is 'C':
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
-        for ans in answer:
-            ans.points = float(points)/len(answer)
-            request.db_session.merge(ans)
 
     request.db_session.flush()
 
