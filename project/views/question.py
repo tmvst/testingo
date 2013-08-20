@@ -26,6 +26,9 @@ from ..models.complete_answer import (
 from ..models.incomplete_test import (
     Incomplete_test,
     )
+from ..models.complete_question import (
+    CompleteQuestion,
+    )
 
 #}}}
 
@@ -343,28 +346,30 @@ def update_points_in_question(request):
     points = json['points']
     id_question = json['id_question']
 
-    question = request.db_session.query(Question).filter_by(id=id_question).one()
-
-    if question.qtype is 'S':
-
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
+    complete_question = request.db_session.query(CompleteQuestion).filter_by(question_id=id_question,incomplete_test_id=testid).one()
+    qtype=complete_question.question.qtype
+    if qtype is 'S':
+        answer = complete_question.complete_q_complete_answers
         for ans in answer:
             ans.points = float(points)/len(answer)
             request.db_session.merge(ans)
 
-    elif question.qtype is 'O':
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
-        answer.points = points
-        request.db_session.merge(answer)
+    elif qtype is 'O':
+        answer = complete_question.complete_q_complete_answers
+        print(answer)
+        for ans in answer:
+            ans.points = points
+            request.db_session.merge(answer)
 
-    elif question.qtype is 'R':
+    elif qtype is 'R':
 
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
-        answer.points = points
-        request.db_session.merge(answer)
+        answer = complete_question.complete_q_complete_answers
+        for ans in answer:
+            ans.points = points
+            request.db_session.merge(answer)
 
-    elif question.qtype is 'C':
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
+    elif qtype is 'C':
+        answer = complete_question.complete_q_complete_answers
         for ans in answer:
             ans.points = float(points)/len(answer)
             request.db_session.merge(ans)

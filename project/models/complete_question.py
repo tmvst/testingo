@@ -26,9 +26,9 @@ class CompleteQuestion(Base):
     date_crt = Column(DateTime)
     date_mdf = Column(DateTime)
     incomplete_test_id = Column(Integer, ForeignKey('incomplete_test.id'), index=True)
-    incomplete_test = relationship('Incomplete_test', backref=backref("complete_questions", cascade="all, delete-orphan"))
+    incomplete_test = relationship('Incomplete_test', backref=backref("complete_questions",order_by=id.desc(), cascade="all, delete-orphan"))
     question_id = Column(Integer, ForeignKey('question.id'), index=True)
-    question = relationship('Question', backref=backref("complete_question", cascade="all, delete-orphan"))
+    question = relationship('Question', backref=backref("complete_question",order_by=id.desc(), cascade="all, delete-orphan"))
 
     def __init__(self, incomplete_test, question):
         """Initialization of class.

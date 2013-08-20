@@ -105,26 +105,28 @@ def submit_test(request):
     questions_c=request.db_session.query(Question).filter_by(test=test,qtype='C').all()
 
     for q in questions_c:
+
         answers_c= q.answers
+        print(answers_c)
         complete_question = CompleteQuestion(incomplete_test,q)
         complete_question.date_crt = datetime.datetime.now()
         complete_question.date_mdf = datetime.datetime.now()
         for ans in answers_c:
             correct_answer=request.db_session.query(Answer).filter_by(id=ans.id).one()
-            if str('check'+str(ans.id)) in uac and ans.correct == str(1):
+            if str('check'+str(ans.id)) in uac and ans.correct :
                 uac.remove(str('check'+str(ans.id)))
                 complete_answer=Complete_answer(str(1),str(1),incomplete_test,correct_answer,q,complete_question)
                 complete_answer.points=q.points/len(answers_c)
                 request.db_session.add(complete_answer)
-            elif str('check'+str(ans.id))  in uac and ans.correct == str(0):
+            elif str('check'+str(ans.id))  in uac and not ans.correct:
                 complete_answer=Complete_answer(str(1),str(0),incomplete_test,correct_answer,q,complete_question)
                 complete_answer.points=0
                 request.db_session.add(complete_answer)
-            elif str('check'+str(ans.id)) not in uac and ans.correct == str(1):
+            elif str('check'+str(ans.id)) not in uac and ans.correct:
                 complete_answer=Complete_answer(str(0),str(0),incomplete_test,correct_answer,q,complete_question)
                 complete_answer.points=0
                 request.db_session.add(complete_answer)
-            elif str('check'+str(ans.id)) not in uac and ans.correct == str(0):
+            elif str('check'+str(ans.id)) not in uac and not ans.correct:
                 complete_answer=Complete_answer(str(0),str(1),incomplete_test,correct_answer,q,complete_question)
                 complete_answer.points=q.points/len(answers_c)
                 request.db_session.add(complete_answer)
@@ -167,14 +169,15 @@ def submit_test(request):
 def show_solved_test(request):
     incomplete_test_id = request.matchdict['incomplete_test_id']
     incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()
-    test = request.db_session.query(Test).filter_by(id=incomplete_test.test_id).one()
-    questions = test.questions
+    test = incomplete_test.test
+    questions = incomplete_test.complete_questions
     questions_and_answers=[]
     for q in questions:
-        q_answers = request.db_session.query(Complete_answer).filter_by(incomp_test=incomplete_test,question=q).all()
+        q_answers = request.db_session.query(Complete_answer).filter_by(complete_question=q).all()
         acq_points =  sum(float(a.points) for  a in q_answers)
         list=[q, q_answers,acq_points]
         questions_and_answers.append(list)
+    print(questions_and_answers)
     if request.userid is None:
         raise HTTPForbidden
         return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
