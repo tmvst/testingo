@@ -28,6 +28,10 @@
                         <p><i>
                         ${answer.text}</i>
                         </p>
+                %elif question.qtype=="S":
+                    <p class="text-success">
+                        ${answer.text}
+                        </p>
 
                 % elif (question.qtype == "C"):
                         <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>

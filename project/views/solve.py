@@ -81,16 +81,16 @@ def submit_test(request):
         complete_question.date_crt = datetime.datetime.now()
         complete_question.date_mdf = datetime.datetime.now()
         for ans in answers_s:
-            correct_answer = request.db_session.query(Answer).filter_by(correct=1,id=ans.id).one()
+            correct_answer = request.db_session.query(Answer).filter_by(correct=str(1),id=ans.id).one()
             for ua in user_answers_S:
                 right_u_answer={}
                 if ua['name']==str(str(q.id)+'&'+str(ans.id)):
                     right_u_answer=ua
                     user_answers_S.remove(right_u_answer)
                     break
-            complete_answer=Complete_answer(right_u_answer['value'],0,incomplete_test,correct_answer,q,complete_question)
+            complete_answer=Complete_answer(right_u_answer['value'],str(0),incomplete_test,correct_answer,q,complete_question)
             if complete_answer.text == correct_answer.text:
-                complete_answer.correct=1
+                complete_answer.correct=str(1)
                 complete_answer.points=q.points/len(answers_s)
             else:
                 complete_answer.points=0
@@ -111,21 +111,21 @@ def submit_test(request):
         complete_question.date_mdf = datetime.datetime.now()
         for ans in answers_c:
             correct_answer=request.db_session.query(Answer).filter_by(id=ans.id).one()
-            if str('check'+str(ans.id)) in uac and ans.correct == 1:
+            if str('check'+str(ans.id)) in uac and ans.correct == str(1):
                 uac.remove(str('check'+str(ans.id)))
-                complete_answer=Complete_answer(str(1),1,incomplete_test,correct_answer,q,complete_question)
+                complete_answer=Complete_answer(str(1),str(1),incomplete_test,correct_answer,q,complete_question)
                 complete_answer.points=q.points/len(answers_c)
                 request.db_session.add(complete_answer)
-            elif str('check'+str(ans.id))  in uac and ans.correct == 0:
-                complete_answer=Complete_answer(str(1),0,incomplete_test,correct_answer,q,complete_question)
+            elif str('check'+str(ans.id))  in uac and ans.correct == str(0):
+                complete_answer=Complete_answer(str(1),str(0),incomplete_test,correct_answer,q,complete_question)
                 complete_answer.points=0
                 request.db_session.add(complete_answer)
-            elif str('check'+str(ans.id)) not in uac and ans.correct == 1:
-                complete_answer=Complete_answer(str(0),0,incomplete_test,correct_answer,q,complete_question)
+            elif str('check'+str(ans.id)) not in uac and ans.correct == str(1):
+                complete_answer=Complete_answer(str(0),str(0),incomplete_test,correct_answer,q,complete_question)
                 complete_answer.points=0
                 request.db_session.add(complete_answer)
-            elif str('check'+str(ans.id)) not in uac and ans.correct == 0:
-                complete_answer=Complete_answer(str(0),1,incomplete_test,correct_answer,q,complete_question)
+            elif str('check'+str(ans.id)) not in uac and ans.correct == str(0):
+                complete_answer=Complete_answer(str(0),str(1),incomplete_test,correct_answer,q,complete_question)
                 complete_answer.points=q.points/len(answers_c)
                 request.db_session.add(complete_answer)
             request.db_session.add(complete_question)
@@ -136,14 +136,14 @@ def submit_test(request):
         complete_question = CompleteQuestion(incomplete_test,q)
         complete_question.date_crt = datetime.datetime.now()
         complete_question.date_mdf = datetime.datetime.now()
-        correct_answer = request.db_session.query(Answer).filter_by(question_id=q.id,correct=1).one()
+        correct_answer = request.db_session.query(Answer).filter_by(question_id=q.id,correct=str(1)).one()
         selected_answer=[s for s in uar if 'radio'+str(q.id) in s]
         if str('radio'+str(q.id)+'='+str(correct_answer.id)) in uar:
-            complete_answer=Complete_answer(str(selected_answer[0][selected_answer[0].find("=")+1:]),1,incomplete_test,correct_answer,q,complete_question)
+            complete_answer=Complete_answer(str(selected_answer[0][selected_answer[0].find("=")+1:]),str(1),incomplete_test,correct_answer,q,complete_question)
             complete_answer.points=q.points
             request.db_session.add(complete_answer)
         else:
-            complete_answer=Complete_answer(str(selected_answer[0][selected_answer[0].find("=")+1:]),0,incomplete_test,correct_answer,q,complete_question)
+            complete_answer=Complete_answer(str(selected_answer[0][selected_answer[0].find("=")+1:]),str(0),incomplete_test,correct_answer,q,complete_question)
             complete_answer.points=0
             request.db_session.add(complete_answer)
             request.db_session.add(complete_question)
@@ -155,8 +155,8 @@ def submit_test(request):
         complete_question = CompleteQuestion(incomplete_test,q)
         complete_question.date_crt = datetime.datetime.now()
         complete_question.date_mdf = datetime.datetime.now()
-        correct_answer = request.db_session.query(Answer).filter_by(correct=1,question_id=q.id).one()
-        complete_answer=Complete_answer(ua['value'],0,incomplete_test,correct_answer,q,complete_question)
+        correct_answer = request.db_session.query(Answer).filter_by(correct=str(1),question_id=q.id).one()
+        complete_answer=Complete_answer(ua['value'],str(0),incomplete_test,correct_answer,q,complete_question)
         complete_answer.points=0
         request.db_session.add(complete_answer)
     request.db_session.add(incomplete_test)

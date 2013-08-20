@@ -19,8 +19,6 @@ from pyramid.security import (
 
 from pyramid_mailer.mailer import Mailer
 
-from sqlalchemy import engine_from_config
-
 from .models import (
     DBSession,
     Base,
