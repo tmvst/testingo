@@ -19,8 +19,6 @@ from pyramid.security import (
 
 from pyramid_mailer.mailer import Mailer
 
-from sqlalchemy import engine_from_config
-
 from .models import (
     DBSession,
     Base,
@@ -71,10 +69,7 @@ def main(global_config, **settings):
     # Settings
     authn_policy = AuthTktAuthenticationPolicy(secret=settings['auth_secret_key']) 
     authz_policy = ACLAuthorizationPolicy()
-    #engine = engine_from_config(settings, 'sqlalchemy.')
-    #engine = create_engine('postgresql://tomasvestenicky:heslo@localhost:5432/testingo_dev')
     engine = create_engine(os.environ["DATABASE_URL"])
-    #engine = create_engine('postgresql://barrborra:1111@localhost:5432/testingo_dev')
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine
 

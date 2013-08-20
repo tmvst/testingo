@@ -2,6 +2,7 @@
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
+    <script src="${request.static_path('project:static/js/create_comment.js')}"></script>
     <script type="text/javascript">
         post_url="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}"
     </script>

@@ -372,3 +372,6 @@ def update_points_in_question(request):
     request.db_session.flush()
 
     return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+
+def create_comment(request):
+    pass

@@ -38,7 +38,7 @@ class Answer(Base):
         """Initialization of class.
         """
         self.text = text
-        self.correct = correct
+        self.correct = str(correct)
         self.question = question
 
     def __repr__(self):
