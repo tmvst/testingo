@@ -32,7 +32,7 @@ class Answer(Base):
     text = Column(String(500))
     correct = Column(Boolean)
     question_id = Column(Integer, ForeignKey('question.id'), index=True)
-    question = relationship('Question', backref=backref("answers",order_by=id.desc(), cascade="all, delete-orphan"))
+    question = relationship('Question', backref=backref("answers",order_by=id.asc(), cascade="all, delete-orphan"))
 
     def __init__(self, text, correct, question):
         """Initialization of class.

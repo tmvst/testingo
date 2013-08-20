@@ -35,13 +35,13 @@ class Complete_answer(Base):
     correct = Column(Boolean)
     points = Column(Float)
     incomp_test_id = Column(Integer, ForeignKey('incomplete_test.id'), index=True)
-    incomp_test = relationship('Incomplete_test', backref=backref("complete_answers",order_by=id.desc(), cascade="all, delete-orphan"))
+    incomp_test = relationship('Incomplete_test', backref=backref("complete_answers",order_by=id.asc(), cascade="all, delete-orphan"))
     answer_id = Column(Integer, ForeignKey('answer.id'), index=True)
-    answer = relationship('Answer', backref=backref("complete_answers",order_by=id.desc(), cascade="all, delete-orphan"))
+    answer = relationship('Answer', backref=backref("complete_answers",order_by=id.asc(), cascade="all, delete-orphan"))
     question_id = Column(Integer, ForeignKey('question.id'), index=True)
-    question = relationship('Question', backref=backref("complete_answers",order_by=id.desc(), cascade="all, delete-orphan"))
+    question = relationship('Question', backref=backref("complete_answers",order_by=id.asc(), cascade="all, delete-orphan"))
     complete_question_id = Column(Integer, ForeignKey('complete_question.id'), index=True)
-    complete_question = relationship('CompleteQuestion', backref=backref("complete_q_complete_answers",order_by=id.desc(), cascade="all, delete-orphan"))
+    complete_question = relationship('CompleteQuestion', backref=backref("complete_q_complete_answers",order_by=id.asc(), cascade="all, delete-orphan"))
 
     def __init__(self, text, correct, test, answer, question,complete_question):
         """Initialization of class.
