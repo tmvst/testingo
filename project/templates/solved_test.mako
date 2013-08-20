@@ -21,15 +21,15 @@
                     <span> Test neobsahuje žiadne otázky a ani odpovede </span>
             % else:
                 % for question in questions_and_answers:
-                    % if question[0].qtype == 'S':
+                    % if question[0].question.qtype == 'S':
 
                         <div class="panel">
                         <div class="panel-heading">
-                        <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
+                        <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
 
                             % if question[1][0].correct == 1:
 
-                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
+                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
                             <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="k${question[0].id}" name="${question[2]}"> </a>
                                 <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
                             <span class="badge pull-right" id="b${question[0].id}">
@@ -38,24 +38,24 @@
                             %else:
                                 ${"%.1f" % question[2]}
                             %endif
-                                /${int(question[0].points)}b
+                                /${int(question[0].question.points)}b
                             </span>
                             </h3>
                             %else:
 
-                                 <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
-                                 <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="c${question[0].id}" name="${question[2]}"> </a>
+                                 <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
+                                 <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="k${question[0].id}" name="${question[2]}"> </a>
                                 <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
                                 
                             <span class="badge pull-right" id="b${question[0].id}">
-                                ${question[2]}/${int(question[0].points)}b
+                                ${question[2]}/${int(question[0].question.points)}b
                             </span>
                                 </h3>
                             %endif
                         </a>
                         </div>
                         <div class="panel-body">
-                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                            <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
                         % for ans in question[1]:
                             % if ans.correct == 1:
                                     <p class="text-success">
@@ -72,12 +72,12 @@
                         %endfor
                         </div>
                         </div>
-                    % elif question[0].qtype == 'C':
+                    % elif question[0].question.qtype == 'C':
 
                         <div class="panel">
                         <div class="panel-heading">
-                        <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
-                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
+                        <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
+                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
                             <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="k${question[0].id}" name="${question[2]}"> </a>
                                 <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
                             <span class="badge pull-right" id="b${question[0].id}">
@@ -87,12 +87,12 @@
                         %else:
                             ${"%.1f" % question[2]}
                         %endif
-                            /${int(question[0].points)}b
+                            /${int(question[0].question.points)}b
                         </span>
                         </h3>
                         </div>
                         <div class="panel-body">
-                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                            <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
                         % for ans in question[1]:
 
                             % if ans.correct == 1:
@@ -100,7 +100,6 @@
                                         <span><p class="text-success"><input type="checkbox" disabled="disabled">
                                         ${ans.answer.text}</p></span>
                                 %else:
-
                                         <span><p class="text-success"><input type="checkbox" disabled="disabled" checked="checked">
                                         ${ans.answer.text}</p></span>
                                 %endif
@@ -120,12 +119,12 @@
                         % endfor
                         </div>
                         </div>
-                    % elif question[0].qtype == 'R':
+                    % elif question[0].question.qtype == 'R':
 
                         <div class="panel">
                         <div class="panel-heading">
-                        <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
-                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
+                        <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
+                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
                              <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="k${question[0].id}" name="${question[2]}"> </a>
                                 <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
                                
@@ -135,13 +134,13 @@
                         %else:
                             ${"%.1f" % question[2]}
                         %endif
-                            /${int(question[0].points)}b
+                            /${int(question[0].question.points)}b
                         </span>
                         </h3>
                         </div>
                         <div class="panel-body">
-                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
-                        % for ans in question[0].answers:
+                            <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
+                        % for ans in question[0].question.answers:
 
                             %if question[1][0].correct == 1:
                                 %if ans.correct ==1:
@@ -176,12 +175,12 @@
 
                         </div>
 
-                    % elif question[0].qtype == 'O':
+                    % elif question[0].question.qtype == 'O':
 
                         <div class="panel">
                         <div class="panel-heading">
-                        <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
-                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
+                        <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
+                            <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
                             <a href="#" class="btn glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].id}" name="${question[2]}"> </a>
                             <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
                                
@@ -191,17 +190,17 @@
                         %else:
                             ${"%.1f" % question[2]}
                         %endif
-                            /${int(question[0].points)}b
+                            /${int(question[0].question.points)}b
                         </span>
                         </h3>
                         </div>
                         <div class="panel-body">
-                            <p><strong>Znenie otázky <br></strong>${question[0].text}</p>
+                            <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
 
                              <p><strong>Užívateľová odpoveď <br></strong></p>
 
                             ${question[1][0].text}</p>
-                        <div id="koment${question[0].id}"></div>
+                        <div id="koment${question[0].question.id}"></div>
                         </div>
 
                         </div>
