@@ -177,7 +177,7 @@ def show_solved_test(request):
         acq_points =  sum(float(a.points) for  a in q_answers)
         list=[q, q_answers,acq_points]
         questions_and_answers.append(list)
-    
+
     if request.userid is None:
         raise HTTPForbidden
         return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
