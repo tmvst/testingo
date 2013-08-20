@@ -29,7 +29,8 @@
                             % if question[1][0].correct == 1:
 
                             <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
-                                <a href="#" class="pull-right zbody" id="c${question[0].id}" name="${question[2]}"> Upraviť hodnotenie </a>
+                            <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="k${question[0].id}" name="${question[2]}"> </a>
+                                <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
                             <span class="badge pull-right" id="b${question[0].id}">
                             %if int(question[2] - question[2])==0:
                                 ${int(question[2])}
@@ -42,10 +43,12 @@
                             %else:
 
                                  <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
-                                <a href="#" class="pull-right zbody" id="c${question[0].id}" name="${question[2]}"> Upraviť hodnotenie </a>
+                                 <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="c${question[0].id}" name="${question[2]}"> </a>
+                                <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
+                                
                             <span class="badge pull-right" id="b${question[0].id}">
-                                        ${0}b
-                                  </span>
+                                ${question[2]}/${int(question[0].points)}b
+                            </span>
                                 </h3>
                             %endif
                         </a>
@@ -74,7 +77,8 @@
                         <div class="panel-heading">
                         <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
                             <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
-                                <a href="#" class="pull-right zbody" id="c${question[0].id}" name="${question[2]}"> Upraviť hodnotenie </a>
+                            <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="k${question[0].id}" name="${question[2]}"> </a>
+                                <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
                             <span class="badge pull-right" id="b${question[0].id}">
 
                         %if int(question[2] - question[2])==0:
@@ -121,7 +125,9 @@
                         <div class="panel-heading">
                         <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
                             <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
-                                <a href="#" class="pull-right zbody" id="c${question[0].id}" name="${question[2]}"> Upraviť hodnotenie </a>
+                             <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="k${question[0].id}" name="${question[2]}"> </a>
+                                <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
+                               
                             <span class="badge pull-right" id="b${question[0].id}">
                         %if int(question[2] - question[2])==0:
                             ${int(question[2])}
@@ -175,7 +181,9 @@
                         <div class="panel-heading">
                         <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].id)}" method="GET">
                             <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].number}
-                                <a href="#" class="pull-right zbody" id="c${question[0].id}" name="${question[2]}"> Upraviť hodnotenie </a>
+                            <a href="#" class="btn glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].id}" name="${question[2]}"> </a>
+                            <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
+                               
                             <span class="badge pull-right" id="b${question[0].id}">
                         %if int(question[2] - question[2])==0:
                             ${int(question[2])}
@@ -192,7 +200,8 @@
                              <p><strong>Užívateľová odpoveď <br></strong></p>
 
                             ${question[1][0].text}</p>
-                            </div>
+                        <div id="koment${question[0].id}"></div>
+                        </div>
 
                         </div>
                     % endif

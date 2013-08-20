@@ -72,8 +72,9 @@ def main(global_config, **settings):
     authn_policy = AuthTktAuthenticationPolicy(secret=settings['auth_secret_key']) 
     authz_policy = ACLAuthorizationPolicy()
     #engine = engine_from_config(settings, 'sqlalchemy.')
-    #engine = create_engine('postgresql+pypostgresql://tomasvestenicky:@localhost:5432/testingo_dev')
+    #engine = create_engine('postgresql://tomasvestenicky:heslo@localhost:5432/testingo_dev')
     engine = create_engine(os.environ["DATABASE_URL"])
+    #engine = create_engine('postgresql://localhost/testingo_dev')
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine
 

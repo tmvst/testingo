@@ -2,6 +2,9 @@
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
+    <script type="text/javascript">
+        post_url="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}"
+    </script>
     <div class="page-header">
         <h1>Otázka č.${question.number} z testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
     </div>
@@ -61,9 +64,10 @@
                 <div class="panel">
                 <div class="panel-heading">
 
-                <h3 class="panel-title"> ${answered_q[1][0]}
-                    <a href="#" class="pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" > Upraviť hodnotenie </a>
+                <h3 class="panel-title" id="o${answered_q[0].id}"> ${answered_q[1][0]}
+                    <a href="#" class="pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}"> Upraviť hodnotenie </a>
                 <span class="badge pull-right" id="b${answered_q[0].id}">
+
                 %if int(answered_q[2] - answered_q[2])==0:
                     ${int(answered_q[2])}
                 %else:
