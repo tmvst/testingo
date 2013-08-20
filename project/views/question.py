@@ -115,7 +115,7 @@ def create_answer(request, db_session, text, correct, question_id):         # pr
     """
     question = request.db_session.query(Question).filter_by(id=question_id).one()
 
-    answer = Answer( text, correct, question)
+    answer = Answer( text, str(correct), question)
 
     db_session.add(answer)
     db_session.flush()
@@ -377,3 +377,6 @@ def update_points_in_question(request):
     request.db_session.flush()
 
     return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+
+def create_comment(request):
+    pass

@@ -54,7 +54,7 @@
                 % elif (question.qtype == "R"):
                         <input class="radioR pull-left" type="radio" value="" disabled>
                         <p>
-                            $b{answer.text}
+                            ${answer.text}
                         </p>
                 % endif
 

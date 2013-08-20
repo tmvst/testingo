@@ -2,26 +2,26 @@
 (function() {
   var hide_process, input_template, process_update;
 
-  input_template = function(points, tu) {};
-
-  "    <div class=\"form-group\">        <label for=\"text\"> Komentár: </label>        <textarea class=\"form-control\" name=\"text\" id=\"text\" rows=\"3\" placeholder=\"Obsah komentáru...\" required></textarea>    </div>   ";
+  input_template = function(points, tu) {
+    return "<div class=\"form-group\">\n    <label for=\"text\"> Komentár: </label>\n    <textarea class=\"form-control\" name=\"v\" id=\"l" + tu + "\"  rows=\"3\" placeholder=\"Obsah komentáru...\" required></textarea>\n    <a href=\"#\" class=\"update_b pull-right\" id=\"u" + tu + "\"> Uložiť </a>\n</div> ";
+  };
 
   hide_process = function(id, body) {
     var tu;
+    alert(id);
     tu = id.substring(1);
-    alert(tu);
     $("#k" + tu).hide();
     $("#koment" + tu).append(input_template(body, tu));
-    return $("#t" + tu).click(function() {
+    return $("#u" + tu).click(function() {
       return process_update(this.id, post_url);
     });
   };
 
   process_update = function(id, post_url) {
-    var new_bodyQ, q_id;
-    q_id = 's' + (id.substring(1));
-    new_bodyQ = $("input[name='" + q_id + "']").val();
-    alert(id.substring(1));
+    var new_comment, tu;
+    tu = "l" + (id.substring(1));
+    new_comment = $("input[name='" + tu + "']").val();
+    alert(tu);
     $.ajax({
       url: post_url,
       type: "POST",
@@ -41,7 +41,6 @@
   $(document).ready(function() {
     var ebody;
     ebody = $(".zkomment");
-    alert("tu som");
     return $(".zkomment").click(function() {
       return hide_process(this.id, this.name);
     });

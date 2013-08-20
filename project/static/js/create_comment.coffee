@@ -1,23 +1,24 @@
   input_template = (points,tu) ->
-  "
-    <div class=\"form-group\">
-        <label for=\"text\"> Komentár: </label>
-        <textarea class=\"form-control\" name=\"text\" id=\"text\" rows=\"3\" placeholder=\"Obsah komentáru...\" required></textarea>
-    </div> 
-  "
+    """
+      <div class="form-group">
+          <label for="text"> Komentár: </label>
+          <textarea class="form-control" name="v" id="l#{tu}"  rows="3" placeholder="Obsah komentáru..." required></textarea>
+          <a href="#" class="update_b pull-right" id="u#{tu}"> Uložiť </a>
+      </div> 
+    """
 
   hide_process = (id, body) ->
+    alert(id)
     tu = (id.substring(1))
-    alert(tu)
     $("#k" + tu).hide()
     $("#koment" + tu).append input_template(body,tu)
-    $("#t" + tu).click ->
+    $("#u" + tu).click ->
       process_update @id, post_url
 
   process_update = (id, post_url) ->
-    q_id = 's'+(id.substring(1))
-    new_bodyQ = $("input[name='"+q_id+"']").val()
-    alert(id.substring(1))
+    tu = "l" + (id.substring(1))
+    new_comment = $("input[name='"+tu+"']").val()
+    alert(tu)
 
     $.ajax
       url: post_url
@@ -35,6 +36,5 @@
 
   $(document).ready ->
     ebody = $(".zkomment")
-    alert("tu som")
     $(".zkomment").click ->
       hide_process @id, @name
