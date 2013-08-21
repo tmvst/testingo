@@ -176,7 +176,7 @@ def show_solved_test(request):
         q_answers = q.complete_q_complete_answers
         acq_points =  sum(float(a.points) for  a in q_answers)
         list=[q, q_answers,acq_points]
-        questions_and_answers.insert(0,list)
+        questions_and_answers.append(list)
         # cudne poriadie , otazky k testu by mali ist normalne asc podla id, rovnako by mali fungovat aj odpovede ku
         # complete_question , potom logicky cloveka napadne pouzit append
         # neviem preco, funguje to ale s insertom na zaciatok
