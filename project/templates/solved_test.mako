@@ -181,8 +181,8 @@
                         <div class="panel-heading">
                         <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
                             <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
-                            <a href="#" class="btn glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].id}" name="${question[2]}"> </a>
-                            <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
+                            <a class="btn glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].id}" name="${question[2]}"> </a>
+                            <a class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
                                
                             <span class="badge pull-right" id="b${question[0].id}">
                         %if int(question[2] - question[2])==0:

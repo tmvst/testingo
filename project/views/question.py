@@ -343,26 +343,45 @@ def update_points_in_question(request):
     testid = request.matchdict['incomplete_test_id']
 
     json = request.json_body
-    points = json['points']
-    id_question = json['id_question']
 
-    complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
-    qtype=complete_question.question.qtype
+    if json['nc']: 
+        create_comment(request)
+        #HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+    else:
 
-    if qtype is 'S' or 'C':
-        answer = complete_question.complete_q_complete_answers
-        for ans in answer:
-            ans.points = float(points)/len(answer)
-            request.db_session.merge(ans)
+        points = json['points']
+        id_question = json['id_question']
 
-    elif qtype is 'O' or 'R':
-        answer = complete_question = request.db_session.query(Complete_answer).filter_by(complete_question=complete_question).one()
-        answer.points=points
-        request.db_session.merge(answer)
+        complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
+        qtype=complete_question.question.qtype
 
-    request.db_session.flush()
+        if qtype is 'S' or 'C':
+            answer = complete_question.complete_q_complete_answers
+            for ans in answer:
+                ans.points = float(points)/len(answer)
+                request.db_session.merge(ans)
+
+        elif qtype is 'O' or 'R':
+            answer = complete_question = request.db_session.query(Complete_answer).filter_by(complete_question=complete_question).one()
+            answer.points=points
+            request.db_session.merge(answer)
+
+        request.db_session.flush()
 
     return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
 
 def create_comment(request):
-    pass
+    testid = request.matchdict['incomplete_test_id']
+    print("TUUUU SOOOOm")
+
+    json = request.json_body
+    id_question = json['id_question']
+    comment = json['comment']
+
+    complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
+    complete_question.comment = comment
+    request.db_session.merge(complete_question)
+
+    request.db_session.flush()
+
+    return 0
