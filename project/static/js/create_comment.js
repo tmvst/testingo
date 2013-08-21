@@ -7,7 +7,7 @@
   };
 
   comment_template = function(koment, tu) {
-    return "<div id=\"h" + tu + "\">\n  Komentár:<br>\n  " + koment + "\n<div>";
+    return "<div id=\"koment_text" + tu + "\">\n  Komentár:<br>\n  " + koment + "\n<div>";
   };
 
   hide_process = function(id, event) {
@@ -16,7 +16,7 @@
     q_id = id.substring(1);
     $("#k" + q_id).hide();
     if ($("textarea[name='l" + q_id + "']")) {
-      $("#h" + q_id).hide();
+      $("#koment_text" + q_id).hide();
       $("#koment" + q_id).append(input_template($("textarea[name='l" + q_id + "']").val(), q_id));
     } else {
       $("#koment" + q_id).append(input_template("mm", q_id));
