@@ -9,8 +9,7 @@
 
     <div>
         <p class="lead">
-            Use this document as a way to quick start any new project.
-            All you get is this message and a barebones HTML document.
+            Vitajte na užívateľskom dashboarde, kde sú zobrazené vami vytvorené testy a ich respondenti, vyplnené testy a aktuálna predpoveď počasia.
         </p>
         <div class="row">
             <div class="col-lg-6">
@@ -38,15 +37,16 @@
                     </div>
                     <div class="tab-pane" id="solved_tests">
                         <div class="list-group">
-                            % for test in user.incomplete_tests:
-                            %if user.id == userid:
-                                <a href="${request.route_path('solved_test', incomplete_test_id=test.id)}" class="list-group-item">
+                                %for test in user.incomplete_tests:
+                                %if user.id == userid:
+                                        <a href="${request.route_path('solved_test', incomplete_test_id=test.id)}" class="list-group-item">
                                 %else:
-                                    <a href="${request.route_path('filled_test', incomplete_test_id=test.id)}" class="list-group-item">
-                            %endif:
-                                    ${test.test.name}
-                                        <span class="glyphicon glyphicon-check pull-right"></span>
-                                    </a>
+                                        <a href="${request.route_path('filled_test', incomplete_test_id=test.id)}" class="list-group-item">
+                                              %endif
+                                        ${test.test.name}
+                                            <span class="glyphicon glyphicon-check pull-right"></span>
+                                        </a>
+
                                 % endfor
                         </div>
                     </div>
@@ -82,7 +82,6 @@
                         % endfor
                             <br>
                     % endfor
-
                 </div>
             </div>
         </div>
