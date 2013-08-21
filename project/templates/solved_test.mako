@@ -23,7 +23,7 @@
                 % for question in questions_and_answers:
                     % if question[0].question.qtype == 'S':
 
-                        <div class="panel">
+                        <div class="panel panel-default">
                         <div class="panel-heading">
                         <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
 
@@ -74,7 +74,7 @@
                         </div>
                     % elif question[0].question.qtype == 'C':
 
-                        <div class="panel">
+                        <div class="panel panel-default">
                         <div class="panel-heading">
                         <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
                             <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
@@ -121,7 +121,7 @@
                         </div>
                     % elif question[0].question.qtype == 'R':
 
-                        <div class="panel">
+                        <div class="panel panel-default">
                         <div class="panel-heading">
                         <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
                             <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
@@ -177,7 +177,7 @@
 
                     % elif question[0].question.qtype == 'O':
 
-                        <div class="panel">
+                        <div class="panel panel-default">
                         <div class="panel-heading">
                         <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
                             <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
