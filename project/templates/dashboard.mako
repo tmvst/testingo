@@ -1,6 +1,7 @@
 <%inherit file="default.mako" />
 <%block name="title">Dashboard</%block>
 <%block name="page_content">
+     <script src="${request.static_path('project:static/js/dashboard_view_tests.js')}"></script>
 
     <div class="page-header">
         <h1>Dashboard</h1>
@@ -13,14 +14,16 @@
             All you get is this message and a barebones HTML document.
         </p>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg">  <!--col-lg-6-->
 
                 <ul id="dtab" class="nav nav-tabs">
                     <li class="active"><a href="#created_tests" data-toggle="tab">Vaše testy</a></li>
                     <li><a href="#solved_tests" data-toggle="tab">Vyplnené testy</a></li>
+                    <li><a href="#view_all_tests" data-toggle="tab" id="preh_test" name="Activita">Prehľad testov</a></li>
                 </ul>
                 <p></p>
                 <div class="tab-content">
+
                     <div class="tab-pane fade active in" id="created_tests">
                         <div class="list-group">
                                 % for test in tests:
@@ -36,10 +39,11 @@
                                 % endfor
                         </div>
                     </div>
+
                     <div class="tab-pane" id="solved_tests">
                         <div class="list-group">
                             % for test in user.incomplete_tests:
-                            %if user.id == userid:
+                            % if user.id == userid:
                                 <a href="${request.route_path('solved_test', incomplete_test_id=test.id)}" class="list-group-item">
                                 %else:
                                     <a href="${request.route_path('filled_test', incomplete_test_id=test.id)}" class="list-group-item">
@@ -50,11 +54,44 @@
                                 % endfor
                         </div>
                     </div>
+
+                    <div class="tab-pane" id="view_all_tests">
+                        <div class="list-group">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr class="success">
+                                        <td>Test</td>
+                                        <td>Respondent</td>
+                                        <td>Dátum vzniku</td>
+                                        <td>Dátum zmeny</td>
+                                        <td>Počet bodov</td>
+                                        <td>Pozor</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                %for test in tests:
+                                    %for in_test in test.incomplete_tests:
+                                        <tr>
+                                            <td>${in_test.test.name}</td>
+                                            <td>${in_test.user.email}</td>
+                                            <td>${in_test.date_crt}</td>
+                                            <td>${in_test.date_mdf}</td>
+                                            <td>body</td>
+                                            <td>${in_test.test.name}</td>
+                                        </tr>
+
+                                    %endfor
+                                %endfor
+                                </tbody>                            
+
+                            </table>                          
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="well text-left">
+           <!--<div class="col-lg-6" id="Activita">
+                <div class="well text-left>
                     <h3>
                         Aktivita
                     </h3>
@@ -84,7 +121,7 @@
                     % endfor
 
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 
