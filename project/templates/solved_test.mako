@@ -22,7 +22,7 @@
 		% else:
 		% for question in questions_and_answers:
 
-		<div class="panel">
+		<div class="panel panel-default">
 			<div class="panel-heading">
 				<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET"></a>
 				<h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}</h3>
