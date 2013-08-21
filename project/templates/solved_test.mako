@@ -136,18 +136,18 @@
                         <div class="accordion" id="a${question[0].id}">
                             <div class="accordion-group">
                                 <div class="accordion-heading">
-                                    <div class="panel-footer">
+
                                         <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${question[0].id}" href="#h${question[0].id}">
                                             Komentár
                                         </a>
-                                    </div>
+
                                 </div>
 
                                 <div id="h${question[0].id}" class="accordion-body collapse out">
                                     <div class="accordion-inner">
 
                                         <a class="btn pull-right zkomment" id="upravit_btn${question[0].id}" name="${question[0].comment}">Upraviť</a>
-                                        <div id="koment_text${question[0].id}">
+                                        <div id="koment_text${question[0].id} well well-sm">
                                             Komentár:<br>
                                         %if question[0].comment is not None:
                                          ${question[0].comment}

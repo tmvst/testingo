@@ -64,13 +64,14 @@ def test_view(request):
         test = request.db_session.query(Test).filter_by(id=testid).one()
     except :
          raise HTTPNotFound
-    questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
-    solved_tests=test.incomplete_tests
+
     if request.userid is None:
         raise  HTTPForbidden
     if request.userid is not test.user_id:
         raise  HTTPUnauthorized
     else:
+        questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
+        solved_tests=test.incomplete_tests
         return {'test':test,'questions':questions,'solved_tests':solved_tests}
 
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
@@ -87,8 +88,11 @@ def test_show(request):
     POST = request.POST
     testid = request.matchdict['test_id']
     if '_delete' in POST:
-        test = request.db_session.query(Test).filter_by(id=testid).one()
-        request.db_session.delete(test)
+        try:
+            test = request.db_session.query(Test).filter_by(id=testid).one()
+            request.db_session.delete(test)
+        except:
+            raise HTTPNotFound
         return HTTPFound(request.route_path('dashboard'))
 
     elif '_share' in POST:
@@ -99,13 +103,12 @@ def test_show(request):
         return HTTPFound(request.route_path('showtest',test_id=testid))
 
 def share_test(request, test_id):
-    test = request.db_session.query(Test).filter_by(id=test_id).one()
-
+    try:
+        test = request.db_session.query(Test).filter_by(id=test_id).one()
+    except:
+        raise HTTPNotFound
     if request.userid is test.user.id:
         token = str(random.getrandbits(70))
         test.share_token = token
 
         return token
-
-    raise HTTPException
-    return HTTPException('Nie tvoj test!')

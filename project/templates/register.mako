@@ -33,7 +33,6 @@
                 </tr>
             </div>
             <tr><td><button type="submit" class="btn btn-primary">Zaregistrovať sa</button></td></tr>
-
         </form>
     </table>
 </%block>

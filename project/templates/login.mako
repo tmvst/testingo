@@ -7,15 +7,24 @@
             % if errors != []:
                     <font color="red">${errors[0]}</font><br>
             % endif
-            <div class="input-group">
-                <label for="email">E-mail</label>
-                <input type="email" name="email" required/>
-            </div>
-            <div class="input-group">
-                <label>Heslo</label>
-                <input type="password" name="password" required/>
-            </div>
-            <button type="submit" class="submit-form">Prihlasit sa</button>
+            <table>
+                <div class="input-group">
+                    <tr>
+                        <div class="input-group">
+                            <td><label for="email">E-mail</label></td>
+                            <td><input type="email" name="email" id="email" class="form-control" style="width: 220px;" required/></td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="input-group">
+                            <td><label>Heslo</label></td>
+                            <td><input type="password" name="password" id="password" class="form-control" style="width: 220px;" required/></td>
+                        </div>
+                    </tr>
+                </div>
+                <tr><td><button type="submit-form" class="btn btn-primary">Prihlásiť sa</button></td></tr>
+
+            </table>
         </form>
     </div>
 </%block>

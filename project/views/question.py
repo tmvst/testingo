@@ -8,7 +8,7 @@ from pyramid.httpexceptions import (
     HTTPFound,
     HTTPForbidden,
     HTTPUnauthorized,
-    HTTPNotFound
+    HTTPNotFound,
     )
 
 from ..models.answer import (
@@ -45,12 +45,12 @@ def view_question(request):
         question = request.db_session.query(Question).filter_by(id=questionid).one()
     except:
         raise HTTPNotFound
-    answers = request.db_session.query(Answer).filter_by(question=question).all()
-    if request.userid is None:
 
+    if request.userid is None:
         raise  HTTPForbidden
     if request.userid is not test.user_id:
         raise HTTPUnauthorized
+    answers = request.db_session.query(Answer).filter_by(question=question).all()
     list_of_answers = view_respondents_answer(request)
     return {'test':test,'question':question, 'answers':answers, 'list_of_answers':list_of_answers}
 
@@ -74,14 +74,15 @@ def question_delete(request):
     """
     Deletes selected question from test and db.
     """
-
     testid = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=testid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
     if request.userid is None:
 
         raise  HTTPForbidden
     if request.userid is not test.user_id:
-
         raise HTTPUnauthorized
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
@@ -102,12 +103,13 @@ def create_question(request, db_session, text, points, q_type):         # prida≈
     """
 
     test_id = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=test_id).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=test_id).one()
+    except:
+        raise HTTPNotFound
     if request.userid is None:
-
         raise  HTTPForbidden
     if request.userid is not test.user_id:
-
         raise HTTPUnauthorized
     if points is '':
         points = 0
@@ -125,6 +127,7 @@ def create_question(request, db_session, text, points, q_type):         # prida≈
 def create_answer(request, db_session, text, correct, question_id):         # prida≈• password !!!
     """Creates a new answer for the question.
     """
+
     question = request.db_session.query(Question).filter_by(id=question_id).one()
 
     answer = Answer( text, str(correct), question)
@@ -177,7 +180,10 @@ def update_points_in_questions(request):
 @view_config(route_name='newquestion_s', request_method='GET', renderer='project:templates/newquestion_s.mako')
 def s_question_view(request):
     testid = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=testid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
     if request.userid is None:
 
         raise  HTTPForbidden
@@ -191,7 +197,10 @@ def s_question_view(request):
 @view_config(route_name='newquestion_c', request_method='GET', renderer='project:templates/newquestion_c.mako')
 def c_question_view(request):
     testid = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=testid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
     if request.userid is None:
 
         raise  HTTPForbidden
@@ -207,7 +216,10 @@ def c_question_view(request):
 @view_config(route_name='newquestion_r', request_method='GET', renderer='project:templates/newquestion_r.mako')
 def r_question_view(request):
     testid = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=testid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
     if request.userid is None:
 
         raise  HTTPForbidden
@@ -222,7 +234,10 @@ def r_question_view(request):
 @view_config(route_name='newquestion_o', request_method='GET', renderer='project:templates/newquestion_o.mako')
 def o_question_view(request):
     testid = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=testid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
     if request.userid is None:
         raise  HTTPForbidden
     if request.userid is not test.user_id:
@@ -240,8 +255,10 @@ def s_question_post(request):
     points = json['points']
     text = json['text']
 
-    test = request.db_session.query(Test).filter_by(id=testid).one()
-
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
@@ -266,7 +283,10 @@ def s_question_post(request):
 @view_config(route_name='newquestion_c', request_method='POST')
 def c_question_post(request):
     testid = request.matchdict['test_id']
-    test=request.db_session.query(Test).filter_by(id=testid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
 
     json = request.json_body
     points = json['points']
@@ -312,7 +332,10 @@ def r_question_post(request):
     points = json['points']
     text = json['text']
 
-    test = request.db_session.query(Test).filter_by(id=testid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
 
     if request.userid is None:
         raise  HTTPForbidden
@@ -362,7 +385,10 @@ def o_question_post(request):
     text = json['text']
     answer = json['answer']
 
-    test = request.db_session.query(Test).filter_by(id=testid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
 
     if request.userid    is None:
         raise  HTTPForbidden
@@ -388,8 +414,10 @@ def o_question_post(request):
 def update_points_in_question(request):
     testid = request.matchdict['incomplete_test_id']
     json = request.json_body
-    incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=testid).one()
-
+    try:
+        incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
     if request.userid is None:
         raise  HTTPForbidden
     if request.userid is not incomplete_test.test.user_id:

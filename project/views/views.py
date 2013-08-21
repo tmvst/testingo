@@ -47,7 +47,6 @@ def dashboard(request):
 
     if request.userid == None:
         raise HTTPForbidden
-        return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
 
     uid = request.userid
     user = request.db_session.query(User).filter_by(id=uid).one()

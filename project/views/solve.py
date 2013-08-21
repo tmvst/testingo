@@ -7,6 +7,7 @@ from pyramid.view import (
     )
 from pyramid.httpexceptions import (
     HTTPException,
+    HTTPNotFound,
     HTTPFound,
     HTTPForbidden,
     HTTPUnauthorized
@@ -47,13 +48,13 @@ def view_question(request):
 def submit_test(request):
     json = request.json_body
     test_token = request.matchdict['token']
-    test = request.db_session.query(Test).filter_by(share_token=test_token).one()
-    if test is None:
-        raise HTTPException
-        return HTTPException('Neexistujuci test')
-    if request.userid is None:
+    try:
+        test = request.db_session.query(Test).filter_by(share_token=test_token).one()
+    except:
+        raise HTTPNotFound
 
-        raise  HTTPForbidden
+    if request.userid is None:
+        raise HTTPForbidden
     if request.userid is not test.user_id:
 
         raise HTTPUnauthorized
@@ -174,13 +175,14 @@ def submit_test(request):
 @view_config(route_name='solved_test', request_method='GET', renderer='project:templates/solved_test.mako')
 def show_solved_test(request):
     incomplete_test_id = request.matchdict['incomplete_test_id']
-    incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()
+    try:
+        incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()
+    except:
+        raise HTTPNotFound
     test = incomplete_test.test
     if request.userid is None:
-
         raise  HTTPForbidden
     if request.userid is not test.user_id:
-
         raise HTTPUnauthorized
     questions = incomplete_test.complete_questions
     questions_and_answers=[]
