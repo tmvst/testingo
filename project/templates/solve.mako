@@ -20,7 +20,7 @@
             % else:
                 <form action="#" id="form_solve">
                 % for question in test.questions:
-                    <div class="panel">
+                    <div class="panel panel-default">
                     <div class="panel-heading">
                     <a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
                     <h3 class="panel-title">Otázka č.${question.number}

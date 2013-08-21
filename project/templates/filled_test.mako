@@ -18,7 +18,7 @@
                 % for question in questions_and_answers:
                     % if question[0].question.qtype == 'S':
 
-                        <div class="panel">
+                        <div class="panel panel-default">
                         <div class="panel-heading">
 
                         % if question[1][0].correct == 1:
@@ -64,7 +64,7 @@
                         </div>
                     % elif question[0].question.qtype == 'C':
 
-                        <div class="panel">
+                        <div class="panel panel-default">
                         <div class="panel-heading">
 
                         <h3 class="panel-title">Otázka č.${question[0].question.number}
@@ -112,7 +112,7 @@
 
                     % elif question[0].question.qtype == 'O':
 
-                        <div class="panel">
+                        <div class="panel panel-default">
                         <div class="panel-heading">
 
                         <h3 class="panel-title" id="o${question[0].question.id}">Otázka č.${question[0].question.number}
@@ -144,7 +144,7 @@
 
                     % elif question[0].question.qtype == 'R':
 
-                        <div class="panel">
+                        <div class="panel panel-default">
                         <div class="panel-heading">
 
                         <h3 class="panel-title">Otázka č.${question[0].question.number}
