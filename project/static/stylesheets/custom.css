@@ -22,6 +22,10 @@ body {
 	display: inline-block;
 }
 
+.answerblock .Rradio {
+	display: inline-block;
+}
+
 .answerblock .checkInput {
 	width: 250px;
 	display: inline-block;
@@ -29,6 +33,14 @@ body {
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
+.answerblock .radiotext {
+	width: 250px;
+	display: inline-block;
+	height: 30px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
 
 .navbar-custom {
 	
