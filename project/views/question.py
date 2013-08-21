@@ -387,9 +387,7 @@ def o_question_post(request):
 @view_config(route_name='solved_test', request_method='POST')
 def update_points_in_question(request):
     testid = request.matchdict['incomplete_test_id']
-
     json = request.json_body
-
     incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=testid).one()
 
     if request.userid is None:
@@ -397,7 +395,10 @@ def update_points_in_question(request):
     if request.userid is not incomplete_test.test.user_id:
         return  HTTPUnauthorized('Nie je to tvoja test')
 
-    if json['nc']: 
+
+
+    if json['nc'] is 1: 
+
         create_comment(request)
         #HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
     else:
