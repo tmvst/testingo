@@ -115,7 +115,6 @@
 
                     %endfor
 
-
                     %elif answered_q[0].question.qtype =='S':
                     %for answer in answered_q[1][1]:
                         %if answer.correct == int(1):

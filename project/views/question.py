@@ -62,7 +62,7 @@ def view_respondents_answer(request):
     question = request.db_session.query(Question).filter_by(id=questionid).one()
     list=[]
     for cq in question.complete_question:
-        user_and_answers =[cq.incomplete_test.user,request.db_session.query(Complete_answer).filter_by(question=question,incomp_test=cq.incomplete_test).all()]
+        user_and_answers =[cq.incomplete_test.user,cq.complete_q_complete_answers]
         acq_points =  sum(float(a.points) for a in user_and_answers[1])
         item=[cq,user_and_answers,acq_points]
         list.append(item)
