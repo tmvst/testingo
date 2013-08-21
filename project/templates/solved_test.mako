@@ -24,31 +24,31 @@
 
                     <div class="panel panel-default">
                     <div class="panel-heading">
-                    	<div class="row">
-                    		<div class="col-md-6">
-							<h3 class="panel-title">
-							<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
-							Otázka č.${question[0].question.number}</a></h3>
-							</div>
-							<div class="col-md-6">
-								<h3 class="panel-title" id="o${question[0].id}">
-									<a class="glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].id}" name="${question[2]}"> </a>
-									<a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="panel-title">
+                                <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
+                                    Otázka č.${question[0].question.number}</a></h3>
+                        </div>
+                    <div class="col-md-6">
+                    <h3 class="panel-title" id="o${question[0].id}">
+                        <a class="glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].id}" name="${question[2]}"> </a>
+                        <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
 
-									<span class="badge pull-right" id="b${question[0].id}">
+                    <span class="badge pull-right" id="b${question[0].id}">
 
-										%if int(question[2] - question[2])==0:
-										${int(question[2])}
-										%else:
-										${"%.1f" % question[2]}
-										%endif
-										/${int(question[0].question.points)}b
+                    %if int(question[2] - question[2])==0:
+                        ${int(question[2])}
+                    %else:
+                        ${"%.1f" % question[2]}
+                    %endif
+                        /${int(question[0].question.points)}b
 
-									</span>
-								</h3>
-							</div>
-						</div>
-					</div>
+                    </span>
+                    </h3>
+                    </div>
+                    </div>
+                    </div>
                     <div class="panel-body">
                         <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
 
@@ -129,47 +129,37 @@
                     % elif question[0].question.qtype == 'O':
                             <p><strong>Užívateľová odpoveď <br></strong></p>
 
-                            ${question[1][0].text}
-                            ${question[0].comment}
-                             ${question[0].id}
-
+                        ${question[1][0].text}
+                        
                     % endif
 
-                    <div class="accordion" id="a${question[0].id}">
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                <div class="panel-footer">
-                                    <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${question[0].id}" href="#h${question[0].id}">
-                                        Komentár
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div id="h${question[0].id}" class="accordion-body collapse out">
-                                <div class="accordion-inner">
-
-                                    <a class="btn pull-right zkomment" id="upravit_btn${question[0].id}" name="${question[0].comment}">Upraviť</a>
-                                    <div id="koment_text${question[0].id}">
-                                        Komentár:<br>
-                                        ${question[0].comment}
+                        <div class="accordion" id="a${question[0].id}">
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <div class="panel-footer">
+                                        <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${question[0].id}" href="#h${question[0].id}">
+                                            Komentár
+                                        </a>
                                     </div>
+                                </div>
 
-                                    <div id="koment_area${question[0].id}"></div>
+                                <div id="h${question[0].id}" class="accordion-body collapse out">
+                                    <div class="accordion-inner">
 
+                                        <a class="btn pull-right zkomment" id="upravit_btn${question[0].id}" name="${question[0].comment}">Upraviť</a>
+                                        <div id="koment_text${question[0].id}">
+                                            Komentár:<br>
+                                        %if question[0].comment is not None:
+                                         ${question[0].comment}
+                                        %endif
+                                        </div>
+
+                                        <div id="koment_area${question[0].id}"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    %if question[0].comment:
-                    <p><strong>Komentár</strong><p>
-                    <div id="koment_text${question[0].id}"><i>${question[0].comment}</i></div>
-                    %else:
-                      <p><strong>Komentár</strong><p>
-                           nooooope
-
-                    %endif
-                     </div>
                     </div>
                 % endfor
             % endif

@@ -14,9 +14,11 @@
     var q_id;
     event.preventDefault;
     q_id = id.substring(11);
-    alert(q_id);
     $("#upravit_btn" + q_id).hide();
     $("#koment_text" + q_id).hide();
+    if (!!text) {
+      text = '';
+    }
     $("#koment_area" + q_id).append(input_template(text, q_id));
     return $("#ulozit" + q_id).click(function() {
       return process_update(q_id, post_url);

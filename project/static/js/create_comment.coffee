@@ -16,12 +16,14 @@
     """
 
   hide_process = (id, text, event) ->
+
     event.preventDefault
     q_id = (id.substring(11))
-    alert(q_id)
     $("#upravit_btn" + q_id).hide()
+    $("#koment_text" + q_id).hide()
 
-    $("#koment_text" + q_id).hide() 
+    if  not not text
+      text=''
     $("#koment_area" + q_id).append(input_template(text, q_id))
 
     $("#ulozit" + q_id).click ->
@@ -31,7 +33,6 @@
     id_q = id
     id_area = "area" + id_q
     new_comment = $("textarea[name='"+id_area+"']").val()
-
     $.ajax
       url: post_url
       type: "POST"
