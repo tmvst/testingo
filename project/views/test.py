@@ -10,7 +10,8 @@ from pyramid.httpexceptions import (
     HTTPException,
     HTTPFound,
     HTTPForbidden,
-    HTTPUnauthorized
+    HTTPUnauthorized,
+    HTTPNotFound
     )
 
 from ..models.user import (
@@ -59,20 +60,16 @@ def create_test(request, db_session, name, description):
 def test_view(request):
 
     testid = request.matchdict['test_id']
-    test = request.db_session.query(Test).filter_by(id=testid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except :
+         raise HTTPNotFound
     questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
     solved_tests=test.incomplete_tests
     if request.userid is None:
         raise  HTTPForbidden
-        return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
-
     if request.userid is not test.user_id:
         raise  HTTPUnauthorized
-        return  HTTPUnauthorized('Nie je to tvoj test')
-
-    if test is None:
-        raise HTTPException
-        return HTTPException('Neexistujuci test')
     else:
         return {'test':test,'questions':questions,'solved_tests':solved_tests}
 

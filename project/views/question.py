@@ -7,7 +7,8 @@ from pyramid.httpexceptions import (
     HTTPException,
     HTTPFound,
     HTTPForbidden,
-    HTTPUnauthorized
+    HTTPUnauthorized,
+    HTTPNotFound
     )
 
 from ..models.answer import (
@@ -39,18 +40,17 @@ def view_question(request):
     """
     testid = request.matchdict['test_id']
     questionid = request.matchdict["question_id"]
-    test = request.db_session.query(Test).filter_by(id=testid).one()
-    question = request.db_session.query(Question).filter_by(id=questionid).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+        question = request.db_session.query(Question).filter_by(id=questionid).one()
+    except:
+        raise HTTPNotFound
     answers = request.db_session.query(Answer).filter_by(question=question).all()
     if request.userid is None:
+
         raise  HTTPForbidden
-        return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
     if request.userid is not test.user_id:
-        raise  HTTPUnauthorized
-        return  HTTPUnauthorized('Nie je to tvoja otázka')
-    if test is None:
-        raise HTTPException
-        return HTTPException('Neexistujuca otazka')
+        raise HTTPUnauthorized
     list_of_answers = view_respondents_answer(request)
     return {'test':test,'question':question, 'answers':answers, 'list_of_answers':list_of_answers}
 
@@ -77,6 +77,12 @@ def question_delete(request):
 
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
+    if request.userid is None:
+
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+
+        raise HTTPUnauthorized
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
     questionid = request.matchdict['question_id']
@@ -97,6 +103,12 @@ def create_question(request, db_session, text, points, q_type):         # prida�
 
     test_id = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=test_id).one()
+    if request.userid is None:
+
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+
+        raise HTTPUnauthorized
     if points is '':
         points = 0
     test.sum_points=test.sum_points + int(points)
@@ -166,7 +178,12 @@ def update_points_in_questions(request):
 def s_question_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
+    if request.userid is None:
 
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+
+        raise HTTPUnauthorized
     solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
 
     return {'errors':[], 'test':test,'solved_tests':solved_tests}
@@ -175,6 +192,13 @@ def s_question_view(request):
 def c_question_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
+    if request.userid is None:
+
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+
+        raise HTTPUnauthorized
+
 
     solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
 
@@ -184,6 +208,12 @@ def c_question_view(request):
 def r_question_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
+    if request.userid is None:
+
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+
+        raise HTTPUnauthorized
 
     solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
 
@@ -193,6 +223,10 @@ def r_question_view(request):
 def o_question_view(request):
     testid = request.matchdict['test_id']
     test = request.db_session.query(Test).filter_by(id=testid).one()
+    if request.userid is None:
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+        raise HTTPUnauthorized
 
     solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
 
@@ -280,6 +314,13 @@ def r_question_post(request):
 
     test = request.db_session.query(Test).filter_by(id=testid).one()
 
+    if request.userid is None:
+        raise  HTTPForbidden
+        return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
+    if request.userid is not test.user_id:
+        raise  HTTPUnauthorized
+        return  HTTPUnauthorized('Nie je to tvoja test')
+
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
@@ -323,6 +364,11 @@ def o_question_post(request):
 
     test = request.db_session.query(Test).filter_by(id=testid).one()
 
+    if request.userid    is None:
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+        raise  HTTPUnauthorized
+
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
@@ -343,6 +389,13 @@ def update_points_in_question(request):
     testid = request.matchdict['incomplete_test_id']
 
     json = request.json_body
+
+    incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=testid).one()
+
+    if request.userid is None:
+        raise  HTTPForbidden
+    if request.userid is not incomplete_test.test.user_id:
+        return  HTTPUnauthorized('Nie je to tvoja test')
 
     if json['nc']: 
         create_comment(request)
@@ -372,7 +425,6 @@ def update_points_in_question(request):
 
 def create_comment(request):
     testid = request.matchdict['incomplete_test_id']
-    print("TUUUU SOOOOm")
 
     json = request.json_body
     id_question = json['id_question']
