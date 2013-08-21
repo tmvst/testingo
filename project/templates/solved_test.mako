@@ -30,8 +30,8 @@
                             % if question[1][0].correct == 1:
 
                             <h3 class="panel-title" id="o${question[0].id}">Otázka č.${question[0].question.number}
-                            <a href="#" class="btn glyphicon glyphicon-envelope pull-right komment" id="k${question[0].id}" name="${question[2]}"> </a>
-                                <a href="#" class="btn glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
+                            <a href="#" class="glyphicon glyphicon-envelope pull-right komment" id="k${question[0].id}" name="${question[2]}"> </a>
+                            <a href="#" class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
                             <span class="badge pull-right" id="b${question[0].id}">
                             %if int(question[2] - question[2])==0:
                                 ${int(question[2])}
