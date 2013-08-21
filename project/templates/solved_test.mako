@@ -32,7 +32,7 @@
 							</div>
 							<div class="col-md-6">
 								<h3 class="panel-title" id="o${question[0].id}">
-									<a class="glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].question.id}" name="${question[2]}"> </a>
+									<a class="glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].id}" name="${question[2]}"> </a>
 									<a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
 
 									<span class="badge pull-right" id="b${question[0].id}">
@@ -130,12 +130,22 @@
                             <p><strong>Užívateľová odpoveď <br></strong></p>
 
                             ${question[1][0].text}
+                            ${question[0].comment}
+                             ${question[0].id}
 
                     % endif
 
                     <div id="koment${question[0].question.id}"></div>
 
-                    </div>
+                    %if question[0].comment:
+                    <p><strong>Komentár</strong><p>
+                    <div id="koment_text${question[0].id}"><i>${question[0].comment}</i></div>
+                    %else:
+                      <p><strong>Komentár</strong><p>
+                           nooooope
+
+                    %endif
+                     </div>
                     </div>
                 % endfor
             % endif
