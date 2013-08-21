@@ -119,9 +119,10 @@
                             <p><strong>Užívateľová odpoveď <br></strong></p>
 
                             ${question[1][0].text}
-                            <div id="koment${question[0].question.id}"></div>
 
                     % endif
+
+                    <div id="koment${question[0].question.id}"></div>
 
                     </div>
                     </div>

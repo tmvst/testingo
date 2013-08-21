@@ -372,7 +372,6 @@ def update_points_in_question(request):
 
 def create_comment(request):
     testid = request.matchdict['incomplete_test_id']
-    print("TUUUU SOOOOm")
 
     json = request.json_body
     id_question = json['id_question']
