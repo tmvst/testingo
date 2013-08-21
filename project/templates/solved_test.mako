@@ -33,7 +33,7 @@
 							<div class="col-md-6">
 								<h3 class="panel-title" id="o${question[0].id}">
 									<a class="glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].question.id}" name="${question[2]}"> </a>
-									<a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
+									<a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
 
 									<span class="badge pull-right" id="b${question[0].id}">
 
