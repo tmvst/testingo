@@ -1,39 +1,36 @@
   input_template = (text,tu) ->
     """
-      <div class="form-group" id="d#{tu}">
+      <div class="form-group" id="textarea_vykresli#{tu}">
           <label for="text"> Komentár: </label>
-          <textarea class="form-control" name="l#{tu}" id="l#{tu}"  rows="3" required>#{text}</textarea>
-          <a href="#" class="update_b pull-right" id="u#{tu}"> Uložiť </a>
+          <textarea class="form-control" name="area#{tu}" id="area#{tu}"  rows="3" placeholder="Obsah komentára..." required>#{text}</textarea>
+          <a href="#" class="update_b pull-right" id="ulozit#{tu}"> Uložiť </a>
       </div> 
     """
 
   comment_template = (koment,tu) ->
     """
-    <div id="h#{tu}">
+    <div id="koment_text#{tu}">
       Komentár:<br>
       #{koment}
-    <div>
+    </div>
     """
 
-  hide_process = (id, event) ->
+  hide_process = (id, text, event) ->
     event.preventDefault
-    q_id = (id.substring(1))
-    $("#k" + q_id).hide()
+    q_id = (id.substring(11))
+    alert(q_id)
+    $("#upravit_btn" + q_id).hide()
 
-    if $("textarea[name='l" + q_id + "']")
-      $("#h" + q_id).hide()
-      $("#koment" + q_id).append(input_template($("textarea[name='l" + q_id + "']").val(), q_id))
-    else
-      $("#koment" + q_id).append(input_template("mm", q_id))       
+    $("#koment_text" + q_id).hide() 
+    $("#koment_area" + q_id).append(input_template(text, q_id))
 
-    $("#u" + q_id).click ->
-      process_update @id, post_url
+    $("#ulozit" + q_id).click ->
+      process_update q_id, post_url
 
   process_update = (id, post_url) ->
-    id_q = (id.substring(1))
-    id_area = "l" + id_q
+    id_q = id
+    id_area = "area" + id_q
     new_comment = $("textarea[name='"+id_area+"']").val()
-    alert(new_comment)
 
     $.ajax
       url: post_url
@@ -44,9 +41,9 @@
         id_question: id_q
         nc: 1
     .done (response) ->
-      $("#koment" + id_q).append comment_template(new_comment, id_q)
-      $("#d" + id_q).hide()
-      $("#k" + id_q).show()
+      $("#koment_area" + id_q).append comment_template(new_comment, id_q)
+      $("#textarea_vykresli" + id_q).hide()
+      $("#upravit_btn" + id_q).show()
     .fail (response) ->
       console.log response + "neupdatol som comment"
 
@@ -55,4 +52,4 @@
   $(document).ready ->
     ebody = $(".zkomment")
     $(".zkomment").click ->
-      hide_process @id, event
+      hide_process @id, @name, event

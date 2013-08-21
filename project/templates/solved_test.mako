@@ -33,7 +33,7 @@
 							<div class="col-md-6">
 								<h3 class="panel-title" id="o${question[0].id}">
 									<a class="glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].id}" name="${question[2]}"> </a>
-									<a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
+									<a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
 
 									<span class="badge pull-right" id="b${question[0].id}">
 
@@ -135,7 +135,31 @@
 
                     % endif
 
-                    <div id="koment${question[0].question.id}"></div>
+                    <div class="accordion" id="a${question[0].id}">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <div class="panel-footer">
+                                    <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${question[0].id}" href="#h${question[0].id}">
+                                        Komentár
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div id="h${question[0].id}" class="accordion-body collapse out">
+                                <div class="accordion-inner">
+
+                                    <a class="btn pull-right zkomment" id="upravit_btn${question[0].id}" name="${question[0].comment}">Upraviť</a>
+                                    <div id="koment_text${question[0].id}">
+                                        Komentár:<br>
+                                        ${question[0].comment}
+                                    </div>
+
+                                    <div id="koment_area${question[0].id}"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     %if question[0].comment:
                     <p><strong>Komentár</strong><p>
