@@ -45,3 +45,13 @@ body {
 .navbar-custom {
 	
 }
+
+.panel-title a {
+	color: #428bca;
+	padding-left: 5px;
+}
+
+.panel-title a:hover {
+	color: black;
+	cursor: pointer;
+}
