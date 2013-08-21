@@ -12,7 +12,6 @@
 
   hide_process = function(id, body, event) {
     var tu;
-    alert(id);
     event.preventDefault;
     tu = id.substring(1);
     $("#k" + tu).hide();
@@ -26,7 +25,6 @@
     var new_comment, tu;
     tu = "l" + (id.substring(1));
     new_comment = $("textarea[name='" + tu + "']").val();
-    alert(new_comment);
     $.ajax({
       url: post_url,
       type: "POST",
@@ -38,7 +36,8 @@
       })
     }).done(function(response) {
       $("#koment" + (id.substring(1))).append(comment_template(new_comment));
-      return $("#d" + (id.substring(1))).hide();
+      $("#d" + (id.substring(1))).hide();
+      return $("#k" + (id.substring(1))).show();
     }).fail(function(response) {
       return console.log(response + "neupdatol som comment");
     });

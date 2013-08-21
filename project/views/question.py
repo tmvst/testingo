@@ -344,7 +344,7 @@ def update_points_in_question(request):
 
     json = request.json_body
 
-    if json['nc']: 
+    if json['nc'] is 1: 
         create_comment(request)
         #HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
     else:

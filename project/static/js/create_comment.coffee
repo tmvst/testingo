@@ -14,7 +14,6 @@
     """
 
   hide_process = (id, body, event) ->
-    alert(id)
     event.preventDefault
     tu = (id.substring(1))
     $("#k" + tu).hide()
@@ -25,7 +24,6 @@
   process_update = (id, post_url) ->
     tu = "l" + (id.substring(1))
     new_comment = $("textarea[name='"+tu+"']").val()
-    alert(new_comment)
 
     $.ajax
       url: post_url
@@ -38,6 +36,7 @@
     .done (response) ->
       $("#koment" + (id.substring(1))).append comment_template(new_comment)
       $("#d" + (id.substring(1))).hide()
+      $("#k" + (id.substring(1))).show()
     .fail (response) ->
       console.log response + "neupdatol som comment"
 

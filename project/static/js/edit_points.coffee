@@ -13,7 +13,6 @@
   process_update = (id, post_url) ->
     q_id = 's'+(id.substring(1))
     new_bodyQ = $("input[name='"+q_id+"']").val()
-    alert(id.substring(1))
 
     $.ajax
       url: post_url
@@ -22,6 +21,7 @@
       data: JSON.stringify
         points: new_bodyQ
         id_question: (id.substring(1))
+        nc: 0
     .done (response) ->
       top.location.href = post_url
     .fail (response) ->
