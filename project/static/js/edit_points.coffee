@@ -1,6 +1,8 @@
   input_template = (points,tu) ->
-    "<a href=\"#\" class=\"update_b pull-right\" id=\"t" + tu + "\"> Uložiť </a>\n
-    <input class=\"pull-right\" value=\"" + points + "\" name=\"s" + tu + "\"> "
+    """
+    <a href="#" class="update_b pull-right" id="t#{tu}"> Uložiť </a>
+    <input class="form-control-my pull-right" value="#{points}" name="s#{tu}"> 
+    """
 
   hide_process = (id, body) ->
     tu = (id.substring(1))
@@ -13,7 +15,6 @@
   process_update = (id, post_url) ->
     q_id = 's'+(id.substring(1))
     new_bodyQ = $("input[name='"+q_id+"']").val()
-    alert(id.substring(1))
 
     $.ajax
       url: post_url

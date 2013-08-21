@@ -24,25 +24,30 @@
 
                     <div class="panel panel-default">
                     <div class="panel-heading">
-						<h3 class="panel-title pull-left clearfix" id="o${question[0].id}">
-						<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
-						Otázka č.${question[0].question.number}</a></h3>
+                    	<div class="row">
+                    		<div class="col-md-6">
+							<h3 class="panel-title">
+							<a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
+							Otázka č.${question[0].question.number}</a></h3>
+							</div>
+							<div class="col-md-6">
+								<h3 class="panel-title" id="o${question[0].id}">
+									<a class="glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].question.id}" name="${question[2]}"> </a>
+									<a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
 
-							<h3 class="panel-title clearfix">
-								<a class="glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].question.id}" name="${question[2]}"> </a>
-								<a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}"> </a>
+									<span class="badge pull-right" id="b${question[0].id}">
 
-								<span class="badge pull-right" id="b${question[0].id}">
+										%if int(question[2] - question[2])==0:
+										${int(question[2])}
+										%else:
+										${"%.1f" % question[2]}
+										%endif
+										/${int(question[0].question.points)}b
 
-									%if int(question[2] - question[2])==0:
-									${int(question[2])}
-									%else:
-									${"%.1f" % question[2]}
-									%endif
-									/${int(question[0].question.points)}b
-
-								</span>
-							</h3>
+									</span>
+								</h3>
+							</div>
+						</div>
 					</div>
                     <div class="panel-body">
                         <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
