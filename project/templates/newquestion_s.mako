@@ -12,7 +12,7 @@
         <h1>Nová otázka (fráza) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
     </div>
 
-    <div class="container" id="newq">
+    <div id="newq">
         <form action="#" id="form_s">
             <div class="form-group">
                 <label for="text">Znenie otázky</label>

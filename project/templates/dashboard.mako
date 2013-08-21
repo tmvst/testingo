@@ -7,7 +7,7 @@
         <a href="${request.route_path('newtest')}" class="btn btn-primary pull-right">Nový test</a>
     </div>
 
-    <div class="container">
+    <div>
         <p class="lead">
             Use this document as a way to quick start any new project.
             All you get is this message and a barebones HTML document.

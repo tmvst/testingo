@@ -4,7 +4,7 @@
     <div class="page-header">
         <h1>${incomplete_test.test.name}</h1>
     </div>
-    <div class="container">
+    <div>
         <div class="control-group">
             <div class="controls">
                 <p>${incomplete_test.test.description}</p>

@@ -8,7 +8,7 @@
     <div class="page-header">
         <h1>${test.name}</h1>
     </div>
-    <div class="container">
+    <div>
         <div class="control-group">
             <div class="controls">
                 <p>${test.description}</p>

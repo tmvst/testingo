@@ -3,7 +3,7 @@
     <span> Test neobsahuje žiadne otázky </span>
 % else:
     % for question in test.questions:
-        <div class="panel">
+        <div class="panel panel-default">
         <div class="panel-heading">
 
         <a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
@@ -34,7 +34,7 @@
                         </p>
 
                 % elif (question.qtype == "C"):
-                        <input class="checkInputC pull-left" type="checkbox" alue="" checked disabled>
+                        <input class="checkInputC pull-left" type="checkbox" value="" checked disabled>
                         <p class="text-success">
                         ${answer.text}
                         </p>

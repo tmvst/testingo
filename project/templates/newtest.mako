@@ -5,7 +5,7 @@
 	<h1>Nový test</h1>
 </div>
 
-<div class="container">
+<div>
 	<form action="${request.route_path('newtest')}" method="POST">
 		<div class="form-group">
 			<label for="name">Názov</label>

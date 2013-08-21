@@ -5,7 +5,7 @@
         <h1>Zoznamy respondentov</h1>
     </div>
 
-    <div class="container">
+    <div>
         <form action="${request.route_path('getlist')}" method="POST">
             <button type="submit" class="btn btn-primary pull-right">Pridať zoznam</button>
         </form>

@@ -9,7 +9,7 @@
         <h1>Otázka č.${question.number} z testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
     </div>
 
-    <div class="container">
+    <div>
         %if question.test.share_token is None:
                 <form action="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}" method="POST">
                     <button type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
@@ -61,7 +61,7 @@
                 <span> Test nevyplnili žiadni respondenti </span>
         % else:
             % for answered_q in list_of_answers:
-                <div class="panel">
+                <div class="panel panel-default">
                 <div class="panel-heading">
 
                 <h3 class="panel-title" id="o${answered_q[0].id}"> ${answered_q[1][0]}

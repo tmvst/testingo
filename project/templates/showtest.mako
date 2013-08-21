@@ -15,7 +15,7 @@
 
     <% questions = test.questions %>
 
-    <div class="container">
+    <div>
         <div class="pull-right">
                 % if test.share_token is None:
                     <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
@@ -64,7 +64,7 @@
                         % else:
 
                         % for question in questions:
-                            <div class="panel">
+                            <div class="panel panel-default">
                             <div class="panel-heading">
 
                             <a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
@@ -129,7 +129,7 @@
 
                 <div class="col-lg-3">
 
-                    <div class="panel">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Riešitelia</h3>
                         </div>
