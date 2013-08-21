@@ -14,9 +14,9 @@
 
     <h2><ul>
         <li>konzistentna kontrola input fieldov na celom webe , pri registracii je to napr defualt html, pri vytvarani otazok nas validator od jquery</li>
-        <li>Spravit otvorenu otazku tj, interface pre vyplnani, jej vyhodnotenie</li>
-        <li>Moznost upravit body pri vsetkych typoch otazok - tazky oriesok ? ci nie ? asi ano :)</li>
-        <li>Komentare? primarne od  adminov testov ==> angazovanie complete_question </li>
+        <li>vytvorenie noveho testu z existujuceho</li>
+        <li>vytvorenie viewu riesitelia testu, v riesiteloch moznost vyhladavania</li>
+        <li>statistiky - mozno vo forme grafov </li>
     </ul>
     </h2>
 </%block>

@@ -51,6 +51,12 @@ def submit_test(request):
     if test is None:
         raise HTTPException
         return HTTPException('Neexistujuci test')
+    if request.userid is None:
+
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+
+        raise HTTPUnauthorized
 
     user_id = request.userid
     user = request.db_session.query(User).filter_by(id=user_id).first()
@@ -170,6 +176,12 @@ def show_solved_test(request):
     incomplete_test_id = request.matchdict['incomplete_test_id']
     incomplete_test = request.db_session.query(Incomplete_test).filter_by(id=incomplete_test_id).one()
     test = incomplete_test.test
+    if request.userid is None:
+
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+
+        raise HTTPUnauthorized
     questions = incomplete_test.complete_questions
     questions_and_answers=[]
     for q in questions:
@@ -180,13 +192,8 @@ def show_solved_test(request):
         # cudne poriadie , otazky k testu by mali ist normalne asc podla id, rovnako by mali fungovat aj odpovede ku
         # complete_question , potom logicky cloveka napadne pouzit append
         # neviem preco, funguje to ale s insertom na zaciatok
-    if request.userid is None:
-        raise HTTPForbidden
-        return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
 
-    if request.userid is not test.user_id:
-        raise HTTPUnauthorized
-        return HTTPUnauthorized('Nie je to tebou vytvorený test')
+
 
     return {'incomplete_test':incomplete_test,'questions_and_answers':questions_and_answers}
 
