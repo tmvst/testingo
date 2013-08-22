@@ -19,6 +19,7 @@
         <li>statistiky - mozno vo forme grafov </li>
         <li>odpocitavanie casu na test - JS</li>
         <li>potvrdzovacia hlaska cez bootstrap nejaky js confirm dialog</li>
+        <li>formátovanie textu v open question</li>
     </ul>
     </h2>
 </%block>
