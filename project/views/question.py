@@ -155,7 +155,7 @@ def update_points_in_question_showQ(request):
 
     if json['nc']:
        
-        create_comment_showQ(request)
+        create_comment(request)
         #HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
     else:
 
@@ -180,9 +180,7 @@ def update_points_in_question_showQ(request):
 
     return HTTPFound(request.route_path('showtest', test_id=testid))
 
-
-def create_comment_showQ(request):
-
+def create_comment(request):
     json = request.json_body
     id_question = json['id_question']
     comment = json['comment']
@@ -412,17 +410,4 @@ def update_points_in_question(request):
 
     return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
 
-def create_comment(request):
-    testid = request.matchdict['incomplete_test_id']
 
-    json = request.json_body
-    id_question = json['id_question']
-    comment = json['comment']
-
-    complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
-    complete_question.comment = comment
-    request.db_session.merge(complete_question)
-
-    request.db_session.flush()
-
-    return 0
