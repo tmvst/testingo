@@ -81,7 +81,7 @@
                                             <td>${cnt}</td>
                                             <td>${in_test.id}</td>
                                             <td>
-                                                <a href="${request.route_path('solved_test', incomplete_test_id=test.id)}">
+                                                <a href="${request.route_path('showtest',test_id=test.id)}">
                                                     ${in_test.test.name}
                                                 </a>
                                             </td>
