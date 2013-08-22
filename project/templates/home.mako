@@ -20,6 +20,11 @@
         <li>odpocitavanie casu na test - JS</li>
         <li>potvrdzovacia hlaska cez bootstrap nejaky js confirm dialog</li>
         <li>formátovanie textu v open question</li>
+        <li>umožniť nevyplniť radio question</li>
+        <li>private/public test nastaviť</li>
+        <li>povinná/nepovinná otázka</li>
+        <li>opakovaný update bodov a komentov</li>
+        <li>zoznam respondentov</li>
     </ul>
     </h2>
 </%block>
