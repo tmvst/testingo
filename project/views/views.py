@@ -54,20 +54,6 @@ def dashboard(request):
 
     return {'errors':[], 'tests': user.tests,'userid':uid}
 
-def view_all_tests(request):
-    uid = request.userid
-    user = request.db_session.query(User).filter_by(id=uid).one()
-
-    tests = user.test
-    for test in tests:
-        incomplete_tests = request.db_session.query(Incomplete_test).filter_by(test=test).all()
-        emails = [a.user.email for a in incomplete_tests]
-        emails_and_tests = zip(list(emails,incomplete_tests))
-
-    print(emails_and_tests)
-
-    return {'errors':[], 'emails_and_tests': emails_and_tests}
-
 
 
 
