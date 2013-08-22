@@ -27,7 +27,6 @@ from ..authenticator import (
 @notfound_view_config(renderer='project:templates/errors/notfound.mako')
 def not_found(request):
     if request.userid == None:
-        # TREBA ZMENIT ABY ISLO NA LOGIN!
         raise HTTPForbidden
 
     uid = request.userid

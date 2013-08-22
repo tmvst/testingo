@@ -58,15 +58,15 @@ def create_test(request, db_session, name, description):
     return test.id
 @view_config(route_name='showtest', request_method='GET', renderer='project:templates/showtest.mako')
 def test_view(request):
-
+    if request.userid is None:
+        raise  HTTPForbidden
     testid = request.matchdict['test_id']
     try:
         test = request.db_session.query(Test).filter_by(id=testid).one()
     except :
          raise HTTPNotFound
 
-    if request.userid is None:
-        raise  HTTPForbidden
+
     if request.userid is not test.user_id:
         raise  HTTPUnauthorized
     else:
