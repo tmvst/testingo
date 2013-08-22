@@ -194,6 +194,27 @@ def create_comment_showQ(request):
     request.db_session.flush()
 
     return 0
+def new_question_wrapper(request,qtype):
+    testid = request.matchdict['test_id']
+
+    json = request.json_body
+    points = json['points']
+    text = json['text']
+
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
+    if test.share_token:
+        return HTTPFound(request.route_path('showtest', test_id=testid))
+
+    question = create_question(request, request.db_session,
+                                  text,
+                                  int(points),
+                                  qtype
+    )
+    question.mandatory=json['is_q_mandatory']
+    return question
 
 
 # ---------------------------------- new stuff ------- (babotkina volba) ----------------
@@ -272,27 +293,9 @@ def o_question_view(request):
 @view_config(route_name='newquestion_s', request_method='POST')
 def s_question_post(request):
     testid = request.matchdict['test_id']
-
     json = request.json_body
-    points = json['points']
-    text = json['text']
-
-    try:
-        test = request.db_session.query(Test).filter_by(id=testid).one()
-    except:
-        raise HTTPNotFound
-    if test.share_token:
-        return HTTPFound(request.route_path('showtest', test_id=testid))
-
-    question = create_question(request, request.db_session,
-                                  text,
-                                  int(points),
-                                  'S'
-    )
-    question.mandatory=json['is_q_mandatory']
-
+    question = new_question_wrapper(request,'S')
     # q_type reprezentuje typ otazky S,C,R,O
-
     answers = json['answers']
     for a in answers :
         ans = a['value']
@@ -300,30 +303,13 @@ def s_question_post(request):
                       ans,
                       1,
                       question)
-
     return HTTPFound(request.route_path('newquestion_s', test_id=testid))
 
 @view_config(route_name='newquestion_c', request_method='POST')
 def c_question_post(request):
     testid = request.matchdict['test_id']
-    try:
-        test = request.db_session.query(Test).filter_by(id=testid).one()
-    except:
-        raise HTTPNotFound
-
     json = request.json_body
-    points = json['points']
-    text = json['text']
-
-    if test.share_token:
-        return HTTPFound(request.route_path('showtest', test_id=testid))
-
-    question = create_question(request, request.db_session,
-                                  text,
-                                  int(points),
-                                  'C'
-    )
-    question.mandatory=json['is_q_mandatory']
+    question = new_question_wrapper(request,'C')
 
     counter = 1
     counterc = 0
@@ -349,35 +335,8 @@ def c_question_post(request):
 @view_config(route_name='newquestion_r', request_method='POST')
 def r_question_post(request):
     testid = request.matchdict['test_id']
-
     json = request.json_body
-    points = json['points']
-    text = json['text']
-
-    try:
-        test = request.db_session.query(Test).filter_by(id=testid).one()
-    except:
-        raise HTTPNotFound
-
-    if request.userid is None:
-        raise  HTTPForbidden
-        return  HTTPForbidden('Pre prístup je nutné sa prihlásiť')
-    if request.userid is not test.user_id:
-        raise  HTTPUnauthorized
-        return  HTTPUnauthorized('Nie je to tvoja test')
-
-    if test.share_token:
-        return HTTPFound(request.route_path('showtest', test_id=testid))
-
-    question = create_question(request, request.db_session,
-                                  text,
-                                  int(points),
-                                  'R'
-    )
-    question.mandatory=json['is_q_mandatory']
-
-
-    # q_type reprezentuje typ otazky S,C,R,O
+    question = new_question_wrapper(request,'R')
 
     counter = 1
     counterc = 0
@@ -403,36 +362,15 @@ def r_question_post(request):
 @view_config(route_name='newquestion_o', request_method='POST')
 def o_question_post(request):
     testid = request.matchdict['test_id']
-
     json = request.json_body
-    points = json['points']
-    text = json['text']
+    question = new_question_wrapper(request,'O')
     answer = json['answer']
-
-    try:
-        test = request.db_session.query(Test).filter_by(id=testid).one()
-    except:
-        raise HTTPNotFound
-
-    if request.userid    is None:
-        raise  HTTPForbidden
-    if request.userid is not test.user_id:
-        raise  HTTPUnauthorized
-
-    if test.share_token:
-        return HTTPFound(request.route_path('showtest', test_id=testid))
-
-    question = create_question(request, request.db_session,
-                                  text,
-                                  int(points),
-                                  'O'
-    )
     question.mandatory=json['is_q_mandatory']
+
     create_answer(request,request.db_session,
                   answer,
                   1,
                   question)
-
     return HTTPFound(request.route_path('newquestion_o', test_id=testid))
 
 @view_config(route_name='solved_test', request_method='POST')
@@ -447,9 +385,6 @@ def update_points_in_question(request):
         raise  HTTPForbidden
     if request.userid is not incomplete_test.test.user_id:
         return  HTTPUnauthorized('Nie je to tvoja test')
-
-
-
     if json['nc']:
 
         create_comment(request)

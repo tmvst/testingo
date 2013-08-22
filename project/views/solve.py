@@ -111,7 +111,6 @@ def submit_test(request):
     for q in questions_c:
 
         answers_c= q.answers
-        print(answers_c)
         complete_question = CompleteQuestion(incomplete_test,q)
         complete_question.date_crt = datetime.datetime.now()
         complete_question.date_mdf = datetime.datetime.now()
