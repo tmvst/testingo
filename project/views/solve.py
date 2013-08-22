@@ -143,16 +143,20 @@ def submit_test(request):
         complete_question.date_crt = datetime.datetime.now()
         complete_question.date_mdf = datetime.datetime.now()
         correct_answer = request.db_session.query(Answer).filter_by(question_id=q.id,correct=str(1)).one()
+        selected_answer=[]
         selected_answer=[s for s in uar if 'radio'+str(q.id) in s]
         if str('radio'+str(q.id)+'='+str(correct_answer.id)) in uar:
             complete_answer=Complete_answer(str(selected_answer[0][selected_answer[0].find("=")+1:]),str(1),incomplete_test,correct_answer,q,complete_question)
             complete_answer.points=q.points
             request.db_session.add(complete_answer)
-        else:
+        elif len(selected_answer) is not 0:
             complete_answer=Complete_answer(str(selected_answer[0][selected_answer[0].find("=")+1:]),str(0),incomplete_test,correct_answer,q,complete_question)
             complete_answer.points=0
             request.db_session.add(complete_answer)
             request.db_session.add(complete_question)
+        elif q.mandatory is False:
+                complete_answer=Complete_answer(str(0),str(0),incomplete_test,correct_answer,q,complete_question)
+                complete_answer.points=0
 
 
     for ua in user_answers_O:

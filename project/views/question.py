@@ -127,13 +127,12 @@ def create_question(request, db_session, text, points, q_type):         # prida�
     db_session.add(question)
     db_session.flush()
 
-    return question.id
+    return question
 
-def create_answer(request, db_session, text, correct, question_id):         # pridať password !!!
+def create_answer(request, db_session, text, correct, question):         # pridať password !!!
     """Creates a new answer for the question.
     """
 
-    question = request.db_session.query(Question).filter_by(id=question_id).one()
 
     answer = Answer( text, str(correct), question)
 
@@ -285,11 +284,12 @@ def s_question_post(request):
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
-    question_id = create_question(request, request.db_session,
+    question = create_question(request, request.db_session,
                                   text,
                                   int(points),
                                   'S'
     )
+    question.mandatory=json['is_q_mandatory']
 
     # q_type reprezentuje typ otazky S,C,R,O
 
@@ -299,7 +299,7 @@ def s_question_post(request):
         create_answer(request,request.db_session,
                       ans,
                       1,
-                      question_id)
+                      question)
 
     return HTTPFound(request.route_path('newquestion_s', test_id=testid))
 
@@ -318,13 +318,12 @@ def c_question_post(request):
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
-    question_id = create_question(request, request.db_session,
+    question = create_question(request, request.db_session,
                                   text,
                                   int(points),
                                   'C'
     )
-
-    # q_type reprezentuje typ otazky S,C,R,O
+    question.mandatory=json['is_q_mandatory']
 
     counter = 1
     counterc = 0
@@ -336,13 +335,13 @@ def c_question_post(request):
             create_answer(request,request.db_session,
                           ans,
                           1,
-                          question_id)
+                          question)
             counterc += 1
         else:
             create_answer(request,request.db_session,
                           ans,
                           0,
-                          question_id)
+                          question)
         counter += 1
 
     return HTTPFound(request.route_path('newquestion_c', test_id=testid))
@@ -370,11 +369,13 @@ def r_question_post(request):
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
-    question_id = create_question(request, request.db_session,
+    question = create_question(request, request.db_session,
                                   text,
                                   int(points),
                                   'R'
     )
+    question.mandatory=json['is_q_mandatory']
+
 
     # q_type reprezentuje typ otazky S,C,R,O
 
@@ -388,13 +389,13 @@ def r_question_post(request):
             create_answer(request,request.db_session,
                           ans,
                           1,
-                          question_id)
+                          question)
             counterc += 1
         else:
             create_answer(request,request.db_session,
                           ans,
                           0,
-                          question_id)
+                          question)
         counter += 1
 
     return HTTPFound(request.route_path('newquestion_r', test_id=testid))
@@ -421,15 +422,16 @@ def o_question_post(request):
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
-    question_id = create_question(request, request.db_session,
+    question = create_question(request, request.db_session,
                                   text,
                                   int(points),
                                   'O'
     )
+    question.mandatory=json['is_q_mandatory']
     create_answer(request,request.db_session,
                   answer,
                   1,
-                  question_id)
+                  question)
 
     return HTTPFound(request.route_path('newquestion_o', test_id=testid))
 

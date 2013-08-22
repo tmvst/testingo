@@ -43,6 +43,7 @@ form_submit = (redir) ->
 		bodyQ = $("input[name='points']").val()
 		answers = $("input.radiotext").serializeArray()
 		correctness = $("input.Rradio").serializeArray()
+		is_q_mandatory = $('#is_q_mandatory').is(':checked')
 
 		$.ajax
 			url: post_url
@@ -50,6 +51,7 @@ form_submit = (redir) ->
 			contentType: "application/json; charset=utf-8"
 			data: JSON.stringify
 				text: textQ
+				is_q_mandatory: is_q_mandatory
 				points: bodyQ
 				answers: answers
 				correctness: correctness

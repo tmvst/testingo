@@ -43,7 +43,7 @@ form_submit = (redir) ->
 		bodyQ = $("input[name='points']").val()
 		answers = $("input.checkInput").serializeArray()
 		correctness = $("input.checkInputC").serializeArray()
-
+		is_q_mandatory = $('#is_q_mandatory').is(':checked')
 		$.ajax
 			url: post_url
 			type: "POST"
@@ -53,9 +53,11 @@ form_submit = (redir) ->
 				points: bodyQ
 				answers: answers
 				correctness: correctness
+				is_q_mandatory: is_q_mandatory
 		.done (response) ->
 			top.location.href = redir
 		.fail (response) ->
+
 			console.log response
 
 	return false

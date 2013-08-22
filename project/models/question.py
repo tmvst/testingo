@@ -4,6 +4,7 @@ from sqlalchemy import (
     String,
     ForeignKey,
     Float,
+    Boolean
     )
 
 from sqlalchemy.orm import (
@@ -32,6 +33,7 @@ class Question(Base):
     number = Column(Integer)
     text = Column(String(500))
     points = Column(Float)
+    mandatory = Column(Boolean)
     qtype = Column(String(5))
     test_id = Column(Integer, ForeignKey('test.id'), index=True)
     test = relationship('Test', backref=backref("questions",order_by=id.asc(),cascade="all, delete-orphan"))

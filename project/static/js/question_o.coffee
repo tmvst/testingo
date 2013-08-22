@@ -15,6 +15,7 @@ form_submit = (redir) ->
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
 		answer = $("textarea[name='odpoved']").val()
+		is_q_mandatory = $('#is_q_mandatory').is(':checked')
 		console.log(bodyQ)
 		console.log(textQ)
 		console.log(answer)
@@ -27,6 +28,7 @@ form_submit = (redir) ->
 				text: textQ
 				points: bodyQ
 				answer: answer
+				is_q_mandatory: is_q_mandatory
 		.done (response) ->
 			top.location.href = redir
 		.fail (response) ->
