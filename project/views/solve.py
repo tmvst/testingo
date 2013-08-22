@@ -55,9 +55,6 @@ def submit_test(request):
 
     if request.userid is None:
         raise HTTPForbidden
-    if request.userid is not test.user_id:
-
-        raise HTTPUnauthorized
 
     user_id = request.userid
     user = request.db_session.query(User).filter_by(id=user_id).first()
