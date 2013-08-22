@@ -2,6 +2,7 @@
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
+    <script src="${request.static_path('project:static/js/create_comment.js')}"></script>
     <script type="text/javascript">
         post_url="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}"
     </script>
@@ -65,7 +66,7 @@
                 <div class="panel-heading">
 
                 <h3 class="panel-title" id="o${answered_q[0].id}"> ${answered_q[1][0]}
-                    <a href="#" class="pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}"> Upraviť hodnotenie </a>
+                    <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" data-points="${int(answered_q[0].question.points)}b"> </a>
                 <span class="badge pull-right" id="b${answered_q[0].id}">
 
                 %if int(answered_q[2] - answered_q[2])==0:
@@ -139,6 +140,36 @@
                             ${answer.text} <br></p>
                     %endfor
                     %endif
+                     <div class="accordion" id="a${answered_q[0].id}">
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+
+                                        <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${answered_q[0].id}" href="#h${answered_q[0].id}">
+                                            Komentár
+                                        </a>
+
+                                </div>
+
+                                <div id="h${answered_q[0].id}" class="accordion-body collapse out">
+                                    <div class="accordion-inner">
+
+                                        <a class="zkomment bezhref pull-right" id="upravit_btn${answered_q[0].id}" name="${answered_q[0].comment}"><br>Upraviť</a>
+                                        <div id="koment_text${answered_q[0].id}">
+                                            <br>Komentár:<br>
+                                
+                                            % if  answered_q[0].comment:
+                                            <div class="well well-sm" id="koment_text#{tu}">
+                                                ${answered_q[0].comment}
+                                            </div>
+                                            % endif
+                                           
+                                        </div>
+
+                                        <div id="koment_area${answered_q[0].id}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
                 </div>
 
