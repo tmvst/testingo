@@ -25,6 +25,9 @@
 
                     <div class="tab-pane fade active in" id="created_tests">
                         <div class="list-group">
+                             %if len(tests) is 0:
+                                <p>Zatiaľ ste nevytvorili žiaden test</p>
+                            %endif
                                 % for test in tests:
                                 <a href="${request.route_path('showtest', test_id=test.id)}" class="list-group-item">
                                 ${test.name}
@@ -41,7 +44,9 @@
 
                     <div class="tab-pane" id="solved_tests">
                         <div class="list-group">
-
+                            %if len(user.incomplete_tests) is 0:
+                                <p>Zatiaľ ste nevyplnili žiaden test</p>
+                            %endif
                             % for test in user.incomplete_tests:
                             % if test.test.user.id == userid:
                                 <a href="${request.route_path('solved_test', incomplete_test_id=test.id)}" class="list-group-item">
@@ -59,6 +64,8 @@
                     <div class="tab-pane" id="view_all_tests">
                         <div class="list-group">
                         <div class="table-responsive">
+                            %if len(tests) > 0:
+
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -101,6 +108,9 @@
                                 </tbody>                            
 
                             </table>
+                                %else:
+                                <p>Respondenti zatiaľ nevyplnili žiaden z vašich testov</p>
+                                    %endif
                             </div>                 
                         </div>
                     </div>

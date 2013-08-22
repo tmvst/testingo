@@ -1,29 +1,28 @@
 #{{{
-import random
+
 
 from pyramid.view import (
     view_config,
     notfound_view_config,
-    forbidden_view_config,
+
     )
 from pyramid.httpexceptions import (
-    HTTPNotFound,
-    HTTPFound,
+
     HTTPForbidden,
     HTTPUnauthorized
-    )
-from pyramid_mailer.message import (
-    Message,
     )
 
 from ..models.user import (
     User,
     )
-from ..utils import valid_email
-from ..authenticator import (
-    WrongPasswordError,
-    NonExistingUserError,
+from ..models.incomplete_test import (
+    Incomplete_test,
     )
+
+from ..models.test import (
+    Test
+    )
+
 #}}}
 @view_config(context=HTTPUnauthorized, renderer='project:templates/errors/unauthorized.mako')
 
@@ -54,14 +53,16 @@ def main_page_view(request):
 def dashboard(request):
     """Shows dashboard.
     """
-
     if request.userid == None:
         raise HTTPForbidden
-
     uid = request.userid
     user = request.db_session.query(User).filter_by(id=uid).one()
     tests=user.tests
-    return {'errors':[], 'tests': tests,'userid':uid}
+    alls=request.db_session.query(Incomplete_test).join(Test).filter_by(Test.user.id=uid).all()
+    print(alls)
+    tests_in_activity=[]
+
+    return {'errors':[], 'tests': tests,'userid':uid,'tests_in_activity':tests_in_activity}
 
 
 
