@@ -10,20 +10,18 @@
   comment_template = (koment,tu) ->
     """
     <div id="koment_text#{tu}">
-      Komentár:<br>
       #{koment}
     </div>
     """
 
   hide_process = (id, text, event) ->
-
     event.preventDefault
     q_id = (id.substring(11))
     $("#upravit_btn" + q_id).hide()
     $("#koment_text" + q_id).hide()
 
-    if  not not text
-      text=''
+    if not not text
+      text = '' 
     $("#koment_area" + q_id).append(input_template(text, q_id))
 
     $("#ulozit" + q_id).click ->
@@ -42,7 +40,8 @@
         id_question: id_q
         nc: 1
     .done (response) ->
-      $("#koment_area" + id_q).append comment_template(new_comment, id_q)
+      #$("#koment_area" + id_q).append comment_template(new_comment, id_q)
+      $("#well" + id_q).html(comment_template(new_comment, id_q))
       $("#textarea_vykresli" + id_q).hide()
       $("#upravit_btn" + id_q).show()
     .fail (response) ->

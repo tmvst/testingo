@@ -32,7 +32,6 @@
                         </div>
                     <div class="col-md-6">
                     <h3 class="panel-title" id="o${question[0].id}">
-                        <a class="glyphicon glyphicon-envelope pull-right zkomment" id="k${question[0].id}" name="${question[2]}"> </a>
                         <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
 
                     <span class="badge pull-right" id="b${question[0].id}">
@@ -42,7 +41,7 @@
                     %else:
                         ${"%.1f" % question[2]}
                     %endif
-                        /${int(question[0].question.points)}b
+                        / ${int(question[0].question.points)}b
 
                     </span>
                     </h3>
@@ -137,7 +136,7 @@
                             <div class="accordion-group">
                                 <div class="accordion-heading">
 
-                                        <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${question[0].id}" href="#h${question[0].id}">
+                                        <a class="accordion-toggle " data-toggle="collapse" data-parent="a${question[0].id}" href="#h${question[0].id}">
                                             Komentár
                                         </a>
 
@@ -146,11 +145,11 @@
                                 <div id="h${question[0].id}" class="accordion-body collapse out">
                                     <div class="accordion-inner">
 
-                                        <a class="btn pull-right zkomment" id="upravit_btn${question[0].id}" name="${question[0].comment}">Upraviť</a>
+                                        <a class="zkomment bezhref" id="upravit_btn${question[0].id}" name="${question[0].comment}">Upraviť</a>
                                         <div id="koment_text${question[0].id} well well-sm">
                                             Komentár:<br>
                                         %if question[0].comment is not None:
-                                         ${question[0].comment}
+                                         	<div class="well well-sm" id="well${question[0].id}">${question[0].comment}</div>
                                         %endif
                                         </div>
 

@@ -31,7 +31,7 @@
       $("#x" + tu).hide()
       $("#b" + tu).show()
       $("#c" + tu).show()
-      $("#b" + tu).html(new_bodyQ + "/" + max)
+      $("#b" + tu).html(new_bodyQ + " / " + max)
     .fail (response) ->
       console.log response + "neupdatol som sa"
 

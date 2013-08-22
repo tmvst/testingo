@@ -7,7 +7,7 @@
   };
 
   comment_template = function(koment, tu) {
-    return "<div id=\"koment_text" + tu + "\">\n  Komentár:<br>\n  " + koment + "\n</div>";
+    return "<div id=\"koment_text" + tu + "\">\n  " + koment + "\n</div>";
   };
 
   hide_process = function(id, text, event) {
@@ -40,7 +40,7 @@
         nc: 1
       })
     }).done(function(response) {
-      $("#koment_area" + id_q).append(comment_template(new_comment, id_q));
+      $("#well" + id_q).html(comment_template(new_comment, id_q));
       $("#textarea_vykresli" + id_q).hide();
       return $("#upravit_btn" + id_q).show();
     }).fail(function(response) {
@@ -58,7 +58,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=create_comment.map
-*/
