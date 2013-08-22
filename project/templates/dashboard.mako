@@ -58,16 +58,17 @@
 
                     <div class="tab-pane" id="view_all_tests">
                         <div class="list-group">
-                            <table class="table table-bordered table-hover">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
                                 <thead>
-                                    <tr class="success">
-                                        <td>ID</td>
-                                        <td>Test</td>
-                                        <td>Respondent</td>
-                                        <td>Dátum vzniku</td>
-                                        <td>Dátum zmeny</td>
-                                        <td>Počet bodov</td>
-                                        <td>Pozor</td>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Test</th>
+                                        <th>Respondent</th>
+                                        <th>Dátum vzniku</th>
+                                        <th>Dátum zmeny</th>
+                                        <th>Počet bodov</th>
+                                        <th>Pozor</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +86,7 @@
                                             <td>${in_test.date_mdf}</td>
                                             <td>body</td>
                                             <td>
-                                                <a href="${request.route_path('solved_test', incomplete_test_id=test.id)}">
+                                                <a href="${request.route_path('solved_test', incomplete_test_id=in_test.id)}">
                                                     <span class="glyphicon glyphicon-warning-sign"></span>
                                                 </a>
                                             </td>
@@ -95,7 +96,8 @@
                                 %endfor
                                 </tbody>                            
 
-                            </table>                          
+                            </table>
+                            </div>                 
                         </div>
                     </div>
                 </div>
