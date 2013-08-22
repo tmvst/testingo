@@ -43,7 +43,7 @@
                         <div class="list-group">
 
                             % for test in user.incomplete_tests:
-                            % if user.id == userid:
+                            % if test.test.user.id == userid:
                                 <a href="${request.route_path('solved_test', incomplete_test_id=test.id)}" class="list-group-item">
                             %else:
                                 <a href="${request.route_path('filled_test', incomplete_test_id=test.id)}" class="list-group-item">

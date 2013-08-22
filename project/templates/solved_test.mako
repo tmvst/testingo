@@ -148,9 +148,13 @@
                                         <a class="zkomment bezhref pull-right" id="upravit_btn${question[0].id}" name="${question[0].comment}"><br>Upraviť</a>
                                         <div id="koment_text${question[0].id}">
                                             <br>Komentár:<br>
+                                
+                                            % if  question[0].comment:
                                             <div class="well well-sm" id="koment_text#{tu}">
                                                 ${question[0].comment}
                                             </div>
+                                            % endif
+                                           
                                         </div>
 
                                         <div id="koment_area${question[0].id}"></div>

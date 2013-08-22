@@ -84,8 +84,13 @@ def question_delete(request):
         raise  HTTPForbidden
     if request.userid is not test.user_id:
         raise HTTPUnauthorized
+
     if test.share_token:
-        return HTTPFound(request.route_path('showtest', test_id=testid))
+        json = request.json_body
+        comp_q = request.db_session.query(CompleteQuestion).filter_by(id=json['id_question']).one()
+        request.matchdict['incomplete_test'] = comp_q.incomplete_test
+        return update_points_in_question_showQ(request)
+
     questionid = request.matchdict['question_id']
     question= request.db_session.query(Question).filter_by(id=questionid).one()
     question_number=question.number
@@ -137,41 +142,59 @@ def create_answer(request, db_session, text, correct, question_id):         # pr
 
     return answer.id
 
-def update_points_in_questions(request):
+def update_points_in_question_showQ(request):
 
-    testid = request.matchdict['incomplete_test_id']
+    incomplete_test= request.matchdict['incomplete_test']
+    testid=incomplete_test.test_id
+    json = request.json_body
+   
+    
+    if request.userid is None:
+        raise  HTTPForbidden
+    if request.userid is not incomplete_test.test.user_id:
+        raise  HTTPUnauthorized
+
+    if json['nc']:
+       
+        create_comment_showQ(request)
+        #HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+    else:
+
+        points = json['points']
+        id_question = json['id_question']
+
+        complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
+        qtype=complete_question.question.qtype
+
+        if qtype is 'S' or 'C':
+            answer = complete_question.complete_q_complete_answers
+            for ans in answer:
+                ans.points = float(points)/len(answer)
+                request.db_session.merge(ans)
+
+        elif qtype is 'O' or 'R':
+            answer = complete_question = request.db_session.query(Complete_answer).filter_by(complete_question=complete_question).one()
+            answer.points=points
+            request.db_session.merge(answer)
+
+        request.db_session.flush()
+
+    return HTTPFound(request.route_path('showtest', test_id=testid))
+
+
+def create_comment_showQ(request):
 
     json = request.json_body
-    points = json['points']
     id_question = json['id_question']
+    comment = json['comment']
 
-    question = request.db_session.query(Question).filter_by(id=id_question).one()
-
-    if question.qtype is 'S':
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
-        for ans in answer:
-            ans.points = float(points)/len(answer)
-            request.db_session.merge(ans)
-
-    elif question.qtype is 'O':
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
-        answer.points = points
-        request.db_session.merge(answer)
-
-    elif question.qtype is 'R':
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).one()
-        answer.points = points
-        request.db_session.merge(answer)
-
-    elif question.qtype is 'C':
-        answer = request.db_session.query(Complete_answer).filter_by(question=question).all()
-        for ans in answer:
-            ans.points = float(points)/len(answer)
-            request.db_session.merge(ans)
+    complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
+    complete_question.comment = comment
+    request.db_session.merge(complete_question)
 
     request.db_session.flush()
 
-    return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+    return 0
 
 
 # ---------------------------------- new stuff ------- (babotkina volba) ----------------
