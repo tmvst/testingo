@@ -103,14 +103,11 @@ def main(global_config, **settings):
     config.add_route('solve', 'solve/{token}')
     config.add_route('solved_test','solved_test/{incomplete_test_id}')
     config.add_route('filled_test','filled_test/{incomplete_test_id}')
-
     config.add_route('newquestion', '/test/{test_id}/newquestion/{question_type}/')
-
     config.add_route('newquestion_s','/test/{test_id}/new-phrase-question') # frazova
     config.add_route('newquestion_c','/test/{test_id}/new-checkbox-question') # checkbox
     config.add_route('newquestion_o','/test/{test_id}/new-open-question') # open
     config.add_route('newquestion_r','/test/{test_id}/new-radio-question') # radio
-
     config.scan()
     random.seed()
 

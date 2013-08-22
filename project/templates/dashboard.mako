@@ -62,7 +62,8 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th></th>
+                                        <th>Id</th>
                                         <th>Test</th>
                                         <th>Respondent</th>
                                         <th>Dátum vzniku</th>
@@ -72,9 +73,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <% cnt=0 %>
                                 %for test in tests:
                                     %for in_test in test.incomplete_tests:
+                                        <% cnt=cnt+1 %>
                                         <tr>
+                                            <td>${cnt}</td>
                                             <td>${in_test.id}</td>
                                             <td>
                                                 <a href="${request.route_path('solved_test', incomplete_test_id=test.id)}">

@@ -4,12 +4,13 @@ import random
 from pyramid.view import (
     view_config,
     notfound_view_config,
-    forbidden_view_config
+    forbidden_view_config,
     )
 from pyramid.httpexceptions import (
     HTTPNotFound,
     HTTPFound,
     HTTPForbidden,
+    HTTPUnauthorized
     )
 from pyramid_mailer.message import (
     Message,
@@ -24,6 +25,8 @@ from ..authenticator import (
     NonExistingUserError,
     )
 #}}}
+@view_config(context=HTTPUnauthorized, renderer='project:templates/errors/unauthorized.mako')
+
 @notfound_view_config(renderer='project:templates/errors/notfound.mako')
 def not_found(request):
     if request.userid == None:
