@@ -9,22 +9,22 @@
 
   comment_template = (koment,tu) ->
     """
-    <div id="koment_text#{tu}">
-      Komentár:<br>
+    <br>Komentár:<br>
+    <div class="well well-sm" id="koment_text#{tu}">
       #{koment}
     </div>
     """
 
   hide_process = (id, text, event) ->
-
     event.preventDefault
     q_id = (id.substring(11))
     $("#upravit_btn" + q_id).hide()
     $("#koment_text" + q_id).hide()
 
-    if  not not text
-      text=''
-    $("#koment_area" + q_id).append(input_template(text, q_id))
+    if text is 'None'
+      $("#koment_area" + q_id).append(input_template('', q_id))
+    else 
+      $("#koment_area" + q_id).append(input_template(text, q_id))
 
     $("#ulozit" + q_id).click ->
       process_update q_id, post_url

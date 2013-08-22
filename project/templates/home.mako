@@ -17,6 +17,8 @@
         <li>vytvorenie noveho testu z existujuceho</li>
         <li>vytvorenie viewu riesitelia testu, v riesiteloch moznost vyhladavania</li>
         <li>statistiky - mozno vo forme grafov </li>
+        <li>odpocitavanie casu na test - JS</li>
+        <li>potvrdzovacia hlaska cez bootstrap nejaky js confirm dialog</li>
     </ul>
     </h2>
 </%block>

@@ -35,7 +35,7 @@
       $("#x" + tu).hide();
       $("#b" + tu).show();
       $("#c" + tu).show();
-      return $("#b" + tu).html(new_bodyQ + "/" + max);
+      return $("#b" + tu).html(new_bodyQ + " / " + max);
     }).fail(function(response) {
       return console.log(response + "neupdatol som sa");
     });

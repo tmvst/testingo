@@ -4,7 +4,7 @@ import random
 from pyramid.view import (
     view_config,
     notfound_view_config,
-    forbidden_view_config,
+    forbidden_view_config
     )
 from pyramid.httpexceptions import (
     HTTPNotFound,
@@ -24,12 +24,18 @@ from ..authenticator import (
     NonExistingUserError,
     )
 #}}}
+@notfound_view_config(renderer='project:templates/errors/notfound.mako')
+def not_found(request):
+    if request.userid == None:
+        raise HTTPForbidden
 
-@notfound_view_config(append_slash=True)
-def notfound(request):
-    return HTTPNotFound("Hľadaná stránka neexistuje")
+    uid = request.userid
+    user = request.db_session.query(User).filter_by(id=uid).one()
+    tests=user.tests
+    return {'errors':[], 'tests': tests,'userid':uid}
 
 
+    return {}
 @view_config(route_name='home', renderer='project:templates/home.mako')
 def main_page_view(request):
     """Shows a Home Page.
@@ -41,18 +47,18 @@ def main_page_view(request):
 
 
 @view_config(route_name='dashboard', request_method='GET', renderer='project:templates/dashboard.mako')
+
 def dashboard(request):
     """Shows dashboard.
     """
 
     if request.userid == None:
         raise HTTPForbidden
-        return HTTPForbidden('Pre prístup je nutné sa prihlásiť')
 
     uid = request.userid
     user = request.db_session.query(User).filter_by(id=uid).one()
-
-    return {'errors':[], 'tests': user.tests,'userid':uid}
+    tests=user.tests
+    return {'errors':[], 'tests': tests,'userid':uid}
 
 
 
