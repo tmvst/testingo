@@ -58,10 +58,7 @@ def dashboard(request):
     uid = request.userid
     user = request.db_session.query(User).filter_by(id=uid).one()
     tests=user.tests
-    alls=request.db_session.query(Incomplete_test).join(Test).filter_by(Test.user.id=uid).all()
-    print(alls)
-    tests_in_activity=[]
-
+    tests_in_activity=request.db_session.query(Incomplete_test).join(Test).filter(Test.user==user).order_by(Incomplete_test.date_crt.desc()).limit(7).all()
     return {'errors':[], 'tests': tests,'userid':uid,'tests_in_activity':tests_in_activity}
 
 

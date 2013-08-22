@@ -46,4 +46,4 @@ class Incomplete_test(Base):
     def __repr__(self):
         """Returns representative object of class Incomplete_test.
         """
-        return "Incomplete_Test<{test_id}>".format(test_id=self.test.id)
+        return "Incomplete_Test<{test_id}>".format(test_id=self.id)

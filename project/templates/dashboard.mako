@@ -123,28 +123,21 @@
                         Aktivita
                     </h3>
 
-                    % for test in user.tests:
+                    % for incomplete_test in tests_in_activity:
                         <%
-                            counter=0
+                            acq_points=0
+                            for c_q in incomplete_test.complete_questions:
+                                acq_points =acq_points +  sum(float(a.points) for  a in c_q.complete_q_complete_answers)
                         %>
-                            <h4><a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h4>
-                        %for incomplete_test in test.incomplete_tests:
-                            <%
-                                counter+=1
-                            %>
                                 <div><p>
-                                    Užívtateľ s emailom  <a href="#">${incomplete_test.user}</a> vyplnil test názvom <a href="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}" >
-                                ${incomplete_test.test.name}</a>
+                                    Užívtateľ <a href="#">${incomplete_test.user}</a> vyplnil test <a href="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}" >
+                                ${incomplete_test.test.name}</a> a ziskal ${acq_points} bodov
                                     <div>
                                         <i class="text-left">${h.pretty_date(incomplete_test.date_crt)}</i>
                                     </div></p>
-                                </div>
-                            %if counter == 3:
-                                <% break %>
-                            %endif
 
-                        % endfor
-                            <br>
+                                </div>
+
                     % endfor
                 </div>
             </div>
