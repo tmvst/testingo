@@ -28,7 +28,12 @@
                         <div class="col-md-6">
                             <h3 class="panel-title">
                                 <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
-                                    Otázka č.${question[0].question.number}</a></h3>
+                                    Otázka č.${question[0].question.number}
+                                     %if question[0].question.mandatory:
+                                - povinná
+                            %else:
+                                - nepovinná
+                            %endif</a></h3>
                         </div>
                     <div class="col-md-6">
                     <h3 class="panel-title" id="o${question[0].id}">

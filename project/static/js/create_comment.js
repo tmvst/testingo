@@ -16,7 +16,6 @@
     q_id = id.substring(11);
     $("#upravit_btn" + q_id).hide();
     $("#koment_text" + q_id).hide();
-    console.log(text === 'None');
     if (text === 'None') {
       $("#koment_area" + q_id).append(input_template('', q_id));
     } else {
@@ -60,3 +59,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=create_comment.map
+*/
