@@ -42,4 +42,5 @@ Testingo/
 
 # Custom
 development.ini
+local.ini
 heroku.ini
