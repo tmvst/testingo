@@ -1,6 +1,7 @@
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
+    <script src="${request.static_path('project:static/js/Chart.min.js')}"></script>
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
     <script src="${request.static_path('project:static/js/create_comment.js')}"></script>
     <script type="text/javascript">
@@ -26,18 +27,18 @@
             </h4>
 
             <div class="list-group">
-                    % if len(answers) is 0:
+                % if len(answers) is 0:
                         <span> Otázka neobsahuje žiadne možnosti</span>
-                    % else:
+                % else:
                     % for answer in question.answers:
                         % if answer.correct == 1:
                             % if (question.qtype == "C"):
-                                    <span><p class="text-success"><input class="checkInputC" type="checkbox" value="" checked disabled="disabled">
+                                <span><p class="text-success"><input class="checkInputC" type="checkbox" value="" checked disabled="disabled">
                             % elif (question.qtype == "R"):
-                                    <span><p class="text-success"><input class="radioR" type="radio" value="" checked disabled="disabled" >
+                                <span><p class="text-success"><input class="radioR" type="radio" value="" checked disabled="disabled" >
                             % endif
-                                ${answer.text}
-                                </p></span>
+                            ${answer.text}
+                            </p></span>
                         % else:
                             % if (question.qtype == "C"):
                                     <span><p class="text-danger"><input class="checkInputC" type="checkbox" value="" disabled="disabled">
@@ -54,13 +55,35 @@
 
                     %if question.mandatory:
                             Odpovedanie na otázku je povinné
-                            %else:
+                    %else:
                             Odpovedanie na otázku je nepovinné
-                            %endif
-                    % endif
+                    %endif
+                % endif
             </div>
         </div>
     </div>
+
+<div class="col-lg-6" id="chart_desc">
+   %if question.qtype == "S":
+    <strong>Najpopulárnejšie odpovede respondentov</strong>
+</div>
+<div class="col-lg-6" id="chart">
+
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+     <script>
+	    var pieData =${graph_data|n};
+
+	var myPie = new Chart(document.getElementById("myChart").getContext("2d")).Pie(pieData,{ labelAlign: 'right',labelFontSize : '14'});
+
+	</script>
+</div>
+    %endif
+  </div>
+</div>
+
+
+
 
     <div class="answer_s">
 
@@ -87,7 +110,7 @@
 
                 </h3></div>
                 <div class="panel-body">
-                    %if answered_q[0].question.qtype =='R':
+                %if answered_q[0].question.qtype =='R':
                     %for answer in answered_q[0].question.answers:
                         %if int(answered_q[1][1][0].text) == answer.id and answered_q[1][1][0].correct ==1 :
 
@@ -105,7 +128,7 @@
                         %endif
 
                     %endfor
-                    %elif answered_q[0].question.qtype =='C':
+                %elif answered_q[0].question.qtype =='C':
                     %for answer in answered_q[1][1]:
 
                         %if answer.text== str(1) and  answer.correct == int(1) :
@@ -124,7 +147,7 @@
 
                     %endfor
 
-                    %elif answered_q[0].question.qtype =='S':
+                %elif answered_q[0].question.qtype =='S':
                     %for answer in answered_q[1][1]:
                         %if answer.correct == int(1):
                                 <p class="text-success">
@@ -141,43 +164,43 @@
 
                     %endfor
 
-                    %elif answered_q[0].question.qtype =='O':
+                %elif answered_q[0].question.qtype =='O':
                     %for answer in answered_q[1][1]:
                             <p>
                                 <strong>Odpoveď uívateľa:</strong>
                             ${answer.text} <br></p>
                     %endfor
-                    %endif
-                     <div class="accordion" id="a${answered_q[0].id}">
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
+                %endif
+                <div class="accordion" id="a${answered_q[0].id}">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
 
-                                        <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${answered_q[0].id}" href="#h${answered_q[0].id}">
-                                            Komentár
-                                        </a>
+                        <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${answered_q[0].id}" href="#h${answered_q[0].id}">
+                            Komentár
+                        </a>
 
-                                </div>
+                    </div>
 
-                                <div id="h${answered_q[0].id}" class="accordion-body collapse out">
-                                    <div class="accordion-inner">
+                <div id="h${answered_q[0].id}" class="accordion-body collapse out">
+                <div class="accordion-inner">
 
-                                        <a class="zkomment bezhref pull-right" id="upravit_btn${answered_q[0].id}" name="${answered_q[0].comment}"><br>Upraviť</a>
-                                        <div id="koment_text${answered_q[0].id}">
-                                            <br>Komentár:<br>
-                                
-                                            % if  answered_q[0].comment:
-                                            <div class="well well-sm" id="koment_text#{tu}">
-                                                ${answered_q[0].comment}
-                                            </div>
-                                            % endif
-                                           
-                                        </div>
+                    <a class="zkomment bezhref pull-right" id="upravit_btn${answered_q[0].id}" name="${answered_q[0].comment}"><br>Upraviť</a>
+                <div id="koment_text${answered_q[0].id}">
+                    <br>Komentár:<br>
 
-                                        <div id="koment_area${answered_q[0].id}"></div>
-                                    </div>
-                                </div>
-                            </div>
+                % if  answered_q[0].comment:
+                        <div class="well well-sm" id="koment_text#{tu}">
+                        ${answered_q[0].comment}
                         </div>
+                % endif
+
+                </div>
+
+                    <div id="koment_area${answered_q[0].id}"></div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
                 </div>
 

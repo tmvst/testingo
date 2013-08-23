@@ -2,7 +2,7 @@
 from pyramid.view import (
     view_config,
     )
-
+import random
 from pyramid.httpexceptions import (
     HTTPException,
     HTTPFound,
@@ -30,7 +30,8 @@ from ..models.incomplete_test import (
 from ..models.complete_question import (
     CompleteQuestion,
     )
-
+import json
+from sqlalchemy import func
 #}}}
 
 @view_config(route_name='showquestion', request_method='GET', renderer='project:templates/showquestion.mako')
@@ -52,7 +53,17 @@ def view_question(request):
         raise HTTPUnauthorized
     answers = request.db_session.query(Answer).filter_by(question=question).all()
     list_of_answers = view_respondents_answer(request)
-    return {'test':test,'question':question, 'answers':answers, 'list_of_answers':list_of_answers}
+
+    user_ans=request.db_session.query(Complete_answer.text,func.count(Complete_answer.id)).filter_by(question=question).group_by(Complete_answer.text).limit(7).all()
+    list=[]
+    for a in user_ans:
+        item={}
+        item['value']=a[1]
+        item['label']=a[0]
+        item['color']='rgb('+str( random.randint(0,255))+','+str( random.randint(0,255))+','+str( random.randint(0,255))+')'
+        list.append(item)
+    graph_data=json.dumps(list)
+    return {'graph_data':graph_data,'test':test,'question':question, 'answers':answers, 'list_of_answers':list_of_answers}
 
 def view_respondents_answer(request):
     """
