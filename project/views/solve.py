@@ -6,7 +6,6 @@ from pyramid.view import (
     view_config,
     )
 from pyramid.httpexceptions import (
-    HTTPException,
     HTTPNotFound,
     HTTPFound,
     HTTPForbidden,
@@ -157,9 +156,7 @@ def submit_test(request):
                 complete_answer=Complete_answer(str(0),str(0),incomplete_test,correct_answer,q,complete_question)
                 complete_answer.points=0
 
-
     for ua in user_answers_O:
-
         q=request.db_session.query(Question).filter_by(id=ua['name'][11:],qtype='O').one()
         complete_question = CompleteQuestion(incomplete_test,q)
         complete_question.date_crt = datetime.datetime.now()

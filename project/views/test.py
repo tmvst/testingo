@@ -7,7 +7,6 @@ from pyramid.view import (
     view_config,
     )
 from pyramid.httpexceptions import (
-    HTTPException,
     HTTPFound,
     HTTPForbidden,
     HTTPUnauthorized,
@@ -23,9 +22,6 @@ from ..models.test import (
 from ..models.question import (
     Question,
     )
-from ..models.incomplete_test import (
-    Incomplete_test,
-)
 #}}}
 
 @view_config(route_name='newtest', request_method='POST')
