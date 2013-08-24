@@ -62,7 +62,7 @@
                                     <label name="text${ans.id}">${ans.text}</label></p>
                         %endfor
                     % elif question.qtype == 'O':
-                            <textarea class="form-control user_answers_O"  name="user_answer${question.id}" id="user_answer" rows="2" placeholder="Sem vpíšte svoju odpoveď " required> </textarea>
+                            <textarea class="form-control user_answers_O"  name="user_answer${question.id}" id="user_answer" rows="4" placeholder="Sem vpíšte svoju odpoveď " required> </textarea>
                     % endif
                     </div>
                     </div>
