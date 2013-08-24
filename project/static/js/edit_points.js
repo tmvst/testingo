@@ -52,7 +52,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=edit_points.map
-*/
