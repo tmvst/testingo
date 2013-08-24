@@ -1,4 +1,5 @@
 <%inherit file="default.mako" />
+<%! import markupsafe %>
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
@@ -132,7 +133,7 @@
                     % elif question[0].question.qtype == 'O':
                             <p><strong>Užívateľová odpoveď <br></strong></p>
 
-                        ${question[1][0].text}
+                        ${question[1][0].text.replace('\n', markupsafe.Markup('<br> '))|n}
                         
                     % endif
 

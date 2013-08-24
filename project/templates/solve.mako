@@ -75,3 +75,5 @@
         </div>
     </div>
 </%block>
+<textarea id="mytextarea"></textarea>
+
