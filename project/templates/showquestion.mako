@@ -63,27 +63,18 @@
         </div>
     </div>
 
-<div class="col-lg-6" id="chart_desc">
-   %if question.qtype == "S":
-    <strong>Najpopulárnejšie odpovede respondentov</strong>
-</div>
-<div class="col-lg-6" id="chart">
-
-    <canvas id="myChart" width="400" height="400"></canvas>
-
-     <script>
-	    var pieData =${graph_data|n};
-
-	var myPie = new Chart(document.getElementById("myChart").getContext("2d")).Pie(pieData,{ labelAlign: 'right',labelFontSize : '14'});
-
-	</script>
-</div>
+    %if question.qtype == "S":
+        <div class="col-lg-6" id="chart_desc">
+            <strong>Najpopulárnejšie odpovede respondentov</strong>
+        </div>
+        <div class="col-lg-6" id="chart">
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <script>
+                var pieData =${graph_data|n};
+                var myPie = new Chart(document.getElementById("myChart").getContext("2d")).Pie(pieData,{ labelColor: 'white',labelAlign: 'right',labelFontSize : '14'});
+            </script>
+        </div>
     %endif
-  </div>
-</div>
-
-
-
 
     <div class="answer_s">
 
