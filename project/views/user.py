@@ -88,8 +88,6 @@ def register_success(request):
     return {'user_id':request.matchdict['user_id']}
 
 
-
-
 def validate_registration_data(form_data):
     """Checkes whether all datas are correct and returns dictionary of errors.
     """

@@ -3,7 +3,7 @@
   var hide_process, input_template, process_update;
 
   input_template = function(points, tu) {
-    return "<span id=\"x" + tu + "\">\n<a href=\"#\" class=\"update_b pull-right\" id=\"t" + tu + "\"> Uložiť </a>\n<input class=\"form-control-my pull-right\" value=\"" + points + "\" name=\"s" + tu + "\"> \n</span>";
+    return "<span id=\"x" + tu + "\">\n<a href=\"#\" class=\"update_b pull-right\" id=\"t" + tu + "\"> Uložiť </a>\n<input class=\"form-control-my pull-right\" value=\"" + points + "\" name=\"s" + tu + "\">\n</span>";
   };
 
   hide_process = function(id, body, max) {

@@ -70,6 +70,11 @@
                             <a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
 
                             <h3 class="panel-title">Otázka č.${question.number}
+                            %if question.mandatory:
+                                - povinná
+                            %else:
+                                - nepovinná
+                            %endif
                             % if question.points:
                                     <span class="badge pull-right">
 										${int(question.points)}b

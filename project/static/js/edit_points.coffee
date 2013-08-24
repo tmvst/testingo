@@ -1,8 +1,8 @@
-  input_template = (points,tu) ->
+input_template = (points,tu) ->
     """
     <span id="x#{tu}">
     <a href="#" class="update_b pull-right" id="t#{tu}"> Uložiť </a>
-    <input class="form-control-my pull-right" value="#{points}" name="s#{tu}"> 
+    <input class="form-control-my pull-right" value="#{points}" name="s#{tu}">
     </span>
     """
 

@@ -2,9 +2,8 @@
 from pyramid.view import (
     view_config,
     )
-
+import random
 from pyramid.httpexceptions import (
-    HTTPException,
     HTTPFound,
     HTTPForbidden,
     HTTPUnauthorized,
@@ -30,7 +29,8 @@ from ..models.incomplete_test import (
 from ..models.complete_question import (
     CompleteQuestion,
     )
-
+import json
+from sqlalchemy import func
 #}}}
 
 @view_config(route_name='showquestion', request_method='GET', renderer='project:templates/showquestion.mako')
@@ -52,7 +52,23 @@ def view_question(request):
         raise HTTPUnauthorized
     answers = request.db_session.query(Answer).filter_by(question=question).all()
     list_of_answers = view_respondents_answer(request)
-    return {'test':test,'question':question, 'answers':answers, 'list_of_answers':list_of_answers}
+
+    user_ans=request.db_session.query(Complete_answer.text,func.count(Complete_answer.id)).filter_by(question=question).group_by(Complete_answer.text).limit(7).all()
+    graph_data= create_pie_chart(user_ans)
+    return {'graph_data':graph_data,'test':test,'question':question, 'answers':answers, 'list_of_answers':list_of_answers}
+def create_pie_chart(data):
+    list=[]
+    colors=["#F38630","#69D2E7","#F7464A","#7D4F6D","#21323D","#949FB1","#D4CCC5"]
+    for a in data:
+        item={}
+        item['value']=a[1]
+        item['label']=a[0]
+        color_code=random.randint(0,len(colors)-1)
+        item['color']=colors[color_code]
+        colors.pop(color_code)
+        list.append(item)
+    return json.dumps(list)
+
 
 def view_respondents_answer(request):
     """
@@ -146,15 +162,15 @@ def update_points_in_question_showQ(request):
     incomplete_test= request.matchdict['incomplete_test']
     testid=incomplete_test.test_id
     json = request.json_body
-   
-    
+
+
     if request.userid is None:
         raise  HTTPForbidden
     if request.userid is not incomplete_test.test.user_id:
         raise  HTTPUnauthorized
 
     if json['nc']:
-       
+
         create_comment(request)
         #HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
     else:
@@ -383,26 +399,23 @@ def update_points_in_question(request):
         raise  HTTPForbidden
     if request.userid is not incomplete_test.test.user_id:
         return  HTTPUnauthorized('Nie je to tvoja test')
-    if json['nc']:
-
+    if json['nc'] is 1:
         create_comment(request)
         #HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
     else:
-
         points = json['points']
         id_question = json['id_question']
-
         complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
         qtype=complete_question.question.qtype
 
         if qtype is 'S' or 'C':
-            answer = complete_question.complete_q_complete_answers
-            for ans in answer:
-                ans.points = float(points)/len(answer)
+            answers = complete_question.complete_q_complete_answers
+            for ans in answers:
+                ans.points = float(points)/len(answers)
                 request.db_session.merge(ans)
 
         elif qtype is 'O' or 'R':
-            answer = complete_question = request.db_session.query(Complete_answer).filter_by(complete_question=complete_question).one()
+            answer = request.db_session.query(Complete_answer).filter_by(complete_question=complete_question).one()
             answer.points=points
             request.db_session.merge(answer)
 

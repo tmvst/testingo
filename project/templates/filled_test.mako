@@ -19,11 +19,18 @@
                 <div class="panel panel-default">
                 <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="panel-title">
+                <div class="col-md-6">
+                <h3 class="panel-title">
 
-                            Otázka č.${question[0].question.number}</h3>
-                    </div>
+                    Otázka č.${question[0].question.number}
+                %if question[0].question.mandatory:
+                        - povinná
+                %else:
+                        - nepovinná
+                %endif
+                </h3>
+
+                </div>
                 <div class="col-md-6">
                 <h3 class="panel-title" id="o${question[0].id}">
                     <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>

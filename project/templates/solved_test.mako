@@ -1,4 +1,5 @@
 <%inherit file="default.mako" />
+<%! import markupsafe %>
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
@@ -28,7 +29,12 @@
                         <div class="col-md-6">
                             <h3 class="panel-title">
                                 <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
-                                    Otázka č.${question[0].question.number}</a></h3>
+                                    Otázka č.${question[0].question.number}
+                                     %if question[0].question.mandatory:
+                                - povinná
+                            %else:
+                                - nepovinná
+                            %endif</a></h3>
                         </div>
                     <div class="col-md-6">
                     <h3 class="panel-title" id="o${question[0].id}">
@@ -36,13 +42,12 @@
 
                     <span class="badge pull-right" id="b${question[0].id}">
 
-                    %if int(question[2] - question[2])==0:
+                    %if (int(question[2]) - question[2])==0:
                         ${int(question[2])}
                     %else:
                         ${"%.1f" % question[2]}
                     %endif
                         / ${int(question[0].question.points)}b
-
                     </span>
                     </h3>
                     </div>
@@ -128,7 +133,7 @@
                     % elif question[0].question.qtype == 'O':
                             <p><strong>Užívateľová odpoveď <br></strong></p>
 
-                        ${question[1][0].text}
+                        ${question[1][0].text.replace('\n', markupsafe.Markup('<br> '))|n}
                         
                     % endif
 
