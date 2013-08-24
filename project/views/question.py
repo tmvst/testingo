@@ -1,14 +1,18 @@
 #{{{
+import random
+import json
+from _datetime import datetime
+
 from pyramid.view import (
     view_config,
     )
-import random
 from pyramid.httpexceptions import (
     HTTPFound,
     HTTPForbidden,
     HTTPUnauthorized,
     HTTPNotFound,
     )
+from sqlalchemy import func
 
 from ..models.answer import (
     Answer,
@@ -19,7 +23,6 @@ from ..models.test import (
 from ..models.question import (
     Question,
     )
-
 from ..models.complete_answer import (
     Complete_answer,
     )
@@ -29,8 +32,8 @@ from ..models.incomplete_test import (
 from ..models.complete_question import (
     CompleteQuestion,
     )
-import json
-from sqlalchemy import func
+
+
 #}}}
 
 @view_config(route_name='showquestion', request_method='GET', renderer='project:templates/showquestion.mako')
@@ -160,6 +163,8 @@ def create_answer(request, db_session, text, correct, question):         # prida
 def update_points_in_question_showQ(request):
 
     incomplete_test= request.matchdict['incomplete_test']
+    incomplete_test.date_mdf  = datetime.datetime.now()
+
     testid=incomplete_test.test_id
     json = request.json_body
 
@@ -179,6 +184,7 @@ def update_points_in_question_showQ(request):
         id_question = json['id_question']
 
         complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
+        complete_question.date_mdf = datetime.datetime.now()
         qtype=complete_question.question.qtype
 
         if qtype is 'S' or 'C':
@@ -188,7 +194,7 @@ def update_points_in_question_showQ(request):
                 request.db_session.merge(ans)
 
         elif qtype is 'O' or 'R':
-            answer = complete_question = request.db_session.query(Complete_answer).filter_by(complete_question=complete_question).one()
+            answer = request.db_session.query(Complete_answer).filter_by(complete_question=complete_question).one()
             answer.points=points
             request.db_session.merge(answer)
 
@@ -203,6 +209,7 @@ def create_comment(request):
 
     complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
     complete_question.comment = comment
+    complete_question.date_mdf = datetime.datetime.now()
     request.db_session.merge(complete_question)
 
     request.db_session.flush()
@@ -223,9 +230,9 @@ def new_question_wrapper(request,qtype):
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
     question = create_question(request, request.db_session,
-                                  text,
-                                  int(points),
-                                  qtype
+                               text,
+                               int(points),
+                               qtype
     )
     question.mandatory=json['is_q_mandatory']
     return question
@@ -401,7 +408,6 @@ def update_points_in_question(request):
         return  HTTPUnauthorized('Nie je to tvoja test')
     if json['nc'] is 1:
         create_comment(request)
-        #HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
     else:
         points = json['points']
         id_question = json['id_question']
