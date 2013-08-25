@@ -13,7 +13,7 @@
             Vitajte na užívateľskom dashboarde, kde sú zobrazené vami vytvorené testy a ich respondenti, vyplnené testy a aktuálna predpoveď počasia.
         </p>
         <div class="row">
-            <div class="col-lg-6" id="left-panel"> 
+            <div class="col-lg-6" id="left-panel">
 
                 <ul id="dtab" class="nav nav-tabs">
                     <li class="active"><a href="#created_tests" class="showTest" data-toggle="tab">Vaše testy</a></li>
@@ -105,13 +105,13 @@
 
                                     %endfor
                                 %endfor
-                                </tbody>                            
+                                </tbody>
 
                             </table>
                                 %else:
                                 <p>Respondenti zatiaľ nevyplnili žiaden z vašich testov</p>
                                     %endif
-                            </div>                 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,11 +130,14 @@
                                 acq_points =acq_points +  sum(float(a.points) for  a in c_q.complete_q_complete_answers)
                         %>
                                 <div><p>
-                                    Užívtateľ <a href="#">${incomplete_test.user}</a> vyplnil test <a href="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}" >
-                                ${incomplete_test.test.name}</a> a ziskal ${acq_points} bodov
-                                    <div>
+                                    Užívateľ <a href="#">${incomplete_test.user}</a> vyplnil test <a href="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}" >
+                                ${incomplete_test.test.name}</a> a ziskal
+
+                                    ${h.pretty_points(acq_points)}
+                                 bodov
+                                    </p><div>
                                         <i class="text-left">${h.pretty_date(incomplete_test.date_crt)}</i>
-                                    </div></p>
+                                    </div>
 
                                 </div>
 

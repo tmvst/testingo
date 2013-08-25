@@ -93,12 +93,11 @@
                     <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" data-points="${int(answered_q[0].question.points)}b"> </a>
                 <span class="badge pull-right" id="b${answered_q[0].id}">
 
-                %if int(answered_q[2] - answered_q[2])==0:
-                    ${int(answered_q[2])}
-                %else:
-                    ${"%.1f" %answered_q[2]}
-                %endif
-                    /${int(answered_q[0].question.points)}b
+
+
+                ${h.pretty_points(answered_q[2])}
+                        /   ${h.pretty_points(answered_q[0].question.points)}b
+
                 </span>
 
                 </h3></div>

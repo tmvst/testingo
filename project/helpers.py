@@ -1,7 +1,6 @@
 # helpers.py
 
-import string
-
+pretty_points = lambda acq_points: int(acq_points) if acq_points.is_integer() else round(acq_points, 1)
 def attr(attribute, value):
     """
     Helper for mako templates, creates attribute for html element
