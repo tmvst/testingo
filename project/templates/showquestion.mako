@@ -11,7 +11,7 @@
     </script>
     <div class="page-header">
 
-        <h1>Otázka č.${question.number} z testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
+        <h1>Otázka č.${question.number} <small>z testu </small><a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
 
     </div>
 
