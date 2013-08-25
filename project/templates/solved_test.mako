@@ -26,21 +26,21 @@
                     <div class="panel panel-default">
                     <div class="panel-heading">
                     <div class="row">
-                        <div class="col-md-6">
-                            <h3 class="panel-title">
-                                <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
-                                    Otázka č.${question[0].question.number}
-                                     %if question[0].question.mandatory:
-                                - povinná
-                            %else:
-                                - nepovinná
-                            %endif</a></h3>
-                        </div>
                     <div class="col-md-6">
-                    <h3 class="panel-title" id="o${question[0].id}">
-                        <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
+                    <h3 class="panel-title">
+                    <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
+                        Otázka č.${question[0].question.number}
+                    %if question[0].question.mandatory:
+                            - povinná
+                    %else:
+                            - nepovinná
+                    %endif </a></h3>
+                </div>
+                <div class="col-md-6">
+                <h3 class="panel-title" id="o${question[0].id}">
+                    <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
 
-                    <span class="badge pull-right" id="b${question[0].id}">
+                <span class="badge pull-right" id="b${question[0].id}">
 
                     %if (int(question[2]) - question[2])==0:
                         ${int(question[2])}
@@ -134,39 +134,39 @@
                             <p><strong>Užívateľová odpoveď <br></strong></p>
 
                         ${question[1][0].text.replace('\n', markupsafe.Markup('<br> '))|n}
-                        
+
                     % endif
 
-                        <div class="accordion" id="a${question[0].id}">
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
+                    <div class="accordion" id="a${question[0].id}">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
 
-                                        <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${question[0].id}" href="#h${question[0].id}">
-                                            Komentár
-                                        </a>
+                            <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${question[0].id}" href="#h${question[0].id}">
+                                Komentár
+                            </a>
 
-                                </div>
-
-                                <div id="h${question[0].id}" class="accordion-body collapse out">
-                                    <div class="accordion-inner">
-
-                                        <a class="zkomment bezhref pull-right" id="upravit_btn${question[0].id}" name="${question[0].comment}"><br>Upraviť</a>
-                                        <div id="koment_text${question[0].id}">
-                                            <br>Komentár:<br>
-                                
-                                            % if  question[0].comment:
-                                            <div class="well well-sm" id="koment_text#{tu}">
-                                                ${question[0].comment}
-                                            </div>
-                                            % endif
-                                           
-                                        </div>
-
-                                        <div id="koment_area${question[0].id}"></div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+
+                    <div id="h${question[0].id}" class="accordion-body collapse out">
+                    <div class="accordion-inner">
+
+                        <a class="zkomment bezhref pull-right" id="upravit_btn${question[0].id}" name="${question[0].comment}"><br>Upraviť</a>
+                    <div id="koment_text${question[0].id}">
+                        <br>Komentár:<br>
+
+                    % if  question[0].comment:
+                            <div class="well well-sm" id="koment_text#{tu}">
+                            ${question[0].comment}
+                            </div>
+                    % endif
+
+                    </div>
+
+                        <div id="koment_area${question[0].id}"></div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
                     </div>
                     </div>
                 % endfor

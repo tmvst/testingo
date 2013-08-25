@@ -4,6 +4,8 @@
     <script src="${request.static_path('project:static/js/Chart.min.js')}"></script>
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
     <script src="${request.static_path('project:static/js/create_comment.js')}"></script>
+    <script src="${request.static_path('project:static/js/confirm_deletion.js')}"></script>
+    <script src="https://raw.github.com/makeusabrew/bootbox/master/bootbox.js"></script>
     <script type="text/javascript">
         post_url="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}"
     </script>
@@ -15,8 +17,8 @@
 
     <div>
         %if question.test.share_token is None:
-                <form action="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}" method="POST">
-                    <button type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
+                <form action="#" method="POST">
+                    <button id="delete_question"type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
                 </form>
         %endif
         <div class="control-group">

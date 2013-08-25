@@ -93,8 +93,8 @@
                                                 </a>
                                             </td>
                                             <td>${in_test.user.email}</td>
-                                            <td>${in_test.date_crt}</td>
-                                            <td>${in_test.date_mdf}</td>
+                                            <td>${in_test.date_crt.strftime('%H:%M dňa %d.%m.%Y')}</td>
+                                            <td>${in_test.date_mdf.strftime('%H:%M dňa %d.%m.%Y')}</td>
                                             <td>body</td>
                                             <td>
                                                 <a href="${request.route_path('solved_test', incomplete_test_id=in_test.id)}">
