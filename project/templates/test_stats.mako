@@ -1,4 +1,5 @@
 <table>
+    <tr><br></tr>
     <tr>
         <td><strong>Najúspešnejší respondent(i):</strong></td>
         <td></td>

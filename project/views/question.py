@@ -32,7 +32,9 @@ from ..models.incomplete_test import (
 from ..models.complete_question import (
     CompleteQuestion,
     )
-
+from ..helpers import (
+    shortify
+)
 
 #}}}
 
@@ -65,10 +67,8 @@ def create_pie_chart(data):
     for a in data:
         item={}
         item['value']=a[1]
-        item['label']=a[0]
-        color_code=random.randint(0,len(colors)-1)
-        item['color']=colors[color_code]
-        colors.pop(color_code)
+        item['label']=shortify(a[0],15)
+        item['color']=colors.pop(0)
         list.append(item)
     return json.dumps(list)
 
