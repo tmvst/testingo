@@ -1,13 +1,16 @@
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
+<<<<<<< HEAD
     <%! import markupsafe %>
+    <script src="${request.static_path('project:static/js/showtest.js')}"></script>
     <ol class="breadcrumb">
         <li><a href="${request.route_path('dashboard')}">Vaše testy</a></li>
 
 
         <li class="active">Test ${test.name}</li>
     </ol>
+
     <div class="page-header">
         <h1>${test.name}</h1>
         <form class="pull-right" action="${request.route_path('showtest', test_id=test.id)}" method="POST">
@@ -31,9 +34,9 @@
                 % else:
                     <div class="input-group sharetoken">
                         <input class="form-control" id="focusedInput" type="text" value="http://0.0.0.0:6543/solve/${test.share_token}" readonly="readonly">
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top"><span class="glyphicon glyphicon-paperclip"></span></button>
-			</span>
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" id="focusBtn"><span class="glyphicon glyphicon-paperclip"></span></button>
+						</span>
                     </div>
                 % endif
         </div>
