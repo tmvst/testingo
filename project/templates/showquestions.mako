@@ -1,3 +1,4 @@
+<%! import markupsafe %>
 <h3>Otázky v teste ${test.name}</h3>
 % if len(test.questions) is 0:
     <span> Test neobsahuje žiadne otázky </span>
@@ -19,7 +20,7 @@
         </a>
         </div>
             <div class="panel-body">
-            <strong>${question.text}</strong>
+            <strong>${question.text.replace('\n', markupsafe.Markup('<br> '))|n}</strong>
             <br>
 
             % for answer in question.answers:

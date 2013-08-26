@@ -40,7 +40,7 @@
                 <h3 class="panel-title" id="o${question[0].id}">
                     <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
 
-                <span class="badge pull-right" id="b${question[0].id}">
+                <span class="badge pul </div>l-right" id="b${question[0].id}">
 
                   ${h.pretty_points(question[2])}
                         /   ${h.pretty_points(question[0].question.points)}b
@@ -51,7 +51,7 @@
                     </div>
                     </div>
                     <div class="panel-body">
-                        <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
+                        <p><strong>Znenie otázky <br></strong>${question[0].question.text.replace('\n', markupsafe.Markup('<br> '))|n}</p>
 
                     % if question[0].question.qtype == 'S':
 
@@ -153,7 +153,7 @@
 
                     % if  question[0].comment:
                             <div class="well well-sm" id="koment_text#{tu}">
-                            ${question[0].comment}
+                            ${question[0].comment.replace('\n', markupsafe.Markup('<br> '))|n}
                             </div>
                     % endif
 

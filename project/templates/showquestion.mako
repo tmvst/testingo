@@ -22,7 +22,7 @@
                 </form>
         %endif
         <div class="control-group">
-            <h4>${question.text}
+            <h4>${question.text.replace('\n', markupsafe.Markup('<br> '))|n}
                 <span class="badge float-left">
                 max. ${question.points}b
             </span>
