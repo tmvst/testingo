@@ -52,7 +52,9 @@
   };
 
   $(document).ready(function() {
-    $('#save_changes').click(form_submit(post_url));
+    $('#save_changes').click(function() {
+      return form_submit(post_url);
+    });
     return $('#create_answer_showQ').click(function() {
       return input_template(this.id, this.name);
     });
