@@ -1,7 +1,6 @@
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
-<<<<<<< HEAD
     <%! import markupsafe %>
     <script src="${request.static_path('project:static/js/showtest.js')}"></script>
     <ol class="breadcrumb">
