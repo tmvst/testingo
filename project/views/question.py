@@ -320,10 +320,11 @@ def s_question_post(request):
     answers = json['answers']
     for a in answers :
         ans = a['value']
-        create_answer(request,request.db_session,
-                      ans,
-                      1,
-                      question)
+        if ans:
+            create_answer(request,request.db_session,
+                          ans,
+                          1,
+                          question)
     return HTTPFound(request.route_path('newquestion_s', test_id=testid))
 
 @view_config(route_name='newquestion_c', request_method='POST')
