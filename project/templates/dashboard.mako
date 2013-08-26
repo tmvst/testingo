@@ -26,7 +26,6 @@
         </div>
 
 	    <p><a href="${request.route_path('newtest')}" class="btn btn-primary">Vytvoriť nový test</a></p>
-
         <div class="row">
             <div class="col-lg-6" id="left-panel">
 

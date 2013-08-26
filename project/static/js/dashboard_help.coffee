@@ -10,7 +10,6 @@ $(document).ready ->
     $('#preh_test').tooltip(delay: { show: 800, hide: 100 })
     $("#help-panel-toggle").tooltip(title: 'Pomoc', placement: 'bottom')
 
-
     $('#help-panel-toggle').click ->
       hide_process event
 
