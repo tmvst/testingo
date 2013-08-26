@@ -33,3 +33,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=dashboard_view_tests.map
+*/

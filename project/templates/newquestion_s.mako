@@ -8,6 +8,14 @@
         test_url="${request.route_path('showtest', test_id=test.id)}"
     </script>
 
+        <ol class="breadcrumb">
+            <li><a href="${request.route_path('dashboard')}">Vaše testy</a></li>
+            <li><a href="${request.route_path('showtest', test_id=test.id)}">Test ${test.name}</a></li>
+
+            <li class="active">Nová otázka</li>
+        </ol>
+
+
     <div class="page-header">
         <h1>Nová otázka (fráza) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
     </div>

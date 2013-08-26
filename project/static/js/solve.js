@@ -35,3 +35,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=solve.map
+*/

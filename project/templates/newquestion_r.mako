@@ -7,6 +7,12 @@
         post_url="${request.route_path('newquestion_r', test_id=test.id)}"
         test_url="${request.route_path('showtest', test_id=test.id)}"
     </script>
+    <ol class="breadcrumb">
+        <li><a href="${request.route_path('dashboard')}">Vaše testy</a></li>
+        <li><a href="${request.route_path('showtest', test_id=test.id)}">Test ${test.name}</a></li>
+
+        <li class="active">Nová otázka</li>
+    </ol>
 
     <div class="page-header">
         <h1>Nová otázka (radio) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a> </h1>
@@ -24,7 +30,7 @@
                 <input id="points" name="points" class="form-control" placeholder="Body">
             </div>
 
-             <div class="form-group">
+            <div class="form-group">
                 <label for="points">Povinnosť vyplniť otázku</label>
                 <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory">
             </div>
