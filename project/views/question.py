@@ -94,6 +94,7 @@ def question_delete(request):
     Deletes selected question from test and db.
     """
     testid = request.matchdict['test_id']
+
     try:
         test = request.db_session.query(Test).filter_by(id=testid).one()
     except:
