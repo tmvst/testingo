@@ -34,7 +34,6 @@ class Test(Base):
     id = Column(Integer, primary_key=True) 
     name = Column(String(200), nullable=False)
     description = Column(String(500))
-    password = Column(String(20))
     date_crt = Column(DateTime)
     date_mdf = Column(DateTime)
     share_token = Column(String(30))
@@ -47,7 +46,6 @@ class Test(Base):
         """
         self.name = name
         self.description = description
-        self.password = password
         self.date_crt = date_crt
         self.date_mdf = date_mdf
         self.user = user
