@@ -42,6 +42,6 @@ form_submit = (redir) ->
 	return false
 
 $(document).ready () ->
-	$('#save_changes').click(form_submit(post_url))
+	$('#save_changes').click(() -> form_submit(post_url))
 	$('#create_answer_showQ').click(() ->
 		input_template @id, @name)
