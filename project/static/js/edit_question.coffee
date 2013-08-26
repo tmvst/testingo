@@ -1,3 +1,7 @@
+input_template = (id, Qtyp) ->
+
+
+
 form_submit = (redir) ->
 	$('#form_showQ').validate
 		rules:
@@ -44,4 +48,4 @@ form_submit = (redir) ->
 $(document).ready () ->
 	$('#save_changes').click(form_submit(post_url))
 	$('#create_answer_showQ').click(() ->
-		input_template @id, @name)
+		input_template @name)

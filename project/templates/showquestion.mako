@@ -22,18 +22,15 @@
 
     <div class="page-header">
 
-
-
-
         <h1>Otázka č.${question.number} <small>z testu </small><a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
 
     </div>
 
     <div>
         %if question.test.share_token is None:
-                <form action="#" method="POST">
-                    <button id="delete_question"type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
-                </form>
+                <!-- <form action="#" method="POST">
+                    <button id="delete_question" type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
+                </form> -->
 
                 <!-- Button trigger modal -->
 
@@ -41,7 +38,7 @@
 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<<<<<<< HEAD
+
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -66,9 +63,6 @@
                 max. ${question.points}b
             </span>
             </h4>
-
-
-
 
             <div class="list-group">
                 % if len(answers) is 0:
