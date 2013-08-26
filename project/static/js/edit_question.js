@@ -4,7 +4,7 @@
 
   form_submit = function(redir) {
     var answers, bodyQ, correctness, is_q_mandatory, textQ;
-    $('#form_c').validate({
+    $('#form_showQ').validate({
       rules: {
         text: {
           required: true
@@ -20,7 +20,7 @@
         }
       }
     });
-    if ($('#form_c').valid()) {
+    if ($('#form_showQ').valid()) {
       textQ = $("textarea[name='text']").val();
       bodyQ = $("input[name='points']").val();
       if (!!$("textarea.text")) {
@@ -52,7 +52,10 @@
   };
 
   $(document).ready(function() {
-    return $('#save_changes').click(form_submit(post_url));
+    $('#save_changes').click(form_submit(post_url));
+    return $('#create_answer_showQ').click(function() {
+      return input_template(this.id, this.name);
+    });
   });
 
 }).call(this);

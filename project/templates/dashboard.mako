@@ -1,24 +1,38 @@
 <%inherit file="default.mako" />
 <%block name="title">Dashboard</%block>
 <%block name="page_content">
-     <script src="${request.static_path('project:static/js/dashboard_view_tests.js')}"></script>
+    <script src="${request.static_path('project:static/js/dashboard_view_tests.js')}"></script>
+	<script src="${request.static_path('project:static/js/dashboard_help.js')}"></script>
 
     <div class="page-header">
         <h1>Dashboard</h1>
-        <a href="${request.route_path('newtest')}" class="btn btn-primary pull-right">Nový test</a>
+	    <a href="#" class="pull-right" id="help-panel-toggle"><img src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/32/help.png"></a>
     </div>
 
     <div>
         <p class="lead">
             Vitajte na užívateľskom dashboarde, kde sú zobrazené vami vytvorené testy a ich respondenti, vyplnené testy a aktuálna predpoveď počasia.
         </p>
+
+        <div class="panel panel-default" id="help-panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Help title
+                    <button type="button" id="help-panel-close" class="close text-right">&times;</button>
+                </h3>
+            </div>
+            <div class="panel-body">
+                Help content
+            </div>
+        </div>
+
+	    <p><a href="${request.route_path('newtest')}" class="btn btn-primary">Vytvoriť nový test</a></p>
         <div class="row">
             <div class="col-lg-6" id="left-panel">
 
                 <ul id="dtab" class="nav nav-tabs">
-                    <li class="active"><a href="#created_tests" class="showTest" data-toggle="tab">Vaše testy</a></li>
-                    <li><a href="#solved_tests" class="showTest" data-toggle="tab">Vyplnené testy</a></li>
-                    <li><a href="#view_all_tests" data-toggle="tab" id="preh_test" name="Activita">Prehľad testov</a></li>
+                    <li class="active"><a href="#created_tests" class="showTest" data-toggle="tab" title="Testy, ktoré ste vytvorili" id="card1">Vaše testy</a></li>
+                    <li><a href="#solved_tests" class="showTest" data-toggle="tab" title="Testy, ktoré ste vyplnili" id="card2">Vyplnené testy</a></li>
+                    <li><a href="#view_all_tests" data-toggle="tab" id="preh_test" name="Activita" title="Podrobný prehľad testov, ktoré ste vytvorili">Prehľad testov</a></li>
                 </ul>
                 <p></p>
                 <div class="tab-content">
