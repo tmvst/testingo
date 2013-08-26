@@ -2,24 +2,15 @@ from pyramid.view import (
     view_config,
     )
 from pyramid.httpexceptions import (
-    HTTPException,
-    HTTPFound,
     HTTPForbidden,
     HTTPUnauthorized,
     HTTPNotFound
     )
 
-
-from ..models.test import (
-    Test,
-    )
-
 from ..models.incomplete_test import (
     Incomplete_test
 )
-from ..models.complete_answer import (
-    Complete_answer,
-)
+
 
 
 @view_config(route_name='filled_test', request_method='GET', renderer='project:templates/filled_test.mako')

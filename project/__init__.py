@@ -96,7 +96,6 @@ def main(global_config, **settings):
     config.add_route('recovery_small_success', '/stratene-heslo-uspech/')
     config.add_route('dashboard', '/dashboard')
     config.add_route('newtest', '/newtest')
-    #config.add_route('newquestion', '/test/{test_id}/newquestion')
     config.add_route('showtest', '/test/{test_id}')
     config.add_route('getlist', '/getlist')
     config.add_route('showquestion', '/test/{test_id}/question/{question_id}')

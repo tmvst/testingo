@@ -1,6 +1,5 @@
 #{{{
 import random
-
 import datetime
 
 from pyramid.view import (
@@ -12,6 +11,7 @@ from pyramid.httpexceptions import (
     HTTPUnauthorized,
     HTTPNotFound
     )
+from sqlalchemy import func,distinct
 
 from ..models.user import (
     User,
@@ -21,6 +21,12 @@ from ..models.test import (
     )
 from ..models.question import (
     Question,
+    )
+from ..models.incomplete_test import (
+    Incomplete_test,
+    )
+from ..models.complete_answer import (
+    Complete_answer,
     )
 #}}}
 
@@ -68,7 +74,10 @@ def test_view(request):
     else:
         questions = request.db_session.query(Question).filter_by(test_id=test.id).all()
         solved_tests=test.incomplete_tests
-        return {'test':test,'questions':questions,'solved_tests':solved_tests}
+        inc_tests_pts=request.db_session.query(Incomplete_test,func.sum(Complete_answer.points).label('avg_points')).join(Complete_answer).join(Test).filter(Incomplete_test.test==test).group_by(Incomplete_test).subquery()
+        avg_pts=request.db_session.query(func.avg(inc_tests_pts.c.avg_points)).scalar()
+        no_of_respondents=request.db_session.query(func.count(distinct(Incomplete_test.user))).filter(Incomplete_test.test==test).scalar()
+        return {'avg_pts':avg_pts,'no_of_respondents':no_of_respondents,'test':test,'questions':questions,'solved_tests':solved_tests}
 
 @view_config(route_name='newtest', request_method='GET', renderer='project:templates/newtest.mako')
 def newtest_view(request):

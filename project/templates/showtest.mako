@@ -36,6 +36,10 @@
                 <p>${test.description}</p>
             </div>
 
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
+
+<div id="test_stats" class="collapse out"><%include file="test_stats.mako"/></div>
+
             <h2>Otázky
                 <small>
                     s celkovým počtom bodov ${test.sum_points}

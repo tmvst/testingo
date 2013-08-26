@@ -4,19 +4,21 @@
     <script src="${request.static_path('project:static/js/Chart.min.js')}"></script>
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
     <script src="${request.static_path('project:static/js/create_comment.js')}"></script>
+    <script src="${request.static_path('project:static/js/confirm_deletion.js')}"></script>
+    <script src="https://raw.github.com/makeusabrew/bootbox/master/bootbox.js"></script>
     <script type="text/javascript">
         post_url="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}"
     </script>
     <div class="page-header">
 
-        <h1>Otázka č.${question.number} z testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
+        <h1>Otázka č.${question.number} <small>z testu </small><a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
 
     </div>
 
     <div>
         %if question.test.share_token is None:
-                <form action="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}" method="POST">
-                    <button type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
+                <form action="#" method="POST">
+                    <button id="delete_question"type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
                 </form>
         %endif
         <div class="control-group">
@@ -91,12 +93,11 @@
                     <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" data-points="${int(answered_q[0].question.points)}b"> </a>
                 <span class="badge pull-right" id="b${answered_q[0].id}">
 
-                %if int(answered_q[2] - answered_q[2])==0:
-                    ${int(answered_q[2])}
-                %else:
-                    ${"%.1f" %answered_q[2]}
-                %endif
-                    /${int(answered_q[0].question.points)}b
+
+
+                ${h.pretty_points(answered_q[2])}
+                        /   ${h.pretty_points(answered_q[0].question.points)}b
+
                 </span>
 
                 </h3></div>

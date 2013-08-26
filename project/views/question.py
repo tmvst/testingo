@@ -163,7 +163,7 @@ def create_answer(request, db_session, text, correct, question):         # prida
 def update_points_in_question_showQ(request):
 
     incomplete_test= request.matchdict['incomplete_test']
-    incomplete_test.date_mdf  = datetime.datetime.now()
+    incomplete_test.date_mdf  = datetime.now()
 
     testid=incomplete_test.test_id
     json = request.json_body
@@ -184,7 +184,7 @@ def update_points_in_question_showQ(request):
         id_question = json['id_question']
 
         complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
-        complete_question.date_mdf = datetime.datetime.now()
+        complete_question.date_mdf = datetime.now()
         qtype=complete_question.question.qtype
 
         if qtype is 'S' or 'C':
@@ -209,7 +209,7 @@ def create_comment(request):
 
     complete_question = request.db_session.query(CompleteQuestion).filter_by(id=id_question).one()
     complete_question.comment = comment
-    complete_question.date_mdf = datetime.datetime.now()
+    complete_question.date_mdf = datetime.now()
     request.db_session.merge(complete_question)
 
     request.db_session.flush()
