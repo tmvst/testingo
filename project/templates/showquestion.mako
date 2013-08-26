@@ -1,11 +1,12 @@
 <%inherit file="default.mako"/>
-<%! import markupsafe%>
+<% import markupsafe%>
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/Chart.min.js')}"></script>
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
     <script src="${request.static_path('project:static/js/create_comment.js')}"></script>
     <script src="${request.static_path('project:static/js/confirm_deletion.js')}"></script>
+    <script src="${request.static_path('project:static/js/edit_question.js')}"></script>
     <script type="text/javascript">
         post_url="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}"
     </script>
@@ -28,6 +29,25 @@
                 max. ${question.points}b
             </span>
             </h4>
+
+        <div class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
 
             <div class="list-group">
                 % if len(answers) is 0:
