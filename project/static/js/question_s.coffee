@@ -31,10 +31,12 @@ form_submit = (redir) ->
 			text:
 				required: true
 			points:
+				required: true
 				number: true
 		messages:
 			text: "Prosím zadajte text otázky"
 			points:
+				required: "Prosím zadajte body"
 				number: "Body musia byť číslo"
 
 	if $('#form_s').valid()
