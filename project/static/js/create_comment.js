@@ -3,7 +3,7 @@
   var comment_template, hide_process, input_template, process_update;
 
   input_template = function(text, tu) {
-    return "<div class=\"form-group\" id=\"textarea_vykresli" + tu + "\">\n    <label for=\"text\"> Komentár: </label>\n    <textarea class=\"form-control\" name=\"area" + tu + "\" id=\"area" + tu + "\"  rows=\"3\" placeholder=\"Obsah komentára...\" required>" + text + "</textarea>\n    <a href=\"#\" class=\"update_b pull-right\" id=\"ulozit" + tu + "\"> Uložiť </a>\n</div> ";
+    return "<div class=\"form-group\" id=\"textarea_vykresli" + tu + "\">\n    <label for=\"text\"> Komentár: </label>\n    <textarea class=\"form-control\" name=\"area" + tu + "\" id=\"area" + tu + "\"  rows=\"3\" placeholder=\"Obsah komentára...\" required>" + text + "</textarea>\n    <a href=\"#\" class=\"update_b pull-right\" id=\"ulozit" + tu + "\"> Uložiť </a>\n</div>";
   };
 
   comment_template = function(koment, tu) {
@@ -41,7 +41,7 @@
         nc: 1
       })
     }).done(function(response) {
-      $("#koment_area" + id_q).append(comment_template(new_comment, id_q));
+      $("#koment_area" + id_q).append(comment_template(new_comment.replace(/\n/g, "<br />"), id_q));
       $("#textarea_vykresli" + id_q).hide();
       return $("#upravit_btn" + id_q).show();
     }).fail(function(response) {
@@ -59,3 +59,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=create_comment.map
+*/

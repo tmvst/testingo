@@ -4,7 +4,7 @@
           <label for="text"> Komentár: </label>
           <textarea class="form-control" name="area#{tu}" id="area#{tu}"  rows="3" placeholder="Obsah komentára..." required>#{text}</textarea>
           <a href="#" class="update_b pull-right" id="ulozit#{tu}"> Uložiť </a>
-      </div> 
+      </div>
     """
 
   comment_template = (koment,tu) ->
@@ -42,7 +42,7 @@
         id_question: id_q
         nc: 1
     .done (response) ->
-      $("#koment_area" + id_q).append comment_template(new_comment, id_q)
+      $("#koment_area" + id_q).append comment_template(new_comment.replace(/\n/g, "<br />"), id_q)
       $("#textarea_vykresli" + id_q).hide()
       $("#upravit_btn" + id_q).show()
     .fail (response) ->
