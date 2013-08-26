@@ -115,5 +115,4 @@ def share_test(request, test_id):
     if request.userid is test.user.id:
         token = str(random.getrandbits(70))
         test.share_token = token
-
         return token

@@ -167,7 +167,10 @@ def submit_test(request):
         request.db_session.add(complete_answer)
     request.db_session.add(incomplete_test)
     request.db_session.flush()
-    return HTTPFound(request.route_path('dashboard'))
+    if request.userid == incomplete_test.test.user_id:
+        return HTTPFound(request.route_path('solved_test',incomplete_test_id= incomplete_test.id))
+    else:
+        return HTTPFound(request.route_path('filled_test',incomplete_test_id= incomplete_test.id))
 
 @view_config(route_name='solved_test', request_method='GET', renderer='project:templates/solved_test.mako')
 def show_solved_test(request):
@@ -188,12 +191,6 @@ def show_solved_test(request):
         acq_points =  sum(float(a.points) for  a in q_answers)
         list=[q, q_answers,acq_points]
         questions_and_answers.append(list)
-        # cudne poriadie , otazky k testu by mali ist normalne asc podla id, rovnako by mali fungovat aj odpovede ku
-        # complete_question , potom logicky cloveka napadne pouzit append
-        # neviem preco, funguje to ale s insertom na zaciatok
-
-
-
     return {'incomplete_test':incomplete_test,'questions_and_answers':questions_and_answers}
 
 

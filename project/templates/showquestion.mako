@@ -10,6 +10,11 @@
     <script type="text/javascript">
         post_url="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}"
     </script>
+    <ol class="breadcrumb">
+  <li><a href="${request.route_path('showtest', test_id=test.id)}">Test ${test.name}</a></li>
+  <li><a href="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}">Otázka č.${question.number}</a></li>
+  <li class="active">Data</li>
+</ol>
     <div class="page-header">
 
         <h1>Otázka č.${question.number} <small>z testu </small><a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
