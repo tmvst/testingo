@@ -51,7 +51,7 @@ def create_test(request, db_session, name, description):
     date_crt = datetime.datetime.now()
     date_mdf = datetime.datetime.now()
 
-    test = Test(name, description, "babotka", date_crt, date_mdf, user)
+    test = Test(name, description, date_crt, date_mdf, user)
 
 
     db_session.add(test)

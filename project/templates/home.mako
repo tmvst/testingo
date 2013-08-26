@@ -18,9 +18,6 @@
         <li>vytvorenie viewu riesitelia testu, v riesiteloch moznost vyhladavania</li>
         <li>statistiky - mozno vo forme grafov </li>
         <li>odpocitavanie casu na test - JS</li>
-        <li>potvrdzovacia hlaska cez bootstrap nejaky js confirm dialog</li>
-        <li>formátovanie textu v open question</li>
-        <li>umožniť nevyplniť radio question</li>
         <li>private/public test nastaviť</li>
         <li>povinná/nepovinná otázka</li>
         <li>opakovaný update bodov a komentov</li>

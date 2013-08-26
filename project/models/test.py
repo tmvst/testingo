@@ -34,7 +34,6 @@ class Test(Base):
     id = Column(Integer, primary_key=True) 
     name = Column(String(200), nullable=False)
     description = Column(String(500))
-    password = Column(String(20))
     date_crt = Column(DateTime)
     date_mdf = Column(DateTime)
     share_token = Column(String(30))
@@ -42,12 +41,11 @@ class Test(Base):
     user = relationship('User', backref=backref("tests",order_by=date_crt.desc(), cascade="all, delete-orphan"))
     sum_points=Column(Integer)
 
-    def __init__(self, name, description, password, date_crt, date_mdf, user):
+    def __init__(self, name, description, date_crt, date_mdf, user):
         """Initialization of class.
         """
         self.name = name
         self.description = description
-        self.password = password
         self.date_crt = date_crt
         self.date_mdf = date_mdf
         self.user = user

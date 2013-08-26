@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "edit_question.js",
+  "sourceRoot": "",
+  "sources": [
+    "edit_question.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,KAAA,2BAAA;;CAAA,CAAA,CAAmB,MAAA,QAAnB;CAAmB,UAClB;CADD,EAAmB;;CAAnB,CAqBA,CAAiB,MAAA,KAAjB;CACC,GAAA,CAAA,QAAA;CACA,GAAA,OAAA,KAAA,CAAyB;CAvB1B,EAqBiB;;CArBjB,CAyBA,CAAkB,EAAlB,GAAA,CAAkB;CACjB,OAAA;CAAA,EAAW,CAAX,IAAA,QAAW;CACX,IAAA,MAAA,GAAA,EAAA;CAFD,EAAkB;CAzBlB"
+}

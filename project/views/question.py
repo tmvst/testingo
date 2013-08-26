@@ -320,10 +320,11 @@ def s_question_post(request):
     answers = json['answers']
     for a in answers :
         ans = a['value']
-        create_answer(request,request.db_session,
-                      ans,
-                      1,
-                      question)
+        if ans:
+            create_answer(request,request.db_session,
+                          ans,
+                          1,
+                          question)
     return HTTPFound(request.route_path('newquestion_s', test_id=testid))
 
 @view_config(route_name='newquestion_c', request_method='POST')
@@ -338,17 +339,18 @@ def c_question_post(request):
     correctness = json['correctness']
     for a in answers :
         ans = a['value']
-        if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
-            create_answer(request,request.db_session,
-                          ans,
-                          1,
-                          question)
-            counterc += 1
-        else:
-            create_answer(request,request.db_session,
-                          ans,
-                          0,
-                          question)
+        if ans:
+            if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
+                create_answer(request,request.db_session,
+                              ans,
+                              1,
+                              question)
+                counterc += 1
+            else:
+                create_answer(request,request.db_session,
+                              ans,
+                              0,
+                              question)
         counter += 1
 
     return HTTPFound(request.route_path('newquestion_c', test_id=testid))
@@ -365,17 +367,18 @@ def r_question_post(request):
     correctness = json['correctness']
     for a in answers :
         ans = a['value']
-        if counterc < len(correctness) and 'radio'+str(counter) == correctness[counterc]['value']:
-            create_answer(request,request.db_session,
-                          ans,
-                          1,
-                          question)
-            counterc += 1
-        else:
-            create_answer(request,request.db_session,
-                          ans,
-                          0,
-                          question)
+        if ans:
+            if counterc < len(correctness) and 'radio'+str(counter) == correctness[counterc]['value']:
+                create_answer(request,request.db_session,
+                              ans,
+                              1,
+                              question)
+                counterc += 1
+            else:
+                create_answer(request,request.db_session,
+                              ans,
+                              0,
+                              question)
         counter += 1
 
     return HTTPFound(request.route_path('newquestion_r', test_id=testid))
