@@ -76,6 +76,7 @@
     answer = $('#answer_r');
     answer.html(button_template());
     $('#submit').click(process_submit);
+    process_submit();
     $('#answer_r').on('click', '.delete-button', delete_entry);
     $('#form_r').submit(function() {
       return false;
