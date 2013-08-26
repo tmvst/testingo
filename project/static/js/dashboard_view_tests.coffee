@@ -10,6 +10,15 @@ show_process = (event) ->
     $("#Activita").show()
 
 $(document).ready ->
+    url = window.location.href
+    host = window.location.host
+    params = url.replace("http://#{host}/dashboard", "")
+
+    if params is "?tab=2"
+      $('#dtab a[href="#solved_tests"]').tab('show')
+    else if params is "?tab=3"
+      $('#dtab a[href="#view_all_tests"]').tab('show')
+
     $("#preh_test").click ->
       hide_process event
     $(".showTest").click ->

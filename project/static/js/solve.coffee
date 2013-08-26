@@ -14,7 +14,7 @@ form_submit = () ->
       user_answers_O: user_answers_O
       console.log(user_answers_O)
   .done (response) ->
-      top.location.href = "/dashboard"
+      top.location.href = "/dashboard?tab=2"
   .fail (response) ->
       alert('nepodarilo sa. bohuzial :( prepac')
       console.log response
