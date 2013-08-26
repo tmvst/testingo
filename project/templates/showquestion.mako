@@ -2,6 +2,9 @@
 <%! import markupsafe%>
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
+    <!--[if lte IE 8]>
+    <script src="${request.static_path('project:static/js/excanvas.js')}"></script>
+    <![endif]-->
     <script src="${request.static_path('project:static/js/Chart.min.js')}"></script>
     <script src="${request.static_path('project:static/js/edit_points.js')}"></script>
     <script src="${request.static_path('project:static/js/create_comment.js')}"></script>
@@ -10,12 +13,17 @@
     <script type="text/javascript">
         post_url="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}"
     </script>
-    <ol class="breadcrumb">
-  <li><a href="${request.route_path('showtest', test_id=test.id)}">Test ${test.name}</a></li>
-  <li><a href="${request.route_path('showquestion', test_id=test.id,question_id=question.id)}">Otázka č.${question.number}</a></li>
-  <li class="active">Data</li>
-</ol>
+         <ol class="breadcrumb">
+            <li><a href="${request.route_path('dashboard')}">Vaše testy</a></li>
+            <li><a href="${request.route_path('showtest', test_id=test.id)}">Test ${test.name}</a></li>
+
+            <li class="active">Otázka č.${question.number}</li>
+        </ol>
+
     <div class="page-header">
+
+
+
 
         <h1>Otázka č.${question.number} <small>z testu </small><a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
 
@@ -27,27 +35,27 @@
                     <button id="delete_question"type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
                 </form>
 
-                    <!-- Button trigger modal -->
+                <!-- Button trigger modal -->
 
                 <a data-toggle="modal" href="#myModal" class="btn btn-primary pull-right">Zmeniť otázku</a>
 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title"></h4>
-                    </div>
-                    <div class="modal-body">
-                        <%include file="newquestion_s.mako"/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <%include file="newquestion_s.mako"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
         %endif
 
@@ -99,23 +107,25 @@
     </div>
 
 
-         <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky o otázke</button>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky o otázke</button>
 
     <div id="test_stats" class="collapse out">
-    %if question.qtype == "S":
+            %if question.qtype == "S":
 
-        <div class="col-lg-6" id="chart_desc">
-            <strong>Najpopulárnejšie odpovede respondentov</strong>
-        </div>
-        <div class="col-lg-6" id="chart">
-            <canvas id="myChart" width="300" height="300"></canvas>
-            <script>
-                var pieData =${graph_data|n};
-                var myPie = new Chart(document.getElementById("myChart").getContext("2d")).Pie(pieData,{ labelFontColor: 'white',labelAlign: 'right',labelFontSize : '14'});
-            </script>
-        </div>
-    %endif
-        </div>
+                <div class="col-lg-6" id="chart_desc">
+                    <strong>Najpopulárnejšie odpovede respondentov</strong>
+                </div>
+                <div class="col-lg-6" id="chart">
+                    <div class="pull-right">
+                        <canvas id="myChart" width="300" height="300"></canvas>
+                    </div>
+                    <script>
+                        var pieData =${graph_data|n};
+                        var myPie = new Chart(document.getElementById("myChart").getContext("2d")).Pie(pieData,{ labelFontColor: 'white',labelAlign: 'right',labelFontSize : '14'});
+                    </script>
+                </div>
+            %endif
+    </div>
 
 
 
@@ -130,20 +140,20 @@
         % else:
             % for answered_q in list_of_answers:
                 <div class="panel panel-default">
-                <div class="panel-heading">
+                    <div class="panel-heading">
 
-                <h3 class="panel-title" id="o${answered_q[0].id}"> ${answered_q[1][0]}
-                    <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" data-points="${int(answered_q[0].question.points)}b"> </a>
+                        <h3 class="panel-title" id="o${answered_q[0].id}"> ${answered_q[1][0]}
+                            <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" data-points="${int(answered_q[0].question.points)}b"> </a>
                 <span class="badge pull-right" id="b${answered_q[0].id}">
 
 
 
                 ${h.pretty_points(answered_q[2])}
-                        /   ${h.pretty_points(answered_q[0].question.points)}b
+                    /   ${h.pretty_points(answered_q[0].question.points)}b
 
                 </span>
 
-                </h3></div>
+                        </h3></div>
                 <div class="panel-body">
                 %if answered_q[0].question.qtype =='R':
                     %for answer in answered_q[0].question.answers:
