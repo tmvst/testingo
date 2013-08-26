@@ -1,5 +1,5 @@
 <%inherit file="default.mako"/>
-<% import markupsafe%>
+<%! import markupsafe%>
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/Chart.min.js')}"></script>
@@ -21,7 +21,27 @@
                 <form action="#" method="POST">
                     <button id="delete_question"type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
                 </form>
-                    <button id="edit_question" class="btn pull-right">Zmeniť otázku</button>
+                    <!-- Button trigger modal -->
+  <a data-toggle="modal" href="#myModal" class="btn btn-primary pull-right">Zmeniť otázku</a>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
         %endif
         <div class="control-group">
             <h4>${question.text.replace('\n', markupsafe.Markup('<br> '))|n}
@@ -30,23 +50,7 @@
             </span>
             </h4>
 
-        <div class="modal fade">
-          <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    <p>One fine body&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+
 
 
             <div class="list-group">
@@ -105,7 +109,11 @@
     %endif
         </div>
 
+
+
     <div class="answer_s">
+
+
 
         <h2>Vyplnené odpovede</h2>
 

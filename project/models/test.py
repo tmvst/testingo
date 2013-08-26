@@ -41,7 +41,7 @@ class Test(Base):
     user = relationship('User', backref=backref("tests",order_by=date_crt.desc(), cascade="all, delete-orphan"))
     sum_points=Column(Integer)
 
-    def __init__(self, name, description, password, date_crt, date_mdf, user):
+    def __init__(self, name, description, date_crt, date_mdf, user):
         """Initialization of class.
         """
         self.name = name
