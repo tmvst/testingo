@@ -1,5 +1,5 @@
-<%inherit file="default.mako" />
-<%! import markupsafe %>
+<%inherit file="default.mako"/>
+<%! import markupsafe%>
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/Chart.min.js')}"></script>
@@ -20,6 +20,7 @@
                 <form action="#" method="POST">
                     <button id="delete_question"type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
                 </form>
+                    <button id="edit_question" class="btn pull-right">Zmeniť otázku</button>
         %endif
         <div class="control-group">
             <h4>${question.text.replace('\n', markupsafe.Markup('<br> '))|n}
