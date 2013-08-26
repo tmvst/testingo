@@ -36,8 +36,6 @@ def not_found(request):
     tests=user.tests
     return {'errors':[], 'tests': tests,'userid':uid}
 
-
-    return {}
 @view_config(route_name='home', renderer='project:templates/home.mako')
 def main_page_view(request):
     """Shows a Home Page.

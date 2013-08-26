@@ -32,14 +32,14 @@
                     <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title"></h4>
+                        <h4 class="modal-title">Úprava otázky č.${question.number} </h4>
                     </div>
                     <div class="modal-body">
-                        <%include file="newquestion_s.mako"/>
+                        <%include file="edit_question.mako"/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="save_changes">Save changes</button>
                     </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
