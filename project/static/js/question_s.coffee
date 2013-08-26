@@ -66,6 +66,7 @@ form_submit = (redir) ->
 $(document).ready () ->
 	answer = $('#answer_s')
 	answer.html(button_template())
+	process_submit()
 	$('#submit').click(process_submit)
 	$('#answer_s').on('click', '.delete-button', delete_entry)
 

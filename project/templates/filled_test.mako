@@ -1,4 +1,5 @@
 <%inherit file="default.mako" />
+<%! import markupsafe %>
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
     <div class="page-header" xmlns="http://www.w3.org/1999/html">
@@ -50,7 +51,7 @@
                 </div>
                 </div>
                 <div class="panel-body">
-                    <p><strong>Znenie otázky <br></strong>${question[0].question.text}</p>
+                    <p><strong>Znenie otázky <br></strong>${question[0].question.text.replace('\n', markupsafe.Markup('<br> '))|n}</p>
                 % if question[0].question.qtype == 'S':
 
                     % for ans in question[1]:
@@ -122,7 +123,7 @@
                         <div id="koment_text${question[0].id}">
                             <br><strong>Komentár:</strong><br>
                             <blockquote class="blockquote " id="koment_text#{tu}">
-                            ${question[0].comment}
+                            ${question[0].comment.replace('\n', markupsafe.Markup('<br> '))|n}
                             </blockquote>
                         </div>
                 % endif

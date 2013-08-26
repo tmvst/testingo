@@ -1,7 +1,7 @@
-
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
+<%! import markupsafe %>
     <div class="page-header">
         <h1>${test.name}</h1>
         <form class="pull-right" action="${request.route_path('showtest', test_id=test.id)}" method="POST">
@@ -102,7 +102,7 @@
                     </a>
                     </div>
                     <div class="panel-body">
-                        <strong>${question.text}</strong>
+                        <strong>${question.text.replace('\n', markupsafe.Markup('<br> '))|n}</strong>
                         <br>
                     % for answer in question.answers:
                         % if answer.correct == 1:

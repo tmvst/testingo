@@ -75,6 +75,7 @@
     var answer, new_c_url, new_o_url, new_r_url, new_s_url;
     answer = $('#answer');
     answer.html(button_template());
+    process_submit();
     $('#submit').click(process_submit);
     $('#answer').on('click', '.delete-button', delete_entry);
     $('#form_c').submit(function() {
