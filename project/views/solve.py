@@ -38,10 +38,12 @@ from ..models.complete_question import (
 
 @view_config(route_name='solve', request_method='GET', renderer='project:templates/solve.mako')
 def view_question(request):
-
-    test_token = request.matchdict['token']
-    test = request.db_session.query(Test).filter_by(share_token=test_token).one()
-    return {'test':test, 'token':test_token}
+    if request.userid:
+        test_token = request.matchdict['token']
+        test = request.db_session.query(Test).filter_by(share_token=test_token).one()
+        return {'test':test, 'token':test_token}
+    else:
+        raise HTTPForbidden
 
 @view_config(route_name='solve', request_method='POST')
 def submit_test(request):

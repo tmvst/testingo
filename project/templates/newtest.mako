@@ -1,6 +1,13 @@
 <%inherit file="default.mako" />
 <%block name="title">Nový test</%block>
 <%block name="page_content">
+
+    <ol class="breadcrumb">
+        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+        <li><a href="${request.route_path('dashboard')}">Vami vytvorené testy</a></li>
+        <li class="active">Nový test</li>
+    </ol>
+
 <div class="page-header">
 	<h1>Nový test</h1>
 </div>

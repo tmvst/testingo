@@ -1,14 +1,15 @@
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
+
     <%! import markupsafe %>
     <script src="${request.static_path('project:static/js/showtest.js')}"></script>
     <ol class="breadcrumb">
-        <li><a href="${request.route_path('dashboard')}">Vaše testy</a></li>
-
-
+        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+        <li><a href="${request.route_path('dashboard')}">Vami vytvorené testy</a></li>
         <li class="active">Test ${test.name}</li>
     </ol>
+
 
     <div class="page-header">
         <h1>${test.name}</h1>
