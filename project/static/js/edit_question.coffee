@@ -23,7 +23,7 @@ phrase_template = () ->
 	"""
 		<div class="form-group">
 			<label for="odpoved"></label>
-			<input class="text form-control" id="text#{ix}" placeholder="Správna odpoveď">
+			<input class="text form-control indikator" id="text#{ix}" placeholder="Správna odpoveď">
 			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
@@ -59,14 +59,14 @@ form_submit = (redir,type) ->
 		bodyQ = $("input[name='points']").val()
 		console.log bodyQ
 
-		if not not $("textarea.text")
-			answers = $("input.text").serializeArray()
-			correctness = $("input.indikator").serializeArray()
-			console.log("input")
-		else
+		if $("textarea.text").val()
 			answers = $("textarea.text").val()
 			correctness = true
 			console.log("textarea")
+		else
+			answers = $("input.text").serializeArray()
+			correctness = $("input.indikator").serializeArray()
+			console.log("input")
 
 		is_q_mandatory = $('#is_q_mandatory').is(':checked')
 

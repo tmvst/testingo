@@ -492,11 +492,12 @@ def edit_question_answers(request,question,answers):
                                   question)
             counter += 1
     elif question.qtype is 'O':
-        answer = json['answer']
+        answer = json['answers']
+        print(answer)
         question.mandatory=json['is_q_mandatory']
 
         create_answer(request,request.db_session,
-                      answer[0]['value'],
+                      answer,
                       1,
                       question)
     elif question.qtype is 'C':

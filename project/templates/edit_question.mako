@@ -47,11 +47,13 @@
 
                             % if (question.qtype == "O"):
                                 <textarea class="text form-control" name="odpoved" rows="3" placeholder="Odpoveď myslím, že vyplniť pre vlastnú potrebu snáď môžete...">${answer.text}</textarea>
+                               
                             % else:
-                                <input class="text form-control" name="text${counter}" value="${answer.text}">
+                                <input class="text form-control" name="text${counter}" id="text${counter}" value="${answer.text}">
+                                 <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
                             % endif
 
-                            <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+
 
                             </span>
                         % else:
@@ -63,8 +65,10 @@
                                     <input class="indikator" name="radio" type="radio" value="ind${counter}" >
 
                             % endif
-                            <input class="text form-control"  name="text${counter}"  value="${answer.text}">
+                            <input class="text form-control"  name="text${counter}"  id="text${counter}"  value="${answer.text}">
                             <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+
+
                             </span>
 
                         % endif
