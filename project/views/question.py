@@ -126,7 +126,7 @@ def question_work(request):
             return update_points_in_question_showQ(request)
         else:
             json = request.json_body
-            print(json['answers'])
+
             update_question(request)
 
         return HTTPFound(request.route_path('showquestion', test_id=testid,question_id=questionid))
@@ -173,13 +173,9 @@ def update_question(request):
 
     points = json['points']
     text = json['text']
-    qtype = json['type']
     answers = json['answers']
-    print(question_id)
     question = request.db_session.query(Question).filter_by(id=question_id).one()
     question.test.sum_points-=question.points
-
-    print(question)
     question.text = text
     question.points = points
     question.test.sum_points+=float(points)
@@ -466,16 +462,12 @@ def update_points_in_question(request):
 
 def edit_question_answers(request,question,answers):
     json = request.json_body
-    print(question)
-    print(question.qtype)
 
-    print(answers)
     if question.qtype is 'R':
         counter = 1
         counterc = 0
 
         correctness = json['correctness']
-        print(correctness)
         for a in answers :
             ans = a['value']
             if ans:
@@ -493,7 +485,7 @@ def edit_question_answers(request,question,answers):
             counter += 1
     elif question.qtype is 'O':
         answer = json['answers']
-        print(answer)
+
         question.mandatory=json['is_q_mandatory']
 
         create_answer(request,request.db_session,
@@ -505,7 +497,7 @@ def edit_question_answers(request,question,answers):
         counterc = 0
         correctness = json['correctness']
         for a in answers :
-            print(a)
+
             ans = a['value']
             if ans:
                 if counterc < len(correctness) and 'ind'+str(counter) == correctness[counterc]['name']:
@@ -522,7 +514,6 @@ def edit_question_answers(request,question,answers):
             counter += 1
     elif question.qtype is 'S':
         for a in answers :
-            print(a)
             ans = a['value']
             if ans:
                 create_answer(request,request.db_session,

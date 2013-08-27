@@ -23,8 +23,8 @@ phrase_template = () ->
 	"""
 		<div class="form-group">
 			<label for="odpoved"></label>
-			<input class="text form-control indikator" id="text#{ix}" placeholder="Správna odpoveď">
-			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+			<input class="text form-control indikator" name="odpoved" id="text#{ix}" placeholder="Správna odpoveď">
+			<div class="btn btn-default btn-sm delete-button"> Zmazať </div>
 		</div>
 	"""
 
@@ -62,11 +62,9 @@ form_submit = (redir,type) ->
 		if $("textarea.text").val()
 			answers = $("textarea.text").val()
 			correctness = true
-			console.log("textarea")
 		else
 			answers = $("input.text").serializeArray()
 			correctness = $("input.indikator").serializeArray()
-			console.log("input")
 
 		is_q_mandatory = $('#is_q_mandatory').is(':checked')
 

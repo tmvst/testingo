@@ -18,7 +18,7 @@
   };
 
   phrase_template = function() {
-    return "<div class=\"form-group\">\n	<label for=\"odpoved\"></label>\n	<input class=\"text form-control indikator\" id=\"text" + ix + "\" placeholder=\"Správna odpoveď\">\n	<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
+    return "<div class=\"form-group\">\n	<label for=\"odpoved\"></label>\n	<input class=\"text form-control indikator\" name=\"odpoved\" id=\"text" + ix + "\" placeholder=\"Správna odpoveď\">\n	<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div>\n</div>";
   };
 
   input_template = function(Qtyp) {
@@ -64,11 +64,9 @@
       if ($("textarea.text").val()) {
         answers = $("textarea.text").val();
         correctness = true;
-        console.log("textarea");
       } else {
         answers = $("input.text").serializeArray();
         correctness = $("input.indikator").serializeArray();
-        console.log("input");
       }
       is_q_mandatory = $('#is_q_mandatory').is(':checked');
       $.ajax({
