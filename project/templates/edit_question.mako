@@ -20,22 +20,34 @@
                 <label for="points">Povinnosť vyplniť otázku</label>
             </div>
 
+            % if (question.qtype != "O"):
+                    <a class="btn btn-default btn-sm" id='create_answer_showQ' name="${question.qtype}"> Pridať odpoveď </a> <br>
+                % endif
+
              <div class="list-group">
                 % if len(answers) is 0:
                         <span> Otázka neobsahuje žiadne možnosti</span>
                 % else:
+                <div id="odpovede_showQ">
                     % for answer in question.answers:
+                    <div class="answerblock">
                         % if answer.correct == 1:
                             <span>
                             % if (question.qtype == "C"):
                                 <input class="indikator" type="checkbox" value="" checked disabled="disabled">
+                                
                             % elif (question.qtype == "R"):
                                 <input class="indikator" type="radio" value="" checked disabled="disabled" >
-                            % elif (question.qtype == "O"):
+                                
+                            % endif
+
+                            % if (question.qtype == "O"):
                                 <textarea class="text form-control" rows="3" placeholder="Odpoveď myslím, že vyplniť pre vlastnú potrebu snáď môžete...">${answer.text}</textarea>
                             % else:
                                 <input class="text form-control" rows="2" value="${answer.text}">
                             % endif
+
+                            <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 
                             </span>
                         % else:
@@ -48,15 +60,14 @@
 
                             % endif
                             <input class="text form-control" rows="2" value="${answer.text}">
+                            <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
                             </span>
 
                         % endif
+                    </div>
                     % endfor
-                % endif
-
-                % if (question.qtype != "O"):
-                    <a class="btn btn-default btn-sm" id='create_answer_showQ' name="${question.qtype}"> Pridať odpoveď </a> <br>
                     <div id="input_answer_showQ"></div>
+                    </div>
                 % endif
              </div>
         </form>

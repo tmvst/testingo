@@ -28,9 +28,9 @@
 
     <div>
         %if question.test.share_token is None:
-                <!-- <form action="#" method="POST">
+                <form action="#" method="POST">
                     <button id="delete_question" type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
-                </form> -->
+                </form>
 
                 <!-- Button trigger modal -->
 
@@ -50,7 +50,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save_changes">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="save_changes" name="${question.qtype}">Save changes</button>
                     </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->

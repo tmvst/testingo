@@ -160,6 +160,22 @@ def create_answer(request, db_session, text, correct, question):         # prida
 
     return answer.id
 
+def update_question(request):
+    question= request.matchdict['question']
+    test= request.matchdict['test']
+    json = request.json_body
+
+    points = json['points']
+    text = json['text']
+    qtype = json['type']
+
+    question = request.db_session.query(Question).filter_by(id=question.id).one()
+    question.text = text
+    question.points = points
+    # update body v teste a zmena otázok 
+    request.db_session.merge(question)
+    db_session.flush()
+
 def update_points_in_question_showQ(request):
 
     incomplete_test= request.matchdict['incomplete_test']
