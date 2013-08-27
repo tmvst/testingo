@@ -5,7 +5,7 @@
 	<script src="${request.static_path('project:static/js/dashboard_help.js')}"></script>
     <ol class="breadcrumb">
 
-        <li class="active"><span class="glyphicon glyphicon-home"></span> Dashboard</li>
+        <li class="active"><span class="glyphicon glyphicon-home"></span> </li>
     </ol>
 
     <div class="page-header">
@@ -15,7 +15,6 @@
 
     <div>
         <p class="lead">
-            Vitajte na užívateľskom dashboarde, kde sú zobrazené vami vytvorené testy a ich respondenti, vyplnené testy a aktuálna predpoveď počasia.
         </p>
 
         <div class="panel panel-default" id="help-panel">

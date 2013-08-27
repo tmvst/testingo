@@ -5,8 +5,8 @@
     <%! import markupsafe %>
     <script src="${request.static_path('project:static/js/showtest.js')}"></script>
     <ol class="breadcrumb">
-        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
-        <li><a href="${request.route_path('dashboard')}">Vami vytvorené testy</a></li>
+        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
+        <li><a href="${request.route_path('dashboard')}">Vaše testy</a></li>
         <li class="active">Test ${test.name}</li>
     </ol>
 
@@ -96,11 +96,7 @@
                             <a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
 
                             <h3 class="panel-title">Otázka č.${question.number}
-                            %if question.mandatory:
-                                    - povinná
-                            %else:
-                                    - nepovinná
-                            %endif
+                            
                             % if question.points:
                                     <span class="badge pull-right">
 										${int(question.points)}b
@@ -152,7 +148,11 @@
 
                                 % endif
                             % endfor
-                            </div>
+
+                            %if question.mandatory:
+                                   <em> * otázku je povinné vyplniť</em>
+                                %endif
+                            </div>                            
                             </div>
                         % endfor
                         % endif

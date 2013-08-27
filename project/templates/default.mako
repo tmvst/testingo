@@ -39,7 +39,7 @@
             <!-- Everything you want hidden at 940px or less, place within here -->
             % if request.userid:
             <ul class="nav navbar-nav pull-right">
-                <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+                <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
                 <li><p class="navbar-text">Prihlásený ${request.user.email}</p></li>
                 <li>
                     <form action="${request.route_path('logout')}" method="POST">
