@@ -23,6 +23,7 @@
       $('#dtab a[href="#solved_tests"]').tab('show');
     } else if (params === "?tab=3") {
       $('#dtab a[href="#view_all_tests"]').tab('show');
+      hide_process(event);
     }
     $("#preh_test").click(function() {
       return hide_process(event);
@@ -33,7 +34,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=dashboard_view_tests.map
-*/
