@@ -27,14 +27,15 @@
 
     <div>
 		%if question.test.share_token is None:
-                <form action="#" method="POST">
-                    <button id="delete_question" type="submit" class="btn btn-danger pull-right">Zmazať otázku</button>
-                </form>
+				<div>
+	                <form action="#" method="POST">
+	                    <button id="delete_question" type="submit" class="btn btn-danger pull-right btns">Zmazať otázku</button>
+	                </form>
 
-                <!-- Button trigger modal -->
+	                <!-- Button trigger modal -->
 
-                <a data-toggle="modal" href="#myModal" class="btn btn-primary pull-right">Zmeniť otázku</a>
-
+	                <a data-toggle="modal" href="#myModal" class="btn btn-primary pull-right btns">Zmeniť otázku</a>
+				</div>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
