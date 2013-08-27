@@ -23,10 +23,14 @@
         <h1>${incomplete_test.test.name}</h1>
     </div>
     <div>
-        <div class="control-group">
-            <div class="controls">
-                <p>${incomplete_test.test.description}</p>
-            </div>
+            <dl class="dl-horizontal">
+                <dt>Popis:</dt>
+                <dd>${incomplete_test.test.description}</dd>
+                <dt>Čas riešenia:</dt>
+                <dd>${incomplete_test.date_crt.strftime('%H:%M dňa %d.%m.%Y')}</dd>
+                <dt>Čas poslednej zmeny:</dt>
+                <dd>${incomplete_test.date_mdf.strftime('%H:%M dňa %d.%m.%Y')}</dd>     
+            </dl>
 
             <h2>Otázky</h2>
 

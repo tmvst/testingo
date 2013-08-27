@@ -2,6 +2,8 @@
     """
       <div class="form-group" id="textarea_vykresli#{tu}">
           <label for="text"> Komentár: </label>
+          <textarea class="form-control" name="area#{tu}" id="area#{tu}"  rows="3" placeholder="Obsah komentára..." required>#{text}</textarea>
+-         <a href="#" class="update_b pull-right" id="ulozit#{tu}"> Uložiť </a>
       </div>
     """
 
@@ -18,11 +20,14 @@
     q_id = (id.substring(11))
     $("#upravit_btn" + q_id).hide()
     $("#koment_text" + q_id).hide()
+    console.log($("#koment_area" + q_id))
 
     if text is 'None'
       $("#koment_area" + q_id).append(input_template('', q_id))
+      console.log("ahoj1")
     else 
       $("#koment_area" + q_id).append(input_template(text, q_id))
+      console.log("ahoj2")
 
     $("#ulozit" + q_id).click ->
       process_update q_id, post_url

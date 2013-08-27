@@ -40,10 +40,6 @@
                     </div>
                 % endif
         </div>
-        <div class="control-group">
-            <div class="controls">
-                <p>${test.description}</p>
-            </div>
 
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
 

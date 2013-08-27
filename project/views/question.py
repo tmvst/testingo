@@ -106,12 +106,6 @@ def question_work(request):
         if request.userid is not test.user_id:
             raise HTTPUnauthorized
 
-        if test.share_token:
-            json = request.json_body
-            comp_q = request.db_session.query(CompleteQuestion).filter_by(id=json['id_question']).one()
-            request.matchdict['incomplete_test'] = comp_q.incomplete_test
-            return update_points_in_question_showQ(request)
-
         questionid = request.matchdict['question_id']
         question= request.db_session.query(Question).filter_by(id=questionid).one()
         question_number=question.number
@@ -124,7 +118,14 @@ def question_work(request):
         request.db_session.flush()
         return HTTPFound(request.route_path('showtest', test_id=testid))
     else:
-        update_question(request)
+        test = request.db_session.query(Test).filter_by(id=testid).one()    # pridať try-except (Babotka)
+        if test.share_token:
+            json = request.json_body
+            comp_q = request.db_session.query(CompleteQuestion).filter_by(id=json['id_question']).one()
+            request.matchdict['incomplete_test'] = comp_q.incomplete_test
+            return update_points_in_question_showQ(request)
+        else:
+            update_question(request)
         return HTTPFound(request.route_path('showquestion', test_id=testid,question_id=questionid))
 
 def create_question(request, db_session, text, points, q_type):         # pridať password !!!
