@@ -179,7 +179,7 @@ def begged_for_recovery(request):
 
     link = request.route_url('new_password', user_id=str(user.id), code=user.recovery_code)
 
-    message = Message(subject='Zmena hesla',
+    message = Message(subject='Zmena hesla na Testingo.sk',
                       recipients=[email],
                       body='Ak si chcete zmeniť heslo, kliknite na nasledovný odkaz:' + link + '.')
 
