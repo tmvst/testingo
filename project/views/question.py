@@ -89,39 +89,43 @@ def view_respondents_answer(request):
     return list
 
 @view_config(route_name='showquestion', request_method='POST')
-def question_delete(request):
+def question_work(request):
     """
     Deletes selected question from test and db.
     """
     testid = request.matchdict['test_id']
+    POST = request.POST
+    if '_delete' in POST:
+        try:
+            test = request.db_session.query(Test).filter_by(id=testid).one()
+        except:
+            raise HTTPNotFound
+        if request.userid is None:
 
-    try:
-        test = request.db_session.query(Test).filter_by(id=testid).one()
-    except:
-        raise HTTPNotFound
-    if request.userid is None:
+            raise  HTTPForbidden
+        if request.userid is not test.user_id:
+            raise HTTPUnauthorized
 
-        raise  HTTPForbidden
-    if request.userid is not test.user_id:
-        raise HTTPUnauthorized
+        if test.share_token:
+            json = request.json_body
+            comp_q = request.db_session.query(CompleteQuestion).filter_by(id=json['id_question']).one()
+            request.matchdict['incomplete_test'] = comp_q.incomplete_test
+            return update_points_in_question_showQ(request)
 
-    if test.share_token:
-        json = request.json_body
-        comp_q = request.db_session.query(CompleteQuestion).filter_by(id=json['id_question']).one()
-        request.matchdict['incomplete_test'] = comp_q.incomplete_test
-        return update_points_in_question_showQ(request)
+        questionid = request.matchdict['question_id']
+        question= request.db_session.query(Question).filter_by(id=questionid).one()
+        question_number=question.number
+        questions_with_number_to_be_changed = request.db_session.query(Question).filter(Question.number > question_number).all()
+        for q in questions_with_number_to_be_changed:
+            q.number=q.number-1
 
-    questionid = request.matchdict['question_id']
-    question= request.db_session.query(Question).filter_by(id=questionid).one()
-    question_number=question.number
-    questions_with_number_to_be_changed = request.db_session.query(Question).filter(Question.number > question_number).all()
-    for q in questions_with_number_to_be_changed:
-        q.number=q.number-1
-
-    test.sum_points-=question.points
-    request.db_session.delete(question)
-    request.db_session.flush()
-    return HTTPFound(request.route_path('showtest', test_id=testid))
+        test.sum_points-=question.points
+        request.db_session.delete(question)
+        request.db_session.flush()
+        return HTTPFound(request.route_path('showtest', test_id=testid))
+    else:
+        update_question(request)
+        return HTTPFound(request.route_path('showquestion', test_id=testid,question_id=questionid))
 
 def create_question(request, db_session, text, points, q_type):         # pridať password !!!
     """Creates a new question and returns its id.
@@ -152,8 +156,6 @@ def create_question(request, db_session, text, points, q_type):         # prida�
 def create_answer(request, db_session, text, correct, question):         # pridať password !!!
     """Creates a new answer for the question.
     """
-
-
     answer = Answer( text, str(correct), question)
 
     db_session.add(answer)
@@ -162,18 +164,31 @@ def create_answer(request, db_session, text, correct, question):         # prida
     return answer.id
 
 def update_question(request):
-    question= request.matchdict['question']
-    test= request.matchdict['test']
+    question_id= request.matchdict['question_id']
     json = request.json_body
 
     points = json['points']
     text = json['text']
     qtype = json['type']
-
-    question = request.db_session.query(Question).filter_by(id=question.id).one()
+    answers = json['answers']
+    print(question_id)
+    question = request.db_session.query(Question).filter_by(id=question_id).one()
+    print(question)
     question.text = text
     question.points = points
-    # update body v teste a zmena otázok 
+    
+    for ans in question.answers:
+        request.db_session.delete(ans)
+
+    if qtype is "C":
+        c_question_post(request)
+    elif qtype is "R":
+        r_question_post(request)
+    elif qtype is "S":
+        s_question_post(request)
+    elif qtype is "O":
+        o_question_post(request)
+
     request.db_session.merge(question)
     db_session.flush()
 
