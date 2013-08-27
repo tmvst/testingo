@@ -174,18 +174,10 @@ def update_question(request):
     
     for ans in question.answers:
         request.db_session.delete(ans)
-
-    if qtype is "C":
-        c_question_post(request)
-    elif qtype is "R":
-        r_question_post(request)
-    elif qtype is "S":
-        s_question_post(request)
-    elif qtype is "O":
-        o_question_post(request)
+    edit_question_answers(request,question,answers)
 
     request.db_session.merge(question)
-    db_session.flush()
+    request.db_session.flush()
 
 def update_points_in_question_showQ(request):
 
@@ -459,5 +451,71 @@ def update_points_in_question(request):
         request.db_session.flush()
 
     return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+
+
+def edit_question_answers(request,question,answers):
+    json = request.json_body
+    print(question)
+    print(question.qtype)
+
+    print(answers)
+    if question.qtype is 'R':
+        counter = 1
+        counterc = 0
+
+        correctness = json['correctness']
+        for a in answers :
+            ans = a['value']
+            if ans:
+                if counterc < len(correctness) and 'radio'+str(counter) == correctness[counterc]['value']:
+                    create_answer(request,request.db_session,
+                                  ans,
+                                  1,
+                                  question)
+                    counterc += 1
+                else:
+                    create_answer(request,request.db_session,
+                                  ans,
+                                  0,
+                                  question)
+            counter += 1
+    elif question.qtype is 'O':
+        answer = json['answer']
+        question.mandatory=json['is_q_mandatory']
+
+        create_answer(request,request.db_session,
+                      answer[0]['value'],
+                      1,
+                      question)
+    elif question.qtype is 'C':
+        counter = 1
+        counterc = 0
+        correctness = json['correctness']
+        for a in answers :
+            print(a)
+            ans = a['value']
+            if ans:
+                if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
+                    create_answer(request,request.db_session,
+                                  ans,
+                                  1,
+                                  question)
+                    counterc += 1
+                else:
+                    create_answer(request,request.db_session,
+                                  ans,
+                                  0,
+                                  question)
+            counter += 1
+    elif question.qtype is 'S':
+        for a in answers :
+            print(a)
+            ans = a['value']
+            if ans:
+                create_answer(request,request.db_session,
+                              ans,
+                              1,
+                              question)
+    return 1
 
 
