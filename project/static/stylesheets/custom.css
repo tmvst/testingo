@@ -80,3 +80,8 @@ body {
 .btns {
     margin-left: 7px;
 }
+
+.well-head {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
