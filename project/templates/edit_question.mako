@@ -21,9 +21,7 @@
             <label for="points">Povinnosť vyplniť otázku</label>
         </div>
 
-        % if (question.qtype != "O"):
-                <a class="btn btn-default btn-sm" id='create_answer_showQ' name="${question.qtype}"> Pridať odpoveď </a> <br>
-        % endif
+
 
         <div class="list-group">
                 % if len(answers) is 0:
@@ -35,29 +33,29 @@
                     <% counter = counter +1 %>
                     <div class="answerblock">
 
-                        % if answer.correct == 1:
+                      % if answer.correct == 1:
                         <span>
                             % if (question.qtype == "C"):
                                     <input class="indikator" type="checkbox" name ="ind${counter}"value="" checked >
 
                             % elif (question.qtype == "R"):
-                                    <input class="indikator" name="radio" type="radio" value="ind${counter}" checked >
+                                    <input class="indikator " name="radio" type="radio" value="ind${counter}" checked >
 
 
                             % endif
 
-                        % if (question.qtype == "O"):
-                                <textarea class="text form-control" name="odpoved" rows="3" placeholder="Odpoveď myslím, že vyplniť pre vlastnú potrebu snáď môžete...">${answer.text}</textarea>
+                            % if (question.qtype == "O"):
+                                    <textarea class="text form-control" name="odpoved" rows="3" placeholder="Odpoveď myslím, že vyplniť pre vlastnú potrebu snáď môžete...">${answer.text}</textarea>
 
-                        % else:
-                            %if question.qtype == "S":
-                                    <input class="text form-control indikator" name="text${counter}" id="text${counter}" value="${answer.text}">
-                            %else:
+                            % else:
+                                %if question.qtype == "S":
+                                        <input class="text form-control indikator" name="text${counter}" id="text${counter}" value="${answer.text}">
+                                %else:
 
-                                    <input class="text form-control" name="text${counter}" id="text${counter}" value="${answer.text}">
-                            %endif
-                                <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
-                        % endif
+                                        <input class="text  form-control" name="text${counter}" id="text${counter}" value="${answer.text}">
+                                %endif
+                                    <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+                            % endif
 
 
 
@@ -65,15 +63,14 @@
                         % else:
                         <span>
                         % if (question.qtype == "C"):
-                                <input class="indikator" name ="ind${counter}" type="checkbox" value="">
+                                <input class="indikator " name ="ind${counter}" type="checkbox" value="">
 
                         % elif (question.qtype == "R"):
-                                <input class="indikator" name="radio" type="radio" value="ind${counter}" >
+                                <input class="indikator " name="radio" type="radio" value="ind${counter}" >
 
                         % endif
                             <input class="text form-control"  name="text${counter}"  id="text${counter}"  value="${answer.text}">
                             <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
-
 
                         </span>
 
@@ -81,6 +78,10 @@
                     </div>
                 % endfor
                     <div id="input_answer_showQ"></div>
+                % if (question.qtype != "O"):
+                     <br>
+                <a class="btn btn-default btn-sm" id='create_answer_showQ' name="${question.qtype}"> Pridať odpoveď </a>
+        % endif
                 </div>
                 % endif
         </div>
