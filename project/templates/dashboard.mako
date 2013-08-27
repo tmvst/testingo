@@ -88,7 +88,6 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Id</th>
                                         <th>Test</th>
                                         <th>Respondent</th>
                                         <th>Dátum vzniku</th>
@@ -104,7 +103,6 @@
                                         <% cnt=cnt+1 %>
                                         <tr>
                                             <td>${cnt}</td>
-                                            <td>${in_test.id}</td>
                                             <td>
                                                 <a href="${request.route_path('showtest',test_id=test.id)}">
                                                     ${in_test.test.name}
@@ -136,8 +134,8 @@
             </div>
 
            <div class="col-lg-6" id="Activita">
-                <div class="well text-left">
-                    <h3>
+                <div class="well">
+                    <h3 class="well-head">
                         Aktivita
                     </h3>
 
@@ -147,17 +145,18 @@
                             for c_q in incomplete_test.complete_questions:
                                 acq_points =acq_points +  sum(float(a.points) for  a in c_q.complete_q_complete_answers)
                         %>
-                                <div><p>
+                                <p>
                                     Užívateľ <a href="#">${incomplete_test.user}</a> vyplnil test <a href="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}" >
                                 ${incomplete_test.test.name}</a> a ziskal
 
                                     ${h.pretty_points(acq_points)}
                                  bodov
-                                    </p><div>
-                                        <i class="text-left">${h.pretty_date(incomplete_test.date_crt)}</i>
-                                    </div>
+                                    <span>
+                                        <br><i class="text-left">${h.pretty_date(incomplete_test.date_crt)}</i>
+                                    </span>
 
-                                </div>
+
+                                </p>
 
                     % endfor
                 </div>
