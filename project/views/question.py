@@ -137,7 +137,7 @@ def create_question(request, db_session, text, points, q_type):         # prida≈
         raise HTTPUnauthorized
     if points is '':
         points = 0
-    test.sum_points=test.sum_points + int(points)
+    test.sum_points=test.sum_points + float(points)
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     qnum = lastnum + 1
 
@@ -258,7 +258,7 @@ def new_question_wrapper(request,qtype):
 
     question = create_question(request, request.db_session,
                                text,
-                               int(points),
+                               float(points),
                                qtype
     )
     question.mandatory=json['is_q_mandatory']

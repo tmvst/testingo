@@ -60,7 +60,7 @@
 
             <div name="questions_tag"><h2>Otázky
                 <small>
-                    s celkovým počtom bodov ${test.sum_points}
+                    s celkovým počtom bodov ${h.pretty_points(test.sum_points)}
                 </small></h2></div>
             % if test.share_token is None:
                     <p>
@@ -95,7 +95,7 @@
                             
                             % if question.points:
                                     <span class="badge pull-right">
-										${int(question.points)}b
+										${h.pretty_points(question.points)}b
 									</span>
                             % endif
                             </h3>

@@ -61,7 +61,7 @@
         <div class="control-group">
             <h4>${question.text.replace('\n', markupsafe.Markup('<br> '))|n}
                 <span class="badge float-left">
-                max. ${question.points}b
+                max. ${h.pretty_points(question.points)}b
             </span>
             </h4>
 
@@ -139,7 +139,7 @@
                     <div class="panel-heading">
 
                         <h3 class="panel-title" id="o${answered_q[0].id}"> ${answered_q[1][0]}
-                            <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" data-points="${int(answered_q[0].question.points)}b"> </a>
+                            <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${answered_q[0].id}" name="${answered_q[2]}" data-points="${h.pretty_points(answered_q[0].question.points)}b"> </a>
                 <span class="badge pull-right" id="b${answered_q[0].id}">
 
 
