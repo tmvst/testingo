@@ -29,7 +29,9 @@
                 <dt>Čas riešenia:</dt>
                 <dd>${incomplete_test.date_crt.strftime('%H:%M dňa %d.%m.%Y')}</dd>
                 <dt>Čas poslednej zmeny:</dt>
-                <dd>${incomplete_test.date_mdf.strftime('%H:%M dňa %d.%m.%Y')}</dd>     
+                <dd>${incomplete_test.date_mdf.strftime('%H:%M dňa %d.%m.%Y')}</dd>  
+                <dt>Dosiahnuté body:</dt>
+                <dd>${round(sum_points)}/${incomplete_test.test.sum_points}</dd>   
             </dl>
 
             <h2>Otázky</h2>

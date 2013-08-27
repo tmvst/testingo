@@ -20,14 +20,11 @@
     q_id = (id.substring(11))
     $("#upravit_btn" + q_id).hide()
     $("#koment_text" + q_id).hide()
-    console.log($("#koment_area" + q_id))
 
     if text is 'None'
       $("#koment_area" + q_id).append(input_template('', q_id))
-      console.log("ahoj1")
     else 
       $("#koment_area" + q_id).append(input_template(text, q_id))
-      console.log("ahoj2")
 
     $("#ulozit" + q_id).click ->
       process_update q_id, post_url
