@@ -3,8 +3,8 @@
 <%block name="page_content">
 
     <ol class="breadcrumb">
-        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
-        <li><a href="${request.route_path('dashboard')}">Vami vytvorené testy</a></li>
+        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
+        <li><a href="${request.route_path('dashboard')}">Vaše testy</a></li>
         <li class="active">Nový test</li>
     </ol>
 

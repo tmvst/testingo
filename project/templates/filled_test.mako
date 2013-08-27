@@ -3,7 +3,7 @@
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
     <ol class="breadcrumb">
-        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
         <li><a id="#filled_tests" href="">Vyplnené testy</a></li>
         <li class="active">Test ${incomplete_test.test.name}</li>
     </ol>

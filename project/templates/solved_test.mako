@@ -10,9 +10,9 @@
 
 
      <ol class="breadcrumb">
-     <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+     <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
      %if incomplete_test.user is incomplete_test.test.user:
-        <li><a " id="solved_tests">Vami vyplnené testy</a></li>
+        <li><a " id="solved_tests">Vaše testy</a></li>
      %else:
         <li><a " id="solved_tests">Respondentami vyplnené testy</a></li>
      %endif
