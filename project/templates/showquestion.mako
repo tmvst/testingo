@@ -30,6 +30,7 @@
 				<div>
 	                <form action="#" method="POST">
 	                    <button id="delete_question" type="submit" class="btn btn-danger pull-right btns">Zmazať otázku</button>
+                         <input type="hidden" name="_delete" value="DELETE">
 	                </form>
 
 	                <!-- Button trigger modal -->
