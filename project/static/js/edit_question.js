@@ -2,7 +2,7 @@
 (function() {
   var check_template, delete_entry, form_submit, input_template, ix, phrase_template, radio_template;
 
-  ix = 1;
+  ix = 14;
 
   check_template = function() {
     return "<div class=\"answerblock\">\n	<input class=\"indikator\" type=\"checkbox\" name=\"ind" + ix + "\" value=\"\">\n	<input class=\"text form-control\" name=\"text" + ix + "\">\n	<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";

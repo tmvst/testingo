@@ -107,7 +107,6 @@ def question_work(request):
         if request.userid is not test.user_id:
             raise HTTPUnauthorized
 
-
         question= request.db_session.query(Question).filter_by(id=questionid).one()
         question_number=question.number
         questions_with_number_to_be_changed = request.db_session.query(Question).filter(Question.number > question_number).all()
@@ -119,7 +118,17 @@ def question_work(request):
         request.db_session.flush()
         return HTTPFound(request.route_path('showtest', test_id=testid))
     else:
-        update_question(request)
+        test = request.db_session.query(Test).filter_by(id=testid).one()    # pridať try-except (Babotka)
+        if test.share_token:
+            json = request.json_body
+            comp_q = request.db_session.query(CompleteQuestion).filter_by(id=json['id_question']).one()
+            request.matchdict['incomplete_test'] = comp_q.incomplete_test
+            return update_points_in_question_showQ(request)
+        else:
+            json = request.json_body
+            print(json['answers'])
+            update_question(request)
+
         return HTTPFound(request.route_path('showquestion', test_id=testid,question_id=questionid))
 
 def create_question(request, db_session, text, points, q_type):         # pridať password !!!
@@ -143,8 +152,8 @@ def create_question(request, db_session, text, points, q_type):         # prida�
 
     question = Question(qnum, text, points, q_type, test)
 
-    db_session.add(question)
-    db_session.flush()
+    request.db_session.add(question)
+    request.db_session.flush()
 
     return question
 
@@ -252,7 +261,11 @@ def new_question_wrapper(request,qtype):
 
     question = create_question(request, request.db_session,
                                text,
+<<<<<<< HEAD
+                               points,
+=======
                                float(points),
+>>>>>>> 9d893e472e592cd52e88b60d5d4ae0b481169269
                                qtype
     )
     question.mandatory=json['is_q_mandatory']

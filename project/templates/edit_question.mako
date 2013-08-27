@@ -7,7 +7,7 @@
 
             <div class="form-group">
                 <label for="points">Body</label>
-                <input id="points" name="points" class="form-control" placeholder="${question.points}">
+                <input id="points" name="points" class="form-control" value="${question.points}" >
             </div>
 
             <div class="form-group">
@@ -29,22 +29,25 @@
                         <span> Otázka neobsahuje žiadne možnosti</span>
                 % else:
                 <div id="odpovede_showQ">
+                     <% counter =0%>
                     % for answer in question.answers:
+                        <% counter = counter +1 %>
                     <div class="answerblock">
+
                         % if answer.correct == 1:
                             <span>
                             % if (question.qtype == "C"):
                                 <input class="indikator" type="checkbox" value="" checked disabled="disabled">
                                 
                             % elif (question.qtype == "R"):
-                                <input class="indikator" type="radio" value="" checked disabled="disabled" >
+                                <input class="indikator" name="radio" type="radio" value="ind${counter}" checked disabled="disabled" >
                                 
                             % endif
 
                             % if (question.qtype == "O"):
-                                <textarea class="text form-control" rows="3" placeholder="Odpoveď myslím, že vyplniť pre vlastnú potrebu snáď môžete...">${answer.text}</textarea>
+                                <textarea class="text form-control" name="odpoved" rows="3" placeholder="Odpoveď myslím, že vyplniť pre vlastnú potrebu snáď môžete...">${answer.text}</textarea>
                             % else:
-                                <input class="text form-control" rows="2" value="${answer.text}">
+                                <input class="text form-control" name="text${counter}" value="${answer.text}">
                             % endif
 
                             <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
@@ -53,13 +56,13 @@
                         % else:
                             <span>
                             % if (question.qtype == "C"):
-                                    <input class="indikator" type="checkbox" value="" disabled="disabled">
+                                    <input class="indikator" name="checkbox" type="checkbox" value="" disabled="disabled">
 
                             % elif (question.qtype == "R"):
-                                    <input class="indikator" type="radio" value="" disabled="disabled">
+                                    <input class="indikator" name="radio" type="radio" value="" disabled="disabled">
 
                             % endif
-                            <input class="text form-control" rows="2" value="${answer.text}">
+                            <input class="text form-control" rows="2" name="odpoved "value="${answer.text}">
                             <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
                             </span>
 
