@@ -1,4 +1,7 @@
-ix = 14
+ix = 0
+update_cnt = (ix) ->
+  ix = $('input.indikator').length
+  return ix
 
 check_template = () ->
 	"""
@@ -26,6 +29,7 @@ phrase_template = () ->
 	"""
 
 input_template = (Qtyp) ->
+	ix = update_cnt ix
 	ix++
 	if Qtyp is "S"
 		$('#input_answer_showQ').append(phrase_template())
@@ -59,7 +63,7 @@ form_submit = (redir,type) ->
 			answers = $("input.text").serializeArray()
 			correctness = $("input.indikator").serializeArray()
 			console.log("input")
-		else 
+		else
 			answers = $("textarea.text").val()
 			correctness = true
 			console.log("textarea")
@@ -85,7 +89,7 @@ form_submit = (redir,type) ->
 	return false
 
 $(document).ready () ->
-	$('#save_changes').click(() -> 
+	$('#save_changes').click(() ->
 		form_submit(post_url, @name))
 	$('#create_answer_showQ').click(() ->
 		input_template @name)

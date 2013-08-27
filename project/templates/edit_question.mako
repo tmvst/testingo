@@ -1,5 +1,6 @@
 <div id="newq">
         <form action="#" id="form_showQ">
+
             <div class="form-group">
                 <label for="text">Znenie otázky</label>
                 <textarea class="form-control" name="text" id="text" rows="3" required>${question.text}</textarea>
@@ -37,10 +38,10 @@
                         % if answer.correct == 1:
                             <span>
                             % if (question.qtype == "C"):
-                                <input class="indikator" type="checkbox" value="" checked disabled="disabled">
+                                <input class="indikator" type="checkbox" name ="ind${counter}"value="" checked >
                                 
                             % elif (question.qtype == "R"):
-                                <input class="indikator" name="radio" type="radio" value="ind${counter}" checked disabled="disabled" >
+                                <input class="indikator" name="radio" type="radio" value="ind${counter}" checked >
                                 
                             % endif
 
@@ -56,13 +57,13 @@
                         % else:
                             <span>
                             % if (question.qtype == "C"):
-                                    <input class="indikator" name="checkbox" type="checkbox" value="" disabled="disabled">
+                                    <input class="indikator" name ="ind${counter}" type="checkbox" value="">
 
                             % elif (question.qtype == "R"):
-                                    <input class="indikator" name="radio" type="radio" value="" disabled="disabled">
+                                    <input class="indikator" name="radio" type="radio" value="ind${counter}" >
 
                             % endif
-                            <input class="text form-control" rows="2" name="odpoved "value="${answer.text}">
+                            <input class="text form-control"  name="text${counter}"  value="${answer.text}">
                             <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
                             </span>
 

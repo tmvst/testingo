@@ -131,7 +131,7 @@ def question_work(request):
 
         return HTTPFound(request.route_path('showquestion', test_id=testid,question_id=questionid))
 
-def create_question(request, db_session, text, points, q_type):         # pridať password !!!
+def create_question(request, text, points, q_type):         # pridať password !!!
     """Creates a new question and returns its id.
     """
 
@@ -259,9 +259,8 @@ def new_question_wrapper(request,qtype):
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
-    question = create_question(request, request.db_session,
+    question = create_question(request,
                                text,
-                               points,
                                float(points),
                                qtype
     )
@@ -476,10 +475,11 @@ def edit_question_answers(request,question,answers):
         counterc = 0
 
         correctness = json['correctness']
+        print(correctness)
         for a in answers :
             ans = a['value']
             if ans:
-                if counterc < len(correctness) and 'radio'+str(counter) == correctness[counterc]['value']:
+                if counterc < len(correctness) and 'ind'+str(counter) == correctness[counterc]['value']:
                     create_answer(request,request.db_session,
                                   ans,
                                   1,
@@ -507,7 +507,7 @@ def edit_question_answers(request,question,answers):
             print(a)
             ans = a['value']
             if ans:
-                if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
+                if counterc < len(correctness) and 'ind'+str(counter) == correctness[counterc]['name']:
                     create_answer(request,request.db_session,
                                   ans,
                                   1,
