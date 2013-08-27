@@ -9,7 +9,8 @@
     </script>
 
         <ol class="breadcrumb">
-            <li><a href="${request.route_path('dashboard')}">Vaše testy</a></li>
+      <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+        <li><a href="${request.route_path('dashboard')}">Vami vytvorené testy</a></li>
             <li><a href="${request.route_path('showtest', test_id=test.id)}">Test ${test.name}</a></li>
 
             <li class="active">Nová otázka</li>

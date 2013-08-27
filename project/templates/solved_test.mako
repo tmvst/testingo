@@ -7,6 +7,18 @@
     <script type="text/javascript">
         post_url="${request.route_path('solved_test', incomplete_test_id=incomplete_test.id)}"
     </script>
+
+
+     <ol class="breadcrumb">
+     <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+     %if incomplete_test.user is incomplete_test.test.user:
+        <li><a " id="solved_tests">Vami vyplnené testy</a></li>
+     %else:
+        <li><a " id="solved_tests">Respondentami vyplnené testy</a></li>
+     %endif
+        <li><a href="${request.route_path('showtest', test_id=incomplete_test.test.id)}">Test ${incomplete_test.test.name}</a></li>
+        <li class="active">Test užívateľa s emailom ${incomplete_test.user.email}</li>
+    </ol>
     <div class="page-header">
         <h1>${incomplete_test.test.name}</h1>
     </div>

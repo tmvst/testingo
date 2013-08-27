@@ -2,6 +2,11 @@
 <%! import markupsafe %>
 <%block name="title">${incomplete_test.test.name}</%block>
 <%block name="page_content">
+    <ol class="breadcrumb">
+        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
+        <li><a id="#filled_tests" href="">Vyplnené testy</a></li>
+        <li class="active">Test ${incomplete_test.test.name}</li>
+    </ol>
     <div class="page-header" xmlns="http://www.w3.org/1999/html">
         <h1>${incomplete_test.test.name}</h1>
     </div>

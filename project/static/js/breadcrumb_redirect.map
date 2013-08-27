@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "breadcrumb_redirect.js",
+  "sourceRoot": "",
+  "sources": [
+    "breadcrumb_redirect.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,CAAA,CAAkB,EAAlB,GAAA,CAAkB;CACd,GAAA,IAAA;CAAA,EAAO,CAAP,EAAa,EAAS;CAAtB,EACyB,CAAzB,CAAA,IAAyB,MAAzB;CACU,EAA0B,CAAR,EAAnB,CAAN,CAAe,CAAU,IAAzB,KAAA;CADH,IAAyB;CADzB,EAGyB,CAAzB,CAAA,IAAyB,MAAzB;CACU,EAA0B,CAAR,EAAnB,CAAN,CAAe,CAAU,IAAzB,KAAA;CADH,IAAyB;CAEzB,EAAsB,EAAtB,IAAsB,EAAtB,CAAA;CACS,EAA0B,CAAR,EAAnB,CAAN,CAAe,CAAU,IAAzB,KAAA;CADF,IAAsB;CAN1B,EAAkB;CAAlB"
+}
