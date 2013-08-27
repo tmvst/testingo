@@ -94,6 +94,7 @@ def question_work(request):
     Deletes selected question from test and db.
     """
     testid = request.matchdict['test_id']
+    questionid = request.matchdict['question_id']
     POST = request.POST
     if '_delete' in POST:
         try:
@@ -106,7 +107,6 @@ def question_work(request):
         if request.userid is not test.user_id:
             raise HTTPUnauthorized
 
-        questionid = request.matchdict['question_id']
         question= request.db_session.query(Question).filter_by(id=questionid).one()
         question_number=question.number
         questions_with_number_to_be_changed = request.db_session.query(Question).filter(Question.number > question_number).all()
@@ -125,7 +125,9 @@ def question_work(request):
             request.matchdict['incomplete_test'] = comp_q.incomplete_test
             return update_points_in_question_showQ(request)
         else:
-            update_question(request)
+            json = request.json_body
+            print(json['answers'])
+            #update_question(request)
         return HTTPFound(request.route_path('showquestion', test_id=testid,question_id=questionid))
 
 def create_question(request, db_session, text, points, q_type):         # prida≈• password !!!
@@ -143,14 +145,14 @@ def create_question(request, db_session, text, points, q_type):         # prida≈
         raise HTTPUnauthorized
     if points is '':
         points = 0
-    test.sum_points=test.sum_points + int(points)
+    test.sum_points=test.sum_points + float(points)
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     qnum = lastnum + 1
 
     question = Question(qnum, text, points, q_type, test)
 
-    db_session.add(question)
-    db_session.flush()
+    request.db_session.add(question)
+    request.db_session.flush()
 
     return question
 
@@ -191,7 +193,7 @@ def update_question(request):
         o_question_post(request)
 
     request.db_session.merge(question)
-    db_session.flush()
+    request.db_session.flush()
 
 def update_points_in_question_showQ(request):
 
@@ -264,7 +266,7 @@ def new_question_wrapper(request,qtype):
 
     question = create_question(request, request.db_session,
                                text,
-                               int(points),
+                               points,
                                qtype
     )
     question.mandatory=json['is_q_mandatory']

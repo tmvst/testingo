@@ -4,6 +4,7 @@ from sqlalchemy import (
     String,
     ForeignKey,
     DateTime,
+    Float,
     )
 
 from sqlalchemy.orm import (
@@ -39,7 +40,7 @@ class Test(Base):
     share_token = Column(String(30))
     user_id = Column(Integer, ForeignKey('user.id'), index=True)
     user = relationship('User', backref=backref("tests",order_by=date_crt.desc(), cascade="all, delete-orphan"))
-    sum_points=Column(Integer)
+    sum_points=Column(Float)
 
     def __init__(self, name, description, date_crt, date_mdf, user):
         """Initialization of class.

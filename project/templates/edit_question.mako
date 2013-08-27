@@ -7,7 +7,7 @@
 
             <div class="form-group">
                 <label for="points">Body</label>
-                <input id="points" name="points" class="form-control" placeholder="${question.points}">
+                <input id="points" name="points" class="form-control" value="${question.points}" >
             </div>
 
             <div class="form-group">

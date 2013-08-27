@@ -53,6 +53,7 @@ form_submit = (redir,type) ->
 
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
+		console.log bodyQ
 
 		if not not $("textarea.text")
 			answers = $("input.text").serializeArray()
