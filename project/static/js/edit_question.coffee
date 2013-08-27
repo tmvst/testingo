@@ -1,16 +1,18 @@
+ix = 1
+
 check_template = () ->
 	"""
 		<div class="answerblock">
-			<input class="indikator" type="checkbox" value="">
-			<input class="text form-control">
+			<input class="indikator" type="checkbox" name="ind#{ix}" value="">
+			<input class="text form-control" name="text#{ix}">
 			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
 radio_template = () ->
 	"""
 		<div class="answerblock">
-			<input class="indikator" type="radio" value="">
-			<input class="text form-control">
+			<input class="indikator" type="radio" name="radio" value="ind#{ix}">
+			<input class="text form-control" name="text#{ix}">
 			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
@@ -18,13 +20,13 @@ phrase_template = () ->
 	"""
 		<div class="form-group">
 			<label for="odpoved"></label>
-			<input class="text form-control" placeholder="Správna odpoveď">
+			<input class="text form-control" id="text#{ix}" placeholder="Správna odpoveď">
 			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
 
 input_template = (Qtyp) ->
-	alert(Qtyp)
+	ix++
 	if Qtyp is "S"
 		$('#input_answer_showQ').append(phrase_template())
 	if Qtyp is "R"
@@ -51,13 +53,16 @@ form_submit = (redir,type) ->
 
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
+		console.log bodyQ
 
 		if not not $("textarea.text")
 			answers = $("input.text").serializeArray()
 			correctness = $("input.indikator").serializeArray()
+			console.log("input")
 		else 
 			answers = $("textarea.text").val()
 			correctness = true
+			console.log("textarea")
 
 		is_q_mandatory = $('#is_q_mandatory').is(':checked')
 

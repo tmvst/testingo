@@ -168,10 +168,12 @@ def update_question(request):
     answers = json['answers']
     print(question_id)
     question = request.db_session.query(Question).filter_by(id=question_id).one()
+    question.test.sum_points-=question.points
+
     print(question)
     question.text = text
     question.points = points
-    
+    question.test.sum_points+=float(points)
     for ans in question.answers:
         request.db_session.delete(ans)
     edit_question_answers(request,question,answers)
