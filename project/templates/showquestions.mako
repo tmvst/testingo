@@ -12,7 +12,7 @@
         <h3 class="panel-title">Otázka č.${question.number}
         % if question.points:
                 <span class="badge pull-right">
-								${question.points}b
+								${h.pretty_points(question.points)}b
 							</span>
         % endif
         </h3>
