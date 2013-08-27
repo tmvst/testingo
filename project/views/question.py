@@ -261,11 +261,8 @@ def new_question_wrapper(request,qtype):
 
     question = create_question(request, request.db_session,
                                text,
-<<<<<<< HEAD
                                points,
-=======
                                float(points),
->>>>>>> 9d893e472e592cd52e88b60d5d4ae0b481169269
                                qtype
     )
     question.mandatory=json['is_q_mandatory']
