@@ -464,25 +464,11 @@ def edit_question_answers(request,question,answers):
     json = request.json_body
 
     if question.qtype is 'R':
-        counter = 1
-        counterc = 0
-
-        correctness = json['correctness']
-        for a in answers :
-            ans = a['value']
+        correctness = int(json['correctness'][0]['value'][3:])
+        for (id, ans) in answers:
             if ans:
-                if counterc < len(correctness) and 'ind'+str(counter) == correctness[counterc]['value']:
-                    create_answer(request,request.db_session,
-                                  ans,
-                                  1,
-                                  question)
-                    counterc += 1
-                else:
-                    create_answer(request,request.db_session,
-                                  ans,
-                                  0,
-                                  question)
-            counter += 1
+                correct = 1 if correctness == id else 0
+                create_answer(request, request.db_session, ans, correct, question)
     elif question.qtype is 'O':
         answer = json['answers']
 
@@ -493,25 +479,14 @@ def edit_question_answers(request,question,answers):
                       1,
                       question)
     elif question.qtype is 'C':
-        counter = 1
-        counterc = 0
         correctness = json['correctness']
-        for a in answers :
-
-            ans = a['value']
+        for (id, ans) in answers:
             if ans:
-                if counterc < len(correctness) and 'ind'+str(counter) == correctness[counterc]['name']:
-                    create_answer(request,request.db_session,
-                                  ans,
-                                  1,
-                                  question)
-                    counterc += 1
-                else:
-                    create_answer(request,request.db_session,
-                                  ans,
-                                  0,
-                                  question)
-            counter += 1
+                print(id)
+                correct = is_checked(correctness,'ind'+str(id))
+                print(correct)
+                create_answer(request, request.db_session, ans, correct, question)
+
     elif question.qtype is 'S':
         for a in answers :
             ans = a['value']
@@ -521,5 +496,14 @@ def edit_question_answers(request,question,answers):
                               1,
                               question)
     return 1
+
+
+def is_checked(correctness,checkbox):
+    for item in correctness:
+        print(item['name'],checkbox)
+        if item['name'] == checkbox:
+            correctness.remove(item)
+            return 1
+    return 0
 
 
