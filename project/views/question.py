@@ -94,6 +94,7 @@ def question_work(request):
     Deletes selected question from test and db.
     """
     testid = request.matchdict['test_id']
+    questionid = request.matchdict['question_id']
     POST = request.POST
     if '_delete' in POST:
         try:
@@ -106,13 +107,6 @@ def question_work(request):
         if request.userid is not test.user_id:
             raise HTTPUnauthorized
 
-        if test.share_token:
-            json = request.json_body
-            comp_q = request.db_session.query(CompleteQuestion).filter_by(id=json['id_question']).one()
-            request.matchdict['incomplete_test'] = comp_q.incomplete_test
-            return update_points_in_question_showQ(request)
-
-        questionid = request.matchdict['question_id']
         question= request.db_session.query(Question).filter_by(id=questionid).one()
         question_number=question.number
         questions_with_number_to_be_changed = request.db_session.query(Question).filter(Question.number > question_number).all()
@@ -124,10 +118,20 @@ def question_work(request):
         request.db_session.flush()
         return HTTPFound(request.route_path('showtest', test_id=testid))
     else:
-        update_question(request)
+        test = request.db_session.query(Test).filter_by(id=testid).one()    # pridať try-except (Babotka)
+        if test.share_token:
+            json = request.json_body
+            comp_q = request.db_session.query(CompleteQuestion).filter_by(id=json['id_question']).one()
+            request.matchdict['incomplete_test'] = comp_q.incomplete_test
+            return update_points_in_question_showQ(request)
+        else:
+            json = request.json_body
+
+            update_question(request)
+
         return HTTPFound(request.route_path('showquestion', test_id=testid,question_id=questionid))
 
-def create_question(request, db_session, text, points, q_type):         # pridať password !!!
+def create_question(request, text, points, q_type):         # pridať password !!!
     """Creates a new question and returns its id.
     """
 
@@ -142,14 +146,14 @@ def create_question(request, db_session, text, points, q_type):         # prida�
         raise HTTPUnauthorized
     if points is '':
         points = 0
-    test.sum_points=test.sum_points + int(points)
+    test.sum_points=test.sum_points + float(points)
     lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     qnum = lastnum + 1
 
     question = Question(qnum, text, points, q_type, test)
 
-    db_session.add(question)
-    db_session.flush()
+    request.db_session.add(question)
+    request.db_session.flush()
 
     return question
 
@@ -169,28 +173,18 @@ def update_question(request):
 
     points = json['points']
     text = json['text']
-    qtype = json['type']
     answers = json['answers']
-    print(question_id)
     question = request.db_session.query(Question).filter_by(id=question_id).one()
-    print(question)
+    question.test.sum_points-=question.points
     question.text = text
     question.points = points
-    
+    question.test.sum_points+=float(points)
     for ans in question.answers:
         request.db_session.delete(ans)
-
-    if qtype is "C":
-        c_question_post(request)
-    elif qtype is "R":
-        r_question_post(request)
-    elif qtype is "S":
-        s_question_post(request)
-    elif qtype is "O":
-        o_question_post(request)
+    edit_question_answers(request,question,answers)
 
     request.db_session.merge(question)
-    db_session.flush()
+    request.db_session.flush()
 
 def update_points_in_question_showQ(request):
 
@@ -261,9 +255,9 @@ def new_question_wrapper(request,qtype):
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
-    question = create_question(request, request.db_session,
+    question = create_question(request,
                                text,
-                               int(points),
+                               float(points),
                                qtype
     )
     question.mandatory=json['is_q_mandatory']
@@ -464,5 +458,68 @@ def update_points_in_question(request):
         request.db_session.flush()
 
     return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+
+
+def edit_question_answers(request,question,answers):
+    json = request.json_body
+
+    if question.qtype is 'R':
+        counter = 1
+        counterc = 0
+
+        correctness = json['correctness']
+        for a in answers :
+            ans = a['value']
+            if ans:
+                if counterc < len(correctness) and 'ind'+str(counter) == correctness[counterc]['value']:
+                    create_answer(request,request.db_session,
+                                  ans,
+                                  1,
+                                  question)
+                    counterc += 1
+                else:
+                    create_answer(request,request.db_session,
+                                  ans,
+                                  0,
+                                  question)
+            counter += 1
+    elif question.qtype is 'O':
+        answer = json['answers']
+
+        question.mandatory=json['is_q_mandatory']
+
+        create_answer(request,request.db_session,
+                      answer,
+                      1,
+                      question)
+    elif question.qtype is 'C':
+        counter = 1
+        counterc = 0
+        correctness = json['correctness']
+        for a in answers :
+
+            ans = a['value']
+            if ans:
+                if counterc < len(correctness) and 'ind'+str(counter) == correctness[counterc]['name']:
+                    create_answer(request,request.db_session,
+                                  ans,
+                                  1,
+                                  question)
+                    counterc += 1
+                else:
+                    create_answer(request,request.db_session,
+                                  ans,
+                                  0,
+                                  question)
+            counter += 1
+    elif question.qtype is 'S':
+        for a in answers :
+            ans = a['value']
+            if ans:
+                create_answer(request,request.db_session,
+                              ans,
+                              1,
+                              question)
+    return 1
 
 

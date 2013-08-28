@@ -26,8 +26,11 @@
       answer = $("textarea[name='odpoved']").val();
       is_q_mandatory = $('#is_q_mandatory').is(':checked');
       console.log(bodyQ);
-      console.log(textQ);
-      console.log(answer);
+      console.log(text);
+      if (bodyQ === "") {
+        bodyQ = 0;
+      }
+      console.log(bodyQ);
       $.ajax({
         url: post_url,
         type: "POST",
@@ -75,3 +78,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=question_o.map
+*/

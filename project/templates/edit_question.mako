@@ -1,74 +1,89 @@
 <div id="newq">
-        <form action="#" id="form_showQ">
-            <div class="form-group">
-                <label for="text">Znenie otázky</label>
-                <textarea class="form-control" name="text" id="text" rows="3" required>${question.text}</textarea>
-            </div>
+    <form action="#" id="form_showQ">
 
-            <div class="form-group">
-                <label for="points">Body</label>
-                <input id="points" name="points" class="form-control" placeholder="${question.points}">
-            </div>
+        <div class="form-group">
+            <label for="text">Znenie otázky</label>
+            <textarea class="form-control" name="text" id="text" rows="3" required>${question.text}</textarea>
+        </div>
 
-            <div class="form-group">
-                 %if question.mandatory:
+        <div class="form-group">
+            <label for="points">Body</label>
+            <input id="points" name="points" class="form-control" value="${question.points}" >
+        </div>
+
+        <div class="form-group">
+            %if question.mandatory:
                     <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory" checked>
-                 %else:
-                     <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory">
-                 %endif
+            %else:
+                    <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory">
+            %endif
 
-                <label for="points">Povinnosť vyplniť otázku</label>
-            </div>
+            <label for="points">Povinnosť vyplniť otázku</label>
+        </div>
 
-            % if (question.qtype != "O"):
-                    <a class="btn btn-default btn-sm" id='create_answer_showQ' name="${question.qtype}"> Pridať odpoveď </a> <br>
-                % endif
 
-             <div class="list-group">
+
+        <div class="list-group">
                 % if len(answers) is 0:
-                        <span> Otázka neobsahuje žiadne možnosti</span>
+                    <span> Otázka neobsahuje žiadne možnosti</span>
                 % else:
                 <div id="odpovede_showQ">
-                    % for answer in question.answers:
+                <% counter =0%>
+                % for answer in question.answers:
+                    <% counter = counter +1 %>
                     <div class="answerblock">
-                        % if answer.correct == 1:
-                            <span>
+
+                      % if answer.correct == 1:
+                        <span>
                             % if (question.qtype == "C"):
-                                <input class="indikator" type="checkbox" value="" checked disabled="disabled">
-                                
+                                    <input class="indikator" type="checkbox" name ="ind${counter}"value="" checked >
+
                             % elif (question.qtype == "R"):
-                                <input class="indikator" type="radio" value="" checked disabled="disabled" >
-                                
+                                    <input class="indikator " name="radio" type="radio" value="ind${counter}" checked >
+
+
                             % endif
 
                             % if (question.qtype == "O"):
-                                <textarea class="text form-control" rows="3" placeholder="Odpoveď myslím, že vyplniť pre vlastnú potrebu snáď môžete...">${answer.text}</textarea>
+                                    <textarea class="text form-control" name="odpoved" rows="3" placeholder="Odpoveď myslím, že vyplniť pre vlastnú potrebu snáď môžete...">${answer.text}</textarea>
+
                             % else:
-                                <input class="text form-control" rows="2" value="${answer.text}">
+                                %if question.qtype == "S":
+                                        <input class="text form-control indikator" name="text${counter}" id="text${counter}" value="${answer.text}">
+                                %else:
+
+                                        <input class="text  form-control" name="text${counter}" id="text${counter}" value="${answer.text}">
+                                %endif
+                                    <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
                             % endif
 
-                            <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 
-                            </span>
+
+                        </span>
                         % else:
-                            <span>
-                            % if (question.qtype == "C"):
-                                    <input class="indikator" type="checkbox" value="" disabled="disabled">
+                        <span>
+                        % if (question.qtype == "C"):
+                                <input class="indikator " name ="ind${counter}" type="checkbox" value="">
 
-                            % elif (question.qtype == "R"):
-                                    <input class="indikator" type="radio" value="" disabled="disabled">
+                        % elif (question.qtype == "R"):
+                                <input class="indikator " name="radio" type="radio" value="ind${counter}" >
 
-                            % endif
-                            <input class="text form-control" rows="2" value="${answer.text}">
+                        % endif
+                            <input class="text form-control"  name="text${counter}"  id="text${counter}"  value="${answer.text}">
                             <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
-                            </span>
+
+                        </span>
 
                         % endif
                     </div>
-                    % endfor
+                % endfor
                     <div id="input_answer_showQ"></div>
-                    </div>
+                % if (question.qtype != "O"):
+                     <br>
+                <a class="btn btn-default btn-sm" id='create_answer_showQ' name="${question.qtype}"> Pridať odpoveď </a>
+        % endif
+                </div>
                 % endif
-             </div>
-        </form>
+        </div>
+    </form>
 </div>

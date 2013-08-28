@@ -40,10 +40,6 @@
                     </div>
                 % endif
         </div>
-        <div class="control-group">
-            <div class="controls">
-                <p>${test.description}</p>
-            </div>
 
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
 
@@ -64,7 +60,7 @@
 
             <div name="questions_tag"><h2>Otázky
                 <small>
-                    s celkovým počtom bodov ${test.sum_points}
+                    s celkovým počtom bodov ${h.pretty_points(test.sum_points)}
                 </small></h2></div>
             % if test.share_token is None:
                     <p>
@@ -99,7 +95,7 @@
                             
                             % if question.points:
                                     <span class="badge pull-right">
-										${int(question.points)}b
+										${h.pretty_points(question.points)}b
 									</span>
                             % endif
                             </h3>

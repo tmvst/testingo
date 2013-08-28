@@ -23,10 +23,16 @@
         <h1>${incomplete_test.test.name}</h1>
     </div>
     <div>
-        <div class="control-group">
-            <div class="controls">
-                <p>${incomplete_test.test.description}</p>
-            </div>
+            <dl class="dl-horizontal">
+                <dt>Popis:</dt>
+                <dd>${incomplete_test.test.description}</dd>
+                <dt>Čas riešenia:</dt>
+                <dd>${incomplete_test.date_crt.strftime('%H:%M dňa %d.%m.%Y')}</dd>
+                <dt>Čas poslednej zmeny:</dt>
+                <dd>${incomplete_test.date_mdf.strftime('%H:%M dňa %d.%m.%Y')}</dd>  
+                <dt>Dosiahnuté body:</dt>
+                <dd>${h.pretty_points(sum_points)}/${h.pretty_points(incomplete_test.test.sum_points)}</dd>
+            </dl>
 
             <h2>Otázky</h2>
 
@@ -50,7 +56,7 @@
                 </div>
                 <div class="col-md-6">
                 <h3 class="panel-title" id="o${question[0].id}">
-                    <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
+                    <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${h.pretty_points(question[0].question.points)}b"> </a>
 
                 <span class="badge pull-right" id="b${question[0].id}">
 

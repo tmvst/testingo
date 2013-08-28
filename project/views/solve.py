@@ -2,6 +2,8 @@
 #{{{
 import datetime
 
+from sqlalchemy import func
+
 from pyramid.view import (
     view_config,
     )
@@ -188,12 +190,15 @@ def show_solved_test(request):
         raise HTTPUnauthorized
     questions = incomplete_test.complete_questions
     questions_and_answers=[]
+    sum_points = 0
     for q in questions:
         q_answers = q.complete_q_complete_answers
         acq_points =  sum(float(a.points) for  a in q_answers)
+        sum_points += acq_points
         list=[q, q_answers,acq_points]
         questions_and_answers.append(list)
-    return {'incomplete_test':incomplete_test,'questions_and_answers':questions_and_answers}
+
+    return {'incomplete_test':incomplete_test,'questions_and_answers':questions_and_answers, 'sum_points': sum_points}
 
 
 

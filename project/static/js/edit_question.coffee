@@ -1,16 +1,21 @@
+ix = 0
+update_cnt = (ix) ->
+  ix = $('input.indikator').length
+  return ix
+
 check_template = () ->
 	"""
 		<div class="answerblock">
-			<input class="indikator" type="checkbox" value="">
-			<input class="text form-control">
+			<input class="indikator" type="checkbox" name="ind#{ix}" value="">
+			<input class="text form-control" name="text#{ix}">
 			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
 radio_template = () ->
 	"""
 		<div class="answerblock">
-			<input class="indikator" type="radio" value="">
-			<input class="text form-control">
+			<input class="indikator" type="radio" name="radio" value="ind#{ix}">
+			<input class="text form-control" name="text#{ix}">
 			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
@@ -18,13 +23,14 @@ phrase_template = () ->
 	"""
 		<div class="form-group">
 			<label for="odpoved"></label>
-			<input class="text form-control" placeholder="Správna odpoveď">
-			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+			<input class="text form-control indikator" name="odpoved" id="text#{ix}" placeholder="Správna odpoveď">
+			<div class="btn btn-default btn-sm delete-button"> Zmazať </div>
 		</div>
 	"""
 
 input_template = (Qtyp) ->
-	alert(Qtyp)
+	ix = update_cnt ix
+	ix++
 	if Qtyp is "S"
 		$('#input_answer_showQ').append(phrase_template())
 	if Qtyp is "R"
@@ -51,13 +57,14 @@ form_submit = (redir,type) ->
 
 		textQ = $("textarea[name='text']").val()
 		bodyQ = $("input[name='points']").val()
+		console.log bodyQ
 
-		if not not $("textarea.text")
-			answers = $("input.text").serializeArray()
-			correctness = $("input.indikator").serializeArray()
-		else 
+		if $("textarea.text").val()
 			answers = $("textarea.text").val()
 			correctness = true
+		else
+			answers = $("input.text").serializeArray()
+			correctness = $("input.indikator").serializeArray()
 
 		is_q_mandatory = $('#is_q_mandatory').is(':checked')
 
@@ -80,7 +87,7 @@ form_submit = (redir,type) ->
 	return false
 
 $(document).ready () ->
-	$('#save_changes').click(() -> 
+	$('#save_changes').click(() ->
 		form_submit(post_url, @name))
 	$('#create_answer_showQ').click(() ->
 		input_template @name)

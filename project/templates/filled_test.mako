@@ -39,17 +39,11 @@
                 </div>
                 <div class="col-md-6">
                 <h3 class="panel-title" id="o${question[0].id}">
-                    <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${int(question[0].question.points)}b"> </a>
+                    <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${h.pretty_points(question[0].question.points)}b"> </a>
 
                 <span class="badge pull-right" id="b${question[0].id}">
-
-                %if int(question[2] - question[2])==0:
-                    ${int(question[2])}
-                %else:
-                    ${"%.1f" % question[2]}
-                %endif
-                    / ${int(question[0].question.points)}b
-
+                    ${h.pretty_points(question[2])}
+                    / ${h.pretty_points(question[0].question.points)}b
                 </span>
                 </h3>
                 </div>
