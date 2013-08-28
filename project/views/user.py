@@ -96,8 +96,8 @@ def validate_registration_data(form_data):
         errors['email'] = 'invalid_email'
     if form_data['password'] == "":
         errors['password'] = 'invalid_password'
-    # if len(form_data['password']) < 5:
-    #     errors['password'] =  'short_password'
+    if len(form_data['password']) < 5:
+         errors['password'] =  'short_password'
     return errors
 
 
@@ -141,9 +141,9 @@ def login_submit(request):
         (headers, user) = request.authenticator.login(email, password)
         return HTTPFound(location=request.route_path('dashboard'), headers=headers)
     except WrongPasswordError:
-        errors.append('wrong-password')
+        errors.append('Zadané nesprávne heslo')
     except NonExistingUserError:
-        errors.append('wrong-email')
+        errors.append('Zadaný nesprávny email')
     return {'errors': errors}
 
 
@@ -171,16 +171,13 @@ def begged_for_recovery(request):
     email = POST['email']
     user = request.db_session.query(User).filter_by(email=email).first()
     if user == None:
-        return {'error':['no-email']}
+        return {'error': ['no-email']}
 
     user.recovery_code = str(random.getrandbits(50))
-
     link = request.route_url('new_password', user_id=str(user.id), code=user.recovery_code)
-
     message = Message(subject='Zmena hesla na Testingo.sk',
                       recipients=[email],
                       body='Ak si chcete zmeniť heslo, kliknite na nasledovný odkaz:' + link + '.')
-
     request.mailer.send(message)
 
     return HTTPFound(location=request.route_url('recovery_small_success'))
@@ -191,7 +188,6 @@ def recovery_small_success(request):
     """Shows a message with an offer to check email for a link to advance in passweord recovery process.
     """
     return {}
-
 
 @view_config(route_name='new_password', request_method='GET', renderer='project:templates/new_password.mako')
 def recovery_final(request):
@@ -204,9 +200,7 @@ def recovery_final(request):
         return HTTPNotFound("Neplatná obnovovacia URL. Skontrolujte odkaz na zmenu hesla a skúste znova.")
     if request.matchdict['code'] != user.recovery_code:
         return HTTPNotFound("Neplatná obnovovacia URL. Skontrolujte odkaz na zmenu hesla a skúste znova.")
-
     return {'error':[]}
-
 
 @view_config(route_name='new_password', request_method='POST', renderer='project:templates/new_password.mako')
 def recovery_final_submit(request):

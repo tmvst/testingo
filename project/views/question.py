@@ -1,5 +1,5 @@
 #{{{
-import random
+
 import json
 from _datetime import datetime
 
@@ -125,8 +125,6 @@ def question_work(request):
             request.matchdict['incomplete_test'] = comp_q.incomplete_test
             return update_points_in_question_showQ(request)
         else:
-            json = request.json_body
-
             update_question(request)
 
         return HTTPFound(request.route_path('showquestion', test_id=testid,question_id=questionid))
@@ -141,23 +139,21 @@ def create_question(request, text, points, q_type):         # pridať password !
     except:
         raise HTTPNotFound
     if request.userid is None:
-        raise  HTTPForbidden
+        raise HTTPForbidden
     if request.userid is not test.user_id:
         raise HTTPUnauthorized
     if points is '':
         points = 0
-    test.sum_points=test.sum_points + float(points)
-    lastnum = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
-    qnum = lastnum + 1
-
-    question = Question(qnum, text, points, q_type, test)
-
+    test.sum_points =+ float(points)
+    last_question_number = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
+    question_number = last_question_number + 1
+    question = Question(question_number, text, points, q_type, test)
     request.db_session.add(question)
     request.db_session.flush()
 
     return question
 
-def create_answer(request, db_session, text, correct, question):         # pridať password !!!
+def create_answer( db_session, text, correct, question):         # pridať password !!!
     """Creates a new answer for the question.
     """
     answer = Answer( text, str(correct), question)
@@ -168,12 +164,14 @@ def create_answer(request, db_session, text, correct, question):         # prida
     return answer.id
 
 def update_question(request):
+
     question_id= request.matchdict['question_id']
     json = request.json_body
 
     points = json['points']
     text = json['text']
     answers = json['answers']
+
     question = request.db_session.query(Question).filter_by(id=question_id).one()
     question.test.sum_points-=question.points
     question.text = text
@@ -182,7 +180,6 @@ def update_question(request):
     for ans in question.answers:
         request.db_session.delete(ans)
     edit_question_answers(request,question,answers)
-
     request.db_session.merge(question)
     request.db_session.flush()
 
@@ -194,18 +191,15 @@ def update_points_in_question_showQ(request):
     testid=incomplete_test.test_id
     json = request.json_body
 
-
     if request.userid is None:
-        raise  HTTPForbidden
+        raise HTTPForbidden
     if request.userid is not incomplete_test.test.user_id:
-        raise  HTTPUnauthorized
-
+        raise HTTPUnauthorized
+    #nc - new comment
     if json['nc']:
-
         create_comment(request)
-        #HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
+    #else update points
     else:
-
         points = json['points']
         id_question = json['id_question']
 
@@ -264,10 +258,6 @@ def new_question_wrapper(request,qtype):
     return question
 
 
-
-# ---------------------------------- new stuff ------- (babotkina volba) ----------------
-
-
 @view_config(route_name='newquestion_s', request_method='GET', renderer='project:templates/newquestion_s.mako')
 def s_question_view(request):
     testid = request.matchdict['test_id']
@@ -276,12 +266,10 @@ def s_question_view(request):
     except:
         raise HTTPNotFound
     if request.userid is None:
-
-        raise  HTTPForbidden
+        raise HTTPForbidden
     if request.userid is not test.user_id:
-
         raise HTTPUnauthorized
-    solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
+    solved_tests = request.db_session.query(Incomplete_test).filter_by(test=test).all()
 
     return {'errors':[], 'test':test,'solved_tests':solved_tests}
 
@@ -293,12 +281,9 @@ def c_question_view(request):
     except:
         raise HTTPNotFound
     if request.userid is None:
-
-        raise  HTTPForbidden
+        raise HTTPForbidden
     if request.userid is not test.user_id:
-
         raise HTTPUnauthorized
-
 
     solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
 
@@ -312,10 +297,8 @@ def r_question_view(request):
     except:
         raise HTTPNotFound
     if request.userid is None:
-
-        raise  HTTPForbidden
+        raise HTTPForbidden
     if request.userid is not test.user_id:
-
         raise HTTPUnauthorized
 
     solved_tests=request.db_session.query(Incomplete_test).filter_by(test=test).all()
@@ -330,7 +313,7 @@ def o_question_view(request):
     except:
         raise HTTPNotFound
     if request.userid is None:
-        raise  HTTPForbidden
+        raise HTTPForbidden
     if request.userid is not test.user_id:
         raise HTTPUnauthorized
 
@@ -343,12 +326,11 @@ def s_question_post(request):
     testid = request.matchdict['test_id']
     json = request.json_body
     question = new_question_wrapper(request,'S')
-    # q_type reprezentuje typ otazky S,C,R,O
     answers = json['answers']
     for a in answers :
         ans = a['value']
         if ans:
-            create_answer(request,request.db_session,
+            create_answer(request.db_session,
                           ans,
                           1,
                           question)
@@ -368,18 +350,17 @@ def c_question_post(request):
         ans = a['value']
         if ans:
             if counterc < len(correctness) and 'check'+str(counter) == correctness[counterc]['name']:
-                create_answer(request,request.db_session,
+                create_answer(request.db_session,
                               ans,
                               1,
                               question)
                 counterc += 1
             else:
-                create_answer(request,request.db_session,
+                create_answer(request.db_session,
                               ans,
                               0,
                               question)
         counter += 1
-
     return HTTPFound(request.route_path('newquestion_c', test_id=testid))
 
 @view_config(route_name='newquestion_r', request_method='POST')
@@ -418,7 +399,7 @@ def o_question_post(request):
     answer = json['answer']
     question.mandatory=json['is_q_mandatory']
 
-    create_answer(request,request.db_session,
+    create_answer(request.db_session,
                   answer,
                   1,
                   question)
@@ -459,21 +440,22 @@ def update_points_in_question(request):
 
     return HTTPFound(request.route_path('solved_test', incomplete_test_id=testid))
 
-
 def edit_question_answers(request,question,answers):
+    # poskyta sa moznost prerobit nase vytvaranie otazok tymto stylom,
+    # zjednnotili by sa nase javascripty, tiez by sme mohli vyuzit moznno jedno mako
     json = request.json_body
     if question.qtype is 'R':
         correctness = int(json['correctness'][0]['value'][3:])
         for (id, ans) in answers:
             if ans:
                 correct = 1 if correctness == id else 0
-                create_answer(request, request.db_session, ans, correct, question)
+                create_answer( request.db_session, ans, correct, question)
     elif question.qtype is 'O':
         answer = json['answers']
 
         question.mandatory=json['is_q_mandatory']
 
-        create_answer(request,request.db_session,
+        create_answer(request.db_session,
                       answer,
                       1,
                       question)
@@ -482,15 +464,16 @@ def edit_question_answers(request,question,answers):
         for (id, ans) in answers:
             if ans:
                 correct = is_checked(correctness,'ind'+str(id))
-                create_answer(request, request.db_session, ans, correct, question)
+                create_answer( request.db_session, ans, correct, question)
     elif question.qtype is 'S':
         for (id, ans) in answers:
             if ans:
-                create_answer(request,request.db_session,
+                create_answer(request.db_session,
                               ans,
                               1,
                               question)
     return 1
+
 def is_checked(correctness,checkbox):
     for item in correctness:
         print(item['name'],checkbox)
@@ -498,5 +481,6 @@ def is_checked(correctness,checkbox):
             correctness.remove(item)
             return 1
     return 0
+
 
 
