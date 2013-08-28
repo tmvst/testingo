@@ -36,18 +36,17 @@ def not_found(request):
     tests=user.tests
     return {'errors':[], 'tests': tests,'userid':uid}
 
-@view_config(route_name='home', renderer='project:templates/home.mako')
-def main_page_view(request):
-    """Shows a Home Page.
-    """
-    return {
-        'page_title': 'HomePage',
-        'logged': (request.userid is not None)
-    }
+# @view_config(route_name='home', renderer='project:templates/home.mako')
+# def main_page_view(request):
+#     """Shows a Home Page.
+#     """
+#     return {
+#         'page_title': 'HomePage',
+#         'logged': (request.userid is not None)
+#     }
 
 
 @view_config(route_name='dashboard', request_method='GET', renderer='project:templates/dashboard.mako')
-
 def dashboard(request):
     """Shows dashboard.
     """
