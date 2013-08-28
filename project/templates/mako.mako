@@ -220,3 +220,22 @@
     </div>
   </div>
 </div>
+
+
+<div id="header">
+        <div class="pull-right">
+            % if request.userid is None:
+            <div id="log in">
+                <form class="form-inline" action="${request.route_path('login')}" method="POST">
+                    <input type="email" name="email" class="form-control" style="width: 180px;" placeholder="Email" required>
+                    <input type="password" name="password" class="form-control" style="width: 180px;" placeholder="Heslo" required>
+                    <button type="submit" class="btn btn-default">Prihlásiť</button>
+                    <span class="help-block">
+                        <a href="${request.route_path('register')}">Zaregistrovať sa</a> |
+                        <a href="${request.route_path('beg_for_recovery')}" >Zabudnuté heslo</a>
+                    </span>
+                </form>
+            </div>
+            % endif
+        </div>
+    </div>

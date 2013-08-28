@@ -64,9 +64,7 @@ class User(Base):
     id = Column(Integer, primary_key=True) 
     email = Column(String(50), unique=True)
     _password = Column(String(100), nullable=False)
-    #fullname = Column(String(100))
-    #meno = Column(String(100), nullable=True)
-    #priezvisko = Column(String(100))
+    name = Column(String(100), nullable=False)
     recovery_code = Column(String(100))
     
 
@@ -89,11 +87,12 @@ class User(Base):
         #self._password = hashpw(value.encode('ascii'), gensalt())
         self._password = hashpw(value, gensalt())
 
-    def __init__(self, email, password):
+    def __init__(self, email, password, name):
         """Initialization of class.
         """
         self.email = email
         self.password = password
+        self.name = name
 
     def __repr__(self):
         """Returns representative object of class User.

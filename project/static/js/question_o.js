@@ -78,7 +78,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=question_o.map
-*/
