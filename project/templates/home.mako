@@ -33,7 +33,7 @@
 
                     <div class="control-group">
                         <div class="controls">
-                            <input size="50" name="email" id="email" value="" type="emal" class="form-control" placeholder="E-Mail" required>
+                            <input size="50" name="email" id="email" value="" type="email" class="form-control" placeholder="E-Mail" required>
                         </div>
                     </div>
 
