@@ -7,14 +7,14 @@ check_template = () ->
   """
   <div class="answerblock">
   <input class="indikator checkInputC" type="checkbox" name="ind#{ix}" value="">
-  <input class="text form-control" name="text#{ix}">
+  <input class="text form-control radiotext" name="text#{ix}">
   <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
   </div>
   """
 radio_template = () ->
   """
   <div class="answerblock">
-  <input class="indikator Rradio" type="radio" name="radio" value="ind#{ix}">
+  <input class="indikator checkInputC" type="radio" name="radio" value="ind#{ix}">
   <input class="text form-control radiotext" name="text#{ix}">
   <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
   </div>

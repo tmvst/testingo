@@ -10,11 +10,11 @@
   };
 
   check_template = function() {
-    return "<div class=\"answerblock\">\n<input class=\"indikator checkInputC\" type=\"checkbox\" name=\"ind" + ix + "\" value=\"\">\n<input class=\"text form-control\" name=\"text" + ix + "\">\n<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
+    return "<div class=\"answerblock\">\n<input class=\"indikator checkInputC\" type=\"checkbox\" name=\"ind" + ix + "\" value=\"\">\n<input class=\"text form-control radiotext\" name=\"text" + ix + "\">\n<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
   };
 
   radio_template = function() {
-    return "<div class=\"answerblock\">\n<input class=\"indikator Rradio\" type=\"radio\" name=\"radio\" value=\"ind" + ix + "\">\n<input class=\"text form-control radiotext\" name=\"text" + ix + "\">\n<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
+    return "<div class=\"answerblock\">\n<input class=\"indikator checkInputC\" type=\"radio\" name=\"radio\" value=\"ind" + ix + "\">\n<input class=\"text form-control radiotext\" name=\"text" + ix + "\">\n<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
   };
 
   phrase_template = function() {
@@ -106,7 +106,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=edit_question.map
-*/

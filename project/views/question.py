@@ -462,7 +462,6 @@ def update_points_in_question(request):
 
 def edit_question_answers(request,question,answers):
     json = request.json_body
-
     if question.qtype is 'R':
         correctness = int(json['correctness'][0]['value'][3:])
         for (id, ans) in answers:
@@ -482,22 +481,16 @@ def edit_question_answers(request,question,answers):
         correctness = json['correctness']
         for (id, ans) in answers:
             if ans:
-                print(id)
                 correct = is_checked(correctness,'ind'+str(id))
-                print(correct)
                 create_answer(request, request.db_session, ans, correct, question)
-
     elif question.qtype is 'S':
-        for a in answers :
-            ans = a['value']
+        for (id, ans) in answers:
             if ans:
                 create_answer(request,request.db_session,
                               ans,
                               1,
                               question)
     return 1
-
-
 def is_checked(correctness,checkbox):
     for item in correctness:
         print(item['name'],checkbox)
