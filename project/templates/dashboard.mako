@@ -116,11 +116,11 @@
                                             <td>${in_test.date_mdf.strftime('%H:%M dňa %d.%m.%Y')}</td>
                                             <td>
                                             <%  
-                                                acq_points=0
-                                                for c_q in in_test.complete_questions:
-                                                    acq_points =acq_points +  sum(float(a.points)for  a in c_q.complete_q_complete_answers)
+                                                sum_points=0
+                                                for respondent_test in in_test.complete_questions:
+                                                    sum_points =sum_points +  sum(float(ans.points)for  ans in respondent_test.complete_q_complete_answers)
                                             %>
-                                            ${h.pretty_points(acq_points)} b
+                                            ${h.pretty_points(sum_points)} b
                                             </td>
                                             <td>
                                                 <a href="${request.route_path('solved_test', incomplete_test_id=in_test.id)}">
