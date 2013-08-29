@@ -28,7 +28,7 @@ from ..models.test import (
 
 @notfound_view_config(renderer='project:templates/errors/notfound.mako')
 def not_found(request):
-    if request.userid == None:
+    if request.userid is None:
         raise HTTPForbidden
 
     uid = request.userid
@@ -50,7 +50,7 @@ def not_found(request):
 def dashboard(request):
     """Shows dashboard.
     """
-    if request.userid == None:
+    if request.userid is None:
         raise HTTPForbidden
     uid = request.userid
     user = request.db_session.query(User).filter_by(id=uid).one()
@@ -63,7 +63,7 @@ def dashboard(request):
 
 @view_config(route_name='getlist', request_method='GET', renderer='project:templates/list_respondents.mako')
 def get_list(request):
-
+#moja oblubena funkcia :D !!!
     return {}
 
 

@@ -2,29 +2,19 @@ ix = 0
 get_cnt = (ix) ->
   ix = $('input.indikator').length
   return ix
-update_cnt = (index_of_deleted) ->
-  $("input.text").each ->
-    current_index = parseInt($(this).attr "name".substr(5))
-    if current_index > index_of_deleted
-      $(this).attr "name","text" + current_index
-  $("input.Rradio").each ->
-    current_index = parseInt($(this).val().substr(3))
-    if current_index > index_of_deleted
-      $(this).attr "value","ind" + current_index
-
 
 check_template = () ->
   """
   <div class="answerblock">
   <input class="indikator checkInputC" type="checkbox" name="ind#{ix}" value="">
-  <input class="text form-control" name="text#{ix}">
+  <input class="text form-control radiotext" name="text#{ix}">
   <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
   </div>
   """
 radio_template = () ->
   """
   <div class="answerblock">
-  <input class="indikator Rradio" type="radio" name="radio" value="ind#{ix}">
+  <input class="indikator checkInputC" type="radio" name="radio" value="ind#{ix}">
   <input class="text form-control radiotext" name="text#{ix}">
   <div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
   </div>
@@ -73,11 +63,14 @@ form_submit = (redir,type) ->
       answers = $("textarea.text").val()
       correctness = true
     else
-      answers = $("input.text").serializeArray()
-      correctness = $("input.indikator").serializeArray()
-
+      answers = [];
+      $("input.text").each(() ->
+        answers.push([parseInt($(this).attr('name').substr(4)), $(this).val()])
+      )
+      correctness =$("input.indikator").serializeArray()
     is_q_mandatory = $('#is_q_mandatory').is(':checked')
-
+    console.log answers
+    console.log correctness
     $.ajax
       url: post_url
       type: "POST"

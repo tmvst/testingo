@@ -112,7 +112,6 @@ def submit_test(request):
     questions_c=request.db_session.query(Question).filter_by(test=test,qtype='C').all()
 
     for q in questions_c:
-
         answers_c= q.answers
         complete_question = CompleteQuestion(incomplete_test,q)
         complete_question.date_crt = datetime.datetime.now()
@@ -197,7 +196,6 @@ def show_solved_test(request):
         sum_points += acq_points
         list=[q, q_answers,acq_points]
         questions_and_answers.append(list)
-
     return {'incomplete_test':incomplete_test,'questions_and_answers':questions_and_answers, 'sum_points': sum_points}
 
 
