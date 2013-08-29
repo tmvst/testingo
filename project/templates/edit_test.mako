@@ -6,7 +6,7 @@
         </div>
         <div class="form-group">
             <label for="description">Opis testu</label>
-            <textarea class="form-control" name="description_test" id="edit_description" rows="3" value="${test.description}" required></textarea>
+            <textarea class="form-control" name="description_test" id="edit_description" rows="3" required>${test.description}</textarea>
         </div>
 
         <label for="name">Čas platnosti:</label>

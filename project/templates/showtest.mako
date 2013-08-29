@@ -53,7 +53,7 @@
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
     </div>
-
+	<p><strong>Popis:</strong> ${test.description}</p>
 
     <% questions = test.questions %>
 
