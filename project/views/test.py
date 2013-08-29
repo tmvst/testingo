@@ -106,6 +106,7 @@ def test_show(request):
         return HTTPFound(request.route_path('showtest',test_id=testid))
         
     else:
+        edit_test(request,testid)
         return HTTPFound(request.route_path('showtest',test_id=testid))
 
 def share_test(request, test_id):
@@ -117,3 +118,19 @@ def share_test(request, test_id):
         token = str(random.getrandbits(70))
         test.share_token = token
         return token
+
+def edit_test(request, test_id):
+    
+    test = request.db_session.query(Test).filter_by(id=test_id).one()
+    print("idem updatnut")
+    POST = request.POST
+
+    test.name = POST['name']
+    test.description = POST['description']
+    test.start_time = POST['start_time']
+    test.end_time = POST['end_time']
+
+    request.db_session.merge(test)
+    request.db_session.flush()
+    
+    return test.id
