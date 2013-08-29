@@ -60,6 +60,7 @@ error_messages = {
 def register_view(request):
     """Displays registration form and processes form data.
     """
+
     return {'errors': {}, 'error_messages': error_messages}
 
 
@@ -73,7 +74,8 @@ def register_submission(request):
     if not errors:
         try:
             user_id = register_user(request.db_session, POST['email'], POST['password'], POST['login'])
-            return HTTPFound(request.route_path('register_success', user_id=user_id))
+            succ = "Registrácia úspešná"
+            return HTTPFound(location=request.route_path('dashboard'), comment=succ)
         except DuplicateUserError:
             errors['email'] = 'duplicate_email'
 
