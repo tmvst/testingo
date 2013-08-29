@@ -5,6 +5,7 @@ from sqlalchemy import (
     ForeignKey,
     DateTime,
     Float,
+    Boolean,
     )
 
 from sqlalchemy.orm import (
@@ -37,18 +38,23 @@ class Test(Base):
     description = Column(String(500))
     date_crt = Column(DateTime)
     date_mdf = Column(DateTime)
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
+    flag = Column(Boolean)
     share_token = Column(String(30))
     user_id = Column(Integer, ForeignKey('user.id'), index=True)
     user = relationship('User', backref=backref("tests",order_by=date_crt.desc(), cascade="all, delete-orphan"))
     sum_points=Column(Float)
 
-    def __init__(self, name, description, date_crt, date_mdf, user):
+    def __init__(self, name, description, date_crt, date_mdf, start_time, end_time, flag, user):
         """Initialization of class.
         """
         self.name = name
         self.description = description
         self.date_crt = date_crt
         self.date_mdf = date_mdf
+        self.start_time = start_time
+        self.end_time = end_time
         self.user = user
         self.sum_points=0
 
