@@ -50,6 +50,10 @@
                                 ${test.name}
                                 %if test.share_token:
                                         <span class="glyphicon glyphicon-lock pull-right"></span>
+                                        <p class="pull-right">
+                                        <input class="checkInputC" name="${test.id}" type="checkbox" value="">
+                                        <em> otvoriť  </em>
+                                        </p> 
                                 %else:
                                         <span class="glyphicon glyphicon-edit pull-right"></span>
                                 %endif
@@ -110,7 +114,14 @@
                                             <td>${in_test.user.email}</td>
                                             <td>${in_test.date_crt.strftime('%H:%M dňa %d.%m.%Y')}</td>
                                             <td>${in_test.date_mdf.strftime('%H:%M dňa %d.%m.%Y')}</td>
-                                            <td>body</td>
+                                            <td>
+                                            <%  
+                                                acq_points=0
+                                                for c_q in in_test.complete_questions:
+                                                    acq_points =acq_points +  sum(float(a.points)for  a in c_q.complete_q_complete_answers)
+                                            %>
+                                            ${h.pretty_points(acq_points)} b
+                                            </td>
                                             <td>
                                                 <a href="${request.route_path('solved_test', incomplete_test_id=in_test.id)}">
                                                     <span class="glyphicon glyphicon-warning-sign"></span>
