@@ -50,10 +50,7 @@
                                 ${test.name}
                                 %if test.share_token:
                                         <span class="glyphicon glyphicon-lock pull-right"></span>
-                                        <p class="pull-right">
-                                        <input class="checkInputC" name="${test.id}" type="checkbox" value="">
-                                        <em> otvoriť  </em>
-                                        </p> 
+                                        <input class="check pull-right" name="test${test.id}" type="checkbox" value="">
                                 %else:
                                         <span class="glyphicon glyphicon-edit pull-right"></span>
                                 %endif

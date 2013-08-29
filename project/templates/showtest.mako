@@ -1,6 +1,16 @@
 <%inherit file="default.mako" />
 <%block name="title">${test.name}</%block>
 <%block name="page_content">
+    <script type="text/javascript">
+        post_url="${request.route_path('showtest', test_id=test.id)}"
+    </script>
+    <script src="${request.static_path('project:static/js/edit_test.js')}"></script>
+    
+    <!-- Datapicker for Date_input -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="${request.static_path('project:static/js/date_time_picker.js')}"></script>
+    <script src="${request.static_path('project:static/js/Date_input.js')}"></script>
 
     <%! import markupsafe %>
     <script src="${request.static_path('project:static/js/showtest.js')}"></script>
@@ -12,6 +22,7 @@
 
 
     <div class="page-header">
+    <div>
         <h1>${test.name}</h1>
         <form class="pull-right" action="${request.route_path('showtest', test_id=test.id)}" method="POST">
             <button type="submit" class="btn btn-danger">
@@ -19,6 +30,29 @@
             </button>
             <input type="hidden" name="_delete" value="DELETE">
         </form>
+        <a data-toggle="modal" href="#myTest" class="btn btn-primary pull-right btns">Zmeniť test</a>
+    </div>
+                <!-- Modal -->
+                <div class="modal fade" id="myTest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Úprava testu ${test.name}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <%include file="edit_test.mako"/>
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button type="button" class="btn btn-primary pull-right" id="save_edit_test" name="${test.id}">Uložiť</button>
+                    
+                                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Zavrieť</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
     </div>
 
 

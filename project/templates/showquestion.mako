@@ -50,8 +50,8 @@
 								<%include file="edit_question.mako"/>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="save_changes" name="${question.qtype}">Save changes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Zavrieť</button>
+                                <button type="button" class="btn btn-primary" id="save_changes" name="${question.qtype}">Uložiť</button>
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
