@@ -122,13 +122,13 @@ def share_test(request, test_id):
 def edit_test(request, test_id):
     
     test = request.db_session.query(Test).filter_by(id=test_id).one()
-    print("idem updatnut")
-    POST = request.POST
 
-    test.name = POST['name']
-    test.description = POST['description']
-    test.start_time = POST['start_time']
-    test.end_time = POST['end_time']
+    json = request.json_body
+
+    test.name = json['name']
+    test.description = json['description']
+    test.start_time = json['start_time']
+    test.end_time = json['end_time']
 
     request.db_session.merge(test)
     request.db_session.flush()

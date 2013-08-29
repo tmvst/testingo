@@ -45,11 +45,10 @@
                                 <%include file="edit_test.mako"/>
                             </div>
                             <div class="modal-footer">
-                                
                                 <button type="button" class="btn btn-primary pull-right" id="save_edit_test" name="${test.id}">Uložiť</button>
-                    
                                 <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Zavrieť</button>
                             </div>
+							</form>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
