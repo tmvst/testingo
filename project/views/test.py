@@ -38,11 +38,13 @@ def newtest_submission(request):
 
     test_id = create_test(request, request.db_session,
                           POST['name'],
-                          POST['description'])
+                          POST['description'],
+                          POST['start_time'],
+                          POST['end_time'])
 
     return HTTPFound(request.route_path('showtest', test_id=test_id))
 
-def create_test(request, db_session, name, description):
+def create_test(request, db_session, name, description, start_time, end_time):
     """ Creates new test and returns its id.
     """
     user_id = request.userid
@@ -51,8 +53,7 @@ def create_test(request, db_session, name, description):
     date_crt = datetime.datetime.now()
     date_mdf = datetime.datetime.now()
 
-    test = Test(name, description, date_crt, date_mdf, user)
-
+    test = Test(name, description, date_crt, date_mdf, start_time, end_time, True, user)
 
     db_session.add(test)
     db_session.flush()
