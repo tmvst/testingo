@@ -182,7 +182,7 @@ def update_question(request):
     question.test.sum_points-=question.points
     question.text = text
     question.points = points
-    question.test.sum_points+=float(points)
+    question.test.sum_points =+ float(points)
     for ans in question.answers:
         request.db_session.delete(ans)
     edit_question_answers(request,question,answers)
