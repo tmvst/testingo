@@ -11,8 +11,8 @@
 
         <label for="name">Čas platnosti:</label>
         <div class="form-group">
-            <input type="text" id="start_time" name="edit_start_time" value="${test.start_time}">
-            <input type="text" id="end_time" name="edit_end_time" value="${test.end_time}">
+            <input type="text" id="start_time" name="edit_start_time" value="${test.start_time.strftime('%m/%d/%Y %H:%M')}">
+            <input type="text" id="end_time" name="edit_end_time" value="${test.end_time.strftime('%m/%d/%Y %H:%M')}">
         </div>
     </form>
 </div>
