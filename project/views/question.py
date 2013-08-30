@@ -383,13 +383,13 @@ def r_question_post(request):
         ans = a['value']
         if ans:
             if counterc < len(correctness) and 'radio'+str(counter) == correctness[counterc]['value']:
-                create_answer(request,request.db_session,
+                create_answer(request.db_session,
                               ans,
                               1,
                               question)
                 counterc += 1
             else:
-                create_answer(request,request.db_session,
+                create_answer(request.db_session,
                               ans,
                               0,
                               question)

@@ -56,10 +56,8 @@ def dashboard(request):
     user = request.db_session.query(User).filter_by(id=uid).one()
     tests=user.tests
     tests_in_activity=request.db_session.query(Incomplete_test).join(Test).filter(Test.user==user).order_by(Incomplete_test.date_crt.desc()).limit(7).all()
+    
     return {'errors':[], 'tests': tests,'userid':uid,'tests_in_activity':tests_in_activity}
-
-
-
 
 @view_config(route_name='getlist', request_method='GET', renderer='project:templates/list_respondents.mako')
 def get_list(request):

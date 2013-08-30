@@ -29,8 +29,8 @@
 	var Timepicker = function () {
 		this.regional = []; // Available regional settings, indexed by language code
 		this.regional[''] = { // Default regional settings
-			currentText: 'Now',
-			closeText: 'Done',
+			currentText: 'Teraz',
+			closeText: 'Hotovo',
 			amNames: ['AM', 'A'],
 			pmNames: ['PM', 'P'],
 			timeFormat: 'HH:mm',
@@ -98,7 +98,7 @@
 			sliderAccessArgs: null,
 			controlType: 'slider',
 			defaultValue: null,
-			parse: 'strict'
+			parse: 'loose'
 		};
 		$.extend(this._defaults, this.regional['']);
 	};
