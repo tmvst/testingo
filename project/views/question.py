@@ -147,7 +147,7 @@ def create_question(request, text, points, q_type):
         raise HTTPUnauthorized
     if points is '':
         points = 0
-    test.sum_points =+ float(points)
+    test.sum_points += float(points)
     last_question_number = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     question_number = last_question_number + 1
     question = Question(question_number, text, points, q_type, test)
@@ -182,7 +182,7 @@ def update_question(request):
     question.test.sum_points-=question.points
     question.text = text
     question.points = points
-    question.test.sum_points =+ float(points)
+    question.test.sum_points += float(points)
     for ans in question.answers:
         request.db_session.delete(ans)
     edit_question_answers(request,question,answers)
