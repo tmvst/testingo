@@ -2,7 +2,7 @@
 <%block name="title">Úvodná stránka</%block>
 <%block name="page_content">
 
-	<script src="${request.static_path('project:static/js/lightbox-2.6.min.js')}"></script>
+    <script src="${request.static_path('project:static/js/lightbox-2.6.min.js')}"></script>
 
     <div class="page-header text-center">
         <h1 class="text-center">Nečakaná revolúcia v online testovaní! :)<br>
@@ -95,12 +95,21 @@
                     <img data-src="holder.js/100%x180" src="http://www.atozed.com/indy/demos/9/RBSODFiles/BSOD.gif" alt="">
                 </a>
             </div>
+
+
+    <div class="fb-like-box pull-right" data-href="https://www.facebook.com/testingo.sk" data-width="250" data-height="190" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
         </div>
     </div>
 
 
-    <div class="fblike">
-        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Ftestingo.sk&amp;width=450&amp;height=80&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;send=true&amp;appId=57820298747" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
-    </div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=57820298747";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
 
 </%block>
