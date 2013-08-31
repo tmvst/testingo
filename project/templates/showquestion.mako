@@ -108,18 +108,30 @@
     <div id="test_stats" class="collapse out">
 			%if question.qtype == "S":
 
-                <div class="col-lg-6" id="chart_desc">
-                    <strong>Najpopulárnejšie odpovede respondentov</strong>
+
+              <div id="chart_desc">
+                    <br><strong>Najpopulárnejšie odpovede respondentov</strong><br><br>
                 </div>
-                <div class="col-lg-6" id="chart">
-                    <div class="pull-right">
-                        <canvas id="myChart" width="300" height="300"></canvas>
-                    </div>
+                  <% chart_id = 0 %>
+            <ul>
+
+            % for sub_answer in graph_data:
+                    <br><li>
+
+            <a type="button" data-toggle="collapse" data-target="#answer${chart_id}">Odpoveď č.${chart_id+1}, správna odpoveď: ${sub_answer['correct_ans'].text}</a>
+
+            <div id="answer${chart_id}" class="collapse out">
+                <% chart_id = chart_id +1 %>
+                        <canvas  id="myChart${chart_id}" width="300" height="300"></canvas>
+
                     <script>
-                        var pieData =${graph_data|n};
-                        var myPie = new Chart(document.getElementById("myChart").getContext("2d")).Pie(pieData,{ labelFontColor: 'white',labelAlign: 'right',labelFontSize : '14'});
+                        var pieData =${sub_answer['data']|n};
+                        var myPie = new Chart(document.getElementById("myChart${chart_id}").getContext("2d")).Pie(pieData,{ labelFontColor: 'white',labelAlign: 'right',labelFontSize : '14'});
                     </script>
                 </div>
+                </li>
+            % endfor
+                </ul>
 			%endif
     </div>
 
