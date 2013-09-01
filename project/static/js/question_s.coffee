@@ -4,8 +4,8 @@ answer_template= () ->
 	"""
 		<div class="form-group">
 			<label for="odpoved">#{ix_s}.</label>
-			<input type="text" id="s#{ix_s}" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď">
-			<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+			<input type="text" id="s#{ix_s}" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď" required>
+			<div class="btn btn-default btn-sm delete-button"> Zmazať </div>
 		</div>
 	"""
 
@@ -31,14 +31,12 @@ form_submit = (redir) ->
 			text:
 				required: true
 			points:
-				required: true
 				number: true
 			odpoved:
 				required: true
 		messages:
 			text: "Prosím zadajte text otázky"
 			points:
-				required: "Prosím zadajte body"
 				number: "Body musia byť číslo"
 			odpoved:
 				required: "Prosím zadajte text odpovede"

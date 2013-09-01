@@ -260,6 +260,8 @@ def new_question_wrapper(request,qtype):
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
+    if points is '':
+        points=0
     question = create_question(request,
                                text,
                                float(points),

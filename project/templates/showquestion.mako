@@ -106,12 +106,13 @@
     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky o otázke</button>
 
     <div id="test_stats" class="collapse out">
-			%if question.qtype == "S":
+
 
 
               <div id="chart_desc">
                     <br><strong>Najpopulárnejšie odpovede respondentov</strong><br><br>
                 </div>
+    %if question.qtype == "S":
                   <% chart_id = 0 %>
             <ul>
 

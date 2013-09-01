@@ -35,8 +35,9 @@
                 <label for="points">Povinnosť vyplniť otázku</label>
                 <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory">
             </div>
-
             <div id="answer_r"></div>
+            <label for="radio" class="error"></label><br>
+
 
             <div class="form-group btn-group pull-left">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">

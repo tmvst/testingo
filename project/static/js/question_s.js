@@ -5,7 +5,7 @@
   ix_s = 1;
 
   answer_template = function() {
-    return "<div class=\"form-group\">\n	<label for=\"odpoved\">" + ix_s + ".</label>\n	<input type=\"text\" id=\"s" + ix_s + "\" name=\"odpoved\" class=\"phrase form-control\" placeholder=\"Správna odpoveď\">\n	<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
+    return "<div class=\"form-group\">\n	<label for=\"odpoved\">" + ix_s + ".</label>\n	<input type=\"text\" id=\"s" + ix_s + "\" name=\"odpoved\" class=\"phrase form-control\" placeholder=\"Správna odpoveď\" required>\n	<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div>\n</div>";
   };
 
   button_template = function() {
@@ -35,7 +35,6 @@
           required: true
         },
         points: {
-          required: true,
           number: true
         },
         odpoved: {
@@ -45,7 +44,6 @@
       messages: {
         text: "Prosím zadajte text otázky",
         points: {
-          required: "Prosím zadajte body",
           number: "Body musia byť číslo"
         },
         odpoved: {
@@ -109,3 +107,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=question_s.map
+*/
