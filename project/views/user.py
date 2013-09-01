@@ -69,11 +69,12 @@ def register_submission(request):
     """Handles registration form submission.
     Creates PDF card in 'users_data/cards/{ID}.pdf'. CSS file for it is in 'templates/pdf_card.css'.
     """
-    POST = request.POST
-    errors = validate_registration_data(POST)
+    json = request.json_body
+    errors = validate_registration_data(json)
+    print(json)
     if not errors:
         try:
-            user_id = register_user(request.db_session, POST['email'], POST['password'], POST['login'])
+            user_id = register_user(request.db_session, json['email'], json['password'], json['login'])
             succ = "Registrácia úspešná"
             return HTTPFound(location=request.route_path('dashboard'), comment=succ)
         except DuplicateUserError:

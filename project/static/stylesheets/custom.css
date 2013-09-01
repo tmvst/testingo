@@ -98,7 +98,27 @@ body {
     padding-right: 5px;
 }
 
+.tlogo {
+    padding: 8px 0 8px 8px;
+}
+
+.sred {
+    color: red;
+}
+
 /* Registracia */
+
+.headrow {
+    margin-top: -20px;
+    padding: 30px 0 30px 0;
+    background: rgba(0, 0, 0, 0) url("../img/landing_bg.jpg") scroll;
+    background-clip: border-box;
+    background-origin: padding-box;
+}
+
+.headrow .whyt {
+    color: whitesmoke;
+}
 
 .form-signin {
     max-width: 330px;

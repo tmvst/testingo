@@ -1,56 +1,68 @@
 <%inherit file="default.mako" />
 <%block name="title">Úvodná stránka</%block>
-<%block name="page_content">
+<%block name="before_content">
+	<script src="${request.static_path('project:static/js/home.js')}"></script>
+	<script type="text/javascript">
+        post_url="${request.route_path('home')}"
+    </script>
 
-	<script src="${request.static_path('project:static/js/lightbox-2.6.min.js')}"></script>
+    <div class="headrow">
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 whyt">
+                        <h2>Prečo si vybrať testingo?</h2>
+                        <ul class="list-unstyled checks">
+                            <li><span class="glyphicon glyphicon-ok"></span> Lebo</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Sem</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Treba</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Zopár</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Dôvodov</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="">
+                            <form class="form-signin" method="post" action="" id="form-signin">
+                                <h2 class="form-signin-heading">Rýchla registrácia</h2>
 
-    <div class="page-header text-center">
-        <h1 class="text-center">Nečakaná revolúcia v online testovaní! :)<br>
-            <small class="text-center">Systém tvorby online testov s automatickým vyhodnocovaním</small></h1>
-    </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input size="50" name="login" id="login" value="" type="text" class="form-control" placeholder="Meno" autofocus="autofocus" required>
+                                    </div>
+                                </div>
 
-    <div class="row">
-        <div class="col-lg-8">
-            <h2>Prečo si vybrať testingo?</h2>
-            <ul class="list-unstyled checks">
-                <li><span class="glyphicon glyphicon-ok"></span> Lebo</li>
-                <li><span class="glyphicon glyphicon-ok"></span> Sem</li>
-                <li><span class="glyphicon glyphicon-ok"></span> Treba</li>
-                <li><span class="glyphicon glyphicon-ok"></span> Zopár</li>
-                <li><span class="glyphicon glyphicon-ok"></span> Dôvodov</li>
-            </ul>
-        </div>
-        <div class="col-lg-4">
-            <div class="">
-                <form class="form-signin" method="post" action="" id="form-signin">
-                    <h2 class="form-signin-heading">Rýchla registrácia</h2>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input size="50" name="email" id="email" value="" type="email" class="form-control" placeholder="E-Mail" required>
+                                    </div>
+                                </div>
 
-                    <div class="control-group">
-                        <div class="controls">
-                            <input size="50" name="login" id="login" value="" type="text" class="form-control" placeholder="Meno" required="required" autofocus="autofocus">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input size="50" name="password" id="password" value="" type="password" class="form-control" placeholder="Heslo" required>
+                                    </div>
+                                </div>
+
+                                <button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-primary btn-block">Registrovať</button>
+                                <p class="help-block text-right">
+                                    <a href="${request.route_path('dashboard')}">Prihlásenie</a> |
+                                    <a href="${request.route_path('beg_for_recovery')}" >Zabudnuté heslo</a>
+                                </p>
+                            </form>
                         </div>
                     </div>
-
-                    <div class="control-group">
-                        <div class="controls">
-                            <input size="50" name="email" id="email" value="" type="email" class="form-control" placeholder="E-Mail" required>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <div class="controls">
-                            <input size="50" name="password" id="password" value="" type="password" class="form-control" placeholder="Heslo" required>
-                        </div>
-                    </div>
-
-                    <button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-primary btn-block">Registrovať</button>
-                    <p class="help-block text-right">
-                        <a href="${request.route_path('dashboard')}">Prihlásenie</a> |
-                        <a href="${request.route_path('beg_for_recovery')}" >Zabudnuté heslo</a>
-                    </p>
-                </form>
+                </div>
             </div>
         </div>
+    </div>
+</%block>
+
+<%block name="page_content">
+    <script src="${request.static_path('project:static/js/lightbox-2.6.min.js')}"></script>
+
+    <div class="page-header text-center">
+        <h1 class="text-center">Testingo je lepšie ako čakajúca kopa papierov :)<br>
+            <small class="text-center">Jednoduchý systém tvorby online testov s automatickým vyhodnocovaním</small></h1>
     </div>
 
     <div class="howitwork">
