@@ -56,6 +56,7 @@ form_submit = (redir,type) ->
         number: "Body musia byť číslo"
       radio: "Prosím zvoľte aspoň jednu možnosť"
 
+
   if $('#form_showQ').valid()
 
     textQ = $("textarea[name='text']").val()
@@ -94,11 +95,11 @@ form_submit = (redir,type) ->
 
 $(document).ready () ->
   $('#save_changes').click(() ->
-    if $('.radiotext').length is 0
+    if ( $('.radiotext').length is 0 and @name is 'R')
       $('#input_answer_showQ').append(radio_template())
       form_submit(post_url, @name)
     else
-      form_submit(post_url, @name)
+      form_submit(post_url, @name))
   $('#create_answer_showQ').click(() ->
     input_template @name)
   $('#odpovede_showQ').on('click', '.delete-button', delete_entry)

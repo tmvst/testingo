@@ -101,7 +101,7 @@
 
   $(document).ready(function() {
     $('#save_changes').click(function() {
-      if ($('.radiotext').length === 0) {
+      if ($('.radiotext').length === 0 && this.name === 'R') {
         $('#input_answer_showQ').append(radio_template());
         return form_submit(post_url, this.name);
       } else {
