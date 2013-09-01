@@ -48,10 +48,13 @@ form_submit = (redir,type) ->
         required: true
       points:
         number: true
+      radio:
+        required: true
     messages:
       text: "Prosím zadajte text otázky"
       points:
         number: "Body musia byť číslo"
+      radio: "Prosím zvoľte aspoň jednu možnosť"
 
   if $('#form_showQ').valid()
 
@@ -91,7 +94,11 @@ form_submit = (redir,type) ->
 
 $(document).ready () ->
   $('#save_changes').click(() ->
-    form_submit(post_url, @name))
+    if $('.radiotext').length is 0
+      $('#input_answer_showQ').append(radio_template())
+      form_submit(post_url, @name)
+    else
+      form_submit(post_url, @name)
   $('#create_answer_showQ').click(() ->
     input_template @name)
   $('#odpovede_showQ').on('click', '.delete-button', delete_entry)

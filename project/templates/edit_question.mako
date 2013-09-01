@@ -27,8 +27,9 @@
                 % if len(answers) is 0:
                     <span> Otázka neobsahuje žiadne možnosti</span>
                    <div id="input_answer_showQ"></div>
-
+                        <label for="radio" class="error"></label>
                             <br>
+
                             <a class="btn btn-default btn-sm" id='create_answer_showQ' name="${question.qtype}"> Pridať odpoveď </a>
 
                 % else:
@@ -75,11 +76,13 @@
                         </div>
                     % endfor
                         <div id="input_answer_showQ"></div>
+                <label for="radio" class="error"></label>
                     % if (question.qtype != "O"):
                             <br>
                             <a class="btn btn-default btn-sm" id='create_answer_showQ' name="${question.qtype}"> Pridať odpoveď </a>
                     % endif
                     </div>
+
                     % endif
         </div>
     </form>
