@@ -10,7 +10,7 @@
         <div class="container">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 whyt">
+                    <div class="col-lg-4 whyt">
                         <h2>Prečo si vybrať testingo?</h2>
                         <ul class="list-unstyled checks">
                             <li><span class="glyphicon glyphicon-ok"></span> Lebo</li>
@@ -20,8 +20,10 @@
                             <li><span class="glyphicon glyphicon-ok"></span> Dôvodov</li>
                         </ul>
                     </div>
+	                <div class="col-lg-4">
+	                </div>
                     <div class="col-lg-4">
-                        <div class="">
+                        <div class="pull-left">
                             <form class="form-signin" method="post" action="" id="form-signin">
                                 <h2 class="form-signin-heading">Rýchla registrácia</h2>
 

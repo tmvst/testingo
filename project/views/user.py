@@ -71,7 +71,7 @@ def register_submission(request):
     """
     json = request.json_body
     errors = validate_registration_data(json)
-    print(json)
+
     if not errors:
         try:
             user_id = register_user(request.db_session, json['email'], json['password'], json['login'])
@@ -79,7 +79,6 @@ def register_submission(request):
             return HTTPFound(location=request.route_path('dashboard'), comment=succ)
         except DuplicateUserError:
             errors['email'] = 'duplicate_email'
-
 
     return {'errors': errors, 'error_messages': error_messages}
 
@@ -145,8 +144,10 @@ def login_submit(request):
         return HTTPFound(location=request.route_path('dashboard'), headers=headers)
     except WrongPasswordError:
         errors.append('Zadané nesprávne heslo')
+        errors.append('passw')
     except NonExistingUserError:
-        errors.append('Zadaný nesprávny email')
+        errors.append('Užívateľ s emailom ' + email + ' neexistuje.')
+        errors.append('email')
     return {'errors': errors}
 
 
