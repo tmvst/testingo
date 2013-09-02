@@ -13,11 +13,12 @@
                     <div class="col-lg-4 whyt">
                         <h2>Prečo si vybrať testingo?</h2>
                         <ul class="list-unstyled checks">
-                            <li><span class="glyphicon glyphicon-ok"></span> Lebo</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Sem</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Treba</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Zopár</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Dôvodov</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Kedykoľvek a kdekoľvek k dispozícii</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Už žiadne papiere</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne ponocovanie</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne meškajúce termíny</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Rovnocenné podmienky</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Okamžité výsledky</li>
                         </ul>
                     </div>
 	                <div class="col-lg-4">
