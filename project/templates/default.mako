@@ -22,7 +22,16 @@
 
 
 <body>
-    <div class="navbar navbar-fixed-top navbar-inverse navbar-custom">
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
+    <div class="navbar navbar-inverse navbar-custom">
         <div class="navbar-inner">
             <div class="container">
 	            <a href="/"><img src="${request.static_path('project:static/img/darklogo.png')}" class="tlogo"></a>
@@ -61,7 +70,8 @@
     </div>
 	<div class="container">
 		<div class="footer">
-			<p class="text-center">Testingo.sk (c) 2013</p>
+			<p>Testingo.sk (c) 2013</p>
+			<div class="fb-like" data-href="http://facebook.com/testingo.sk" data-width="450" data-show-faces="true" data-send="false"></div>
 		</div>
 	</div>
 </div>

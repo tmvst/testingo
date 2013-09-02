@@ -105,12 +105,12 @@
     <div class="screenshots">
         <h2>Ako to vyzerá?</h2>
         <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3">
                 <a href="http://www.atozed.com/indy/demos/9/RBSODFiles/BSOD.gif" data-lightbox="BSOD" class="thumbnail">
                     <img data-src="holder.js/100%x180" src="http://www.atozed.com/indy/demos/9/RBSODFiles/BSOD.gif" alt="">
                 </a>
             </div>
-	        <div class="col-sm-3 col-sm-offset-3">
+	        <div class="col-sm-3 col-sm-offset-6">
 		        <div class="fb-like-box" data-href="https://www.facebook.com/testingo.sk" data-width="250" data-height="190" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
 	        </div>
         </div>
