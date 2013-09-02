@@ -1,8 +1,8 @@
 <%inherit file="default.mako" />
 <%block name="title">Úvodná stránka</%block>
 <%block name="before_content">
-	<script src="${request.static_path('project:static/js/home.js')}"></script>
-	<script type="text/javascript">
+    <script src="${request.static_path('project:static/js/home.js')}"></script>
+    <script type="text/javascript">
         post_url="${request.route_path('home')}"
     </script>
 
@@ -21,8 +21,8 @@
                             <li><span class="glyphicon glyphicon-ok"></span> Okamžité výsledky</li>
                         </ul>
                     </div>
-	                <div class="col-lg-4">
-	                </div>
+                    <div class="col-lg-4">
+                    </div>
                     <div class="col-lg-4">
                         <div class="pull-left">
                             <form class="form-signin" method="post" action="" id="form-signin">
@@ -110,9 +110,9 @@
                     <img data-src="holder.js/100%x180" src="http://www.atozed.com/indy/demos/9/RBSODFiles/BSOD.gif" alt="">
                 </a>
             </div>
-
-
-    <div class="fb-like-box pull-right" data-href="https://www.facebook.com/testingo.sk" data-width="250" data-height="190" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+	        <div class="col-sm-3 col-sm-offset-3">
+		        <div class="fb-like-box" data-href="https://www.facebook.com/testingo.sk" data-width="250" data-height="190" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+	        </div>
         </div>
     </div>
 
@@ -125,6 +125,4 @@
         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=57820298747";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-
-
 </%block>

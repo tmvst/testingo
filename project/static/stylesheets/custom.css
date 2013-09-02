@@ -106,6 +106,13 @@ body {
     color: red;
 }
 
+.footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    margin-bottom: 40px;
+    border-top: 1px solid rgb(238, 238, 238);
+}
+
 /* Registracia */
 
 .headrow {

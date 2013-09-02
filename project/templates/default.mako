@@ -59,6 +59,11 @@
     <div class="container">
             <%block name="page_content">${content | n}</%block>
     </div>
+	<div class="container">
+		<div class="footer">
+			<p class="text-center">Testingo.sk (c) 2013</p>
+		</div>
+	</div>
 </div>
 
 </body>
