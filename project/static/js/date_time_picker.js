@@ -42,7 +42,7 @@
 			secondText: 'Second',
 			millisecText: 'Millisecond',
 			microsecText: 'Microsecond',
-			timezoneText: 'Time Zone',
+			timezoneText: 'Časová zóna',
 			isRTL: false
 		};
 		this._defaults = { // Global defaults for all the datetime picker instances

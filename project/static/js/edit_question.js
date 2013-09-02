@@ -48,13 +48,17 @@
         },
         points: {
           number: true
+        },
+        radio: {
+          required: true
         }
       },
       messages: {
         text: "Prosím zadajte text otázky",
         points: {
           number: "Body musia byť číslo"
-        }
+        },
+        radio: "Prosím zvoľte aspoň jednu možnosť"
       }
     });
     if ($('#form_showQ').valid()) {
@@ -97,7 +101,12 @@
 
   $(document).ready(function() {
     $('#save_changes').click(function() {
-      return form_submit(post_url, this.name);
+      if ($('.radiotext').length === 0 && this.name === 'R') {
+        $('#input_answer_showQ').append(radio_template());
+        return form_submit(post_url, this.name);
+      } else {
+        return form_submit(post_url, this.name);
+      }
     });
     $('#create_answer_showQ').click(function() {
       return input_template(this.name);

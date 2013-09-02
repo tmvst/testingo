@@ -64,21 +64,20 @@ def register_view(request):
     return {'errors': {}, 'error_messages': error_messages}
 
 
-@view_config(route_name='home', request_method='POST', renderer='project:templates/home.mako')
+@view_config(route_name='home', request_method='POST', renderer='json')
 def register_submission(request):
     """Handles registration form submission.
-    Creates PDF card in 'users_data/cards/{ID}.pdf'. CSS file for it is in 'templates/pdf_card.css'.
     """
-    POST = request.POST
-    errors = validate_registration_data(POST)
+    json = request.json_body
+    errors = validate_registration_data(json)
+
     if not errors:
         try:
-            user_id = register_user(request.db_session, POST['email'], POST['password'], POST['login'])
+            user_id = register_user(request.db_session, json['email'], json['password'], json['login'])
             succ = "Registrácia úspešná"
             return HTTPFound(location=request.route_path('dashboard'), comment=succ)
         except DuplicateUserError:
             errors['email'] = 'duplicate_email'
-
 
     return {'errors': errors, 'error_messages': error_messages}
 
@@ -144,8 +143,10 @@ def login_submit(request):
         return HTTPFound(location=request.route_path('dashboard'), headers=headers)
     except WrongPasswordError:
         errors.append('Zadané nesprávne heslo')
+        errors.append('passw')
     except NonExistingUserError:
-        errors.append('Zadaný nesprávny email')
+        errors.append('Užívateľ s emailom ' + email + ' neexistuje.')
+        errors.append('email')
     return {'errors': errors}
 
 

@@ -1,7 +1,9 @@
 <%inherit file="default.mako" />
 <%block name="title">Renovacia hesla</%block>
 <%block name="page_content">
-    <h2>Zmena hesla</h2>
+	<div class="page-header">
+		<h1>Zmena hesla</h1>
+	</div>
     <div id="lost_pasword">
         <table>
             <form method="POST">

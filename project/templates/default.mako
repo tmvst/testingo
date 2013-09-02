@@ -25,6 +25,7 @@
     <div class="navbar navbar-fixed-top navbar-inverse navbar-custom">
         <div class="navbar-inner">
             <div class="container">
+	            <a href="/"><img src="${request.static_path('project:static/img/darklogo.png')}" class="tlogo"></a>
 
               <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
               <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -34,12 +35,12 @@
             </a>
 
             <!-- Be sure to leave the brand out there if you want it shown -->
-            <a class="navbar-brand" href="/">Testingo <span class="glyphicon glyphicon-ok"></span></a>
+            <!-- <a class="navbar-brand" href="/">Testingo <span class="glyphicon glyphicon-ok"></span></a> -->
 
             <!-- Everything you want hidden at 940px or less, place within here -->
             % if request.userid:
             <ul class="nav navbar-nav pull-right">
-                <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
+                <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Ovládací panel</a></li>
                 <li><p class="navbar-text">Prihlásený ${request.user.email}</p></li>
                 <li>
                     <form action="${request.route_path('logout')}" method="POST">
@@ -52,12 +53,18 @@
     </div>
 </div>
 
+<%block name="before_content">
+</%block>
 <div class="container" id="main">
     <div class="container">
-        <div class="content">
             <%block name="page_content">${content | n}</%block>
-        </div>
     </div>
+	<div class="container">
+		<div class="footer">
+			<p class="text-center">Testingo.sk (c) 2013</p>
+		</div>
+	</div>
 </div>
+
 </body>
 </html>
