@@ -58,9 +58,21 @@
           login: name,
           email: email,
           password: pass
-        })
+        }),
+        success: function(response) {
+          console.log(response["errors"]);
+          if (response["errors"]) {
+            console.log("Email exists!");
+            return false;
+          } else {
+            return top.location.href = redir;
+          }
+        },
+        error: function() {
+          return console.log("Error");
+        }
       }).done(function() {
-        return top.location.href = redir;
+        return console.log("Done");
       }).fail(function(response) {
         return console.log(response);
       });

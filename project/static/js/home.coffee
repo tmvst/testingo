@@ -44,8 +44,17 @@ form_submit = (redir) ->
         login: name
         email: email
         password: pass
+      success: (response) ->
+        console.log response["errors"]
+        if response["errors"]
+          console.log "Email exists!"
+          return false
+        else
+          top.location.href = redir
+      error: () ->
+        console.log "Error"
     .done () ->
-        top.location.href = redir
+        console.log "Done"
     .fail (response) ->
         console.log response
   return false

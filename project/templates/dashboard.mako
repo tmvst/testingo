@@ -9,7 +9,7 @@
     </ol>
 
     <div class="page-header">
-        <h1>Dashboard</h1>
+        <h1>Ovládací panel</h1>
 	    <a href="#" class="pull-right" id="help-panel-toggle"><img src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/32/help.png"></a>
     </div>
 
@@ -50,7 +50,6 @@
                                 ${test.name}
                                 %if test.share_token:
                                         <span class="glyphicon glyphicon-lock pull-right"></span>
-                                        <input class="check pull-right" name="test${test.id}" type="checkbox" value="">
                                 %else:
                                         <span class="glyphicon glyphicon-edit pull-right"></span>
                                 %endif

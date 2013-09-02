@@ -64,10 +64,9 @@ def register_view(request):
     return {'errors': {}, 'error_messages': error_messages}
 
 
-@view_config(route_name='home', request_method='POST', renderer='project:templates/home.mako')
+@view_config(route_name='home', request_method='POST', renderer='json')
 def register_submission(request):
     """Handles registration form submission.
-    Creates PDF card in 'users_data/cards/{ID}.pdf'. CSS file for it is in 'templates/pdf_card.css'.
     """
     json = request.json_body
     errors = validate_registration_data(json)
