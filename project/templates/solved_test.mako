@@ -60,7 +60,7 @@
 
                 <span class="badge pull-right" id="b${question[0].id}">
 
-                  ${h.pretty_points(question[2])}
+                  ${h.pretty_points(float(question[2]))}
                         /   ${h.pretty_points(question[0].question.points)}b
 
                     </span>

@@ -36,13 +36,13 @@
 			timeFormat: 'HH:mm',
 			timeSuffix: '',
 			timeOnlyTitle: 'Choose Time',
-			timeText: 'Time',
-			hourText: 'Hour',
-			minuteText: 'Minute',
+			timeText: 'Čas',
+			hourText: 'Hodina',
+			minuteText: 'Minúta',
 			secondText: 'Second',
 			millisecText: 'Millisecond',
 			microsecText: 'Microsecond',
-			timezoneText: 'Time Zone',
+			timezoneText: 'Časová zóna',
 			isRTL: false
 		};
 		this._defaults = { // Global defaults for all the datetime picker instances

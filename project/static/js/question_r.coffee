@@ -4,10 +4,14 @@ answer_template= () ->
 	"""
 		<div class="answerblock">
 		<input class="Rradio" name="radio" type="radio" value="radio#{ix}">
-		<input name="text1#{ix}" class="radiotext form-control">
+		<input name="text1#{ix}" class="radiotext form-control" required >
 		<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
 		</div>
 	"""
+error_template = () ->
+  """
+  <label for="radio" class="error"></label>
+  """
 
 button_template= () ->
 	"""
@@ -32,10 +36,13 @@ form_submit = (redir) ->
 				required: true
 			points:
 				number: true
+			radio:
+				required: true
 		messages:
 			text: "Prosím zadajte text otázky"
 			points:
 				number: "Body musia byť číslo"
+			radio: "Prosím zvoľte aspoň jednu možnosť"
 
 	if $('#form_r').valid()
 

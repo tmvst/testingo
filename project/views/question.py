@@ -57,9 +57,14 @@ def view_question(request):
         raise HTTPUnauthorized
     answers = request.db_session.query(Answer).filter_by(question=question).all()
     list_of_answers = view_respondents_answer(request)
-
-    user_ans=request.db_session.query(Complete_answer.text,func.count(Complete_answer.id)).filter_by(question=question).group_by(Complete_answer.text).limit(7).all()
-    graph_data= create_pie_chart(user_ans)
+    graph_data=[]
+    for ans in answers:
+        if question.qtype is 'S':
+            item={}
+            user_ans=request.db_session.query(Complete_answer.text,func.count(Complete_answer.id)).filter_by(answer=ans).group_by(Complete_answer.text).limit(7).all()
+            item['correct_ans']=request.db_session.query(Answer).filter_by(id=ans.id).one()
+            item['data']=create_pie_chart(user_ans)
+            graph_data.insert(0,item)
     return {'graph_data':graph_data,'test':test,'question':question, 'answers':answers, 'list_of_answers':list_of_answers}
 def create_pie_chart(data):
     list=[]
@@ -91,46 +96,49 @@ def view_respondents_answer(request):
 @view_config(route_name='showquestion', request_method='POST')
 def question_work(request):
     """
-    Deletes selected question from test and db.
+    Deletes or updates selected question from test and db.
     """
     testid = request.matchdict['test_id']
     questionid = request.matchdict['question_id']
     POST = request.POST
+
+    try:
+        test = request.db_session.query(Test).filter_by(id=testid).one()
+    except:
+        raise HTTPNotFound
+    if request.userid is None:
+        raise  HTTPForbidden
+    if request.userid is not test.user_id:
+        raise HTTPUnauthorized
+
     if '_delete' in POST:
-        try:
-            test = request.db_session.query(Test).filter_by(id=testid).one()
-        except:
-            raise HTTPNotFound
-        if request.userid is None:
-
-            raise  HTTPForbidden
-        if request.userid is not test.user_id:
-            raise HTTPUnauthorized
-
+        # Delete
         question= request.db_session.query(Question).filter_by(id=questionid).one()
         question_number=question.number
         questions_with_number_to_be_changed = request.db_session.query(Question).filter(Question.number > question_number).all()
         for q in questions_with_number_to_be_changed:
             q.number=q.number-1
-
         test.sum_points-=question.points
         request.db_session.delete(question)
         request.db_session.flush()
         return HTTPFound(request.route_path('showtest', test_id=testid))
     else:
-        test = request.db_session.query(Test).filter_by(id=testid).one()    # pridať try-except (Babotka)
+
         if test.share_token:
+            # Already shared, either new comment or points for a completed question.
             json = request.json_body
             comp_q = request.db_session.query(CompleteQuestion).filter_by(id=json['id_question']).one()
             request.matchdict['incomplete_test'] = comp_q.incomplete_test
             return update_points_in_question_showQ(request)
         else:
+            # Updates question and it's answers
             update_question(request)
 
         return HTTPFound(request.route_path('showquestion', test_id=testid,question_id=questionid))
 
-def create_question(request, text, points, q_type):         # pridať password !!!
-    """Creates a new question and returns its id.
+def create_question(request, text, points, q_type):
+    """
+    Creates a new question, add the points value to a test  and returns its id.
     """
 
     test_id = request.matchdict['test_id']
@@ -144,7 +152,7 @@ def create_question(request, text, points, q_type):         # pridať password !
         raise HTTPUnauthorized
     if points is '':
         points = 0
-    test.sum_points =+ float(points)
+    test.sum_points += float(points)
     last_question_number = len(request.db_session.query(Question).filter_by(test_id=test_id).all())
     question_number = last_question_number + 1
     question = Question(question_number, text, points, q_type, test)
@@ -164,7 +172,10 @@ def create_answer( db_session, text, correct, question):         # pridať passw
     return answer.id
 
 def update_question(request):
-
+    """
+    Updates question's text, points and answers. Bootstrap modal component is used together with our coffe edit_question
+    and edit_question_answers python function. Returns nothing :P
+    """
     question_id= request.matchdict['question_id']
     json = request.json_body
 
@@ -176,7 +187,7 @@ def update_question(request):
     question.test.sum_points-=question.points
     question.text = text
     question.points = points
-    question.test.sum_points+=float(points)
+    question.test.sum_points += float(points)
     for ans in question.answers:
         request.db_session.delete(ans)
     edit_question_answers(request,question,answers)
@@ -249,6 +260,8 @@ def new_question_wrapper(request,qtype):
     if test.share_token:
         return HTTPFound(request.route_path('showtest', test_id=testid))
 
+    if points is '':
+        points=0
     question = create_question(request,
                                text,
                                float(points),
@@ -393,6 +406,9 @@ def r_question_post(request):
 
 @view_config(route_name='newquestion_o', request_method='POST')
 def o_question_post(request):
+    """
+    Creates new Answer object for a newquestion of an Open type.
+    """
     testid = request.matchdict['test_id']
     json = request.json_body
     question = new_question_wrapper(request,'O')
@@ -407,6 +423,9 @@ def o_question_post(request):
 
 @view_config(route_name='solved_test', request_method='POST')
 def update_points_in_question(request):
+    """
+    Updates points in a question.
+    """
     testid = request.matchdict['incomplete_test_id']
     json = request.json_body
     try:
@@ -475,6 +494,11 @@ def edit_question_answers(request,question,answers):
     return 1
 
 def is_checked(correctness,checkbox):
+    """
+    Checks whether checkbox was checked in the  received JSON data from AJAX request.
+    Returns 1 (true) if it was checked ( and removes it from list , to speed up the processing)
+            0 (false)  if it was not checked.
+    """
     for item in correctness:
         print(item['name'],checkbox)
         if item['name'] == checkbox:

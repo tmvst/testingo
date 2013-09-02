@@ -97,8 +97,8 @@ def validate_registration_data(form_data):
         errors['email'] = 'invalid_email'
     if form_data['password'] == "":
         errors['password'] = 'invalid_password'
-    if len(form_data['password']) < 5:
-         errors['password'] =  'short_password'
+    #if len(form_data['password']) < 5:
+    #     errors['password'] =  'short_password'
     return errors
 
 
