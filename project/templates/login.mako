@@ -17,7 +17,7 @@
 					% endif
 				</div>
 			% endif
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 col-md-offset-4">
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" name="email" id="email" class="form-control" placeholder="Email" required/>
