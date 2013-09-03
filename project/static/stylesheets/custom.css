@@ -1,5 +1,5 @@
 body {
-	padding-top: 60px;
+
 }
 
 .page-header {
@@ -43,7 +43,7 @@ body {
 
 
 .navbar-custom {
-	
+	border-radius: 0;
 }
 
 .panel-title a {
@@ -107,11 +107,15 @@ body {
 }
 
 .footer {
-    margin-top: 20px;
-    padding-top: 10px;
+    margin-top: 30px;
+    padding-top: 50px;
     margin-bottom: 40px;
     border-top: 1px solid rgb(238, 238, 238);
     color: rgb(153, 153, 153);
+}
+
+.before {
+    margin-bottom: 20px;
 }
 
 /* Registracia */
@@ -129,7 +133,8 @@ body {
 }
 
 .form-signin {
-    max-width: 330px;
+    width: 330px;
+    height: 320px;
     margin: 0 auto;
     padding: 10px 25px;
     background-image: url("../img/regbg.png");
@@ -162,6 +167,17 @@ body {
 }
 .error {
     color: #b94a48;
+}
+
+.user-pic {
+    width: 72px;
+    height: 72px;
+    margin: 60px auto 20px auto;
+}
+
+.user-pic img {
+    width: 72px;
+    height: 72px;
 }
 
 /* How it works */
