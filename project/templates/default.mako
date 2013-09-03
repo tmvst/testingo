@@ -50,7 +50,7 @@
             % if request.userid:
             <ul class="nav navbar-nav pull-right">
                 <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Ovládací panel</a></li>
-                <li><p class="navbar-text">Prihlásený ${request.user.email}</p></li>
+                <li><p class="navbar-text">Prihlásený ${request.user.name}</p></li>
                 <li>
                     <form action="${request.route_path('logout')}" method="POST">
                         <button type="submit" class="btn btn-link navbar-btn">Odhlásiť</button>

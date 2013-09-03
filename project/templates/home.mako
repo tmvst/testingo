@@ -25,33 +25,46 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="pull-left">
-                            <form class="form-signin" method="post" action="" id="form-signin">
-                                <h2 class="form-signin-heading">Rýchla registrácia</h2>
+							% if request.userid is None:
+                                <form class="form-signin" method="post" action="" id="form-signin">
+                                    <h2 class="form-signin-heading">Rýchla registrácia</h2>
 
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <input size="50" name="login" id="login" value="" type="text" class="form-control" placeholder="Meno" autofocus="autofocus" required>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <input size="50" name="login" id="login" value="" type="text" class="form-control" placeholder="Meno" autofocus="autofocus" required>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <input size="50" name="email" id="email" value="" type="email" class="form-control" placeholder="E-Mail" required>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <input size="50" name="email" id="email" value="" type="email" class="form-control" placeholder="E-Mail" required>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <input size="50" name="password" id="password" value="" type="password" class="form-control" placeholder="Heslo" required>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <input size="50" name="password" id="password" value="" type="password" class="form-control" placeholder="Heslo" required>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-primary btn-block">Registrovať</button>
-                                <p class="help-block text-right">
-                                    <a href="${request.route_path('dashboard')}">Prihlásenie</a> |
-                                    <a href="${request.route_path('beg_for_recovery')}" >Zabudnuté heslo</a>
-                                </p>
-                            </form>
+                                    <button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-primary btn-block">Registrovať</button>
+                                    <p class="help-block text-right">
+                                        <a href="${request.route_path('dashboard')}">Prihlásenie</a> |
+                                        <a href="${request.route_path('beg_for_recovery')}" >Zabudnuté heslo</a>
+                                    </p>
+                                </form>
+							% else:
+                                <div class="form-signin">
+                                    <div class="user-pic"> <img src="${request.static_path('project:static/img/icons/User.png')}"> </div>
+                                    <p class="text-center">
+                                        Prihlásený ${request.user.name} <br>
+                                        <em>${request.user.email}</em> <br>
+                                    </p>
+                                    <form action="${request.route_path('logout')}" method="POST">
+                                        <p class="text-center"><button type="submit" class="btn btn-primary btn-sm">Odhlásiť</button></p>
+                                    </form>
+                                </div>
+							% endif
                         </div>
                     </div>
                 </div>
@@ -75,7 +88,7 @@
 
                 <!-- ###   Feature 1 ### -->
                 <div class="col-lg-4 featu">
-                    <div class="icon"> <img src="${request.static_path('project:static/img/how1.png')}"> </div>
+                    <div class="icon"> <img src="${request.static_path('project:static/img/icons/Lock.png')}"> </div>
                     <h6> 1. Registrujte sa</h6>
                     <p> Po registrácii získate prístup k vytváraniu a riešeniu testov a užitočným štatistikám </p>
                     <div class="step"><p>Krok 1</p></div>
@@ -83,7 +96,7 @@
 
                 <!-- ###   Feature 2 ### -->
                 <div class="col-lg-4 featu">
-                    <div class="icon"> <img src="${request.static_path('project:static/img/how2.png')}"> </div>
+                    <div class="icon"> <img src="${request.static_path('project:static/img/icons/Dashboard.png')}"> </div>
                     <h6> 2. Vytvorte test</h6>
                     <p> Po vytvorení testu do neho môžete pridávať ľubovoľný počet otázok rôznych typov </p>
                     <div class="step"><p>Krok 2</p></div>
@@ -91,7 +104,7 @@
 
                 <!-- ###   Feature 2 ### -->
                 <div class="col-lg-4 featu">
-                    <div class="icon"> <img src="${request.static_path('project:static/img/how3.png')}"> </div>
+                    <div class="icon"> <img src="${request.static_path('project:static/img/icons/Mail3.png')}"> </div>
                     <h6> 3. Zdieľajte test</h6>
                     <p> Keď budete so zadaním spokojní, môžete test jednoducho poslať respondentom na riešenie </p>
                     <div class="step"><p>Krok 3</p></div>
@@ -110,9 +123,9 @@
                     <img data-src="holder.js/100%x180" src="http://www.atozed.com/indy/demos/9/RBSODFiles/BSOD.gif" alt="">
                 </a>
             </div>
-	        <div class="col-sm-3 col-sm-offset-6">
-		        <div class="fb-like-box" data-href="https://www.facebook.com/testingo.sk" data-width="250" data-height="190" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
-	        </div>
+            <div class="col-sm-3 col-sm-offset-6">
+                <div class="fb-like-box" data-href="https://www.facebook.com/testingo.sk" data-width="250" data-height="190" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+            </div>
         </div>
     </div>
 

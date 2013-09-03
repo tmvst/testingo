@@ -43,7 +43,7 @@ body {
 
 
 .navbar-custom {
-	
+	border-radius: 0;
 }
 
 .panel-title a {
@@ -129,7 +129,8 @@ body {
 }
 
 .form-signin {
-    max-width: 330px;
+    width: 330px;
+    height: 320px;
     margin: 0 auto;
     padding: 10px 25px;
     background-image: url("../img/regbg.png");
@@ -162,6 +163,17 @@ body {
 }
 .error {
     color: #b94a48;
+}
+
+.user-pic {
+    width: 72px;
+    height: 72px;
+    margin: 60px auto 20px auto;
+}
+
+.user-pic img {
+    width: 72px;
+    height: 72px;
 }
 
 /* How it works */
