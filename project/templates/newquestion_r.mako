@@ -16,7 +16,9 @@
     </ol>
 
     <div class="page-header">
-        <h1>Nová otázka (radio) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a> </h1>
+        <h1>Nová otázka do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a>
+        <br>
+        s jednou správnou odpoveďou</h1>
     </div>
 
     <div id="newq">

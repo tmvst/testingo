@@ -18,7 +18,9 @@
 
 
     <div class="page-header">
-        <h1>Nová otázka (fráza) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
+        <h1>Nová otázka do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a>
+        <br>
+        s frázovou odpoveďou</h1>
     </div>
 
     <div id="newq">

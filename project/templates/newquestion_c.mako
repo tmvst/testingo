@@ -14,7 +14,9 @@
     </ol>
 
     <div class="page-header">
-        <h1>Nová otázka (checkbox) do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
+        <h1>Nová otázka do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a>
+        <br>
+        s viacerými správnymi odpoveďami</h1>
     </div>
 
     <div id="newq">
