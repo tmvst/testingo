@@ -31,36 +31,34 @@
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 
-    <div class="navbar navbar-inverse navbar-custom">
-        <div class="navbar-inner">
-            <div class="container">
-	            <a href="/"><img src="${request.static_path('project:static/img/darklogo.png')}" class="tlogo"></a>
-
-              <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    <nav class="navbar navbar-inverse navbar-custom" role="navigation">
+	    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Navigácia</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </a>
-
-            <!-- Be sure to leave the brand out there if you want it shown -->
-            <!-- <a class="navbar-brand" href="/">Testingo <span class="glyphicon glyphicon-ok"></span></a> -->
-
-            <!-- Everything you want hidden at 940px or less, place within here -->
-            % if request.userid:
-            <ul class="nav navbar-nav pull-right">
-                <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Ovládací panel</a></li>
-                <li><p class="navbar-text">Prihlásený ${request.user.name}</p></li>
-                <li>
-                    <form action="${request.route_path('logout')}" method="POST">
-                        <button type="submit" class="btn btn-link navbar-btn">Odhlásiť</button>
-                    </form>
-                </li>
-            </ul>
-            % endif
+            </button>
+            <a href="/"><img src="${request.static_path('project:static/img/darklogo.png')}" class="tlogo"></a>
         </div>
-    </div>
-</div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+			    % if request.userid:
+		            <ul class="nav navbar-nav navbar-right">
+                        <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> Ovládací panel</a></li>
+			            <li class="dropdown">
+				            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					            <span class="glyphicon glyphicon-user"></span> ${request.user.name} <b class="caret"></b>
+				            </a>
+				            <ul class="dropdown-menu">
+					            <li><a href="${request.route_path('logout')}">Odhlásiť</a></li>
+				            </ul>
+			            </li>
+                    </ul>
+			    % endif
+        </div>
+		    </div>
+    </nav>
 
 <%block name="before_content">
 </%block>
