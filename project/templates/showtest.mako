@@ -102,10 +102,10 @@
                             <span class="glyphicon glyphicon-plus"></span> Pridať otázku <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="${request.route_path('newquestion_s', test_id=test.id)}">Fráza</a></li>
-                            <li><a href="${request.route_path('newquestion_c', test_id=test.id)}">Checkbox</a></li>
-                            <li><a href="${request.route_path('newquestion_r', test_id=test.id)}">Rádio</a></li>
-                            <li><a href="${request.route_path('newquestion_o', test_id=test.id)}">Otvorená</a></li>
+                            <li><a href="${request.route_path('newquestion_s', test_id=test.id)}">otázka s frázovou odpoveďou</a></li>
+                            <li><a href="${request.route_path('newquestion_c', test_id=test.id)}">otázka s viacerými správnymi odpoveďami</a></li>
+                            <li><a href="${request.route_path('newquestion_r', test_id=test.id)}">otázka s jednou správnou odpoveďou</a></li>
+                            <li><a href="${request.route_path('newquestion_o', test_id=test.id)}">otázka s otvorenou odpoveďou</a></li>
                         </ul>
                     </div>
                     </p>

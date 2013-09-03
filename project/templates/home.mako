@@ -13,12 +13,13 @@
                     <div class="col-lg-4 whyt">
                         <h2>Prečo si vybrať testingo?</h2>
                         <ul class="list-unstyled checks">
-                            <li><span class="glyphicon glyphicon-ok"></span> Kedykoľvek a kdekoľvek k dispozícii</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Už žiadne papiere</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne ponocovanie</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne meškajúce termíny</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Rovnocenné podmienky</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Okamžité výsledky</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Vytvorte si test kedykoľvek a kdekoľvek potrebujete.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Nestrácajte čas opravovaním papierových testov.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne ponocovanie! Zautomatizujte opravovanie svojich testov.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Meškajúce termíny a nervózni študenti sú Vašou minulosťou.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Vytvorte rovnocenné podmienky riešenia pre svojich študentov.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Výsledok je študentovi zverejnený okamžite alebo kedykoľvek sa rozhodnete.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Majte všetko pod kontrolou!</li>
                         </ul>
                     </div>
                     <div class="col-lg-4">
@@ -90,7 +91,7 @@
                 <div class="col-lg-4 featu">
                     <div class="icon"> <img src="${request.static_path('project:static/img/icons/Lock.png')}"> </div>
                     <h6> 1. Registrujte sa</h6>
-                    <p> Po registrácii získate prístup k vytváraniu a riešeniu testov a užitočným štatistikám </p>
+                    <p> Po registrácii získate prístup k vytváraniu testov, ich riešeniu a k užitočným štatistikám </p>
                     <div class="step"><p>Krok 1</p></div>
                 </div>
 
@@ -98,7 +99,7 @@
                 <div class="col-lg-4 featu">
                     <div class="icon"> <img src="${request.static_path('project:static/img/icons/Dashboard.png')}"> </div>
                     <h6> 2. Vytvorte test</h6>
-                    <p> Po vytvorení testu do neho môžete pridávať ľubovoľný počet otázok rôznych typov </p>
+                    <p> Po vytvorení testu môžete pridávať ľubovoľný počet otázok s rôznymi typmi odpovedí </p>
                     <div class="step"><p>Krok 2</p></div>
                 </div>
 
@@ -106,7 +107,7 @@
                 <div class="col-lg-4 featu">
                     <div class="icon"> <img src="${request.static_path('project:static/img/icons/Mail3.png')}"> </div>
                     <h6> 3. Zdieľajte test</h6>
-                    <p> Keď budete so zadaním spokojní, môžete test jednoducho poslať respondentom na riešenie </p>
+                    <p> Keď budete so zadaním spokojní, jednoducho pošlite svoj test svojim respondentom </p>
                     <div class="step"><p>Krok 3</p></div>
                 </div>
 

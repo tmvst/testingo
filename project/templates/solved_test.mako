@@ -48,13 +48,9 @@
                     <h3 class="panel-title">
                     <a href="${request.route_path('showquestion',test_id=incomplete_test.test.id, question_id=question[0].question.id)}" method="GET">
                         Otázka č.${question[0].question.number}
-                    %if question[0].question.mandatory:
-                            - povinná
-                    %else:
-                            - nepovinná
-                    %endif </a></h3>
+                    </a></h3>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 pull-right">
                 <h3 class="panel-title" id="o${question[0].id}">
                     <a class="glyphicon glyphicon-pencil pull-right zbody" id="c${question[0].id}" name="${question[2]}" data-points="${h.pretty_points(question[0].question.points)}b"> </a>
 
@@ -182,6 +178,10 @@
                     </div>
                     </div>
                     </div>
+                    %if question[0].question.mandatory:
+                        <br>
+                        <em> * otázku je povinné vyplniť</em>
+                    %endif
                     </div>
                     </div>
                 % endfor

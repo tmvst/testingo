@@ -37,13 +37,24 @@ from ..models.complete_question import (
     )
 
 #}}}
+@view_config(route_name='unavailable_test', request_method='GET', renderer='project:templates/errors/unavailable_test.mako')
+def view_test(request):
+    test = request.db_session.query(Test).filter_by(id=request.matchdict['test_id']).one()
+    return {'test':test}  
 
 @view_config(route_name='solve', request_method='GET', renderer='project:templates/solve.mako')
 def view_question(request):
     if request.userid:
         test_token = request.matchdict['token']
         test = request.db_session.query(Test).filter_by(share_token=test_token).one()
-        return {'test':test, 'token':test_token}
+
+        time = datetime.datetime.now()
+
+        if ((time < test.start_time) or (time > test.end_time)):
+            print("tu")
+            raise HTTPFound(request.route_path('unavailable_test', test_id=test.id))
+        else:
+            return {'test':test, 'token':test_token}
     else:
         raise HTTPForbidden
 
