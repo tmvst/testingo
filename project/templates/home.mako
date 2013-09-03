@@ -13,12 +13,13 @@
                     <div class="col-lg-4 whyt">
                         <h2>Prečo si vybrať testingo?</h2>
                         <ul class="list-unstyled checks">
-                            <li><span class="glyphicon glyphicon-ok"></span> Kedykoľvek a kdekoľvek k dispozícii</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Už žiadne papiere</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne ponocovanie</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne meškajúce termíny</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Rovnocenné podmienky</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Okamžité výsledky</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Vytvor si test kedykoľvek a kdekoľvek potrebuješ.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Nestrácaš čas opravovaním papierových testov.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne ponocovanie! Zautomatizuj opravovanie svojich testov.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Meškajúce termíny a nervózni študenti sú Tvojou minulosťou.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Vytvor rovnocenné podmienky riešenia pre svojich študentov.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Výsledok je študentovi zverejnený okamžite alebo kedykoľvek sa rozhodneš.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Maj všetko pod kontrolou!</li>
                         </ul>
                     </div>
                     <div class="col-lg-4">
