@@ -114,6 +114,10 @@ body {
     color: rgb(153, 153, 153);
 }
 
+.before {
+    margin-bottom: 20px;
+}
+
 /* Registracia */
 
 .headrow {

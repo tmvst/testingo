@@ -60,8 +60,11 @@
 		    </div>
     </nav>
 
+<div class="before">
 <%block name="before_content">
 </%block>
+</div>
+
 <div class="container" id="main">
     <div class="container">
             <%block name="page_content">${content | n}</%block>
