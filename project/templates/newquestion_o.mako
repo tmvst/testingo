@@ -48,10 +48,10 @@
                     <span class="glyphicon glyphicon-ok"></span> Uložiť a pridať ďalšiu <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="" id="save_and_add_s">Fráza</a></li>
-                    <li><a href="" id="save_and_add_c">Checkbox</a></li>
-                    <li><a href="" id="save_and_add_r">Rádio</a></li>
-                    <li><a href="" id="save_and_add_o">Otvorená</a></li>
+                    <li><a href="" id="save_and_add_s">otázka s frázovou odpoveďou</a></li>
+                    <li><a href="" id="save_and_add_c">otázka s viacerými správnymi odpoveďami</a></li>
+                    <li><a href="" id="save_and_add_r">otázka s jednou správnou odpoveďou</a></li>
+                    <li><a href="" id="save_and_add_o">otázka s otvorenou odpoveďou</a></li>
                 </ul>
             </div>
             <button type="submit" formaction="#" class="btn btn-default" id="save_and_end" style="margin-left: 5px;">Uložiť a skončiť</button>
