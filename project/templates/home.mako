@@ -57,7 +57,7 @@
                                 <div class="form-signin">
                                     <div class="user-pic"> <img src="${request.static_path('project:static/img/icons/User.png')}"> </div>
                                     <p class="text-center">
-                                        Prihlásený ${request.user.name} <br>
+                                        Prihlásený <a href="${request.route_path('profile')}">${request.user.name}</a><br>
                                         <em>${request.user.email}</em> <br>
                                     </p>
                                     <form action="${request.route_path('logout')}" method="POST">

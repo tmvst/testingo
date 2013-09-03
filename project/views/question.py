@@ -64,7 +64,7 @@ def view_question(request):
             user_ans=request.db_session.query(Complete_answer.text,func.count(Complete_answer.id)).filter_by(answer=ans).group_by(Complete_answer.text).limit(7).all()
             item['correct_ans']=request.db_session.query(Answer).filter_by(id=ans.id).one()
             item['data']=create_pie_chart(user_ans)
-            graph_data.insert(0,item)
+            graph_data.append(item)
     return {'graph_data':graph_data,'test':test,'question':question, 'answers':answers, 'list_of_answers':list_of_answers}
 def create_pie_chart(data):
     list=[]

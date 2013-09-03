@@ -17,12 +17,14 @@ from pyramid_mailer.message import (
 
 from ..models.user import (
     User,
+    MyPassword
     )
 from ..utils import valid_email
 from ..authenticator import (
     WrongPasswordError,
     NonExistingUserError,
     )
+from bcrypt import (hashpw, gensalt)
 #}}}
 class RegistrationError(Exception):
     pass
@@ -218,3 +220,40 @@ def recovery_final_submit(request):
     user = request.db_session.query(User).filter_by(id=request.matchdict['user_id']).first()
     user.password = password
     return HTTPFound(location=request.route_url('home'))
+
+@view_config(route_name='profile', request_method='GET', renderer='project:templates/profile.mako')
+def access_user_profile(request):
+    """
+    Returns user.
+    """
+    try:
+        user = request.db_session.query(User).filter_by(id=request.userid).one()
+    except Exception:
+        raise HTTPNotFound
+    return {'user': user,'errors':[]}
+
+@view_config(route_name='profile', request_method='POST', renderer='project:templates/profile.mako')
+def change_password(request):
+    """
+    Returns user.
+    """
+    user=request.db_session.query(User).filter_by(id=request.userid).one()
+    json = request.json_body
+    new_password = json['new_password']
+    new_password2 = json['new_password2']
+
+    email = user.email
+    password= json['current_password']
+    errors=[]
+    if new_password != new_password2:
+        errors.append('Heslá sa nerovnajú, ako si sa sem dostal vôbec, ty hacker')
+        return {'errors':errors}
+    try:
+        (headers, user) = request.authenticator.login(email, password)
+        user.password = new_password
+        request.db_session.flush()
+        errors.append('Heslo bolo úspešne zmenené')
+        return {'errors':errors}
+    except WrongPasswordError:
+        errors.append('Zadané nesprávne heslo')
+        return {'errors':errors}

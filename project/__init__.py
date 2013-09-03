@@ -90,6 +90,7 @@ def main(global_config, **settings):
     config.add_route('register_success', '/uspesna-registracia/{user_id}/')
     config.add_route('login', '/login/')
     config.add_route('logout', '/logout/')
+    config.add_route('profile', '/profile/')
     config.add_route('beg_for_recovery', '/stratene-heslo/')
     config.add_route('new_password', '/nove-heslo/{user_id}/{code}/')
     config.add_route('get_user_info', '/get-user-info/{user_id}/')
