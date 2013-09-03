@@ -8,6 +8,4 @@ Testingo je alternatívou k papierovým testom, ktoré treba po vytvorení vytla
 Testingo poskytuje rozhranie pre tvorbu testov s automatickým vyhodnocovaním výsledkov.
 Respondent po vyriešení testu okamžite získava svoj výsledok a v prípade chýb aj správne odpovede.
 
-Viac na [Testingo.sk][1]
-
-[1]:	http://testingo.sk "Testingo.sk"
+Viac na http://testingo.sk
