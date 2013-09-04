@@ -30,6 +30,7 @@
                 <div class="control-group">
 
                     <form class="form"  name="form-change_password" id="form-change_password">
+                        <div id="error_alert"></div>
                         <table>
                             <div class="input-group">
                                 <tr>

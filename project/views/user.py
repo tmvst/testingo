@@ -232,7 +232,7 @@ def access_user_profile(request):
         raise HTTPNotFound
     return {'user': user,'errors':[]}
 
-@view_config(route_name='profile', request_method='POST', renderer='project:templates/profile.mako')
+@view_config(route_name='profile', renderer='json')
 def change_password(request):
     """
     Returns user.
@@ -252,8 +252,9 @@ def change_password(request):
         (headers, user) = request.authenticator.login(email, password)
         user.password = new_password
         request.db_session.flush()
-        errors.append('Heslo bolo úspešne zmenené')
-        return {'errors':errors}
+        succ = "Heslo bolo úspešne zmenené"
+        return HTTPFound(location=request.route_path('dashboard'), comment=succ)
     except WrongPasswordError:
         errors.append('Zadané nesprávne heslo')
         return {'errors':errors}
+
