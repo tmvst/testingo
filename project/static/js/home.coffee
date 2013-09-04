@@ -50,11 +50,12 @@ form_submit = (redir) ->
           console.log "Email exists!"
           return false
         else
-          top.location.href = redir
+          top.location.href = "/dashboard"
       error: () ->
         console.log "Error"
     .done () ->
         console.log "Done"
+        top.location.href = "/dashboard"
     .fail (response) ->
         console.log response
   return false

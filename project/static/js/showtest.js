@@ -8,6 +8,14 @@
   };
 
   $(document).ready(function() {
+    var url;
+    if ($('#focusedInput').val()) {
+      if (window.location.host === "testingo.sk") {
+        url = $('#focusedInput').val();
+        url = url.replace('0.0.0.0:6543', 'testingo.sk');
+        $('#focusedInput').val(url);
+      }
+    }
     $('#focusedInput').click(function() {
       return this.select();
     });
