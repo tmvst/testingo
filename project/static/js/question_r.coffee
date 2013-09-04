@@ -13,11 +13,6 @@ error_template = () ->
   <label for="radio" class="error"></label>
   """
 
-button_template= () ->
-	"""
-	<a class="btn btn-default btn-sm" id='submit'> Pridať odpoveď </a> <br>
-	"""
-
 process_submit = () ->
 	$('#answer_r').append(answer_template())
 	ix++
@@ -72,9 +67,8 @@ form_submit = (redir) ->
 
 $(document).ready () ->
 	answer = $('#answer_r')
-	answer.html(button_template())
-	$('#submit').click(process_submit)
 	process_submit()
+	$('#submit').click(process_submit)
 	$('#answer_r').on('click', '.delete-button', delete_entry)
 
 	$('#form_r').submit(() -> false)

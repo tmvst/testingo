@@ -40,8 +40,11 @@
                 <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory">
             </div>
 
+            <hr><label for="text">Odpovede</label>
 
             <div id="answer_s"></div>
+
+            <a class="btn btn-default btn-sm" id='submit'> Pridať odpoveď </a> <br>
 
             <div class="form-group btn-group pull-left">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -59,7 +62,6 @@
             <div class="pull-right"><a href="${request.route_path('showtest', test_id=test.id)}" class="btn btn-danger">Zrušiť</a></div>
         </form>
     </div>
-    <br>
     <hr>
 
     <%include file="showquestions.mako"/>

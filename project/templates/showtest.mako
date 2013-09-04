@@ -78,17 +78,6 @@
                 </div>
                 <br>
                 <button type="button" class="btn btn-primary pull-right" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
-
-                <div id="test_stats" class="collapse out">
-
-                    %if len(solved_tests) is 0:
-                        <div class="panel-body">
-                            <span> Test ešte nikto neriešil</span>
-                        </div>
-                    %else:
-                        <%include file="test_stats.mako"/>
-                    %endif
-                </div>
             </div>
         </div>
         <div class="col-lg-6 whyt pull-left">
@@ -104,7 +93,18 @@
     </div>
     </div>
 
-                <hr>
+    <hr>
+
+    <div id="test_stats" class="collapse out">
+        %if len(solved_tests) is 0:
+            <div class="panel-body">
+                <span> Test ešte nikto neriešil</span>
+            </div>
+        %else:
+            <%include file="test_stats.mako"/>
+        %endif
+        <hr>
+    </div>
 
             <div name="questions_tag"><h2>Otázky
                 <small>

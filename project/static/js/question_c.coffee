@@ -9,11 +9,6 @@ answer_template= () ->
 		</div>
 	"""
 
-button_template= () ->
-	"""
-	<a class="btn btn-default btn-sm" id='submit'> Pridať odpoveď </a> <br>
-	"""
-
 process_submit = () ->
 	$('#answer').append(answer_template())
 	ix++
@@ -65,7 +60,6 @@ form_submit = (redir) ->
 
 $(document).ready () ->
 	answer = $('#answer')
-	answer.html(button_template())
 	process_submit()
 	$('#submit').click(process_submit)
 	$('#answer').on('click', '.delete-button', delete_entry)

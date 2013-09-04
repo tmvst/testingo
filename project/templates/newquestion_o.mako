@@ -33,16 +33,17 @@
                 <input id="points" name="points" class="form-control" placeholder="Body">
             </div>
 
-
-
-            <div id="answer_o">
-                <label for="odpoved">Správna odpoveď</label>
-                <textarea type="text" id="s#{ix}" name="odpoved" class="phrase form-control" placeholder="Odpoveď myslím, že vyplniť pre vlastnú potrebu snáď môžete..."></textarea>
-            </div>
-
             <div class="form-group">
                 <label for="points">Povinnosť vyplniť otázku</label>
                 <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory">
+            </div>
+
+            <hr>
+
+
+            <div id="answer_o">
+                <label for="odpoved">Odpoveď</label>
+                <textarea type="text" id="s#{ix}" name="odpoved" class="open form-control" placeholder="Odpoveď vyplniť môžete pre vlasnú kontrolu pri opravovaní. Automatické vyhodnotenie to neovplyvní."></textarea>
             </div>
 
             <div class="form-group btn-group pull-left">
@@ -61,6 +62,7 @@
             <div class="pull-right"><a href="${request.route_path('showtest', test_id=test.id)}" class="btn btn-danger">Zrušiť</a></div>
         </form>
     </div>
+    <hr>
 
     <%include file="showquestions.mako"/>
 

@@ -3,15 +3,9 @@ ix_s = 1
 answer_template= () ->
 	"""
 		<div class="form-group">
-			<label for="odpoved">#{ix_s}.</label>
 			<input type="text" id="s#{ix_s}" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď" required>
-			<div class="btn btn-default btn-sm delete-button"> Zmazať </div>
+			<div class="btn btn-default btn-sm delete-button"> Zmazať </div><br>
 		</div>
-	"""
-
-button_template= () ->
-	"""
-	<a class="btn btn-default btn-sm" id='submit'> Pridať odpoveď </a> <br>
 	"""
 
 process_submit = () ->
@@ -67,7 +61,6 @@ form_submit = (redir) ->
 
 $(document).ready () ->
 	answer = $('#answer_s')
-	answer.html(button_template())
 	process_submit()
 	$('#submit').click(process_submit)
 	$('#answer_s').on('click', '.delete-button', delete_entry)
