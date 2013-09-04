@@ -24,11 +24,7 @@
                     <div class="panel-heading">
                     <a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
                     <h3 class="panel-title">Otázka č.${question.number}
-                    %if question.mandatory:
-                                - povinná
-                            %else:
-                                - nepovinná
-                            %endif
+
                     % if question.points:
                             <span class="badge pull-right">
 								${h.pretty_points(question.points)}b
@@ -64,6 +60,12 @@
                     % elif question.qtype == 'O':
                             <textarea class="form-control user_answers_O"  name="user_answer${question.id}" id="user_answer" rows="4" placeholder="Sem vpíšte svoju odpoveď " required> </textarea>
                     % endif
+
+                    %if question.mandatory:
+                        <br>
+                        <em> * otázku je povinné vyplniť</em>
+                    %endif
+
                     </div>
                     </div>
                 % endfor

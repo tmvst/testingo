@@ -51,6 +51,7 @@
 					            <span class="glyphicon glyphicon-user"></span> ${request.user.name} <b class="caret"></b>
 				            </a>
 				            <ul class="dropdown-menu">
+                                <li><a href="${request.route_path('profile')}">Profil</a></li>
 					            <li><a href="${request.route_path('logout')}">Odhlásiť</a></li>
 				            </ul>
 			            </li>

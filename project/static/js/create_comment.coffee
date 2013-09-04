@@ -1,9 +1,9 @@
   input_template = (text,tu) ->
     """
       <div class="form-group" id="textarea_vykresli#{tu}">
-          <label for="text"> Komentár: </label>
-          <textarea class="form-control" name="area#{tu}" id="area#{tu}"  rows="3" placeholder="Obsah komentára..." required>#{text}</textarea>
--         <a href="#" class="update_b pull-right" id="ulozit#{tu}"> Uložiť </a>
+        <label for="text"> Komentár: </label>
+        <textarea class="form-control" name="area#{tu}" id="area#{tu}"  rows="3" placeholder="Obsah komentára..." required>#{text}</textarea>
+        <a href="#" class="update_b pull-right" id="ulozit#{tu}"> Uložiť </a>
       </div>
     """
 
