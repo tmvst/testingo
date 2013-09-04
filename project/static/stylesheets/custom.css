@@ -130,6 +130,7 @@ body {
 
 .headrow .whyt {
     color: whitesmoke;
+    text-shadow: black 0 0 0.3em;
 }
 
 .form-signin {
