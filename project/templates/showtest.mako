@@ -56,11 +56,10 @@
 
     <div class="container">
     <div class="row">
-        <div class="col-lg-6 whyt">
+        <div class="col-lg-6 whyt pull-right">
        
             <% questions = test.questions %>
 
-            <div class="pull-right">
                 <div>
                         % if test.share_token is None:
                             <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
@@ -78,7 +77,7 @@
                 </div>
                 <br>
                 <button type="button" class="btn btn-primary pull-right" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
-            </div>
+
         </div>
         <div class="col-lg-6 whyt pull-left">
             <dl class="dl-horizontal">

@@ -15,7 +15,7 @@
     </script>
     <ol class="breadcrumb">
         <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
-        <li><a id="own_tests">Vaše testy</a></li>
+        <li><a id="own_tests" href="${request.route_path('dashboard')}">Vaše testy</a></li>
         <li><a href="${request.route_path('showtest', test_id=test.id)}">Test ${test.name}</a></li>
 
         <li class="active">Otázka č.${question.number}</li>
@@ -57,6 +57,7 @@
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
 		%endif
+        <button type="button" class="btn btn-primary pull-right" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky o otázke</button>
 
         <div class="control-group">
             <h4>${question.text.replace('\n', markupsafe.Markup('<br> '))|n}
@@ -93,35 +94,29 @@
 					% endfor
 
 					%if question.mandatory:
-                            Odpovedanie na otázku je povinné
+                            <em> * Otázku je povinné vyplniť</em>
 					%else:
-                            Odpovedanie na otázku je nepovinné
+                            <em> * Otázku nie je povinné vyplniť</em>
 					%endif
 				% endif
             </div>
         </div>
     </div>
 
-
-    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky o otázke</button>
-
     <div id="test_stats" class="collapse out">
+        <hr>
+        <div id="chart_desc">
+            <strong>Najpopulárnejšie odpovede respondentov</strong><br><br>
+        </div>
 
-
-
-              <div id="chart_desc">
-                    <br><strong>Najpopulárnejšie odpovede respondentov</strong><br><br>
-                </div>
-    %if question.qtype == "S":
-                  <% chart_id = 0 %>
+        %if question.qtype == "S":
+            <% chart_id = 0 %>
             <ul>
-
             % for sub_answer in graph_data:
-                    <br><li>
+                <br><li>
+                <a type="button" data-toggle="collapse" data-target="#answer${chart_id}">Odpoveď č.${chart_id+1}, správna odpoveď: ${sub_answer['correct_ans'].text}</a>
 
-            <a type="button" data-toggle="collapse" data-target="#answer${chart_id}">Odpoveď č.${chart_id+1}, správna odpoveď: ${sub_answer['correct_ans'].text}</a>
-
-            <div id="answer${chart_id}" class="collapse out">
+                <div id="answer${chart_id}" class="collapse out">
                 <% chart_id = chart_id +1 %>
                         <canvas  id="myChart${chart_id}" width="300" height="300"></canvas>
 
@@ -132,20 +127,18 @@
                 </div>
                 </li>
             % endfor
-                </ul>
-			%endif
+            </ul>
+		%endif
     </div>
 
-
+    <hr>
 
     <div class="answer_s">
-
-
 
         <h2>Vyplnené odpovede</h2>
 
 		% if len(list_of_answers) is 0:
-                <span> Test nevyplnili žiadni respondenti </span>
+                <span> Test ešte nemá svojich riešiteľov </span>
 		% else:
 			% for answered_q in list_of_answers:
                 <div class="panel panel-default">

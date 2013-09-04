@@ -9,7 +9,7 @@
 
   comment_template = (koment,tu) ->
     """
-    <br>Komentár:<br>
+    Komentár:<br>
     <div class="well well-sm" id="koment_text#{tu}">
       #{koment}
     </div>

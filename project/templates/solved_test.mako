@@ -155,31 +155,29 @@
                             <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="a${question[0].id}" href="#h${question[0].id}">
                                 Komentár
                             </a>
-
+                            <br>
                         </div>
 
                     <div id="h${question[0].id}" class="accordion-body collapse out">
                     <div class="accordion-inner">
+                        <a class="zkomment bezhref pull-right" id="upravit_btn${question[0].id}" name="${question[0].comment}">Upraviť</a>
 
-                        <a class="zkomment bezhref pull-right" id="upravit_btn${question[0].id}" name="${question[0].comment}"><br>Upraviť</a>
                     <div id="koment_text${question[0].id}">
-                        <br>Komentár:<br>
+                        Komentár:<br>
 
                     % if  question[0].comment:
                             <div class="well well-sm" id="koment_text#{tu}">
                             ${question[0].comment.replace('\n', markupsafe.Markup('<br> '))|n}
                             </div>
                     % endif
-
                     </div>
-
                         <div id="koment_area${question[0].id}"></div>
                     </div>
                     </div>
                     </div>
                     </div>
                     %if question[0].question.mandatory:
-                        <br>
+                        
                         <em> * otázku je povinné vyplniť</em>
                     %endif
                     </div>
