@@ -65,14 +65,15 @@
             console.log("Email exists!");
             return false;
           } else {
-            return top.location.href = redir;
+            return top.location.href = "/dashboard";
           }
         },
         error: function() {
           return console.log("Error");
         }
       }).done(function() {
-        return console.log("Done");
+        console.log("Done");
+        return top.location.href = "/dashboard";
       }).fail(function(response) {
         return console.log(response);
       });
