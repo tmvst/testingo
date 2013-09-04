@@ -59,6 +59,8 @@
             <div class="pull-right"><a href="${request.route_path('showtest', test_id=test.id)}" class="btn btn-danger">Zrušiť</a></div>
         </form>
     </div>
+    <br>
+    <hr>
 
     <%include file="showquestions.mako"/>
 

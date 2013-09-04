@@ -53,43 +53,58 @@
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
     </div>
-	<p><strong>Popis:</strong> ${test.description}</p>
 
-    <% questions = test.questions %>
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-6 whyt">
+       
+            <% questions = test.questions %>
 
-    <div>
-        <div class="pull-right">
-                % if test.share_token is None:
-                    <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-share-alt"></span> Zdieľať test</button>
-                        <input type="hidden" name="_share" value="SHARE">
-                    </form>
-                % else:
-                    <div class="input-group sharetoken">
-                        <input class="form-control" id="focusedInput" type="text" value="http://0.0.0.0:6543/solve/${test.share_token}" readonly="readonly">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" id="focusBtn"><span class="glyphicon glyphicon-paperclip"></span></button>
-						</span>
-                    </div>
-                % endif
-        </div>
+            <div class="pull-right">
+                <div>
+                        % if test.share_token is None:
+                            <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-share-alt">   </span>Zdieľať test</button>
+                                <input type="hidden" name="_share" value="SHARE">
+                            </form>
+                        % else:
+                            <div class="input-group sharetoken">
+                                <input class="form-control" id="focusedInput" type="text" value="http://0.0.0.0:6543/solve/${test.      share_token}" readonly="readonly">
+                              <span class="input-group-btn">
+                                 <button class="btn btn-default" type="button" id="focusBtn"><span class="glyphicon glyphicon-paperclip"></span></button>
+                              </span>
+                            </div>
+                        % endif
+                </div>
+                <br>
+                <button type="button" class="btn btn-primary pull-right" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
 
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
-
-
-            <div id="test_stats" class="collapse out">
+                <div id="test_stats" class="collapse out">
 
                     %if len(solved_tests) is 0:
                         <div class="panel-body">
                             <span> Test ešte nikto neriešil</span>
                         </div>
                     %else:
-                    <%include file="test_stats.mako"/>
+                        <%include file="test_stats.mako"/>
                     %endif
+                </div>
             </div>
+        </div>
+        <div class="col-lg-6 whyt pull-left">
+            <dl class="dl-horizontal">
+                <dt>Popis:</dt>
+                    <dd>${test.description}</dd>
+                <dt>Čas začiatku:</dt>
+                    <dd>${test.start_time.strftime('%H:%M   %d.%m.%Y')}</dd>
+                <dt>Čas ukončenia:</dt>
+                    <dd>${test.end_time.strftime('%H:%M   %d.%m.%Y')}</dd>
+            </dl>
+        </div>
+    </div>
+    </div>
 
-
-
+                <hr>
 
             <div name="questions_tag"><h2>Otázky
                 <small>
@@ -115,7 +130,7 @@
                 <div class="col-lg-9">
 
                         % if len(questions) is 0:
-                            <span> Test neobsahuje žiadne otázky </span>
+                            <span> Test neobsahuje žiadne otázky</span>
                         % else:
 
                         % for question in questions:
