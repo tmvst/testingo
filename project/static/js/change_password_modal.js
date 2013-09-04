@@ -80,7 +80,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=change_password_modal.map
-*/
