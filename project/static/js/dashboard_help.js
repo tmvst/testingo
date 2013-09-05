@@ -2,9 +2,9 @@
 (function() {
   var hide_process;
 
-  hide_process = function(event) {
-    event.preventDefault;
-    return $("#help-panel").toggle();
+  hide_process = function() {
+    $("#help-panel").toggle();
+    return false;
   };
 
   $(document).ready(function() {
@@ -32,10 +32,10 @@
       placement: 'bottom'
     });
     $('#help-panel-toggle').click(function() {
-      return hide_process(event);
+      return hide_process;
     });
     return $("#help-panel-close").click(function() {
-      return hide_process(event);
+      return hide_process;
     });
   });
 
