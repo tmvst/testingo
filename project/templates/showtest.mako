@@ -203,10 +203,6 @@
 
                                 % endif
                             % endfor
-
-                            %if question.mandatory:
-                                   <em> * otázku je povinné vyplniť</em>
-                                %endif
                             </div>                            
                             </div>
                         % endfor
