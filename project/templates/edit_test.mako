@@ -25,7 +25,6 @@
             % endif
 
             <a class="btn btn-default" id="input_value">Neobmedzene</a>
-
         </div>
     </form>
 </div>
