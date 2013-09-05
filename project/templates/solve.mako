@@ -60,12 +60,6 @@
                     % elif question.qtype == 'O':
                             <textarea class="form-control user_answers_O"  name="user_answer${question.id}" id="user_answer" rows="4" placeholder="Sem vpíšte svoju odpoveď " required> </textarea>
                     % endif
-
-                    %if question.mandatory:
-                        <br>
-                        <em> * otázku je povinné vyplniť</em>
-                    %endif
-
                     </div>
                     </div>
                 % endfor

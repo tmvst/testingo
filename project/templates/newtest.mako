@@ -8,6 +8,17 @@
   	<script src="${request.static_path('project:static/js/date_time_picker.js')}"></script>
   	<script src="${request.static_path('project:static/js/Date_input.js')}"></script>
   	<script src="${request.static_path('project:static/js/newtest.js')}"></script>
+  	<script type='text/javascript'>
+  		time_input_value = function() {
+    		return $('.timeinput').val("");
+  		};
+
+  		$(document).ready(function() {
+    		return $('#input_value').click(function() {
+      			return time_input_value();
+    	});
+  });
+  	</script>
 
     <ol class="breadcrumb">
         <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
@@ -32,8 +43,9 @@
 
 		<label for="name">Čas platnosti:</label>
 		<div class="form-group">
-			<input type="text" id="start_time" name="start_time" placeholder="Čas otvorenia">
-			<input type="text" id="end_time" name="end_time" placeholder="Čas uzatvorenia">
+			<input class="timeinput" type="text" id="start_time" name="start_time" placeholder="Čas otvorenia">
+			<input class="timeinput" type="text" id="end_time" name="end_time" placeholder="Čas uzatvorenia">
+			<a class="btn btn-default" id="input_value">Neobmedzene</a>
 		</div>
 
 		<div class="form-group pull-left">

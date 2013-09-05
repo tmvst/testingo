@@ -176,10 +176,6 @@
                     </div>
                     </div>
                     </div>
-                    %if question[0].question.mandatory:
-                        
-                        <em> * otázku je povinné vyplniť</em>
-                    %endif
                     </div>
                     </div>
                 % endfor

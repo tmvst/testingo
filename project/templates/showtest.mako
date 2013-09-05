@@ -60,9 +60,21 @@
                 <dt>Popis:</dt>
                 <dd>${test.description}</dd>
                 <dt>Čas začiatku:</dt>
-                <dd>${test.start_time.strftime('%H:%M dňa %d.%m.%Y')}</dd>
+                    <dd>
+                    % if test.start_time:
+                        ${test.start_time.strftime('%H:%M dňa %d.%m.%Y')}
+                    % else:
+                        neobmedzene
+                    % endif
+                    </dd>
                 <dt>Čas ukončenia:</dt>
-                <dd>${test.end_time.strftime('%H:%M dňa %d.%m.%Y')}</dd>
+                    <dd>
+                    % if test.end_time:
+                        ${test.end_time.strftime('%H:%M dňa %d.%m.%Y')}
+                    % else:
+                        neobmedzene
+                    % endif
+                    </dd>
             </dl>
         </div>
 
@@ -164,7 +176,7 @@
 
 							% elif (question.qtype == "C"):
                                     <p class="text-success">
-                                        <input class="checkInputC" type="checkbox" alue="" checked disabled>
+                                        <input class="checkInputC" type="checkbox" value="" checked disabled>
 									${answer.text}
                                     </p>
 							% elif (question.qtype == "R"):
@@ -189,10 +201,6 @@
 
 						% endif
 					% endfor
-
-					%if question.mandatory:
-                            <em> * otázku je povinné vyplniť</em>
-					%endif
                     </div>
                     </div>
 				% endfor

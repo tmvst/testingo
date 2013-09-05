@@ -1,3 +1,6 @@
+time_input_value = () ->
+  $('.timeinput').val("")
+
 form_submit = (redir) ->
   $('#form_showT').validate
     rules:
@@ -40,3 +43,5 @@ form_submit = (redir) ->
 $(document).ready () ->
   $('#save_edit_test').click(() ->
     form_submit(post_url))
+  $('#input_value').click(() ->
+    time_input_value())
