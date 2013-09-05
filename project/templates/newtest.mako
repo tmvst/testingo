@@ -7,6 +7,7 @@
   	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   	<script src="${request.static_path('project:static/js/date_time_picker.js')}"></script>
   	<script src="${request.static_path('project:static/js/Date_input.js')}"></script>
+  	<script src="${request.static_path('project:static/js/newtest.js')}"></script>
 
     <ol class="breadcrumb">
         <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
