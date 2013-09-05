@@ -11,8 +11,21 @@
 
         <label for="name">Čas platnosti:</label>
         <div class="form-group">
-            <input type="text" id="start_time" name="edit_start_time" value="${test.start_time.strftime('%m/%d/%Y %H:%M')}">
-            <input type="text" id="end_time" name="edit_end_time" value="${test.end_time.strftime('%m/%d/%Y %H:%M')}">
+
+            % if test.start_time:
+                <input class="timeinput" type="text" id="start_time" name="edit_start_time" value="${test.start_time.strftime('%m/%d/%Y %H:%M')}">
+            % else:
+                <input class="timeinput" type="text" id="start_time" name="edit_start_time">
+            % endif
+
+            % if test.end_time:
+                <input class="timeinput" type="text" id="end_time" name="edit_end_time" value="${test.end_time.strftime('%m/%d/%Y %H:%M')}">
+            % else:
+                <input class="timeinput" type="text" id="end_time" name="edit_end_time">
+            % endif
+
+            <a class="btn btn-default" id="input_value">Neobmedzene</a>
+
         </div>
     </form>
 </div>

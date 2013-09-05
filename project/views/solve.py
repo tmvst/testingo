@@ -49,10 +49,11 @@ def view_question(request):
         test = request.db_session.query(Test).filter_by(share_token=test_token).one()
 
         time = datetime.datetime.now()
-
-        if ((time < test.start_time) or (time > test.end_time)):
-            print("tu")
-            raise HTTPFound(request.route_path('unavailable_test', test_id=test.id))
+        if test.start_time and test.end_time:
+            if ((time < test.start_time) or (time > test.end_time)):
+                raise HTTPFound(request.route_path('unavailable_test', test_id=test.id))
+            else:
+                return {'test':test, 'token':test_token}
         else:
             return {'test':test, 'token':test_token}
     else:

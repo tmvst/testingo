@@ -84,9 +84,21 @@
                 <dt>Popis:</dt>
                     <dd>${test.description}</dd>
                 <dt>Čas začiatku:</dt>
-                    <dd>${test.start_time.strftime('%H:%M dňa %d.%m.%Y')}</dd>
+                    <dd>
+                    % if test.start_time:
+                        ${test.start_time.strftime('%H:%M dňa %d.%m.%Y')}
+                    % else:
+                        neobmedzene
+                    % endif
+                    </dd>
                 <dt>Čas ukončenia:</dt>
-                    <dd>${test.end_time.strftime('%H:%M dňa %d.%m.%Y')}</dd>
+                    <dd>
+                    % if test.end_time:
+                        ${test.end_time.strftime('%H:%M dňa %d.%m.%Y')}
+                    % else:
+                        neobmedzene
+                    % endif
+                    </dd>
             </dl>
         </div>
     </div>

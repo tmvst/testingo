@@ -53,6 +53,10 @@ def create_test(request, db_session, name, description, start_time, end_time):
     date_crt = datetime.datetime.now()
     date_mdf = datetime.datetime.now()
 
+    if start_time is '':
+        start_time = None
+        end_time = None
+
     test = Test(name, description, date_crt, date_mdf, start_time, end_time, True, user)
 
     db_session.add(test)
@@ -127,8 +131,12 @@ def edit_test(request, test_id):
 
     test.name = json['name']
     test.description = json['description']
-    test.start_time = json['start_time']
-    test.end_time = json['end_time']
+    if json['start_time'] is '':
+        test.start_time = None
+        test.end_time = None
+    else:
+        test.start_time = json['start_time']
+        test.end_time = json['end_time']
 
     request.db_session.merge(test)
     request.db_session.flush()
