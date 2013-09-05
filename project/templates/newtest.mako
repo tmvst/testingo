@@ -7,17 +7,7 @@
   	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   	<script src="${request.static_path('project:static/js/date_time_picker.js')}"></script>
   	<script src="${request.static_path('project:static/js/Date_input.js')}"></script>
-  	<script type='text/javascript'>
-  		time_input_value = function() {
-    		return $('.timeinput').val("");
-  		};
-
-  		$(document).ready(function() {
-    		return $('#input_value').click(function() {
-      			return time_input_value();
-    	});
-  });
-  	</script>
+  	<script src="${request.static_path('project:static/js/newtest.js')}"></script>
 
     <ol class="breadcrumb">
         <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
@@ -30,7 +20,7 @@
 </div>
 
 <div>
-	<form action="${request.route_path('newtest')}" method="POST">
+	<form id="new_test" action="${request.route_path('newtest')}" method="POST">
 		<div class="form-group">
 			<label for="name">Názov</label>
 			<input type="text" id="name" name="name" class="form-control" placeholder="Názov testu" required>
@@ -48,7 +38,7 @@
 		</div>
 
 		<div class="form-group pull-left">
-			<button type="submit" class="btn btn-primary">Vytvoriť test</button>
+			<button type="submit" id="create_test" class="btn btn-primary">Vytvoriť test</button>
 		</div>
 		<div class="pull-right"><a href="${request.route_path('dashboard')}" class="btn btn-danger">Zrušiť</a></div>
 	</form>
