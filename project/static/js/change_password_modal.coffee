@@ -57,6 +57,7 @@ form_submit = (post_url) ->
         current_password: $("#current_password").val()
         new_password: $("#new_password").val()
         new_password2: $("#password_repeat").val()
+        con: 0
       success: (response) ->
         if response['errors']
           $('#error_alert').append(fail_template())

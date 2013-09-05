@@ -8,6 +8,7 @@
 
 <!-- Button trigger modal -->
 <script src="${request.static_path('project:static/js/change_password_modal.js')}"></script>
+<script src="${request.static_path('project:static/js/edit_personal_data.js')}"></script>
 % if errors != []:
                 <div class="alert alert-success">
                     ${errors[0]}
@@ -96,14 +97,16 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Úprava osobných údajov</h4>
                 </div>
+                 <form action="#" id="form_editPD">
                     <div class="modal-body">
                         <div id="error_alert"></div>
                         <%include file="edit_personal_data.mako"/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Zrušiť</button>
-                        <button type="button" id="submit" name="submit"class="btn btn-primary">Uložiť</button>
+                        <button type="button" id="submit_data" name="submit_data"class="btn btn-primary">Uložiť</button>
                     </div>
+                    </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

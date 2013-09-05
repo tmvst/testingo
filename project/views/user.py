@@ -239,22 +239,34 @@ def change_password(request):
     """
     user=request.db_session.query(User).filter_by(id=request.userid).one()
     json = request.json_body
-    new_password = json['new_password']
-    new_password2 = json['new_password2']
 
-    email = user.email
-    password= json['current_password']
-    errors=[]
-    if new_password != new_password2:
-        errors.append('Heslá sa nerovnajú, ako si sa sem dostal vôbec, ty hacker')
-        return {'errors':errors}
-    try:
-        (headers, user) = request.authenticator.login(email, password)
-        user.password = new_password
+    if json['con'] is 0:
+        new_password = json['new_password']
+        new_password2 = json['new_password2']
+
+        email = user.email
+        password= json['current_password']
+        errors=[]
+        if new_password != new_password2:
+            errors.append('Heslá sa nerovnajú, ako si sa sem dostal vôbec, ty hacker')
+            return {'errors':errors}
+        try:
+            (headers, user) = request.authenticator.login(email, password)
+            user.password = new_password
+            request.db_session.flush()
+            succ = "Heslo bolo úspešne zmenené"
+            return HTTPFound(location=request.route_path('dashboard'), comment=succ)
+        except WrongPasswordError:
+            errors.append('Zadané nesprávne heslo')
+            return {'errors':errors}
+    else: 
+        user.name = json['user_name']
+        user.email = json['email']
+
+        request.db_session.merge(user)
         request.db_session.flush()
-        succ = "Heslo bolo úspešne zmenené"
-        return HTTPFound(location=request.route_path('dashboard'), comment=succ)
-    except WrongPasswordError:
-        errors.append('Zadané nesprávne heslo')
-        return {'errors':errors}
+
+        return HTTPFound(location=request.route_path('profile'))
+
+
 
