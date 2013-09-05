@@ -33,11 +33,6 @@
                 <input id="points" name="points" class="form-control" placeholder="Body">
             </div>
 
-            <div class="form-group">
-                <label for="points">Povinnosť vyplniť otázku</label>
-                <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory">
-            </div>
-
             <hr><label for="text">Odpovede</label>
 
             <div id="answer_r"></div>

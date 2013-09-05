@@ -11,18 +11,6 @@
             <input id="points" name="points" class="form-control" value="${question.points}" >
         </div>
 
-        <div class="form-group">
-            %if question.mandatory:
-                    <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory" checked>
-            %else:
-                    <input type="checkbox" id="is_q_mandatory" name="is_q_mandatory">
-            %endif
-
-            <label for="points">Povinnosť vyplniť otázku</label>
-        </div>
-
-
-
         <div class="list-group">
                 % if len(answers) is 0:
                     <span> Otázka neobsahuje žiadne možnosti</span>

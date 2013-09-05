@@ -57,7 +57,7 @@
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
 		%endif
-        <button type="button" class="btn btn-primary pull-right" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky o otázke</button>
+        <button type="button" class="btn btn-default pull-right" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
 
         <div class="control-group">
             <h4>${question.text.replace('\n', markupsafe.Markup('<br> '))|n}
