@@ -56,26 +56,22 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <dl class="dl-horizontal">
-                <dt>Popis:</dt>
-                <dd>${test.description}</dd>
-                <dt>Čas začiatku:</dt>
-                    <dd>
+	        <p class="lead">${test.description}</p>
+                <p><strong>Čas začiatku: </strong>
                     % if test.start_time:
                         ${test.start_time.strftime('%H:%M dňa %d.%m.%Y')}
                     % else:
                         neobmedzene
                     % endif
-                    </dd>
-                <dt>Čas ukončenia:</dt>
-                    <dd>
+	            <br>
+                <strong>Čas ukončenia: </strong>
                     % if test.end_time:
                         ${test.end_time.strftime('%H:%M dňa %d.%m.%Y')}
                     % else:
                         neobmedzene
                     % endif
-                    </dd>
-            </dl>
+		        </p>
+	        <button type="button" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
         </div>
 
     <div class="col-lg-6">
@@ -83,7 +79,7 @@
 		<div class="pull-right">
 	% if test.share_token is None:
             <form action="${request.route_path('showtest', test_id=test.id)}" method="POST">
-	            <div class="form-group">
+	            <div class="form-group pull-right">
                     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-share-alt">   </span>Zdieľať test</button>
                     <input type="hidden" name="_share" value="SHARE">
 		        </div>
@@ -96,7 +92,6 @@
 	                              </span>
             </div>
 	% endif
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
         </div>
 
     </div>

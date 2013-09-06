@@ -21,7 +21,7 @@ form_submit = (post_url) ->
         email: $("#email").val()
         con: 1
     .done (response) ->
-      console.log "Done"
+      top.location.href = post_url
     .fail (response) ->
       console.log response
     return false

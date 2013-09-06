@@ -90,7 +90,7 @@
     </div><!-- /.modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="change_personal_data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
+    <div class="modal fade" id="change_personal_data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
