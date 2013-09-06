@@ -15,7 +15,7 @@
                 </div>
 %endif
 
-    <h1>${user.name}<a data-toggle="modal" href="#change_personal_data" class="btn btn-primary pull-right">Upraviť</a></h1>
+    <h1 class="profile-pic">${user.name}<a data-toggle="modal" href="#change_personal_data" class="btn btn-primary pull-right">Upraviť</a></h1>
     <hr>
     <h3>Osobné údaje</h3>
     <dl>
