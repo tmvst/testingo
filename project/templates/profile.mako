@@ -27,19 +27,8 @@
         <dd><a data-toggle="modal" href="#change_password_modal" class="btn btn-primary btn-sm">Zmena hesla</a></dd>
     </dl>
     <hr>
-    <h3>Bližšie informácie</h3>
-    <dl>
-        <dt>Zamestnanie</dt>
-        <dd></dd>
-        <dt>Škola</dt>
-        <dd></dd>
-        <dt>Zameranie</dt>
-        <dd></dd>
 
-    </dl>
-    <hr>
     <h3>Moje štatistiky</h3>
-    <br>
     <p>Zatiaľ som vytvoril ${len(user.tests)} testov a odpovedal na ${len(user.incomplete_tests)} testov.</p>
 
 

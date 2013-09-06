@@ -1,7 +1,3 @@
-hide_process = () ->
-    $("#help-panel").toggle()
-    return false
-
 $(document).ready ->
     $("#help-panel").hide()
 
@@ -11,7 +7,7 @@ $(document).ready ->
     $("#help-panel-toggle").tooltip(title: 'Pomoc', placement: 'bottom')
 
     $('#help-panel-toggle').click () ->
-      hide_process
+      $("#help-panel").toggle()
 
     $("#help-panel-close").click () ->
-      hide_process
+      $("#help-panel").toggle()
