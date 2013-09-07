@@ -22,20 +22,17 @@
     </ol>
 
     <div class="page-header">
-        <h1>Otázka č.${question.number} <small>z testu </small><a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a></h1>
-    </div>
-
-    <div>
 		%if question.test.share_token is None:
 				<div>
-	                <form action="#" method="POST">
-	                    <button id="delete_question" type="submit" class="btn btn-danger pull-right btns">Zmazať otázku</button>
+					<h1>Otázka č.${question.number}</h1>
+	                <form action="#" method="POST" class="pull-right">
+	                    <button id="delete_question" type="submit" class="btn btn-danger btns">Zmazať otázku</button>
                          <input type="hidden" name="_delete" value="DELETE">
 	                </form>
 
 	                <!-- Button trigger modal -->
 
-	                <a data-toggle="modal" href="#myModal" class="btn btn-primary pull-right btns">Zmeniť otázku</a>
+	                <a data-toggle="modal" href="#myModal" class="btn btn-primary pull-right btns">Upraviť otázku</a>
 				</div>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -57,7 +54,7 @@
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
 		%endif
-        <button type="button" class="btn btn-default pull-right" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
+		</div>
 
         <div class="control-group">
             <h4>${question.text.replace('\n', markupsafe.Markup('<br> '))|n}
@@ -101,7 +98,8 @@
 				% endif
             </div>
         </div>
-    </div>
+
+		<button type="button" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
 
     <div id="test_stats" class="collapse out">
         <hr>
@@ -138,7 +136,7 @@
         <h2>Vyplnené odpovede</h2>
 
 		% if len(list_of_answers) is 0:
-                <span> Test ešte nemá svojich riešiteľov </span>
+                <em>Test ešte nikto neriešil</em>
 		% else:
 			% for answered_q in list_of_answers:
                 <div class="panel panel-default">

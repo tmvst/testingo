@@ -12,8 +12,9 @@
         </div>
 
         <div class="list-group">
+				<label>Odpovede</label>
                 % if len(answers) is 0:
-                    <span> Otázka neobsahuje žiadne možnosti</span>
+                   <em> Otázka neobsahuje žiadne možnosti</em>
                    <div id="input_answer_showQ"></div>
                         <label for="radio" class="error"></label>
                             <br>

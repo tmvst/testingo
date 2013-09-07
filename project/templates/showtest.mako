@@ -30,7 +30,7 @@
                 </button>
                 <input type="hidden" name="_delete" value="DELETE">
             </form>
-            <a data-toggle="modal" href="#myTest" class="btn btn-primary pull-right">Upraviť test</a>
+            <a data-toggle="modal" href="#myTest" class="btn btn-primary pull-right btns">Upraviť test</a>
         </div>
         <!-- Modal -->
     <div class="modal fade" id="myTest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
