@@ -28,8 +28,8 @@
     </dl>
     <hr>
 
-    <h3>Moje štatistiky</h3>
-    <p>Zatiaľ som vytvoril ${len(user.tests)} testov a odpovedal na ${len(user.incomplete_tests)} testov.</p>
+    <h3>Štatistiky</h3>
+    <p>Doteraz ste vytvorili ${len(user.tests)} testov a odpovedali na ${len(user.incomplete_tests)} testov.</p>
 
 
     <!-- Modal -->

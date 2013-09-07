@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="sk-SK">
 <head>
-	<title><%block name="title"/></title>
+	<title><%block name="title"/> | Testingo</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="${request.static_path('project:static/favicon.png')}">

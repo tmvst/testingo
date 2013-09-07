@@ -1,10 +1,9 @@
 <%inherit file="default.mako" />
-<%block name="title">Dashboard</%block>
+<%block name="title">Ovládací panel</%block>
 <%block name="page_content">
     <script src="${request.static_path('project:static/js/dashboard_view_tests.js')}"></script>
 	<script src="${request.static_path('project:static/js/dashboard_help.js')}"></script>
     <ol class="breadcrumb">
-
         <li class="active"><span class="glyphicon glyphicon-home"></span> </li>
     </ol>
 

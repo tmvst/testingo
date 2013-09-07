@@ -22,9 +22,8 @@
     </ol>
 
     <div class="page-header">
-		%if question.test.share_token is None:
-				<div>
-					<h1>Otázka č.${question.number}</h1>
+				<h1>Otázka č.${question.number}</h1>
+				%if question.test.share_token is None:
 	                <form action="#" method="POST" class="pull-right">
 	                    <button id="delete_question" type="submit" class="btn btn-danger btns">Zmazať otázku</button>
                          <input type="hidden" name="_delete" value="DELETE">
@@ -33,7 +32,6 @@
 	                <!-- Button trigger modal -->
 
 	                <a data-toggle="modal" href="#myModal" class="btn btn-primary pull-right btns">Upraviť otázku</a>
-				</div>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 

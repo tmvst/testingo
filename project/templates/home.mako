@@ -13,12 +13,12 @@
                     <div class="col-lg-6 whyt">
                         <h2>Prečo si vybrať testingo?</h2>
                         <ul class="list-unstyled checks">
-                            <li><span class="glyphicon glyphicon-ok"></span> Vytvorte si test kedykoľvek a kdekoľvek potrebujete.</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Nestrácajte čas opravovaním papierových testov.</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne ponocovanie! Zautomatizujte opravovanie svojich testov.</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Meškajúce termíny a nervózni študenti sú Vašou minulosťou.</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Vytvorte rovnocenné podmienky riešenia pre svojich študentov.</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Výsledok je študentovi zverejnený okamžite alebo kedykoľvek sa rozhodnete.</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Vytvorte si test kedykoľvek a kdekoľvek potrebujete</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Nestrácajte čas opravovaním papierových testov</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne ponocovanie! Zautomatizujte opravovanie svojich testov</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Meškajúce termíny a nervózni študenti sú Vašou minulosťou</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Vytvorte rovnocenné podmienky riešenia pre svojich študentov</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Výsledok je študentovi zverejnený okamžite alebo kedykoľvek sa rozhodnete</li>
                             <li><span class="glyphicon glyphicon-ok"></span> Majte všetko pod kontrolou!</li>
                         </ul>
                     </div>
