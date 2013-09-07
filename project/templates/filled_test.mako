@@ -27,11 +27,7 @@
                 <h3 class="panel-title">
 
                     Otázka č.${question[0].question.number}
-                %if question[0].question.mandatory:
-                        - povinná
-                %else:
-                        - nepovinná
-                %endif
+                
                 </h3>
 
                 </div>
