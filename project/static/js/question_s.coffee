@@ -3,8 +3,14 @@ ix_s = 1
 answer_template= () ->
 	"""
 		<div class="form-group">
-			<input type="text" id="s#{ix_s}" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď" required>
-			<div class="btn btn-default btn-sm delete-button"> Zmazať </div><br>
+      <div class='row'>
+        <div class='col-sm-4'>
+			    <input type="text" id="s#{ix_s}" name="odpoved" class="phrase form-control" placeholder="Správna odpoveď" required>
+        </div>
+        <div class='col-sm-2'>
+			    <div class="btn btn-default delete-button"> Zmazať </div><br>
+        </div>
+       </div>
 		</div>
 	"""
 
@@ -17,7 +23,7 @@ update_cnt = () ->
 	cnt = $('.phrase').length
 
 delete_entry = (e) ->
-	$(e.target).parent().remove()
+	$(e.target).parent().parent().remove()
 
 form_submit = (redir) ->
 	$('#form_s').validate

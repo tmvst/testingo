@@ -18,29 +18,9 @@ body {
 	cursor: text;
 }
 
-.answerblock .checkInputC {
-	display: inline-block;
+.checkbox, .radio {
+    margin: 0;
 }
-
-.answerblock .Rradio {
-	display: inline-block;
-}
-
-.answerblock .checkInput {
-	width: 250px;
-	display: inline-block;
-	height: 30px;
-	margin-bottom: 5px;
-	margin-top: 5px;
-}
-.answerblock .radiotext {
-	width: 250px;
-	display: inline-block;
-	height: 30px;
-	margin-bottom: 5px;
-	margin-top: 5px;
-}
-
 
 .navbar-custom {
 	border-radius: 0;

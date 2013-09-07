@@ -2,10 +2,18 @@ ix = 1
 
 answer_template= () ->
 	"""
-		<div class="answerblock">
-		<input class="Rradio" name="radio" type="radio" value="radio#{ix}">
-		<input name="text1#{ix}" class="radiotext form-control" required >
-		<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+		<div class="form-group">
+      <div class='row'>
+        <div class='col-sm-6'>
+          <div class='radio'>
+		        <input class="Rradio" name="radio" type="radio" value="radio#{ix}">
+		        <input name="text1#{ix}" class="radiotext form-control" required>
+          </div>
+        </div>
+        <div class='col-sm-2'>
+		      <div class="btn btn-default delete-button"> Zmazať </div> <br>
+        </div>
+      </div>
 		</div>
 	"""
 error_template = () ->
@@ -22,7 +30,7 @@ update_cnt = () ->
 	cnt = $('.radiotext').length
 
 delete_entry = (e) ->
-	$(e.target).parent().remove()
+	$(e.target).parent().parent().remove()
 
 form_submit = (redir) ->
 	$('#form_r').validate

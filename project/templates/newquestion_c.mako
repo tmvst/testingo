@@ -14,9 +14,7 @@
     </ol>
 
     <div class="page-header">
-        <h1>Nová otázka do testu <a href="${request.route_path('showtest',test_id=test.id)}">${test.name}</a>
-        <br>
-        s viacerými správnymi odpoveďami</h1>
+        <h1>Nová otázka s viacerými správnymi odpoveďami</h1>
     </div>
 
     <div id="newq">
@@ -35,22 +33,22 @@
 
             <div id="answer"></div>
 
-            <a class="btn btn-default btn-sm" id='submit'> Pridať odpoveď </a> <br>
+            <a class="btn btn-default" id='submit'> Pridať odpoveď </a> <br>
 
-            <div class="form-group btn-group pull-left">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <div class="form-group btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="margin-top: 15px;">
                     <span class="glyphicon glyphicon-ok"></span> Uložiť a pridať ďalšiu <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="" id="save_and_add_s">otázka s frázovou odpoveďou</a></li>
-                    <li><a href="" id="save_and_add_c">otázka s viacerými správnymi odpoveďami</a></li>
-                    <li><a href="" id="save_and_add_r">otázka s jednou správnou odpoveďou</a></li>
-                    <li><a href="" id="save_and_add_o">otázka s otvorenou odpoveďou</a></li>
+                    <li><a href="" id="save_and_add_s">s frázovou odpoveďou</a></li>
+                    <li><a href="" id="save_and_add_c">s viacerými správnymi odpoveďami</a></li>
+                    <li><a href="" id="save_and_add_r">s jednou správnou odpoveďou</a></li>
+                    <li><a href="" id="save_and_add_o">s otvorenou odpoveďou</a></li>
                 </ul>
             </div>
             <button type="submit" formaction="#" class="btn btn-default" id="save_and_end" style="margin-left: 5px;">Uložiť a skončiť</button>
 
-            <div class="pull-right"><a href="${request.route_path('showtest', test_id=test.id)}" class="btn btn-danger">Zrušiť</a></div>
+            <a href="${request.route_path('showtest', test_id=test.id)}" class="btn btn-danger pull-right" style="margin-top: 15px;">Zrušiť</a>
         </form>
     </div>
     <hr>

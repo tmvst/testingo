@@ -72,7 +72,7 @@
     </div>
 	<div class="container">
 		<div class="footer">
-			<p>Testingo.sk (c) 2013</p>
+			<p>Testingo.sk © 2013</p>
 			<div class="fb-like" data-href="http://facebook.com/testingo.sk" data-width="450" data-show-faces="true" data-send="false"></div>
 		</div>
 	</div>

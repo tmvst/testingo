@@ -5,7 +5,7 @@
   ix = 1;
 
   answer_template = function() {
-    return "<div class=\"answerblock\">\n<input class=\"checkInputC\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n<input name=\"text" + ix + "\" class=\"checkInput form-control\">\n<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
+    return "<div class=\"form-group\">\n      <div class='row'>\n        <div class='col-sm-5'>\n      <div class='checkbox'>\n            <input class=\"checkInputC\" name=\"check" + ix + "\" type=\"checkbox\" value=\"\">\n        <input name=\"text" + ix + "\" class=\"checkInput form-control\">\n          </div>\n        </div>\n        <div class='col-sm-2'>\n      <div class=\"btn btn-default delete-button\"> Zmazať </div>\n        </div>\n      </div>\n</div>";
   };
 
   process_submit = function() {
@@ -20,7 +20,7 @@
   };
 
   delete_entry = function(e) {
-    return $(e.target).parent().remove();
+    return $(e.target).parent().parent().remove();
   };
 
   form_submit = function(redir) {

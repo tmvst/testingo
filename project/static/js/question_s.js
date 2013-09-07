@@ -5,7 +5,7 @@
   ix_s = 1;
 
   answer_template = function() {
-    return "<div class=\"form-group\">\n	<input type=\"text\" id=\"s" + ix_s + "\" name=\"odpoved\" class=\"phrase form-control\" placeholder=\"Správna odpoveď\" required>\n	<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div><br>\n</div>";
+    return "<div class=\"form-group\">\n      <div class='row'>\n        <div class='col-sm-4'>\n	    <input type=\"text\" id=\"s" + ix_s + "\" name=\"odpoved\" class=\"phrase form-control\" placeholder=\"Správna odpoveď\" required>\n        </div>\n        <div class='col-sm-2'>\n	    <div class=\"btn btn-default delete-button\"> Zmazať </div><br>\n        </div>\n       </div>\n</div>";
   };
 
   process_submit = function() {
@@ -20,7 +20,7 @@
   };
 
   delete_entry = function(e) {
-    return $(e.target).parent().remove();
+    return $(e.target).parent().parent().remove();
   };
 
   form_submit = function(redir) {

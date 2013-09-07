@@ -9,22 +9,22 @@
             <textarea class="form-control" name="description_test" id="edit_description" rows="3" required>${test.description}</textarea>
         </div>
 
-        <label for="name">Čas platnosti:</label>
         <div class="form-group">
-
+			<label for="start_time">Čas otvorenia:</label>
             % if test.start_time:
-                <input class="timeinput" type="text" id="start_time" name="edit_start_time" value="${test.start_time.strftime('%m/%d/%Y %H:%M')}">
+                <input class="form-control timeinput" type="text" id="start_time" name="edit_start_time" value="${test.start_time.strftime('%m/%d/%Y %H:%M')}">
             % else:
-                <input class="timeinput" type="text" id="start_time" name="edit_start_time">
+                <input class="form-control timeinput" type="text" id="start_time" name="edit_start_time">
             % endif
-
+	    </div>
+		<div class="form-group">
+	        <label for="end_time">Čas uzatvorenia:</label>
             % if test.end_time:
-                <input class="timeinput" type="text" id="end_time" name="edit_end_time" value="${test.end_time.strftime('%m/%d/%Y %H:%M')}">
+                <input class="form-control timeinput" type="text" id="end_time" name="edit_end_time" value="${test.end_time.strftime('%m/%d/%Y %H:%M')}">
             % else:
-                <input class="timeinput" type="text" id="end_time" name="edit_end_time">
+                <input class="form-control timeinput" type="text" id="end_time" name="edit_end_time">
             % endif
-
-            <a class="btn btn-default" id="input_value">Neobmedzene</a>
         </div>
+	    <a class="btn btn-default" id="input_value">Neobmedzene</a>
     </form>
 </div>

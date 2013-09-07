@@ -5,7 +5,7 @@
   ix = 1;
 
   answer_template = function() {
-    return "<div class=\"answerblock\">\n<input class=\"Rradio\" name=\"radio\" type=\"radio\" value=\"radio" + ix + "\">\n<input name=\"text1" + ix + "\" class=\"radiotext form-control\" required >\n<div class=\"btn btn-default btn-sm delete-button\"> Zmazať </div> <br>\n</div>";
+    return "<div class=\"form-group\">\n      <div class='row'>\n        <div class='col-sm-6'>\n          <div class='radio'>\n        <input class=\"Rradio\" name=\"radio\" type=\"radio\" value=\"radio" + ix + "\">\n        <input name=\"text1" + ix + "\" class=\"radiotext form-control\" required>\n          </div>\n        </div>\n        <div class='col-sm-2'>\n      <div class=\"btn btn-default delete-button\"> Zmazať </div> <br>\n        </div>\n      </div>\n</div>";
   };
 
   error_template = function() {
@@ -24,7 +24,7 @@
   };
 
   delete_entry = function(e) {
-    return $(e.target).parent().remove();
+    return $(e.target).parent().parent().remove();
   };
 
   form_submit = function(redir) {

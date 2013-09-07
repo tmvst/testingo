@@ -55,7 +55,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
 	        <p class="lead">${test.description}</p>
                 <p><strong>Čas začiatku: </strong>
                     % if test.start_time:
@@ -74,7 +74,7 @@
 	        <button type="button" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
         </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-4">
 	<% questions = test.questions %>
 		<div class="pull-right">
 	% if test.share_token is None:
@@ -102,7 +102,7 @@
     <div id="test_stats" class="collapse out">
 		%if len(solved_tests) is 0:
                 <div class="panel-body">
-                    <span> Test ešte nikto neriešil</span>
+                    <em> Test ešte nikto neriešil</em>
                 </div>
 		%else:
 			<%include file="test_stats.mako"/>
@@ -121,10 +121,10 @@
                 <span class="glyphicon glyphicon-plus"></span> Pridať otázku <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="${request.route_path('newquestion_s', test_id=test.id)}">otázka s frázovou odpoveďou</a></li>
-                <li><a href="${request.route_path('newquestion_c', test_id=test.id)}">otázka s viacerými správnymi odpoveďami</a></li>
-                <li><a href="${request.route_path('newquestion_r', test_id=test.id)}">otázka s jednou správnou odpoveďou</a></li>
-                <li><a href="${request.route_path('newquestion_o', test_id=test.id)}">otázka s otvorenou odpoveďou</a></li>
+                <li><a href="${request.route_path('newquestion_s', test_id=test.id)}">s frázovou odpoveďou</a></li>
+                <li><a href="${request.route_path('newquestion_c', test_id=test.id)}">s viacerými správnymi odpoveďami</a></li>
+                <li><a href="${request.route_path('newquestion_r', test_id=test.id)}">s jednou správnou odpoveďou</a></li>
+                <li><a href="${request.route_path('newquestion_o', test_id=test.id)}">s otvorenou odpoveďou</a></li>
             </ul>
         </div>
         </p>
@@ -134,7 +134,7 @@
         <div class="col-lg-9">
 
 				% if len(questions) is 0:
-                    <span> Test neobsahuje žiadne otázky</span>
+                    <em> Test neobsahuje žiadne otázky</em>
 				% else:
 
 				% for question in questions:
@@ -210,7 +210,7 @@
                 </div>
 				% if len(solved_tests) is 0:
                         <div class="panel-body">
-                            <span> Test ešte nikto neriešil :(</span>
+                            <em>Test ešte nikto neriešil</em>
                         </div>
 				% else:
                     <div class="panel-body">

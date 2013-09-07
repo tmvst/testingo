@@ -30,11 +30,25 @@
 			<textarea class="form-control" name="description" id="description" rows="3" placeholder="Pár slov na úvod" required></textarea>
 		</div>
 
-		<label for="name">Čas platnosti:</label>
+		<label for="start_time">Čas otvorenia:</label>
 		<div class="form-group">
-			<input class="timeinput" type="text" id="start_time" name="start_time" placeholder="Čas otvorenia">
-			<input class="timeinput" type="text" id="end_time" name="end_time" placeholder="Čas uzatvorenia">
-			<a class="btn btn-default" id="input_value">Neobmedzene</a>
+			<div class="row">
+				<div class="col-md-3">
+					<input class="form-control timeinput" type="text" id="start_time" name="start_time" placeholder="Čas otvorenia">
+				</div>
+			</div>
+		</div>
+
+		<label for="end_time">Čas uzatvorenia:</label>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-3">
+					<input class="form-control timeinput" type="text" id="end_time" name="end_time" placeholder="Čas uzatvorenia">
+				</div>
+				<div class="col-md-3">
+					<a class="btn btn-default" id="input_value" name="reset">Neobmedzene</a>
+				</div>
+			</div>
 		</div>
 
 		<div class="form-group pull-left">

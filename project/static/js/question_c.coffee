@@ -2,10 +2,18 @@ ix = 1
 
 answer_template= () ->
 	"""
-		<div class="answerblock">
-		<input class="checkInputC" name="check#{ix}" type="checkbox" value="">
-		<input name="text#{ix}" class="checkInput form-control">
-		<div class="btn btn-default btn-sm delete-button"> Zmazať </div> <br>
+		<div class="form-group">
+      <div class='row'>
+        <div class='col-sm-5'>
+		      <div class='checkbox'>
+            <input class="checkInputC" name="check#{ix}" type="checkbox" value="">
+		        <input name="text#{ix}" class="checkInput form-control">
+          </div>
+        </div>
+        <div class='col-sm-2'>
+		      <div class="btn btn-default delete-button"> Zmazať </div>
+        </div>
+      </div>
 		</div>
 	"""
 
@@ -18,7 +26,7 @@ update_cnt = () ->
 	cnt = $('.checkInput').length
 
 delete_entry = (e) ->
-	$(e.target).parent().remove()
+	$(e.target).parent().parent().remove()
 
 form_submit = (redir) ->
 	$('#form_c').validate
