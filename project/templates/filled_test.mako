@@ -8,12 +8,10 @@
         <li class="active">Test ${incomplete_test.test.name}</li>
     </ol>
     <div class="page-header" xmlns="http://www.w3.org/1999/html">
-        <h1>${incomplete_test.test.name}</h1>
+        <h1>${incomplete_test.test.name} <small>${h.pretty_points(sum_points)}/${h.pretty_points(incomplete_test.test.sum_points)}</small></h1>
     </div>
     <div class="control-group">
-        <div class="controls">
-            <p>${incomplete_test.test.description}</p>
-        </div>
+            <p class="lead">${incomplete_test.test.description}</p>
 
         <h2>Otázky</h2>
 
