@@ -212,7 +212,7 @@
 				%elif answered_q[0].question.qtype =='O':
 					%for answer in answered_q[1][1]:
                             <p>
-                                <strong>Odpoveď uívateľa:</strong>
+                                <strong>Odpoveď užívateľa:</strong>
 							${answer.text} <br></p>
 					%endfor
 				%endif

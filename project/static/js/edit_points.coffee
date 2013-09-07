@@ -6,7 +6,8 @@
     </span>
     """
 
-  hide_process = (id, body, max) ->
+  hide_process = (id, body) ->
+    max = $("#"+id).data("points")
     tu = (id.substring(1))
     $("#b" + tu).hide()
     $("#o" + tu).append input_template(body,tu)
@@ -38,7 +39,5 @@
     return false
 
   $(document).ready ->
-    ebody = $(".zbody")
-    maxp = $(".zbody").data("points")
     $(".zbody").click ->
-      hide_process @id, @name, maxp
+      hide_process @id, @name

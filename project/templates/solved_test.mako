@@ -12,27 +12,28 @@
      <ol class="breadcrumb">
      <li><a href="${request.route_path('dashboard')}"><span class="glyphicon glyphicon-home"></span> </a></li>
      %if incomplete_test.user is incomplete_test.test.user:
-        <li><a " href="${request.route_path('dashboard')}" id="solved_tests">Vaše testy</a></li>
+        <li><a href="${request.route_path('dashboard')}" id="solved_tests">Vaše testy</a></li>
      %else:
-        <li><a " id="solved_tests">Respondentami vyplnené testy</a></li>
+        <li><a id="solved_tests">Respondentami vyplnené testy</a></li>
      %endif
         <li><a href="${request.route_path('showtest', test_id=incomplete_test.test.id)}">Test ${incomplete_test.test.name}</a></li>
-        <li class="active">Test užívateľa s emailom ${incomplete_test.user.email}</li>
+        <li class="active">Riešený test užívateľa ${incomplete_test.user.name}</li>
     </ol>
     <div class="page-header">
-        <h1>${incomplete_test.test.name}</h1>
+        <h1>${incomplete_test.test.name} <small>${h.pretty_points(sum_points)}/${h.pretty_points(incomplete_test.test.sum_points)}</small></h1>
     </div>
+		<p class="lead">${incomplete_test.test.description}</p>
     <div>
-            <dl class="dl-horizontal">
-                <dt>Popis:</dt>
-                <dd>${incomplete_test.test.description}</dd>
-                <dt>Čas riešenia:</dt>
-                <dd>${incomplete_test.date_crt.strftime('%H:%M dňa %d.%m.%Y')}</dd>
-                <dt>Čas poslednej zmeny:</dt>
-                <dd>${incomplete_test.date_mdf.strftime('%H:%M dňa %d.%m.%Y')}</dd>  
-                <dt>Dosiahnuté body:</dt>
-                <dd>${h.pretty_points(sum_points)}/${h.pretty_points(incomplete_test.test.sum_points)}</dd>
-            </dl>
+            <p>
+                <strong>Čas riešenia:</strong>
+                ${incomplete_test.date_crt.strftime('%H:%M dňa %d.%m.%Y')}
+	            <br>
+                <strong>Čas poslednej zmeny:</strong>
+                ${incomplete_test.date_mdf.strftime('%H:%M dňa %d.%m.%Y')}
+	            <br>
+                <strong>Dosiahnuté body:</strong>
+                ${h.pretty_points(sum_points)}/${h.pretty_points(incomplete_test.test.sum_points)}
+            </p>
 
             <h2>Otázky</h2>
 
@@ -125,7 +126,7 @@
                                 %endif
 
                             %else:
-                                %if ((int(question[1][0].text) == ans.id) and (ans.id != int(question[1][0].answer_id))):
+                                %if (int(question[1][0].text) == ans.id) and (ans.id != int(question[1][0].answer_id)):
                                         <span> <p class="text-danger"><input type="radio" disabled="disabled" checked="checked">
                                         ${ans.text}</p></span>
                                 %elif  int(ans.id) == int(question[1][0].answer_id):
@@ -142,7 +143,7 @@
                         % endfor
 
                     % elif question[0].question.qtype == 'O':
-                            <p><strong>Užívateľová odpoveď <br></strong></p>
+                            <p><strong>Užívateľova odpoveď <br></strong></p>
 
                         ${question[1][0].text.replace('\n', markupsafe.Markup('<br> '))|n}
 

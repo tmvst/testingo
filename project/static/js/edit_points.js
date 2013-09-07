@@ -6,8 +6,9 @@
     return "<span id=\"x" + tu + "\">\n<a href=\"#\" class=\"update_b pull-right\" id=\"t" + tu + "\"> Uložiť </a>\n<input class=\"form-control-my pull-right\" value=\"" + points + "\" name=\"s" + tu + "\">\n</span>";
   };
 
-  hide_process = function(id, body, max) {
-    var tu;
+  hide_process = function(id, body) {
+    var max, tu;
+    max = $("#" + id).data("points");
     tu = id.substring(1);
     $("#b" + tu).hide();
     $("#o" + tu).append(input_template(body, tu));
@@ -43,11 +44,8 @@
   };
 
   $(document).ready(function() {
-    var ebody, maxp;
-    ebody = $(".zbody");
-    maxp = $(".zbody").data("points");
     return $(".zbody").click(function() {
-      return hide_process(this.id, this.name, maxp);
+      return hide_process(this.id, this.name);
     });
   });
 
