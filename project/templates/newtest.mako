@@ -19,14 +19,16 @@
 	<h1>Nový test</h1>
 </div>
 
+<p class="lead">Pre vytvorenie nového testu zadajte názov a popis. Ak chete test sprístupniť na riešenie v konkrétnom čase, vyplňte aj príslušné polia.</p>
+
 <div>
 	<form id="new_test" action="${request.route_path('newtest')}" method="POST">
 		<div class="form-group">
-			<label for="name">Názov</label>
+			<label for="name">Názov <small>(max. 100 znakov)</small></label>
 			<input type="text" id="name" name="name" class="form-control" placeholder="Názov testu" required>
 		</div>
 		<div class="form-group">
-			<label for="description">Opis testu</label>
+			<label for="description">Opis testu <small>(max. 500 znakov)</small></label>
 			<textarea class="form-control" name="description" id="description" rows="3" placeholder="Pár slov na úvod" required></textarea>
 		</div>
 

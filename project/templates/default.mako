@@ -4,7 +4,7 @@
 	<title><%block name="title"/></title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="${request.static_path('project:static/templates/stylesheet/favicon.ico')}">
+    <link rel="icon" type="image/png" href="${request.static_path('project:static/favicon.png')}">
 
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
