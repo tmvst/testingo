@@ -10,52 +10,50 @@
     </div>
     <div>
         <div class="control-group">
-            <div class="controls">
-                <p>${test.description}</p>
-            </div>
+                <p class="lead">${test.description}</p>
 
             <h2>Otázky</h2>
             % if len(test.questions) is 0:
-                    <span> Test neobsahuje žiadne otázky </span>
+                    <em> Test neobsahuje žiadne otázky </em>
             % else:
                 <form action="#" id="form_solve">
                 % for question in test.questions:
                     <div class="panel panel-default">
                     <div class="panel-heading">
-                    <a href="${request.route_path('showquestion',test_id=test.id, question_id=question.id)}" method="GET">
-                    <h3 class="panel-title">Otázka č.${question.number}
-
-                    % if question.points:
+					% if question.points:
                             <span class="badge pull-right">
 								${h.pretty_points(question.points)}b
 							</span>
                     % endif
-                    </h3>
+                    <h3 class="panel-title">${question.number}. ${question.text}</h3>
 
-                    </a>
                     </div>
-                         <div class="panel-body">
-                        <label for="user_answer">${question.text}</label>
+                        <div class="panel-body">
 
                         <!--id otazky v nazve text area-->
                     % if question.qtype == 'S':
                         %for ans in question.answers:
-                                <p><input class="form-control user_answers_S"  name="${question.id}&${ans.id}"   rows="2" placeholder="Sem vpíšte svoju odpoveď " required>
-                                </p>
+                                <input class="form-control user_answers_S"  name="${question.id}&${ans.id}"   rows="2" placeholder="Sem vpíšte svoju odpoveď " required> <br>
                         %endfor
                     % elif question.qtype == 'C':
                         %for ans in question.answers:
+							<div class="checkbox ptop">
                                 <!--id oodpovede v nazve text area-->
-
-                                <p><input class="user_answers_C" name="check${ans.id}" type="checkbox" value="">
-                                    <label class="checkbox_labels" name="text${ans.id}">${ans.text}</label></p>
+                                <label class="checkbox_labels" name="text${ans.id}">
+	                                <input class="user_answers_C" name="check${ans.id}" type="checkbox" value="">
+                                    ${ans.text}
+                                </label>
+							</div>
                         %endfor
                     % elif question.qtype == 'R':
                         %for ans in question.answers:
+							<div class="radio ptop">
                                 <!--id oodpovede v nazve text area-->
-
-                                <p><input class="user_answers_R" name="radio${question.id}" id="radio${ans.id}" type="radio" value="${ans.id}">
-                                    <label name="text${ans.id}">${ans.text}</label></p>
+                                <label class="radio_labels" name="text${ans.id}">
+	                                <input class="user_answers_R" name="radio${question.id}" id="radio${ans.id}" type="radio" value="${ans.id}">
+                                    ${ans.text}
+                                </label>
+							</div>
                         %endfor
                     % elif question.qtype == 'O':
                             <textarea class="form-control user_answers_O"  name="user_answer${question.id}" id="user_answer" rows="4" placeholder="Sem vpíšte svoju odpoveď " required> </textarea>

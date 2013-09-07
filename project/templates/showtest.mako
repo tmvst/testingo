@@ -85,7 +85,7 @@
 		        </div>
             </form>
 	% else:
-            <div class="input-group sharetoken form-group">
+            <div class="input-group form-group">
                 <input class="form-control" id="focusedInput" type="text" value="http://0.0.0.0:6543/solve/${test.share_token}" readonly="readonly">
 	                              <span class="input-group-btn">
 	                                 <button class="btn btn-default" type="button" id="focusBtn"><span class="glyphicon glyphicon-paperclip"></span></button>

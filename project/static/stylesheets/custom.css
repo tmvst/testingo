@@ -104,6 +104,14 @@ body {
     padding-left: 1.2em;
 }
 
+.checkbox_labels, .radio_labels {
+    font-weight: normal;
+}
+
+.ptop {
+    padding-top: 5px;
+}
+
 /* Registracia */
 
 .headrow {
