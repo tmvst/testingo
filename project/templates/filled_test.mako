@@ -27,7 +27,7 @@
                 <h3 class="panel-title">
 
                     Otázka č.${question[0].question.number}
-                
+
                 </h3>
 
                 </div>

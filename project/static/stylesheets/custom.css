@@ -112,6 +112,10 @@ body {
     padding-top: 5px;
 }
 
+div.ui-datepicker {
+    font-size: 13px;
+}
+
 /* Registracia */
 
 .headrow {

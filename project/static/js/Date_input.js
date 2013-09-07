@@ -15,7 +15,11 @@
 			},
 			onSelect: function (selectedDateTime){
 				$('#end_time').datetimepicker('option', 'minDate', $('#start_time').datetimepicker('getDate') );
-			}
+			},
+            firstDay: 1,
+            monthNames: [ "Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December" ],
+            dayNames: [ "Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota" ],
+            dayNamesMin: [ "Ne", "Po", "Ut", "St", "Št", "Pia", "So" ]
         });
 
         $('#end_time').datetimepicker({
@@ -33,8 +37,11 @@
 			},
 			onSelect: function (selectedDateTime){
 				$('#start_time').datetimepicker('option', 'maxDate', $('#end_time').datetimepicker('getDate') );
-			}
-			
+			},
+            firstDay: 1,
+            monthNames: [ "Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December" ],
+            dayNames: [ "Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota" ],
+            dayNamesMin: [ "Ne", "Po", "Ut", "St", "Št", "Pia", "So" ]
 		});
     });
 
