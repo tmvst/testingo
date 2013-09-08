@@ -9,23 +9,12 @@
 
     <div class="page-header">
         <h1>Ovládací panel</h1>
-	    <a href="#" class="pull-right" id="help-panel-toggle"><img src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/32/help.png"></a>
     </div>
 
     <div>
         <p class="lead">
+	        Dobrý deň, ${request.user.name}
         </p>
-
-        <div class="panel panel-default" id="help-panel">
-            <div class="panel-heading">
-                <h3 class="panel-title">Help title
-                    <button type="button" id="help-panel-close" class="close text-right">&times;</button>
-                </h3>
-            </div>
-            <div class="panel-body">
-                Help content
-            </div>
-        </div>
 
 	    <p><a href="${request.route_path('newtest')}" class="btn btn-primary">Vytvoriť nový test</a></p>
         <div class="row">
@@ -55,7 +44,12 @@
 
                                 </a>
                                 % endfor
+
                         </div>
+	                    <p>
+	                            <small><span class="glyphicon glyphicon-edit"></span></small> - test je ešte možné upravovať <br>
+	                            <small><span class="glyphicon glyphicon-lock"></span></small> - zdieľaný test, ktorému už nie je možné meniť otázky
+	                        </p>
                     </div>
 
                     <div class="tab-pane" id="solved_tests">
@@ -70,7 +64,13 @@
                                 <a href="${request.route_path('filled_test', incomplete_test_id=test.id)}" class="list-group-item">
                             %endif
                                     ${test.test.name}
-                                    <span class="glyphicon glyphicon-check pull-right"></span>
+										<%
+                                                sum_points=0
+                                                for respondent_test in test.complete_questions:
+                                                    sum_points =sum_points +  sum(float(ans.points)for  ans in respondent_test.complete_q_complete_answers)
+                                            %>
+										<span class="text-muted pull-right">${h.pretty_points(sum_points)}/${h.pretty_points(test.test.sum_points)}</span>
+                                    <!-- <span class="glyphicon glyphicon-check pull-right"></span> -->
                                 </a>
 
                                 % endfor

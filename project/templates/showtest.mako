@@ -55,7 +55,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-sm-8">
 	        <p class="lead">${test.description}</p>
                 <p><strong>Čas začiatku: </strong>
                     % if test.start_time:
@@ -74,7 +74,7 @@
 	        <button type="button" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#test_stats">Zobraz štatistiky</button>
         </div>
 
-    <div class="col-lg-4">
+    <div class="col-sm-4">
 	<% questions = test.questions %>
 		<div class="pull-right">
 	% if test.share_token is None:

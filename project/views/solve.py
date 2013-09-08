@@ -39,7 +39,11 @@ from ..models.complete_question import (
 #}}}
 @view_config(route_name='unavailable_test', request_method='GET', renderer='project:templates/errors/unavailable_test.mako')
 def view_test(request):
-    test = request.db_session.query(Test).filter_by(id=request.matchdict['test_id']).one()
+    try:
+        test = request.db_session.query(Test).filter_by(id=request.matchdict['test_id']).one()
+    except:
+        raise HTTPNotFound
+
     return {'test':test}  
 
 @view_config(route_name='solve', request_method='GET', renderer='project:templates/solve.mako')
