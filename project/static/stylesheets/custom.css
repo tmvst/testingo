@@ -116,7 +116,7 @@ div.ui-datepicker {
     font-size: 13px;
 }
 
-/* Registracia */
+/* Home */
 
 .headrow {
     margin-top: -20px;
@@ -127,8 +127,12 @@ div.ui-datepicker {
 }
 
 .headrow .whyt {
-    color: whitesmoke;
+    color: #f5f5f5;
     text-shadow: black 0 0 0.3em;
+}
+
+.whyt ul li {
+    font-size: 1.1em;
 }
 
 .form-signin {
@@ -177,6 +181,36 @@ div.ui-datepicker {
 .user-pic img {
     width: 72px;
     height: 72px;
+}
+
+.team img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+}
+
+.team img:hover {
+    opacity: 0.7;
+}
+
+.team .fotka {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px auto;
+}
+
+.team h4 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.team h5 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.team .lead {
+    padding-top: 20px;
 }
 
 /* How it works */

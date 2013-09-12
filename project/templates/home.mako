@@ -15,10 +15,10 @@
                         <ul class="list-unstyled checks">
                             <li><span class="glyphicon glyphicon-ok"></span> Vytvorte si test kedykoľvek a kdekoľvek potrebujete</li>
                             <li><span class="glyphicon glyphicon-ok"></span> Nestrácajte čas opravovaním papierových testov</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne ponocovanie! Zautomatizujte opravovanie svojich testov</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Žiadne ponocovanie! Testy opravuje a vyhodnocuje Testingo</li>
                             <li><span class="glyphicon glyphicon-ok"></span> Meškajúce termíny a nervózni študenti sú Vašou minulosťou</li>
                             <li><span class="glyphicon glyphicon-ok"></span> Vytvorte rovnocenné podmienky riešenia pre svojich študentov</li>
-                            <li><span class="glyphicon glyphicon-ok"></span> Výsledok je študentovi zverejnený okamžite alebo kedykoľvek sa rozhodnete</li>
+                            <li><span class="glyphicon glyphicon-ok"></span> Výsledok sa respondent dozvie okamžite</li>
                             <li><span class="glyphicon glyphicon-ok"></span> Majte všetko pod kontrolou!</li>
                         </ul>
                     </div>
@@ -88,7 +88,7 @@
             <div class="row">
 
                 <!-- ###   Feature 1 ### -->
-                <div class="col-lg-4 featu">
+                <div class="col-md-4 featu">
                     <div class="icon"> <img src="${request.static_path('project:static/img/icons/Lock.png')}"> </div>
                     <h6> 1. Registrujte sa</h6>
                     <p> Po registrácii získate prístup k vytváraniu testov, ich riešeniu a k užitočným štatistikám </p>
@@ -96,7 +96,7 @@
                 </div>
 
                 <!-- ###   Feature 2 ### -->
-                <div class="col-lg-4 featu">
+                <div class="col-md-4 featu">
                     <div class="icon"> <img src="${request.static_path('project:static/img/icons/Dashboard.png')}"> </div>
                     <h6> 2. Vytvorte test</h6>
                     <p> Po vytvorení testu môžete pridávať ľubovoľný počet otázok s rôznymi typmi odpovedí </p>
@@ -104,7 +104,7 @@
                 </div>
 
                 <!-- ###   Feature 2 ### -->
-                <div class="col-lg-4 featu">
+                <div class="col-md-4 featu">
                     <div class="icon"> <img src="${request.static_path('project:static/img/icons/Mail3.png')}"> </div>
                     <h6> 3. Zdieľajte test</h6>
                     <p> Keď budete so zadaním spokojní, jednoducho pošlite svoj test svojim respondentom </p>
@@ -120,16 +120,54 @@
         <h2>Ako to vyzerá?</h2>
         <div class="row">
             <div class="col-md-3">
-                <a href="http://www.atozed.com/indy/demos/9/RBSODFiles/BSOD.gif" data-lightbox="BSOD" class="thumbnail">
-                    <img data-src="holder.js/100%x180" src="http://www.atozed.com/indy/demos/9/RBSODFiles/BSOD.gif" alt="">
+                <a href="${request.static_path('project:static/img/sshots/st-dashboard.png')}" data-lightbox="Dashboard" class="thumbnail">
+                    <img data-src="holder.js/100%x180" src="${request.static_path('project:static/img/sshots/st-dashboard.png')}" alt="">
                 </a>
             </div>
-            <div class="col-sm-3 col-sm-offset-6">
-                <div class="fb-like-box" data-href="https://www.facebook.com/testingo.sk" data-width="250" data-height="190" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+			<div class="col-md-3">
+                <a href="${request.static_path('project:static/img/sshots/st-newtest.png')}" data-lightbox="Nový test" class="thumbnail">
+                    <img data-src="holder.js/100%x180" src="${request.static_path('project:static/img/sshots/st-newtest.png')}" alt="">
+                </a>
+            </div>
+	        <div class="col-md-3">
+                <a href="${request.static_path('project:static/img/sshots/st-ncq.png')}" data-lightbox="Nová otázka s viacerými odpoveďami" class="thumbnail">
+                    <img data-src="holder.js/100%x180" src="${request.static_path('project:static/img/sshots/st-ncq.png')}" alt="">
+                </a>
+            </div>
+	        <div class="col-md-3">
+                <a href="${request.static_path('project:static/img/sshots/st-solve.png')}" data-lightbox="Riešenie testu" class="thumbnail">
+                    <img data-src="holder.js/100%x180" src="${request.static_path('project:static/img/sshots/st-solve.png')}" alt="">
+                </a>
             </div>
         </div>
     </div>
 
+	<hr>
+
+    <div class="team">
+        <h2>Kto je za tým?</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="fotka">
+                    <img src="${request.static_path('project:static/img/fotky/basa.jpg')}" alt="Barbora Brocková">
+                </div>
+                <h4>Barbora Brocková</h4>
+            </div>
+	        <div class="col-md-4">
+                <div class="fotka">
+                    <img src="${request.static_path('project:static/img/fotky/adam.jpg')}" alt="Adam Lieskovský">
+                </div>
+                <h4>Adam Lieskovský</h4>
+            </div>
+	        <div class="col-md-4">
+                <div class="fotka">
+                    <img src="${request.static_path('project:static/img/fotky/tomas.jpg')}" alt="Tomáš Vestenický">
+                </div>
+                <h4>Tomáš Vestenický</h4>
+            </div>
+        </div>
+	    <p class="lead text-center">Sme študenti FIIT STU a Testingo vzniklo ako náš projekt v rámci The Spot Startup Summerschool 2013</p>
+    </div>
 
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
